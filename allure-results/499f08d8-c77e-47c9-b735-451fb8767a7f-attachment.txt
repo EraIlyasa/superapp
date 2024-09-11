@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//*[@class=\"RangePicker_container__z2E2K RangePicker_middle__Jtfzk\"]/*[2]"
+}
