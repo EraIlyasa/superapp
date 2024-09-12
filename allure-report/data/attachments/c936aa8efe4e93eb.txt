@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//*[@data-placeholder=\"Tulis syarat dan ketentuan yang berlaku pada misi ini.\"]"
+}
