@@ -6,7 +6,7 @@ export const config: Options.Testrunner = {
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
-    tsConfigPath: './tsconfig.json',
+    tsConfigPath: './tsconfig.e2e.json',
     
     //
     // ==================
@@ -24,9 +24,8 @@ export const config: Options.Testrunner = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/**/*.feature',
-        // './test/specs/**/misiRegular.feature',
-        // './test/specs/procurement/purchaseOrder.feature'
+        // ToDo: define location for spec files here
+        './test/specs/**/*.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -63,7 +62,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'silent',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:

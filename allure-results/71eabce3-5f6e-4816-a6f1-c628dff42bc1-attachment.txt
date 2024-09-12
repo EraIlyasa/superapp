@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//span[@class=\"ant-select-selection-placeholder\" and text()=\"Pilih Sumber\"]"
+}

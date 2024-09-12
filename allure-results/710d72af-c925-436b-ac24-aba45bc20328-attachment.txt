@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "(//*[@class=\"ant-input-affix-wrapper css-1vp3ixv ant-input-outlined\"])[1]"
+}
