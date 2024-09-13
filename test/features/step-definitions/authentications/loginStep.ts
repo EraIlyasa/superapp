@@ -59,7 +59,7 @@ When('I login with credential', async() => {
 
 // Wait for the email input field to be present and interact with it
         try {
-            await login.emailInput.setValue('');
+            await login.emailInput.setValue('super.sqa.automation@gmail.com');
             //await this.takeScreenshot('Entered email');
 
             await login.nextButton.click();
@@ -72,7 +72,7 @@ When('I login with credential', async() => {
         }
 
 // Wait for the password input field to be present and interact with it
-        await login.passwordInput.setValue('');
+        await login.passwordInput.setValue('Sup3rP4ssw0rd!!');
         //await this.takeScreenshot('Entered password');
         await login.nextButton.click();
         //await this.takeScreenshot('Clicked Next after password');
