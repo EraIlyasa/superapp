@@ -281,4 +281,8 @@ export default new class popUpBanner{
         return $('(//*[@data-testid="page-header-back-btn"])');
     }
 
+    get btnUploadGambar() {
+        return $('//span[@class="ant-upload"]/*[@type="file"]');
+    }
+
 }

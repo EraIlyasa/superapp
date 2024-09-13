@@ -4,7 +4,7 @@ Feature: Create-popup-banner
     Background: User login into the system
         Given I send login url
         When I login with credential
-        # Then I see usernameDisplay
+        Then I see usernameDisplay
 
     @createPopUpBanner
     Scenario Outline: Memastikan user dapat membuat pop-up banner baru
@@ -14,6 +14,7 @@ Feature: Create-popup-banner
         And User wait for 5 seconds
         Given User click "btnBuat" inside "menuPopUpBanner"
         And User wait for 3 seconds
+        And User select image inside "pickBannerImage"
         And User input "<namaBanner>" into "fieldNama"
         And User click "pickSumber"
         And User click "pickSumberAplikasi" inside "pickSumber"
@@ -36,6 +37,11 @@ Feature: Create-popup-banner
         And User click "pickSemuaGudang" inside "pickGudang"
         And User click "pickArea"
         And User click "pickSemuaArea" inside "pickArea"
-        And User click "pickBannerImage"
-        # And User select image inside "pickBannerImage"
+        # And User click "pickBannerImage"
+
+        # tambahan
+        And User wait for 5 seconds
+        And User click "btnBuatBanner"
+        Then User able to see "Data berhasil disimpan" message verification
+        And User wait for 10 seconds 
         

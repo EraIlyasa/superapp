@@ -1,6 +1,6 @@
 import popUpBannerPage from '../../pageobjects/Engagement/cms/popUpBanner';
-import { Given, When } from '@cucumber/cucumber';
-// import * as path from 'path';
+import { Given, When, Then } from '@cucumber/cucumber';
+import * as path from 'path';
 
 const popup = popUpBannerPage;
 
@@ -110,7 +110,7 @@ When ('User click "pickBannerImage"', async() => {
     await popup.pickBannerImage.click();
 })
 
-// When ('User select image inside "pickBannerImage"', async() => {
+When ('User select image inside "pickBannerImage"', async() => {
 //     const input = browser.$('input[type="file"]');
 //     const filePath = browser.uploadFile(path.join(__dirname, '../engagement/src/images.jpeg'));
 
@@ -119,5 +119,25 @@ When ('User click "pickBannerImage"', async() => {
 //     // const fileInput = await browser.$('input[type="file"]');
 //     // await fileInput.setValue(filePath);
 // })
+
+const uploadElement = await popup.btnUploadGambar;
+
+    await uploadElement.waitForExist({ timeout: 5000 });
+
+    await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+    }, uploadElement);
+    const filePath = path.resolve('C:\\Users\\Asus\\Documents\\git\\griya-super\\200 x300 .png');
+    const uploadFile = await browser.uploadFile(filePath)
+
+    await uploadElement.setValue(uploadFile);
+    await browser.keys(['Enter'])
+})
+
+
+When ('User click "btnBuatBanner"', async() => {
+    await popup.btnBuatBanner.click();
+})
+
 
 
