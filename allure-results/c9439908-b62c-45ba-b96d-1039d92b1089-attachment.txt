@@ -1,0 +1,55 @@
+{
+  "actions": [
+    {
+      "id": "action16",
+      "type": "key",
+      "parameters": {},
+      "actions": [
+        {
+          "type": "keyDown",
+          "value": "9"
+        },
+        {
+          "type": "keyDown",
+          "value": "5"
+        },
+        {
+          "type": "keyDown",
+          "value": "0"
+        },
+        {
+          "type": "keyDown",
+          "value": "0"
+        },
+        {
+          "type": "keyDown",
+          "value": "0"
+        },
+        {
+          "type": "pause",
+          "duration": 10
+        },
+        {
+          "type": "keyUp",
+          "value": "9"
+        },
+        {
+          "type": "keyUp",
+          "value": "5"
+        },
+        {
+          "type": "keyUp",
+          "value": "0"
+        },
+        {
+          "type": "keyUp",
+          "value": "0"
+        },
+        {
+          "type": "keyUp",
+          "value": "0"
+        }
+      ]
+    }
+  ]
+}

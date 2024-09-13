@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"xpath\",\"selector\":\"(//*[@role=\"option\" and text()=\"Transfer BCA - PT Bank Central Asia Tbk\"])[1]\"}\n  (Session info: chrome=128.0.6613.121)",
+  "stacktrace": "\tGetHandleVerifier [0x00007FF695EBB632+29090]\n\t(No symbol) [0x00007FF695E2E6E9]\n\t(No symbol) [0x00007FF695CEB1CA]\n\t(No symbol) [0x00007FF695D3EFD7]\n\t(No symbol) [0x00007FF695D3F22C]\n\t(No symbol) [0x00007FF695D897F7]\n\t(No symbol) [0x00007FF695D6672F]\n\t(No symbol) [0x00007FF695D865D9]\n\t(No symbol) [0x00007FF695D66493]\n\t(No symbol) [0x00007FF695D309B1]\n\t(No symbol) [0x00007FF695D31B11]\n\tGetHandleVerifier [0x00007FF6961D8CBD+3295277]\n\tGetHandleVerifier [0x00007FF6962248A3+3605523]\n\tGetHandleVerifier [0x00007FF69621A767+3564247]\n\tGetHandleVerifier [0x00007FF695F76F16+797318]\n\t(No symbol) [0x00007FF695E3986F]\n\t(No symbol) [0x00007FF695E35454]\n\t(No symbol) [0x00007FF695E355E0]\n\t(No symbol) [0x00007FF695E24A7F]\n\tBaseThreadInitThunk [0x00007FFBD3D9257D+29]\n\tRtlUserThreadStart [0x00007FFBD48AAF28+40]\n"
+}

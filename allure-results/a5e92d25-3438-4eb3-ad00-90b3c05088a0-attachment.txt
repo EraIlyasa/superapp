@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//*[@placeholder=\"Input product SKU quota\"]"
+}

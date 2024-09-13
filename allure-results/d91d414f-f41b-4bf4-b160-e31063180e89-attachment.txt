@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "(//*[@role=\"listbox\"])[4]/*[1]"
+}

@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: element not found\n  (Session info: chrome=128.0.6613.121)",
+  "stacktrace": "\tGetHandleVerifier [0x00007FF7FC13B632+29090]\n\t(No symbol) [0x00007FF7FC0AE6E9]\n\t(No symbol) [0x00007FF7FBF6B1CA]\n\t(No symbol) [0x00007FF7FBF7DBD9]\n\t(No symbol) [0x00007FF7FBF72944]\n\t(No symbol) [0x00007FF7FBF70777]\n\t(No symbol) [0x00007FF7FBF74071]\n\t(No symbol) [0x00007FF7FBF74110]\n\t(No symbol) [0x00007FF7FBFC1434]\n\t(No symbol) [0x00007FF7FC0087FF]\n\t(No symbol) [0x00007FF7FBFE66EA]\n\t(No symbol) [0x00007FF7FC0065D9]\n\t(No symbol) [0x00007FF7FBFE6493]\n\t(No symbol) [0x00007FF7FBFB09B1]\n\t(No symbol) [0x00007FF7FBFB1B11]\n\tGetHandleVerifier [0x00007FF7FC458CBD+3295277]\n\tGetHandleVerifier [0x00007FF7FC4A48A3+3605523]\n\tGetHandleVerifier [0x00007FF7FC49A767+3564247]\n\tGetHandleVerifier [0x00007FF7FC1F6F16+797318]\n\t(No symbol) [0x00007FF7FC0B986F]\n\t(No symbol) [0x00007FF7FC0B5454]\n\t(No symbol) [0x00007FF7FC0B55E0]\n\t(No symbol) [0x00007FF7FC0A4A7F]\n\tBaseThreadInitThunk [0x00007FFBD3D9257D+29]\n\tRtlUserThreadStart [0x00007FFBD48AAF28+40]\n"
+}

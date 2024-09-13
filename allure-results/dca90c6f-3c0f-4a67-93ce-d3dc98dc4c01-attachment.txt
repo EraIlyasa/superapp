@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "(//*[@placeholder=\"DD Mon YYYY\"])[2]"
+}
