@@ -45,7 +45,7 @@ When ('User input "filePath" into "uploadGambar"', async () => {
     await browser.execute((el:HTMLElement) => {
         el.style.display = 'block';
     }, uploadElement);
-    const filePath = path.resolve('C:\\Users\\Asus\\Documents\\git\\griya-super\\Product Banner Design.jpg');
+    const filePath = path.resolve('C:\\Users\\Asus\\Documents\\git\\griya-super\\Images\\Product Banner Design.jpg');
     const uploadFile = await browser.uploadFile(filePath)
 
     await uploadElement.setValue(uploadFile);
