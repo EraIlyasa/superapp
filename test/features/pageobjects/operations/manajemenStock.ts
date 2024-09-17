@@ -41,8 +41,7 @@ class manajemenStock {
     public get colStokConsigment() {
         return $('//*[@data-id="btn-consignment-stock-0"]');
     }
-
-    //Action
+    //Action rilis/unril dan konversi
     public get btnRilis() {
         return $('//*[@data-id="btn-release-undefined"]');
     }

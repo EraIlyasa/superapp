@@ -17,7 +17,6 @@ class IncomingCheckerV3 {
     public get btnInputIncoming() {
         return $('//*[@id="icon-action"]');
     }
-
     //Modal Input Incoming
     public get noAntrian() {
         return $('//*[@data-id="antrian-no"]');
@@ -52,7 +51,7 @@ class IncomingCheckerV3 {
     public get iconDown() {
         return $('data-icon="down"');
     }
-    public get expiredDate() {
+    public get expireDate() {
         return $('//*[@data-id="expired-date-0"]');
     }
     public get productionDate() {

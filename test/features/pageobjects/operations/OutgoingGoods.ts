@@ -2,9 +2,7 @@ export default new class OutgoingGoods {
     public get logistikModul() {
         return $('//span[@data-testid="Menu-Logistic"]');
     }
-
-
-    //Out Going Goods menu
+    //OutGoing Goods menu
     public get outGoingGoodsMenu() {
         return $('//span[@class="ant-menu-title-content"]/a[@data-testid="Menu-OutgoingGoods V4"]');
     }

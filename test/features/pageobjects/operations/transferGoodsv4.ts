@@ -31,7 +31,7 @@ class transferGoodsv4 {
     public get pilihProduk() {
         return $('//*[contains(text(), "Pilih produk")]');
     }
-    public get choosenPilihProduk() {
+    public get choosePilihProduk() {
         return $('//div[@name="44S Hijau Beras 5kg"]');
     }
     public get pilihSatuan() {
@@ -55,7 +55,6 @@ class transferGoodsv4 {
     public get validasiSimpan() {
         return $('//main[@class="ModalIllustration_modalBody__VucKT"]');
     }
-
     //Expect 
     public get title() {
         return $('//div[@class="flex gap-size-16"]');

@@ -2,7 +2,7 @@ class IncomingGoods {
     public get inputSearch() {
         return $('//*[@id="searchBar"]/div/span/span/span[1]/input');
     }
-    public get btnCari() {
+    public get btnCariProduk() {
         return $('//*[@data-id="enter-btn"]');
     }
     public get btnFilterGudang() {

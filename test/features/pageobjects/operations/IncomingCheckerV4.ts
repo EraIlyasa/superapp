@@ -14,7 +14,7 @@ class IncomingChecker {
     public get countMengantri() {
         return $('//*[@id="__next"]//div/main//div[2]/div[3]/div[2]/div[3]/div[1]');
     }
-    public get countDicekOlehTL() {
+    public get countDicekByTL() {
         return $('//*[@id="__next"]//div/main//div[2]/div[3]/div[2]/div[3]/div[2]');
     }
     public get countSelesai() {

@@ -15,7 +15,7 @@ class MutasiStock {
         return $('//div[@class="ant-tabs-nav-list"]/*[@data-node-key="good"]')
     }
 
-    //
+    //mutasi
     public get stockBagus() {
         return $('//*[@id="rc-tabs-0-tab-good"]/div/div/span"]');
     }

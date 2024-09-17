@@ -1,9 +1,8 @@
 class transferGoodsv3 {
     public get logistikModul() {
         return $('//span[@data-testid="Menu-Logistic"]');
-    }
-    
-    //
+    }  
+    //transfergoods
     public get transferGoodsMenu() {
         return $('//span[@class="ant-menu-title-content"]/*[@data-testid="Menu-TransferGoods"]')
     }
