@@ -1,8 +1,8 @@
 Feature: Create-flashsale
-  # Background: User login into the system
-  #   Given I send login url
-  #   When I login with credential
-  #   Then I see usernameDisplay
+  Background: User login into the system
+    Given I send login url
+    When I login with credential
+    Then I see usernameDisplay
 
   @flashsale-0001
   Scenario Outline: Memastikan dapat buat flashsale baru
@@ -212,13 +212,14 @@ Feature: Create-flashsale
     And User click "btnSaveModal" in "menuFlashsaleV4"
     And User wait for 5 seconds
     And User click "btnCreateFlashsale" in "menuFlashsaleV4"
-    Then displayed "<allertMessage>" on field name flashsale
+    Then Displayed "<allertMessage>" on field name flashsale
     And User wait for 10 seconds
 
     Examples:
       | endDate     | startDate   | hargaJual | allertMessage |
       | 15 Sep 2025 | 14 Sep 2025 |     95000 | Required      |
- @flashsale-0005
+
+  @flashsale-0005
   Scenario Outline: Memastikan ada validation jika user tidak input quota SKU flashsale
     Given I send login url
     When I login with credential
@@ -267,9 +268,14 @@ Feature: Create-flashsale
     And User click "btnSaveModal" in "menuFlashsaleV4"
     And User wait for 5 seconds
     And User click "btnCreateFlashsale" in "menuFlashsaleV4"
-    Then User able to see "Data berhasil disimpan" message verification
+    Then Displayed "<allertMessage>" on field product quota SKU
+    Then Displayed "<allertMessage>" on field flashsale quota
+    Then Displayed "<allertMessage>" on field min. purchase
     And User wait for 10 seconds
 
     Examples:
-      | namaFlashsale     | endDate     | startDate   | hargaJual |
-      | Automated testing | 15 Sep 2025 | 14 Sep 2025 |     95000 |
+      | namaFlashsale     | endDate     | startDate   | hargaJual | allertMessage |
+      | Automated testing | 15 Sep 2025 | 15 Sep 2025 |     95000 | Required      |
+
+  
+      

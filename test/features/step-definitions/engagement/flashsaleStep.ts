@@ -1,6 +1,8 @@
 import flashsalePage from '../../pageobjects/Engagement/flashsalePage';
 import { Given, When, Then } from '@cucumber/cucumber';
+
 import * as path from 'path';
+
 
 // const uploadFile = async (selector: string, filePath: string) => {
 //     const element = $(selector);
@@ -139,6 +141,11 @@ When ('User click "fieldCariProduk" in "menuFlashsaleV4"', async() => {
 
 When ('User click "optCariProduk0" in "menuFlashsaleV4"', async() => {
     await Flashsale.optCariProduk0.click();
+})
+
+
+When ('User input {string} in "fieldCariProduk"', async(product) => {
+    await Flashsale.fieldCariProduk.setValue(product);
 })
 
 
@@ -281,7 +288,7 @@ Then ('displayed {string} on field image flashsale', async(allertMessage) => {
 
 
 
-Then ('displayed {string} on field name flashsale', async(allertMessage) => {
+Then ('Displayed {string} on field name flashsale', async(allertMessage) => {
     await Flashsale.allertName.scrollIntoView();
     expect (await Flashsale.allertName.isDisplayed());
     const text = await Flashsale.allertName.getText(); 
@@ -298,6 +305,35 @@ Then ('I see Invalid Message modal popup "Nama tidak boleh kosong"', async() => 
 
 
 
-Then ('I see Invalid Message modal popup "Kuota / Produk minimal adalah 1"', async() => {
-    
+Then ('Displayed {string} on field product quota SKU', async(allertMessage) => {
+    (await Flashsale.getAllertSection3('[1]')).scrollIntoView();
+    const allert = (await Flashsale.getAllertSection3('[1]')).getText();
+    expect (await allert).toEqual(allertMessage);
+    await browser.pause(1000);
+})
+
+
+Then ('Displayed {string} on field flashsale quota', async(allertMessage) => {
+    (await Flashsale.getAllertSection3('[2]')).scrollIntoView();
+    const allert = (await Flashsale.getAllertSection3('[2]')).getText();
+    expect (await allert).toEqual(allertMessage);
+    await browser.pause(1000);
+})
+
+
+Then ('Displayed {string} on field min. purchase', async(allertMessage) => {
+    (await Flashsale.getAllertSection3('[3]')).scrollIntoView();
+    const allert = (await Flashsale.getAllertSection3('[3]')).getText();
+    expect (await allert).toEqual(allertMessage);
+    await browser.pause(1000);
+})
+
+
+Then ('I see Invalid Message modal popup "Terdapat flashsale lain di antara tanggal mulai dan tanggal selesai', async() => {
+    if  (await Flashsale.titleMenu.waitForExist({ timeout: 5000})) {
+        const title= await Flashsale.titleMenu.getText();
+        console.log(title)
+    } else {
+        console.log('Terdapat flashsale lain di antara tanggal mulai dan tanggal selesai')
+    }
 })

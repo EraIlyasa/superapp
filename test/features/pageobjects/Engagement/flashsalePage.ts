@@ -14,6 +14,7 @@ export default new class flashsalePage {
     get btnXpanArrow() { return $('//*[@class="ant-table-row ant-table-row-level-0 Table_tableRowClassname__a3AXN"][1]/*[1]/*'); }
     get btnDetailFlashsale() { return $('//*[@class="ant-table-row ant-table-row-level-0 Table_tableRowClassname__a3AXN"][1]/*[2]/*/*[2]'); }
     get btnLihatArea() { return $('(//*[contains(text(), "Lihat Area")])[1]'); }
+    get titleMenu() { return $('(//*[@data-testid="page-header-title"])'); }
 
     //Filter Modal 
     get filterBtnModalWarehouse() { return $('//*[@data-node-key="warehouse_id"]'); }
@@ -66,6 +67,7 @@ export default new class flashsalePage {
     get fieldInputProductQuotaUser() { return $('//*[@placeholder="Input product SKU quota"]'); }
     get fieldInputFlashsaleQuota() { return $('//*[@placeholder="Input participant quota"]'); }
     get fieldMinPurchase() { return $('//*[@placeholder="Input minimum purchase"]'); }
+    get allertProductQuotaUser() { return $('(//*[@class="SingleTextField_helper__1ejhl SingleTextField_error__1Vust"])[1]'); }
 
     //Option User Segmet & product Quota Section 3 
     get optSegment() { return $('//div[@title="All Segment"]'); }
@@ -76,8 +78,8 @@ export default new class flashsalePage {
     get btnBatal() { return $('//*[contains(text(), "Batal")]'); }
     get btnAksi() { return $('(//*[@class="Table_actions__i8GrK"])[1]'); }
 
-    //Modal Add Product 
-    get fieldCariProduk() { return $('(//*[@class="ant-select-selector"])[5]'); }
+    //Modal Add Product     
+    get fieldCariProduk() { return $('(//*[@class="ant-select-selector"])[5]'); } 
     get fieldCariUnit() { return $('(//*[@class="ant-select-selection-search"])[6]'); }
     get fieldInputQty() { return $('(//*[@placeholder="0"])[2]'); }
     get fieldInputHargaJual() { return $('(//*[@placeholder="0"])[3]'); }
@@ -88,9 +90,12 @@ export default new class flashsalePage {
     get btnSaveModal() { return $('//*[contains(text(), "Save")]'); }
 
     //Option Modal Add Product 
-    get optCariProduk0() { return $('(//*[@role="listbox"])[4]/*[1]'); }
-    get optCariProduk1() { return $('(//*[@role="listbox"])[4]/*[2]'); }
+    get optCariProduk0() { return $('(//*[@title="Produk Load Test 1"])'); }
+    get optCariProduk1() { return $('(//*[@title="Kecap eeky"])[1]'); }
     get optUnit0() { return $('(//*[@class="rc-virtual-list-holder-inner"])[5]/*[1]'); }
 
 
+    async getAllertSection3(que: string) {
+        return $('(//*[@class="SingleTextField_helper__1ejhl SingleTextField_error__1Vust"])'+que+'');
+    } //it should be "[1], [2], [3]"
 }
