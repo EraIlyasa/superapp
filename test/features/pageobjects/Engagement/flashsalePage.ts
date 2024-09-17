@@ -15,6 +15,16 @@ export default new class flashsalePage {
     get btnDetailFlashsale() { return $('//*[@class="ant-table-row ant-table-row-level-0 Table_tableRowClassname__a3AXN"][1]/*[2]/*/*[2]'); }
     get btnLihatArea() { return $('(//*[contains(text(), "Lihat Area")])[1]'); }
     get titleMenu() { return $('(//*[@data-testid="page-header-title"])'); }
+    get btnDetailFS() { return $('//tbody[@class="ant-table-tbody"]/*[1]/*[2]/*/*[2]'); }
+    get statusText() { return $('//tbody[@class="ant-table-tbody"]/*[1]/*[7]/*'); }
+
+    //Detail Flashsale
+    get btnPublishFlashSale() { return $('//*[contains(text(), "Publish Flash Sale")]'); }
+    get btnEdit() { return $('//*[contains(text(), "Edit")]'); }
+    get btnCancel() { return $('//*[contains(text(), "Cancel")]'); }
+    get btnPublishFlashSaleModal() { return $('(//*[contains(text(), "Publish Flash Sale")])[2]'); }
+    get btnBatalModal() { return $('(//*[contains(text(), "Batal")])'); }
+    
 
     //Filter Modal 
     get filterBtnModalWarehouse() { return $('//*[@data-node-key="warehouse_id"]'); }

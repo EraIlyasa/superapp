@@ -337,3 +337,39 @@ Then ('I see Invalid Message modal popup "Terdapat flashsale lain di antara tang
         console.log('Terdapat flashsale lain di antara tanggal mulai dan tanggal selesai')
     }
 })
+
+
+Then ('User able to see {string} before publish', async(statsBefore) => {
+    const statusBefore = await Flashsale.statusText.getText();
+
+    expect (await statusBefore).toEqual(statsBefore)
+    console.log('status before: ', statusBefore)
+})
+
+
+Given ('User click "btnDetailFS" in flashsale page', async() => {
+    await Flashsale.btnDetailFS.click();
+})
+
+
+When ('User click "btnPublishFlashSale" in detail flashsale', async() => {
+    await Flashsale.btnPublishFlashSale.click();
+})
+
+
+When ('User click "btnPublishFlashSaleModal" in detail modal flashsale', async() => {
+    await Flashsale.btnPublishFlashSaleModal.click();
+})
+
+
+Then ('User able to see {string} after publish', async(statsAfter) => {
+    const statusAfter = await Flashsale.statusText.getText();
+
+    expect ( await statusAfter).toEqual(statsAfter)
+    console.log('status after : ', statusAfter);
+})
+
+
+When ('User back to flashsale main page', async() => {
+    await browser.back();
+})
