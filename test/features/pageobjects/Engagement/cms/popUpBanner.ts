@@ -1,4 +1,4 @@
-export default new class popUpBanner{
+class popUpBanner{
 
     get navMenuMarketing(){
         return $('//*[@data-testid="Menu-Marketing"]');
@@ -286,3 +286,4 @@ export default new class popUpBanner{
     }
 
 }
+export default new popUpBanner();

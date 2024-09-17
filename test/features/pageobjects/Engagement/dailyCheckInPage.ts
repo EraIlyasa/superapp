@@ -1,4 +1,4 @@
-class DailyCheckInPage {
+class dailyCheckInPage {
 
     get marketingMenus() {
         return $('//span[contains(text(),"Marketing")]');
@@ -218,4 +218,4 @@ class DailyCheckInPage {
     }
 }
 
-export default new DailyCheckInPage();
+export default new dailyCheckInPage();
