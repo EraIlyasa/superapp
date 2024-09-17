@@ -127,7 +127,7 @@ When ('User click "fieldInputJumlahDiskon"', async() => {
 When ('User input {string} inside "fieldInputJumlahDiskon"', async(diskon) => {
     for (const char of diskon) {
         await poinTukar.fieldInputJumlahDiskon.setValue(char);
-        await browser.pause(100);  // Jeda 200ms antara setiap input
+        await browser.pause(100);  
     }
 })
 

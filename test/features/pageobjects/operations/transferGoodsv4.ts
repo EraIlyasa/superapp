@@ -1,52 +1,64 @@
 class transferGoodsv4 {
-    public get logistikModul() {
+    public get navMenuLogistik() {
         return $('//span[@data-testid="Menu-Logistic"]');
     }
 
-    public get transferGoodsMenu() {
+    public get menuTransferGoodsV4() {
         return $('//span[@class="ant-menu-title-content"]/*[@data-testid="Menu-TransferGoods V4"]')
     }
 
     public get btnBuatTransferGoods() {
         return $('//a[@href="/logistic/transfer-goods-v4/new"]'); //('//button[@type="button"]/*[contains(text(), "Buat Transfer Goods")]'); //('//div[@data-testid="page-header-extra"]');
     }
-    public get gudangAsal() {
+    public get fieldGudangAsal() {
         return $('//div[@data-testid="dropdown-warehouse-from"]/*[2]');
     }
-    public get gudangTujuan() {
+    public get fieldGudangTujuan() {
         return $('//div[@data-testid="dropdown-warehouse-to"]/*[2]');
     }
-    public get choosenGudangAsal() {
+    public get optGudangAsal() {
         return $('//div[@class="rc-virtual-list-holder-inner"]/*[1]');
     }
-    public get tanggalKirim() {
-        return $('//div[@class="ant-picker-input"]');
+    public get optGudangTujuan() {
+        return $('(//*[@title="Aloha-RTP"])[2]');
     }
-    public get tambahkanProduk() {
+    public get fieldTanggalKirim() {
+        return $('//*[@data-testid="date-picker-delivery-date"]');
+    }
+    public get fieldInputCatatan() {
+        return $('(//*[@data-testid="textarea-note"])');
+    }
+    public get fieldTipePT() { 
+        return $('//div[@data-testid="dropdown-warehouse-company-id"]/*[2]'); 
+    }
+    public get optTipePT() {
+        return $('//div[@title="PT. Ganda Segar Arum"]');
+    }
+    public get btnTambahkanProduk() {
         return $('//div[@class="flex flex-row space-x-12"]');
     }
-    public get btnTambahProduk() {
+    public get btnTambahProdukModal() {
         return $('//div[@class="ModalFullFrame_footerRight__c5wWR"]/*[1]');
     }
-    public get pilihProduk() {
-        return $('//*[contains(text(), "Pilih produk")]');
+    public get fieldPilihProduk() {
+        return $('(//*[@class="ant-select-selection-search"])[5]');
     }
-    public get choosePilihProduk() {
-        return $('//div[@name="44S Hijau Beras 5kg"]');
+    public get optPilihProduk() {
+        return $('//div[@name="**Agarasa Melon 10g - Inner Box"]');
     }
-    public get pilihSatuan() {
-        return $('//*[contains(text(), "Pilih satuan")]');
+    public get fieldPilihSatuan() {
+        return $('(//*[@class="ant-select-selection-search"])[6]');
     }
-    public get choosenPilihSatuan() {
-        return $('//div[@title="Karton"]');
+    public get optPilihSatuan() {
+        return $('(//div[@class="rc-virtual-list-holder-inner"])[5]/*[1]');
     }
-    public get qtyTransfer() {
-        return $('//div[@class="ant-input-number ant-input-number-sm css-1vp3ixv"]');
-    }
-    public get btnSimpan() {
+    public get fieldQtyTransfer() {
+        return $('//input[@class="ant-input-number-input"]');
+    }    
+    public get btnSimpanModal() {
         return $('//div[@class="ModalFullFrame_footerRight__c5wWR"]/*[2]');
     }
-    public get btnSimpanUtama() {
+    public get btnSimpan() {
         return $('//div[@class="ant-col css-1vp3ixv"]/*[@type="button"]');
     }
     public get btnKonfirmasiValidasi() {
