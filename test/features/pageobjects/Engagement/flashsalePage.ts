@@ -14,6 +14,7 @@ export default new class flashsalePage {
     get btnXpanArrow() { return $('//*[@class="ant-table-row ant-table-row-level-0 Table_tableRowClassname__a3AXN"][1]/*[1]/*'); }
     get btnDetailFlashsale() { return $('//*[@class="ant-table-row ant-table-row-level-0 Table_tableRowClassname__a3AXN"][1]/*[2]/*/*[2]'); }
     get btnLihatArea() { return $('(//*[contains(text(), "Lihat Area")])[1]'); }
+    get allertUploadBanner() { return $('//*[@class="UploadArea_errorMsg__GW9EU"]'); }
 
     //Filter Modal 
     get filterBtnModalWarehouse() { return $('//*[@data-node-key="warehouse_id"]'); }

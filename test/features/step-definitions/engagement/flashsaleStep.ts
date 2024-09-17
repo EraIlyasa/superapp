@@ -1,5 +1,5 @@
 import flashsalePage from '../../pageobjects/Engagement/flashsalePage';
-import { Given, When } from '@cucumber/cucumber';
+import { Given, When, Then } from '@cucumber/cucumber';
 import * as path from 'path';
 
 // const uploadFile = async (selector: string, filePath: string) => {
@@ -271,4 +271,11 @@ When ('User click "optArea0" in "menuFlashsaleV4"', async() => {
     await Flashsale.optArea0.click();
 })
 
+
+Then ('displayed {string} on field image flashsale', async(allertMessage) => {
+    await Flashsale.allertUploadBanner.scrollIntoView();
+    expect (await Flashsale.allertUploadBanner.isDisplayed());
+    const text = await Flashsale.allertUploadBanner.getText(); 
+    expect (await text).toEqual(allertMessage);
+})
 

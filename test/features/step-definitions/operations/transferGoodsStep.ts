@@ -124,3 +124,8 @@ When ('User click "btnSimpanModal"', async() => {
 When ('User click "btnSimpan"', async() => {
     await transferGoods.btnSimpan.click();
 })
+
+
+When ('User click "btnYaSimpan"', async() => {
+    await transferGoods.btnYaSimpan.click();
+})

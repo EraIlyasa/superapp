@@ -33,6 +33,7 @@ Feature: Create - Transfer Transfer Goods
     And User click "btnSimpanModal"
     And User wait for 5 seconds
     And User click "btnSimpan"
+    And User click "btnYaSimpan"
     Then User able to see "Data berhasil disimpan" message verification
 
     Examples:

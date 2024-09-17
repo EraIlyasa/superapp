@@ -67,6 +67,9 @@ class transferGoodsv4 {
     public get validasiSimpan() {
         return $('//main[@class="ModalIllustration_modalBody__VucKT"]');
     }
+    public get btnYaSimpan() { 
+        return $('(//*[@data-testid="btn-create-transfer-goods"])[2]')
+    }
     //Expect 
     public get title() {
         return $('//div[@class="flex gap-size-16"]');
