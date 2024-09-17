@@ -279,3 +279,25 @@ Then ('displayed {string} on field image flashsale', async(allertMessage) => {
     expect (await text).toEqual(allertMessage);
 })
 
+
+
+Then ('displayed {string} on field name flashsale', async(allertMessage) => {
+    await Flashsale.allertName.scrollIntoView();
+    expect (await Flashsale.allertName.isDisplayed());
+    const text = await Flashsale.allertName.getText(); 
+    expect (await text).toEqual(allertMessage);
+})
+
+ 	
+Then ('I see Invalid Message modal popup "tanggal selesai flashsale harus lebih besar dari tanggal mulai"', async() => {
+
+})
+
+
+Then ('I see Invalid Message modal popup "Nama tidak boleh kosong"', async() => {})
+
+
+
+Then ('I see Invalid Message modal popup "Kuota / Produk minimal adalah 1"', async() => {
+    
+})

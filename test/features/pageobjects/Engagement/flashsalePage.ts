@@ -14,7 +14,6 @@ export default new class flashsalePage {
     get btnXpanArrow() { return $('//*[@class="ant-table-row ant-table-row-level-0 Table_tableRowClassname__a3AXN"][1]/*[1]/*'); }
     get btnDetailFlashsale() { return $('//*[@class="ant-table-row ant-table-row-level-0 Table_tableRowClassname__a3AXN"][1]/*[2]/*/*[2]'); }
     get btnLihatArea() { return $('(//*[contains(text(), "Lihat Area")])[1]'); }
-    get allertUploadBanner() { return $('//*[@class="UploadArea_errorMsg__GW9EU"]'); }
 
     //Filter Modal 
     get filterBtnModalWarehouse() { return $('//*[@data-node-key="warehouse_id"]'); }
@@ -48,6 +47,8 @@ export default new class flashsalePage {
     get fieldInputWarehouse() { return $('(//*[@class="ant-select-selection-search-input"])[2]'); }
     get fieldInputArea() { return $('(//*[@class="ant-select-selector"])[3]'); }
     get fieldInputName() { return $('//*[@placeholder="Input name"]'); }
+    get allertUploadBanner() { return $('//*[@class="UploadArea_errorMsg__GW9EU"]'); }
+    get allertName() { return $('//*[@class="SingleTextField_helper__1ejhl SingleTextField_error__1Vust"]'); }
 
     //Option Page Section 1
     get optWarehouse0() { return $('(//*[@title="Aloha"])[2]'); }
