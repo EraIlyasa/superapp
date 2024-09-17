@@ -186,7 +186,24 @@ When ('User click "btnSimpanEdit"', async () => {
     await pages.btnSimpanEdit.click();
 })
 
+When ('User click "btnDetailPage" inside "menuPages"', async () => {
+    await pages.btnDetailPage.click();
+})
+
+When ('User click "btnHapusPage"', async () => {
+    await pages.btnHapusPage.click();
+})
+
+When ('User click "btnConfirmHapusPage" inside "btnHapusPage"', async () => {
+    await pages.btnConfirmHapusPage.click();
+})
+
 Then ('User able to see "Data Tersimpan!" message verification', async () => {
     await browser.pause(5000);
     console.log("Pages berhasil dibuat!");
+});
+
+Then ('User able to see "Gagal Menyimpan Data!" message verification', async () => {
+    await browser.pause(5000);
+    console.log("Cannot read properties of undefined (reading 'routes')");
 });

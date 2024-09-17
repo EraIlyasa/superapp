@@ -144,6 +144,10 @@ export default new class pages{
         return $('//*[@class="ant-btn css-1vp3ixv ant-btn-primary ant-btn-lg Button_button__QU6uO Button_solid__yWcC4 Button_large__Z_hZd"]');
     }
 
+    get btnDetailPage(){
+        return $('(//*[@class="ant-btn css-1vp3ixv ant-btn-ghost text-greyscale-50 Button_button__QU6uO Button_ghost__t9rWe Button_medium__hRLU4"])[1]');
+    }
+
     get btnEditPage(){
         return $('(//*[@class="ant-btn css-1vp3ixv ant-btn-ghost text-greyscale-50 Button_button__QU6uO Button_ghost__t9rWe Button_medium__hRLU4"])[2]');
     }
@@ -158,6 +162,14 @@ export default new class pages{
 
     get btnSimpanEdit(){
         return $('(//*[@class="ant-btn css-1vp3ixv ant-btn-primary ant-btn-lg Button_button__QU6uO Button_solid__yWcC4 Button_large__Z_hZd"])[1]');
+    }
+
+    get btnHapusPage(){
+        return $('//*[@class="ant-btn css-1vp3ixv ant-btn-default ant-btn-lg ant-btn-dangerous Button_button__QU6uO Button_outline__QxRzb Button_large__Z_hZd"]');
+    }
+
+    get btnConfirmHapusPage(){
+        return $('//*[@data-testid="confirm-nonactive-toggle"]');
     }
 
 }

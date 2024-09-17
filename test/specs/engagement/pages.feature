@@ -174,3 +174,16 @@ Feature: Create-page
     And User wait for 5 seconds
     Then User able to see "Data Tersimpan!" message verification
     And User wait for 10 seconds 
+
+    @hapus-page
+    Scenario Outline: Tampil alert hapus page
+    And User wait for 5 seconds
+    And User click "navMenuMarketing" in global page
+    And User click "menuCMSV4" inside "navMenuMarketing"
+    And User click "menuPages" inside "menuCMSV4"
+    And User click "btnDetailPage" inside "menuPages"
+    And User click "btnHapusPage"
+    And User click "btnConfirmHapusPage" inside "btnHapusPage"
+    And User wait for 3 seconds
+    Then User able to see "Gagal Menyimpan Data!" message verification
+    And User wait for 5 seconds 
