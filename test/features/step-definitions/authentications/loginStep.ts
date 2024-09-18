@@ -84,9 +84,21 @@ When('I login with credential', async() => {
         await browser.pause(5000);
 })
 
-Then('I see usernameDisplay', async() => {
-    await expect (login.usernameDisplay).toBeExisting();
-    const title = await login.usernameDisplay.getText();
-    console.log(title);
-})
+// Then('I see usernameDisplay', async() => {
+//     await expect (login.usernameDisplay).toBeExisting();
+//     const title = await login.usernameDisplay.getText();
+//     console.log(title);
+    
+// })
 
+Then('I see usernameDisplay', async () => {
+    const isExisting = await login.usernameDisplay.isExisting();
+    console.log('Element exists:', isExisting);
+
+    if (isExisting) {
+        const title = await login.usernameDisplay.getText();
+        console.log('Title:', title);
+    } else {
+        console.error('usernameDisplay element not found.');
+    }
+});

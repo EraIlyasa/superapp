@@ -7,11 +7,20 @@ const e2eBs = e2eBadStockPage;
 //     await e2eBs.navMenuStock.click();
 // })
 
-
-When ('User click "menuInventory" button in "Stock"', async() => {
-    await e2eBs.menuInventory.scrollIntoView();
+When('User click "menuInventory" button in "Stock"', async () => {
+    await browser.waitUntil(
+        async () => {
+            await e2eBs.menuInventory.scrollIntoView();
+            return e2eBs.menuInventory.isClickable();
+        },
+        {
+            timeout: 17000, // Wait for up to 17 seconds
+            timeoutMsg: 'menuInventory was not clickable after 17s'
+        }
+    );
     await e2eBs.menuInventory.click();
-})
+});
+
 
 
 When('User click "btnSearch" button in inventory page', async () => {
@@ -19,8 +28,8 @@ When('User click "btnSearch" button in inventory page', async () => {
     await browser.waitUntil(
         async () => await e2eBs.btnSearch.isClickable(),
         {
-            timeout: 17000, // Wait for up to 5 seconds
-            timeoutMsg: 'btnSearch was not clickable after 5s'
+            timeout: 17000, // Wait for up to 17 seconds
+            timeoutMsg: 'btnSearch was not clickable after 17s'
         }
     );
     
