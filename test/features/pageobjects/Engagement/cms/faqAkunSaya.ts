@@ -4,13 +4,10 @@ class faqAkunSaya {
         return $('//*[@id="site-layout-background"]/div[2]/div[1]//div[2]/button');
     }
     public get colCategory() {
-        return $('//*[@id="site-layout-background"]/div[2]/div[2]//div[2]//div/table/thead/tr/th[2]');
+        return $('//a[text()="Tentang SuperApps"]');
     }
     public get questionsAmount() {
-        return $('//*[@id="site-layout-background"]/div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[3]');
-    }
-    public get detailCategory() {
-        return $('//*[@id="site-layout-background"]/div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[2]');
+        return $('//td[text()="5"]');
     }
     public get EditFAQ() {
         return $('//*[@id="icon-action"]');

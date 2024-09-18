@@ -21,13 +21,13 @@ class faqJawara {
         return $('//*[@id="site-layout-background"]//div[2]//div[2]/div[2]//div[1]//div[2]/button');
     }
     public get addQuestions() {
-        return $('//*[@id="site-layout-background"]//div[2]//div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[2]/div/input');
+        return $('//input[@placeholder="Add Question"]');
     }
     public get inputAnswer() {
-        return $('//*[@id="site-layout-background"]//div[2]//div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[3]//div[2]/div[1]');
+        return $('//div[@data-placeholder="Add Answers"]');
     }
     public get btnDelete() {
-        return $('//*[@id="site-layout-background"]//div[2]//div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[1]/div/svg');
+        return $('//div[@class="m-top-3"]');
     }
     public get btnCancel() {
         return $('//*[@id="site-layout-background"]/footer/div/button[1]');

@@ -37,10 +37,10 @@ class tentangProgram {
         return $('//*[@id="site-layout-background"]/footer/div/button');
     }
     public get previewBannerImg() {
-        return $('//*[@id="site-layout-background"]//div[2]//div[1]/div/div[1]//div[2]//div/span//div[1]/div/span/a/span');
+        return $('//span[@aria-label="eye"]');
     }
     public get deleteBannerImg() {
-        return $('//*[@id="site-layout-background"]//div[2]//div[1]//div[1]//div[2]//span//div[1]/div/span/button');
+        return $('//button[@title="Remove file"]');
     }
     public get addLinkBanner() {
         return $('//*[@id="site-layout-background"]//div[2]//div[1]//div[1]//div[4]/div/input');
@@ -52,13 +52,13 @@ class tentangProgram {
         return $('//*[@id="icon-action"]');
     }
     public get colBenefitTitle() {
-        return $('//*[@id="site-layout-background"]//div[2]//div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[2]/div/input');
+        return $('//input[@placeholder="Add Benefit Title"]');
     }
     public get colFootnote() {
-        return $('//*[@id="site-layout-background"]//div[2]//div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[3]/div/input');
+        return $('//input[@placeholder="Footnote"]');
     }
     public get colPejuang() {
-        return $('//*[@id="site-layout-background"]//div[2]//div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[4]/div/span/input[1]');
+        return $('//*[@id="site-layout-background"]//div[2]//div[2]/div[2]///div[2]//div/table/tbody/tr[2]/td[4]/div/span/input[1]');
     }
     public get colJagoan() {
         return $('//*[@id="site-layout-background"]//div[2]/div/div[2]/div[2]//div[2]//div/table/tbody/tr[2]/td[5]/div/span/input[1]');
