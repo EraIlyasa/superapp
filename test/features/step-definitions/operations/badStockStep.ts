@@ -106,19 +106,21 @@ When ('User click "btnSimpanModal" in BS page', async() => {
 })
 
 
+
 When ('User upload file to "imgUploadPB"', async() => {
     const uploadElement = await bs.imgUploadPB;
-    await uploadElement.waitForExist({timeout:5000});
+
+    await uploadElement.waitForExist({ timeout: 5000 });
+
     await browser.execute((el:HTMLElement) => {
         el.style.display = 'block';
     }, uploadElement);
+    const filePath = path.resolve('C:\\Users\\Asus\\Documents\\git\\griya-super\\Images\\Product Banner Design.jpg');
+    const uploadFile = await browser.uploadFile(filePath)
 
-    const filePath = path.resolve('C:\\Users\\Asus\\Documents\\git\\griya-super\\Images\\200 x300 .png');
-    const uploadFIle = await browser.uploadFile(filePath);
-    await uploadElement.setValue(uploadFIle)
-    await browser.keys(['Enter']);
+    await uploadElement.setValue(uploadFile);
+    await browser.keys(['Enter'])
 })
-
 
 When ('User click "menuBuktiAlokasiBarang"', async() => {
     await bs.menuBuktiAlokasiBarang.click();
@@ -151,3 +153,4 @@ Then ('User able to see "Success Message"', async() => {
 When ('User click "btnYaSimpanModal" to create BS', async() => {
     await bs.btnYaSimpanModal.click();
 })
+

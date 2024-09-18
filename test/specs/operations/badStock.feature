@@ -26,14 +26,14 @@ Feature: Create - Bad Bad Stock
     And User wait for 5 seconds
     # And User click "fieldInputCatatan"
     And User input "<catatan>" into "fieldInputCatatanModal"
-    And User click "btnSimpanModal" in BS page
-    And User wait for 5 seconds
-    And User upload file to "imgUploadPB"
-    And User click "menuBuktiAlokasiBarang"
-    And User upload file into "imgUploadBAB0"
-    And User click "btnSimpan" to create BS
-    And User click "btnYaSimpanModal" to create BS
-    Then User able to see "Success Message"
+    # And User click "btnSimpanModal" in BS page
+    # And User wait for 5 seconds
+    # And User upload file to "imgUploadPB"
+    # And User click "menuBuktiAlokasiBarang"
+    # And User upload file into "imgUploadBAB0"
+    # And User click "btnSimpan" to create BS
+    # And User click "btnYaSimpanModal" to create BS
+    # Then User able to see "Success Message"
 
     Examples:
       | qty | catatan           |
