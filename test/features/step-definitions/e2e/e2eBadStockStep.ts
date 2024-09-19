@@ -8,8 +8,7 @@ const e2eBs = e2eBadStockPage;
 // })
 
 When('User click "menuInventory" button in "Stock"', async () => {
-    await browser.waitUntil(
-        async () => {
+    await browser.waitUntil(async () => {
             await e2eBs.menuInventory.scrollIntoView();
             return e2eBs.menuInventory.isClickable();
         },
