@@ -5,7 +5,6 @@ Feature: Order
              When I login with credential
              Then I see usernameDisplay
 
-            Given I am on the dashboard
              When I click order
               And I click penjualan
               And I click button add
@@ -26,3 +25,4 @@ Feature: Order
              
              When I click kode transaksi
              Then I get order id
+

@@ -1,5 +1,5 @@
-import { Given, When, Then } from '@cucumber/cucumber';
-import sideMenuBarPage from '../../../src/pages/side-menu-bar/side-menu-bar-page.ts';
+import { When } from '@cucumber/cucumber';
+import sideMenuBarPage from '../../pageobjects/side-menu/side-menu-page';
 
 When('I click order', async() => {
     await sideMenuBarPage.order.scrollIntoView();

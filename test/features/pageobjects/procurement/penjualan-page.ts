@@ -1,9 +1,9 @@
-import { $ } from '@wdio/globals';
+import { $ } from '@wdio/globals'
 
-export default new class orderPage {
+export default new class penjualanPage {
 
     get btnAdd(){ 
-        return $('//button[@id="btnAdd"]');
+        return $('//button[@id="btnAdd"]')
     }
 
     get marketplace(){ 
@@ -85,5 +85,4 @@ export default new class orderPage {
     get shortcutDetailPenjualan() {
         return $('#detail-link-penjualan-T240913-272')
     }
-
 }

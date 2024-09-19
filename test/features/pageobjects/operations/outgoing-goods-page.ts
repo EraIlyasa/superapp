@@ -1,7 +1,6 @@
 import { $ } from '@wdio/globals';
 
-export default new class logisticPage {
-    [x: string]: any;
+export default new class outgoingGoodsPage {
 
     get tanggalKirim() {
         return $('//button[@data-id="period"]');
@@ -83,11 +82,11 @@ export default new class logisticPage {
         return $('(//*[@class="ant-select-selection-search-input"])[5]')
     }
 
-    public get alasanMinimalDrop() {
+    get alasanMinimalDrop() {
         return $('//*[contains(text(), "Minimal drop point tidak tercukupi")]')
     }
 
-    public get btnGanti() {
+    get btnGanti() {
         return $('(//*[contains(text(), "Ganti")])[3]')
     }
 
