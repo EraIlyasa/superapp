@@ -198,3 +198,26 @@ When ('User delete "hapusRow2" in setoran page', async() => {
 
 })
 
+
+Then ('User able to see successfull message create setoran', async() => {
+    await browser.pause(5000);
+}) 
+
+
+When ('user attach file import CSV', async() => {
+    await setoran.btnImportCSV.click();
+    await browser.pause(3000);
+    const uploadElement = await setoran.importCSVModal;
+    await uploadElement.waitForExist({ timeout: 5000 });
+    await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+    }, uploadElement);
+    const filePath = path.resolve('C:\\Users\\Asus\\Documents\\git\\griya-super\\file-csv\\template-inhouse.csv');
+    const uploadFile = await browser.uploadFile(filePath)
+
+    await uploadElement.setValue(uploadFile);
+    await browser.keys(['Enter'])
+    await browser.pause(5000);
+    await setoran.btnImport.click();
+  
+})

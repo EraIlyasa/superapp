@@ -31,6 +31,9 @@ export default new class setoranPage {
     get fieldInputBuktiTF3() {return $('(//*[@class="ant-input css-1vp3ixv"])[4]'); }
     get btnSimpanModal() {return $('(//*[@data-testid="btn-cancel-delete"])');}
     get btnBatalModal() {return $('(//*[@data-testid="btn-submit"])');}
+    get btnImportCSV() {return $('//*[@data-testid="btn-import-csv"]');}
+    get importCSVModal() {return $('//*[@data-testid="form-file-import"]')}
+    get btnImport() {return $('//*[@id="submit-import"]'); }
 
 
 
