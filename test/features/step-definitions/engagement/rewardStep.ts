@@ -258,3 +258,10 @@ When ('User click "fieldArea" in create reward page', async() => {
 When ('User click "optArea0"', async() => {
     await reward.optArea0.click();
 })
+
+
+Then ('User verify {string} on "allertNamaReward"', async() => {})
+Then ('User verify {string} on "allertTipeReward"', async() => {})
+Then ('User verify {string} on "allertTipeUser"', async() => {})
+Then ('User verify {string} on "allertKondisi"', async() => {})
+Then ('User verify {string} on "allertGudang"', async() => {})

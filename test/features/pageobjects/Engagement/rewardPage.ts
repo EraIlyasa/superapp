@@ -13,7 +13,7 @@ export default new class rewardPage {
     //Buat Reward
     get btnSimpan() { return $('//*[contains(text(), "Simpan")]'); }
     get btnBatal() { return $('//*[contains(text(), "Batal")]'); }
-    
+
     //Section 1 Informasi Umum 
     get fieldInputNamaReward() { return $('(//*[@placeholder="Masukkan Nama Reward"])[1]'); }
     get fieldTipeReward() { return $('(//*[@class="ant-select-selection-search-input"])[2]'); }
@@ -26,6 +26,11 @@ export default new class rewardPage {
     get fieldInputEndDate() { return $('(//*[@placeholder="Select date"])[2]'); }
     get fieldArea() { return $('(//*[@class="ant-select-selector"])[6]'); }
     get fieldInputIntervalExp() { return $('//*[@placeholder="Masukkan waktu interval expired"]'); }
+    get allertNamaReward() { return $('//*[contains(text(), "Nama Reward wajib diisi")]'); }
+    get allertTipeReward() { return $('(//*[contains(text(), "Tipe Reward wajib dipiliih")])'); }
+    get allertTipeUser() { return $('Tipe User wajib dipilih'); }
+    get allertKondisi() { return $('(//*[contains(text(), "Kondisi wajib dipilih")])'); }
+    get allertGudang() { return $('(//*[contains(text(), "Gudang wajib dipiliih")])'); }
 
     //Section 3 Daftar Reward 
 

@@ -144,3 +144,20 @@ Feature: Create-Feature
     Examples:
       | namaReward     | minBelanja | kuotaUser | startDate   | endtDate    | productName            | reward | intervalExp |
       | Reward Testing |      95000 |         1 | 19 Sep 2026 | 20 Sep 2026 | Automated Testing hehe |      4 |           2 |
+
+  @Reward-0004
+  Scenario Outline: Memastikan dapat create reward dengan tipe reward daily checkin
+    And User wait for 5 seconds
+    Given User click "btnBuatRewardNew" in menu reward
+    And User wait for 5 seconds
+    Given User click "btnSimpan" to create new reward
+    Then User able to see invalid verification message
+    Then User verify "<allertnamareward>" on "allertNamaReward"
+    Then User verify "<allerttipereward>" on "allertTipeReward"
+    Then User verify "<allerttipeuser>" on "allertTipeUser"
+    Then User verify "<allertkondisi>" on "allertKondisi"
+    Then User verify "<allertgudang>" on "allertGudang"
+
+    Examples:
+      | allertnamareward        | allerttipereward           | allerttipeuser          | allertkondisi         | allertgudang          |
+      | Nama Reward wajib diisi | Tipe Reward wajib dipiliih | Tipe User wajib dipilih | Kondisi wajib dipilih | Gudang wajib dipiliih |
