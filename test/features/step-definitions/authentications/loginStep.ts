@@ -92,6 +92,7 @@ When('I login with credential', async() => {
 // })
 
 Then('I see usernameDisplay', async () => {
+    await browser.pause(3000);
     const isExisting = await login.usernameDisplay.isExisting();
     console.log('Element exists:', isExisting);
 

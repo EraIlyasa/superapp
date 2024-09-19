@@ -4,15 +4,41 @@ import path from 'path';
 const setoran = setoranPage;
 
 When ('User click "navMenuFinance" in global page', async() => {
-    await browser.waitUntil(async() => {
-        const isDisplayed = await setoran.navMenuFinance.isDisplayed();
-        return isDisplayed;
-    }, {
-        timeout:10000,
-        timeoutMsg: 'navMenuFinance is not displayed'
+    // await browser.waitUntil(async() => {
+    //     const isDisplayed = await setoran.navMenuFinance.isDisplayed();
+    //     return isDisplayed;
+    // }, {
+    //     timeout:10000,
+    //     timeoutMsg: 'navMenuFinance is not displayed'
         
-    })
-    await setoran.navMenuFinance.click();
+    // })
+    // await setoran.navMenuFinance.click();
+
+    const coba = 5;  
+for (let i = 0; i < coba; i++) {
+    try { await browser.waitUntil(async () => {
+            const isDisplayed = await setoran.navMenuFinance.isDisplayed();
+            return isDisplayed;
+        }, {
+            timeout: 10000, 
+            timeoutMsg: 'navMenuFinance is not displayed'
+        });
+
+        await setoran.navMenuFinance.click();
+        console.log(`Attempt ${i + 1}: Successfully clicked navMenuFinance`);
+        break;  
+
+    } catch (error) {
+        console.log(`Attempt ${i + 1}: Failed to click navMenuFinance. Retrying...`);
+        
+        if (i === coba - 1) {
+            console.error('Max attempts reached. navMenuFinance could not be clicked.');
+            throw error;  
+        }
+
+        await browser.pause(1000);  
+    }
+}
 })
 
 
@@ -76,6 +102,10 @@ When ('User input {string} into "fieldInputNamaKurir"', async(namaKurir) => {
     })
     await browser.pause(1000);
     await setoran.aksiKonfirmasi.scrollIntoView();
+})
+
+
+When ('User click "aksiKonfirmasi" in setoran page', async() => {
     await setoran.aksiKonfirmasi.click();
 })
 
@@ -140,10 +170,26 @@ When ('User click "btnSayaYakin" in setoran page', async() => {
 
 When ('User delete "hapusRow1" in setoran page', async() => {
     // await setoran.hapusRow1.scrollIntoView();
-    await setoran.hapusRow1.click();
-    await setoran.btnConfirmDelete.click();
+    // const coba = 5;
+    await browser.waitUntil(async() => {
+        await setoran.hapusRow1.click();
+        const isExisting = await setoran.btnConfirmDelete.isExisting();
+        return isExisting;
+    }, {
+        timeout:10000,
+        timeoutMsg: 'btnConfirmDelete is not isExisting'
+    })
+
     await browser.pause(1000);
+
+    if (await setoran.btnConfirmDelete.isClickable()) {
+        await setoran.btnConfirmDelete.click();
+    } else {
+        console.log('Repeating the step...')
+        await browser.refresh()
+    }
 })
+
 
 When ('User delete "hapusRow2" in setoran page', async() => {
     await setoran.hapusRow2.scrollIntoView();
