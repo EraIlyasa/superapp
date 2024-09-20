@@ -72,6 +72,12 @@ When ('User click "optTipeOrder0" in setoran page', async() => {
 })
 
 
+When ('User click "optTipeOrder1" in setoran page', async() => {
+    await setoran.optTipeOrder1.click();
+    await browser.pause(1000);
+})
+
+
 When ('User click "fieldGudang" in setoran page', async() => {
     await setoran.fieldGudang.click();
     await browser.pause(1000);
@@ -89,24 +95,48 @@ When ('User click "fieldInputNamaKurir" in setoran page', async() => {
 })
 
 
-When ('User input {string} into "fieldInputNamaKurir"', async(namaKurir) => {
+When ('User input {string} inhouse into "fieldInputNamaKurir"', async(namaKurir) => {
     await setoran.fieldInputNamaKurir.setValue(namaKurir);
     await browser.keys(['Enter']);  
 
     await browser.waitUntil( async() => {
-        const isDisplayed = await setoran.optNamaKurir.isDisplayed();
+        const isDisplayed = await setoran.optNamaKurirInhouse.isDisplayed();
         return isDisplayed;
     }, {
         timeout: 10000,
         timeoutMsg : 'cannot input kurir name'
     })
     await browser.pause(1000);
-    await setoran.aksiKonfirmasi.scrollIntoView();
+    
 })
 
 
-When ('User click "aksiKonfirmasi" in setoran page', async() => {
-    await setoran.aksiKonfirmasi.click();
+When ('User input {string} vendor into "fieldInputNamaKurir"', async(namaKurir) => {
+    await setoran.fieldInputNamaKurir.setValue(namaKurir);
+    await browser.keys(['Enter']);  
+
+    await browser.waitUntil( async() => {
+        const isDisplayed = await setoran.optNamaKurirVendor.isDisplayed();
+        return isDisplayed;
+    }, {
+        timeout: 10000,
+        timeoutMsg : 'cannot input kurir name'
+    })
+    await browser.pause(1000);
+    
+})
+
+
+When ('User click "aksiKonfirmasi0" in setoran page', async() => {
+    await setoran.aksiKonfirmasi0.scrollIntoView();
+    await setoran.aksiKonfirmasi0.click();
+})
+
+
+When ('User click "aksiKonfirmasi1" in setoran page', async() => {
+    await setoran.aksiKonfirmasi1.scrollIntoView();
+    await browser.pause(2000);
+    await setoran.aksiKonfirmasi1.click();
 })
 
 
@@ -204,9 +234,10 @@ Then ('User able to see successfull message create setoran', async() => {
 }) 
 
 
-When ('user attach file import CSV', async() => {
+When ('User attach file import CSV inhouse', async() => {
     await setoran.btnImportCSV.click();
     await browser.pause(3000);
+
     const uploadElement = await setoran.importCSVModal;
     await uploadElement.waitForExist({ timeout: 5000 });
     await browser.execute((el:HTMLElement) => {
@@ -220,4 +251,30 @@ When ('user attach file import CSV', async() => {
     await browser.pause(5000);
     await setoran.btnImport.click();
   
+})
+
+
+When ('User attach file import CSV vendor', async() => {
+    await setoran.btnImportCSV.click();
+    await browser.pause(3000);
+
+    const uploadElement = await setoran.importCSVModal;
+    await uploadElement.waitForExist({ timeout: 5000 });
+    await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+    }, uploadElement);
+    const filePath = path.resolve('file-csv\\template-vendor.csv');
+    const uploadFile = await browser.uploadFile(filePath)
+
+    await uploadElement.setValue(uploadFile);
+    await browser.keys(['Enter'])
+    await browser.pause(5000);
+    await setoran.btnImport.click();
+  
+})
+
+
+When ('User delete nominal inside "fieldInputBayarCash"', async() => {
+    await setoran.fieldInputBayarCash.click();
+    await setoran.btnClearRevisiBayar.click();
 })

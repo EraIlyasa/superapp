@@ -21,7 +21,21 @@ export default new class setoranPage {
 
 
     //Section 2 Pesanan Selesai 
-    get aksiKonfirmasi() {return $('(//*[@data-testid="action-0"])/*/*[1]');}
+    get aksiKonfirmasi0() {return $('(//*[@data-testid="action-0"])/*/*[1]');}
+    get aksiKonfirmasi1() {return $('(//*[@data-testid="action-1"])/*/*[1]');}
+    get aksiKonfirmasi2() {return $('(//*[@data-testid="action-2"])/*/*[1]');}
+
+    //tbody element
+    get assertMetodeBayar0() {return $('(//*[@class="ant-table-tbody"])[1]/*[2]/*[3]');}
+    get assertMetodeBayar1() {return $('(//*[@class="ant-table-tbody"])[1]/*[3]/*[3]');}
+    get assertMetodeBayar2() {return $('(//*[@class="ant-table-tbody"])[1]/*[4]/*[3]');}
+
+
+    //without tbody element
+    get textMetodeBayar0() {return $('(//*[@data-testid="invoice-0"])[2]');}
+    get textMetodeBayar1() {return $('(//*[@data-testid="invoice-1"])[3]');}
+    get textMetodeBayar2() {return $('(//*[@data-testid="invoice-2"])[3]');}
+
     get aksiHapus() {return $('(//*[@data-testid="action-0"])/*/*[2]');}
     get uploadImage1() {return $('(//*[@data-testid="form-image-upload"])[1]');}
     get uploadImage2() {return $('(//*[@data-testid="form-image-upload"])[2]');}
@@ -34,6 +48,7 @@ export default new class setoranPage {
     get btnImportCSV() {return $('//*[@data-testid="btn-import-csv"]');}
     get importCSVModal() {return $('//*[@data-testid="form-file-import"]')}
     get btnImport() {return $('//*[@id="submit-import"]'); }
+    get btnClearRevisiBayar() {return $('//*[@class="ant-input-clear-icon"]');}
 
 
 
@@ -44,8 +59,13 @@ export default new class setoranPage {
     get optGudang0() {return $('(//*[@title="Aloha"])[2]');}
     get optGudang1() {return $('(//*[@title="Aloha-RTP"])');}
     get optGudang2() {return $('(//*[@title="Bandung"])');}
-    get optNamaKurir() {return $('(//*[@title="feboi243"])');}
+    get optNamaKurirInhouse() {return $('(//*[@title="feboi243"])');}
+    get optNamaKurirVendor() {return $('(//*[@title="SANGAR SURABAYA"])');}
 
     get hapusRow1() {return $('(//*[@data-testid="action-1"])/*/*[2]');}
     get hapusRow2() {return $('(//*[@data-testid="action-2"])/*/*[2]');}
+
+    async getOptKurir(name: string) {
+        return $('(//*[@title="'+ name +'"])')
+    }
 }

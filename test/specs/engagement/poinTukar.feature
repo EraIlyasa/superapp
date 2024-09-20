@@ -55,42 +55,42 @@ Feature: Create-Poin Tukar
 
   @PT-0002
   Scenario Outline: Memastikan tidak dapat buat poin tukar baru dengan button cancel
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    # Given I send login url
+    # When I login with credential
+    # Then I see usernameDisplay
     And User click "navMenuMarketing" in global page
     And User click "menuPoinTukar" inside "navMenuMarketing"
     And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
-    # And User wait for 5 seconds
-    # And User upload image to "uploadImage" voucher detail
-    # And User click "fieldInputVoucherName"
-    # And User input "<voucherName>" into "fieldInputVoucherName"
-    # And User click "fieldInputVoucherPrefix"
-    # And User input "<voucherPrefix>" into "fieldInputVoucherPrefix"
-    # And User click "fieldInputDuration"
-    # And User input "<duration>"
-    # And User click "toggleAllDay"
-    # # And User click "fieldValidDay"
-    # # And User input "<validDay>" into "fieldValidDay"
-    # And User click "fieldcondition"
-    # And User click "getConditions" inside "fieldCondition"
-    # And User click "fieldProductCluster"
-    # And User get "getProductCluster" inside fieldProductCluster"
-    # # And User click "fieldDiscountBy"
-    # # And User click "optDiscountBy1" inside "fieldDiscountBy"
-    # And User click "fieldInputJumlahDiskon"
-    # And User input "<diskon>" inside "fieldInputJumlahDiskon"
-    # And User click "fieldInputJumlahTransaksi"
-    # And User input "<jumlahTransaksi>" inside "fieldInputJumlahTransaksi"
-    # And User click "fieldInputTitle"
-    # And User input "<title>" inside "fieldInputTitle"
-    # And User input "<description>" inside "fieldInputDesc"
-    # And User input "<description>" inside "fieldInputDescAboutVoucher"
-    # And User input "<description>" inside "fieldInputDescTC"
-    # And User input "<description>" inside "fieldInputDescH2U"
-    # And User wait for 5 seconds
+    And User wait for 5 seconds
+    And User upload image to "uploadImage" voucher detail
+    And User click "fieldInputVoucherName"
+    And User input "<voucherName>" into "fieldInputVoucherName"
+    And User click "fieldInputVoucherPrefix"
+    And User input "<voucherPrefix>" into "fieldInputVoucherPrefix"
+    And User click "fieldInputDuration"
+    And User input "<duration>"
+    And User click "toggleAllDay"
+    # And User click "fieldValidDay"
+    # And User input "<validDay>" into "fieldValidDay"
+    And User click "fieldcondition"
+    And User click "getConditions" inside "fieldCondition"
+    And User click "fieldProductCluster"
+    And User get "getProductCluster" inside fieldProductCluster"
+    # And User click "fieldDiscountBy"
+    # And User click "optDiscountBy1" inside "fieldDiscountBy"
+    And User click "fieldInputJumlahDiskon"
+    And User input "<diskon>" inside "fieldInputJumlahDiskon"
+    And User click "fieldInputJumlahTransaksi"
+    And User input "<jumlahTransaksi>" inside "fieldInputJumlahTransaksi"
+    And User click "fieldInputTitle"
+    And User input "<title>" inside "fieldInputTitle"
+    And User input "<description>" inside "fieldInputDesc"
+    And User input "<description>" inside "fieldInputDescAboutVoucher"
+    And User input "<description>" inside "fieldInputDescTC"
+    And User input "<description>" inside "fieldInputDescH2U"
+    And User wait for 5 seconds
     And User click "btnCancel"
     Then User will be back to "subMenuVoucherParameter" and able to see "<expectedTitle>"
     And User wait for 5 seconds
