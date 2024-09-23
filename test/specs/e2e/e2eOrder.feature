@@ -27,7 +27,7 @@ Feature: Create-e2e-order
     And User click "btnSimpanModalListMP"
     And User click "btnSimpanModalMP"
     And User click "btnSubmitOrder"
-    And User wait for 1 0 seconds
+    And User wait for 10 seconds
     And User select the invoice number
     And User click "navMenuLogistic"
     And User click "menuOutgoingGoods" in "navMenuLogistic"
