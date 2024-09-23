@@ -101,6 +101,18 @@ When ('User click "btnSimpanModalMP"', async () => {
     await order.btnSimpanModalMP.click();
 })
 
+When ('User click "btnTambahVoucher"', async () => {
+    await order.btnTambahVoucher.click();
+})
+
+When ('User click "checkboxVoucher"', async () => {
+    await order.checkboxVoucher.click();
+})
+
+When ('User click "btnSimpanVoucher"', async () => {
+    await order.btnSimpanVoucher.click();
+})
+
 When ('User click "btnSubmitOrder"', async () => {
     await order.btnSubmitOrder.click();
 })

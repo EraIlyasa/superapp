@@ -26,6 +26,11 @@ Feature: Create-e2e-order
     And User input "2" in "inputQtyModalMP"
     And User click "btnSimpanModalListMP"
     And User click "btnSimpanModalMP"
+    And User click "btnTambahVoucher"
+    And User wait for 3 seconds
+    And User click "checkboxVoucher"
+    And User click "btnSimpanVoucher"
+    And User wait for 3 seconds
     And User click "btnSubmitOrder"
     And User wait for 10 seconds
     And User select the invoice number

@@ -95,6 +95,17 @@ export default new class e2eOrderPage {
         return $('//*[contains(text(), "Karton")]');
     }
 
+    //voucher
+    public get btnTambahVoucher(){
+        return $('//button[span[text()=" Tambah Voucher"]]');
+    }
+    public get checkboxVoucher(){
+        return $('//*[@class="ant-checkbox-input"]');
+    }
+    public get btnSimpanVoucher(){
+        return $('//*[@class="ant-btn ant-btn-primary ant-btn-lg"]');
+    }
+
 
     //Direct Order
     //section 1 detail
