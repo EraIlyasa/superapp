@@ -1,6 +1,6 @@
 export default new class purchaseOrderPage {
     // V4
-    get navMenuPurchasing() { return $('//div[@role="menuitem"]/span[@data-testid="Menu-Purchasing"]'); }
+    get navMenuPurchasing() { return $('//span[@data-testid="Menu-Purchasing"]');} //('//div[@role="menuitem"]/span[@data-testid="Menu-Purchasing"]'); }
     get POv4() { return $('//span[@class="ant-menu-title-content"]/a[@data-testid="Menu-PurchaseOrder V4"]'); }
     get POv3() { return $('//*[@data-testid="Menu-PurchaseOrder V3"]'); }
     get navMenuFinances() { return $('//*[@data-testid="Menu-Finances"]'); }
@@ -51,14 +51,19 @@ export default new class purchaseOrderPage {
     get modalPrepayment() { return $('//*[@class="modal-title" and text()="Request Prepayment"]'); }
     get alertPengajuan() { return $('//*[@class="ant-alert-message" and text()="[Nota Pengajuan] wajib diisi"]'); }
     get reqnavRincianPO() { return $('//[@class="ant-tabs-nav-list"]//[@data-node-key="detail_po"]'); }
-    get reqnavNotaPengajuan() { return $('//*[@data-node-key="filing_note"]'); }
-    get reqnavDiskonOffFaktur() { return $('//[@class="ant-tabs-nav-list"]//*[@data-node-key="discount_off_note"]'); }
-    get reqnavDocTambahan() { return $('//[@class="ant-tabs-nav-list"]//*[@data-node-key="additional_note"]'); }
+    get reqNavNotaPengajuan() { return $('//*[@data-node-key="filing_note"]'); }
+    get reqNavDiskonOffFaktur() { return $('//[@class="ant-tabs-nav-list"]//*[@data-node-key="discount_off_note"]'); }
+    get reqNavDocTambahan() { return $('//[@class="ant-tabs-nav-list"]//*[@data-node-key="additional_note"]'); }
     get dropzonePrepaymentNota() { return $('//[@class="ant-card-body"]//[@id="upload-file"]'); }
     get fieldDeskripsiPrepayment() { return $('//*[@id="filing_note-note"]'); }
-    get btnSimpanPrepayment() { return $('//*[@data-testid="btn-start-searching"]'); }
+    get imgUploadRPNP() {return $('#upload-file')}
+    get btnSimpanRPModal() {return $('#updateBtnEdit');}
+    get btnBatalRPModal() {return $('#cancelBtnEdit');}
+    // get btnSimpanPrepayment() { return $('//*[@data-testid="btn-start-searching"]'); }
     get btnYes() { return $('//*[@id="btn-yes"]'); }
-    get allertNotification() { return $('(//div[@class="ant-alert-content"])[1]'); }
+    get allertNotaPengajuan() { return $('(//*[@class="ant-alert-message"])[2]'); } 
+    get allertNotaPengajuanTempo() {return $('(//*[@class="ant-alert-message"])'); }
+    get allertRincianPO() {return $('(//*[@class="ant-alert-message"])[1]');}
 
     // Modal Filter
     get optModalFilterGudang() { return $('//div[@class="ant-tabs-nav-list"]/*[@data-node-key="warehouse_ids"]'); }
@@ -103,11 +108,11 @@ export default new class purchaseOrderPage {
     get optTipePTPO() { return $('//*[@id="PT Coba Coba"]'); }
     get optSupplier() { return $('//*[@data-testid="autosuggest-options" and @id=" PT. Ganda Segar Arum"]'); }
     get optSupplierPKP() { return $('//*[@data-testid="autosuggest-options" and @id="Supplier PKP"]');}
-    get optMetodePembayaranTransfer() {return $('//*[@data-testid="dropdown-options" and @title="Transfer"]')}
+    get optMetodePembayaranTransfer() {return $('//*[@title="Transfer"]')}
     get optPengirimanFranco() {return $('//*[@data-testid="dropdown-options" and @title="Franco"]')}
     get optPIC() {return $('//*[@id="Angga"]')}
     get optBankSupplier() {return $('(//*[@role="option" and text()="Transfer BCA - PT Bank Central Asia Tbk"])[1]')}
-    get optMetodePembayaranTempo() {return $('//*[@data-testid="dropdown-options" and @title="Tempo"]')}
+    get optMetodePembayaranTempo() {return $('//*[@title="Tempo"]')}
 
     //Section 2 Daftar Pembelian 
     get btnImportCSVPO() {return $('//button[@id="export-csv-button"]')}
@@ -169,6 +174,10 @@ export default new class purchaseOrderPage {
 
     //Section 4 Dokumen
     get navNotaPengajuan() {return $('//*[@data-node-key="filing_note"]')}
+    get imgUploadNotaPengajuan() {return $('#filing_note_docs');}
+    get imgUploadDiskonOffFaktur() {return $('#discount_off_note_docs');}
+    get imgUploadDokumenTambahan() {return $('#additional_note_docs');}
+
     get navDiskonOffFaktur() {return $('//*[@data-node-key="discount_off_note"]')}
     get navDokumenTambahan() {return $('//*[@data-node-key="additional_note"]')}
     get dropzoneNotaPengajuan() {return $('//span[@class="ant-upload-picture-card-wrapper size-small undefined"]');} //('//span[@class="ant-upload"]'); //('//span[@role="button"]/*[@id="filing_note_docs"]'); //('//*[@id="Nota Pengajuan-upload-picture"]')}
@@ -188,4 +197,8 @@ export default new class purchaseOrderPage {
 
     //
     get menuPaymentRequestV4() { return $('//*[@data-testid="Menu-PaymentRequest V4"]')}
+
+    //special function 
+    async getOptPembayaran(name:string) {
+        return $('//*[@title="'+name+'"]')}
 }

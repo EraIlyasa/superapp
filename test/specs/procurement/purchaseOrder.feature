@@ -50,7 +50,9 @@ Feature: Create - Purchase Order
     And User verified "purchase order cost" for "textValueSubTotal" is "<textValueSubTotal>"
     And User fill "fieldDiskonOffFaktur" with value "<diskonOffFaktur>" in "PO" page
     And User verified "purchase order cost" for "textValueGrandTotal" is "<textValueGrandTotal>"
-    And User send PO document "Super.png" in "dropzoneNotaPengajuan"
+    
+    And User click "navNotaPengajuan"
+    And User upload image to "imgUploadNotaPengajuan" in "PO" page
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see "Purchase Order berhasil dibuat!" message verification
 

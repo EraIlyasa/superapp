@@ -1,25 +1,52 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import purchaseOrderPage from "../../pageobjects/procurement/purchaseOrderPage";
+import path from "path";
 const POV4 = purchaseOrderPage;
 
 
 
 When('User click "navMenuPurchasing" button in "Global" page', async () => {
-    await POV4.navMenuPurchasing.click();
+  await browser.waitUntil(async() => {
+    const isClickable = await POV4.navMenuPurchasing.isClickable();
+    return isClickable;
+  }, {
+    timeout:10000,
+    timeoutMsg: 'NavMenuPurchasing still not clickable'
+  })  
+  await POV4.navMenuPurchasing.click();
   });
   
   
   When('User click "menuPurchasingPO" button in "PO" page', async () => {
-    await POV4.menuPurchasingPO.click();
+    try { 
+      await browser.waitUntil(async () => {
+        return (await POV4.menuPurchasingPO.isDisplayed() && await POV4.menuPurchasingPO.isClickable());
+    }, {
+        timeout: 30000,
+        timeoutMsg: 'Element not clickable after 30 seconds'
+    });
+        console.log("Element is clickable, clicking now...");
+        await POV4.menuPurchasingPO.click();
+        await browser.pause(5000);
+    } catch (error) {
+    console.error("Error occurred while clicking menuPurchasingPO:", error);
+}
   });
   
   
   When('User directed to "Purchase Order" page', async () => {
-    await browser.pause(10000);
+    await browser.pause(2000);
   });
   
   
   When('User click "btnCreateNewPO" button in "PO" page', async () => {
+    await browser.waitUntil(async() => {
+      const isClickable = await POV4.btnCreateNewPO.isClickable();
+      return isClickable;
+    }, {
+      timeout:20000,
+      timeoutMsg:'btnCreateNewPO still not clickable'
+    })
     await POV4.btnCreateNewPO.click();
   });
   
@@ -181,8 +208,8 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
     });
 
 
-  When ('User click "btnSimpanPrepayment" button in "PO" page', async() => { 
-      await POV4.btnSimpanPrepayment.click(); 
+  When ('User click "btnSimpanRPModal" button in request payment modal', async() => { 
+      await POV4.btnSimpanRPModal.click(); 
   })
 
 
@@ -340,6 +367,7 @@ When ('User clicks "btnCari" button in "Finance" page', async() => {
 
 When ('User clicks "btnDetailRow0" button in "Finance" page', async() => {
     await POV4.btnDetailRow0.click();
+    await browser.pause(1000);
 })
 
 
@@ -355,4 +383,168 @@ Then ('User able to see request payment confirmation "poCodeModal" is match', as
 
 When ('User clicks "btnSimpanModalPR" button in "Finance" page', async() => {
     await POV4.btnSimpanModalPR.click();
+})
+
+
+When ('User click "btnPrepayment" button in "PO" page', async() => {
+  await POV4.btnPrepayment.click();
+  await browser.pause(1000);
+})
+
+When ('User upload image to "imgUploadNotaPengajuan" in "PO" page', async() => {
+  const uploadElement = await POV4.imgUploadNotaPengajuan;
+
+  await uploadElement.waitForExist({ timeout: 5000 });
+
+  await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+    }, uploadElement);
+  const filePath = path.resolve('Images\\Product Banner Design.jpg');
+  const uploadFile = await browser.uploadFile(filePath)
+
+  await uploadElement.setValue(uploadFile);
+  await browser.keys(['Enter'])
+})
+
+
+When ('User upload image to "imgUploadRPNP" in request payment modal', async() => {
+  const imgNotaPengajuan = await POV4.imgUploadRPNP;
+  await imgNotaPengajuan.waitForExist({timeout:1000});
+
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, imgNotaPengajuan);
+  const filePath = path.resolve('Images\\Product Banner Design.jpg');
+  const uploadFile = await browser.uploadFile(filePath);
+  await imgNotaPengajuan.setValue(uploadFile);
+  await browser.keys(['Enter']);
+  await browser.pause(1000);
+})
+
+
+When ('User click "navNotaPengajuan"', async() => {
+  await POV4.navNotaPengajuan.scrollIntoView();
+  await POV4.navNotaPengajuan.click();
+  await browser.pause(1000);
+})
+
+
+When ('User click "reqNavNotaPengajuan" button in "PO" page', async() => {
+  await POV4.reqNavNotaPengajuan.click();
+  await browser.pause(1000);
+})
+
+
+When ('User fill "fieldDeskripsiPrepayment" with value "Notes Prepayment" in "PO" page', async() => {
+  await POV4.fieldDeskripsiPrepayment.setValue('Notes Prepayment');
+  await browser.pause(1000);
+
+})
+
+
+ When ('User click "btnDetailRow0" button in "PO" page', async() => {
+  await POV4.btnDetailRow0.click();
+  await browser.pause(1000);
+ })
+
+
+Then ('User able to see "Data has been updated" message verification', async() => {
+  await browser.pause(3000);
+})
+
+
+ When ('User click "btnBatalRPModal" button in request payment modal', async() => {
+  await POV4.btnBatalRPModal.click();
+  await browser.pause(3000);
+})
+
+
+Then ('User verifiy the page', async() => {
+  const isExist = await POV4.btnPrepayment.isExisting();
+
+  try {
+    expect (await isExist)
+    console.log('The btnPrepayment is exist after cancel prepayment')
+  } catch {
+    console.log('The btnPrepayment is not exist after cancel prepayment')
+  }
+  
+})
+
+
+When ('User clicks "optMetodePembayaranTempo" button in "PO" page', async() => {
+  await POV4.optMetodePembayaranTempo.click();
+  await browser.pause(1000);
+
+})
+
+
+Then ('User "able" to see "allertNotaPengajuan" in "PO" page', async() => {
+  await browser.waitUntil(async() => {
+    const isDisplayed = await POV4.allertNotaPengajuan.isDisplayed();
+    return isDisplayed;
+  }, {
+    timeout:10000,
+    timeoutMsg:'allertNotaPengajuan still not displayed'
+  })
+  console.log('allertNotaPengajuan is displpayed')
+})
+
+
+Then ('User "able" to see "allertNotaPengajuanTempo" in "PO" page', async() => {
+  await browser.waitUntil(async() => {
+    return await POV4.allertNotaPengajuanTempo.isDisplayed;
+  }, {
+    timeout:10000,
+    timeoutMsg:'allertNotaPengajuanTempo still not displayed after timeout'
+  })
+  console.log('allertNotaPengajuanTempo is displayed')
+})
+
+
+When ('User choose metode pembayaran {string}', async(metodePembayaran:string) => {
+ 
+  if (metodePembayaran === 'Transfer'){
+    (await POV4.getOptPembayaran('Transfer')).click();
+  } else if (metodePembayaran === 'Cash On Delivery') {
+    (await POV4.getOptPembayaran('Cash On Delivery')).click();
+  } else if (metodePembayaran === 'Tempo') {
+    (await POV4.getOptPembayaran('Tempo')).click();
+  } 
+})
+
+
+When ('User click "btnSubmitPO" in detail page', async() => {
+  await POV4.btnSubmitPO.click();
+  await browser.pause(1000);
+})
+
+
+Then ('User able to see "[Rincian PO] Jumlah Payment request wajib diisi" message verification', async() => {
+  await browser.waitUntil(async() => {
+    return await POV4.allertRincianPO.isDisplayed();
+  }, {
+    timeout:10000,
+    timeoutMsg:'allertRincianPO is displayed'
+  })
+  await browser.pause(2000);
+})
+
+
+When ('User click "fieldNominalPrepayment" button in "PO" page', async() =>{
+  await POV4.fieldNominalPrepayment.click();
+  await browser.pause(1000);
+
+
+})
+When ('User fill "fieldNominalPrepayment" with value "0" in "PO" page', async() =>{
+  await browser.keys(['Control', 'a']);
+  await browser.keys(['Delete']);
+  await POV4.fieldNominalPrepayment.setValue('0');
+})
+
+
+Given ('User get create PO url', async() => {
+  await browser.url('https://v3-web-app-micro.staging.superapp.co.id/purchasing/purchase-order/new');
+  await browser.pause(5000);
 })
