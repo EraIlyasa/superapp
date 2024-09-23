@@ -103,7 +103,7 @@ export default new class purchaseOrderPage {
 
     // Option Section 1 Detail
     get optJenisPOFinishGood() { return $('//*[@data-testid="dropdown-options" and @title="Finish Good"]'); }
-    get optJenisPORM() { return $('//*[@data-testid="dropdown-options" and @title="Raw Material"]'); }
+    get optJenisPORM() { return $('//*[@title="Raw Material"]'); }
     get optGudangPOAloha() { return $('//*[@data-testid="dropdown-options" and @title="Aloha"]'); }
     get optTipePTPO() { return $('//*[@id="PT Coba Coba"]'); }
     get optSupplier() { return $('//*[@data-testid="autosuggest-options" and @id=" PT. Ganda Segar Arum"]'); }
@@ -149,7 +149,7 @@ export default new class purchaseOrderPage {
     //Option Section 2 Daftar Pembelian
      get optProdukModalPO() {return $('//*[@id="Tamiya Broken G (Jangan Dipakai)"]')}
      get optProdukModalPO2() {return $('//*[@id="Automated Stock | ra"]');}
-     get optProdukModalPORaw() {return $('//*[@id="Raw Material Automation - 1"]')}
+     get optProdukModalPORaw() {return $('//*[@id="Automated Raw"]');}
      get optSatuanModalPO() {return $('//*[@data-testid="dropdown-options" and @title="Bag"]')}
      get optSatuanModalPO2() {return $('//*[@data-testid="dropdown-options" and @title="Bag"]')}
 

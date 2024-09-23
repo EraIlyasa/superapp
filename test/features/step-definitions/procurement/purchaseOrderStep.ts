@@ -548,3 +548,30 @@ Given ('User get create PO url', async() => {
   await browser.url('https://v3-web-app-micro.staging.superapp.co.id/purchasing/purchase-order/new');
   await browser.pause(5000);
 })
+
+
+When ('User get kode invoice', async() => {
+  kodeInvoice = await POV4.kodePORow1.getText();
+  console.log('Kode Invoice : ' + kodeInvoice);
+  await browser.pause(2000);
+})
+let kodeInvoice: string
+export {kodeInvoice}
+
+
+When ('User clicks "optJenisPORM" button in "PO" page', async() => {
+  await POV4.optJenisPORM.click();
+  await browser.pause(1000);
+})
+
+
+When ('User clicks "optProdukModalPORaw" button in "PO" page', async() => {
+  await POV4.optProdukModalPORaw.click();
+  await browser.pause(1000);
+})
+
+
+When ('User back to previous in page "PO"', async() =>{
+  await browser.back();
+  await browser.pause(5000);
+})
