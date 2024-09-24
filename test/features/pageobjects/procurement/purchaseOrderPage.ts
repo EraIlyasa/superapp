@@ -22,7 +22,8 @@ export default new class purchaseOrderPage {
     get btnCari() { return $('//*[@data-id="enter-btn"]'); }
     get btnFilter() { return $('//*[@class="ant-col m-left-4"]/*[@data-id="filter-modal-trigger"]');}//('//*[@data-id="filter-modal-trigger"]'); }
     get btnExportCSV() { return $('//div[@class="ant-dropdown-trigger PurchaseOrder_btnExportPo__Oc06b"]/*[contains(text() "Export CSV")]'); }
-    get textStatusPO() { return $('//*[contains(@id "purchase-status")]'); }
+    // get textStatusPO() { return $('//*[contains(@id "purchase-status")]'); }
+    get textStatusPO() {return $('//tbody[@class="ant-table-tbody"]/*[2]/*[10]/*[1]');}
     get textStatusPaymentRequest() { return $('//*[@id="payment-request-prepayment-status-0"]'); }
     get textProductName() { return $('(//*[@class="ant-table-cell"])[11]'); }
     get textProductName2() { return $('(//*[@class="ant-table-cell"])[20]'); }
@@ -31,7 +32,7 @@ export default new class purchaseOrderPage {
     get kodePORow1() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[2]/*[1]'); }
     get kodePOPR() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[3]/*[1]'); }
     get prepaymentStatus() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[8]/*/*[contains(text() "Ditolak")]'); }
-    get statusPO() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[10]/*/*[contains(text() "Cancelled")]'); }
+    get statusPOCanceled() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[10]/*/*[contains(text() "Cancelled")]'); }
 
     // Edit PO
     get btnDetailRow0() { return $('//*[@id="purchase-po-code-0"]'); }
@@ -145,6 +146,8 @@ export default new class purchaseOrderPage {
     get btnTambahProdukModalPO() {return $('//*[@id="add-new-product-button"]')}
     get btnSimpanModalPO() {return $('//*[@id="updateBtnEdit"]')}
     get optPengirimanLocco() {return $('//*[@data-testid="dropdown-options" and @title="Locco"]')}
+    get uploadFilePO() {return $('//*[@data-id="drager-modal-import"]');}
+    get btnCancelImport() {return $('(//*[@data-testid="btn-cancel"])[2]');}
 
     //Option Section 2 Daftar Pembelian
      get optProdukModalPO() {return $('//*[@id="Tamiya Broken G (Jangan Dipakai)"]')}
@@ -182,7 +185,7 @@ export default new class purchaseOrderPage {
     get navDokumenTambahan() {return $('//*[@data-node-key="additional_note"]')}
     get dropzoneNotaPengajuan() {return $('//span[@class="ant-upload-picture-card-wrapper size-small undefined"]');} //('//span[@class="ant-upload"]'); //('//span[@role="button"]/*[@id="filing_note_docs"]'); //('//*[@id="Nota Pengajuan-upload-picture"]')}
     get fieldDeskripsiDokumen() {return $('//input[@id="filing-note-description"]') }//('//*[@id="Nota Pengajuan-description-input"]')}
-
+    get fieldDeskripsiNota() {return $('//*[@id="filing-note-description"]');}
 
     //Bottom BTN
     get btnBatalCreatePO() {return $('//*[@id="btnCancel"]')}

@@ -12,6 +12,11 @@ export default new class incomingGoodsPage {
     get btnStatus() {return $('');}
     get btnTipeIncoming() {return $('(//*[@class="ant-tag Table_filterItem__x3tSg Chips_container__Uk_w2 Chips_large__DNi_I css-1vp3ixv"])[5]');}
     get btnMoreFilter() {return $('(//*[@class="ant-tag Table_filterItem__x3tSg Chips_container__Uk_w2 Chips_large__DNi_I css-1vp3ixv"])[6]');}
+    get btnAmbilAntrian() {return $('//*[@data-testid="get-queue-0"]');}
+    get uploadSJ() {return $('//*[@data-testid="form-image-upload"]');}
+    get fieldInputDriver() {return $('//*[@placeholder="Masukkan nama driver supplier"]');}
+    get btnCheckinModalNomorAntrian() {return $('//*[@data-testid="btn-submit"]');}
+    get btnBatalModalNomorAntrian() {return $('//*[@data-testid="btn-cancel"]');}
 
     //Filter 
     get filterGudangModal() {return $('//*[@data-node-key="warehouse_id"]');}
@@ -27,7 +32,7 @@ export default new class incomingGoodsPage {
     get optGudang1() {return $('(//*[contains(text(), "Aloha-RTP")])');}
     get btnTerapkanFilterModal() {return $('//*[@data-testid="filter-incoming-goods-supplier-apply-filter"]');}
     get btnResetFilterModal() {return $('//*[@data-testid="filter-incoming-goods-supplier-reset-filter"]');}
-    
+
 
 
     public get fieldInputSearch0() {

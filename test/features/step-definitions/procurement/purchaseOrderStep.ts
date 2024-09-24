@@ -362,6 +362,13 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
 
 When ('User clicks "btnCari" button in "Finance" page', async() => {
     await POV4.btnCari.click();
+    await browser.pause(1000);
+})
+
+
+When ('User click "btnCari" in "PO" page', async()=> {
+  await POV4.btnCari.click();
+  await browser.pause(2000);
 })
 
 
@@ -404,6 +411,23 @@ When ('User upload image to "imgUploadNotaPengajuan" in "PO" page', async() => {
 
   await uploadElement.setValue(uploadFile);
   await browser.keys(['Enter'])
+  await browser.pause(2000);
+})
+
+
+When ('User send "template-PO-RAW.csv" in "uploadFilePO" in "PO" page', async() =>{
+  const uploadCSV = await POV4.uploadFilePO;
+  await uploadCSV.waitForExist({timeout:10000})
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCSV);
+    const filePath = path.resolve('file-csv\\template-PO-RAW.csv');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCSV.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(2000);
+
+  
 })
 
 
@@ -418,12 +442,18 @@ When ('User upload image to "imgUploadRPNP" in request payment modal', async() =
   const uploadFile = await browser.uploadFile(filePath);
   await imgNotaPengajuan.setValue(uploadFile);
   await browser.keys(['Enter']);
-  await browser.pause(1000);
+  await browser.pause(2000);
 })
 
 
 When ('User click "navNotaPengajuan"', async() => {
-  await POV4.navNotaPengajuan.scrollIntoView();
+  await browser.waitUntil(async() => {
+    await POV4.navNotaPengajuan.scrollIntoView();
+    return POV4.navNotaPengajuan.isDisplayed();
+  }, {
+    timeout:10000,
+    timeoutMsg:'navNotaPengajuan still not displayed'
+  })
   await POV4.navNotaPengajuan.click();
   await browser.pause(1000);
 })
@@ -550,7 +580,7 @@ Given ('User get create PO url', async() => {
 })
 
 
-When ('User get kode invoice', async() => {
+When ('User get kode invoice PO', async() => {
   kodeInvoice = await POV4.kodePORow1.getText();
   console.log('Kode Invoice : ' + kodeInvoice);
   await browser.pause(2000);
@@ -573,5 +603,79 @@ When ('User clicks "optProdukModalPORaw" button in "PO" page', async() => {
 
 When ('User back to previous in page "PO"', async() =>{
   await browser.back();
+  await browser.pause(5000);
+})
+
+
+When ('User click "btnSubmitImport" button in "PO" page', async() => {
+  await POV4.btnSubmitImport.click();
+  await browser.pause(1000);
+})
+
+
+When ('User click "btnImportCSVPO" button in "PO" page', async() => {
+  await POV4.btnImportCSVPO.click();
+  await browser.pause(1000);
+})
+
+
+When ('User click "btnEditPO" button in "PO" page', async() => {
+  await POV4.btnEditPO.click();
+  await browser.pause(2000);
+})
+
+
+When ('User click "fieldDeskripsiNota" in "PO" page', async() => {
+  await POV4.fieldDeskripsiNota.scrollIntoView();
+  await POV4.fieldDeskripsiNota.click();
+  await browser.pause(1000);
+}) 
+
+
+When ('User input {string} into "fieldDeskripsiNota"', async(desc:string) => {
+  await POV4.fieldDeskripsiNota.setValue(desc);
+  await browser.pause(1000);
+})
+
+
+Given ('User get url to "PO" page', async() => {
+  await browser.url('https://v3-web-app-micro.staging.superapp.co.id/purchasing/purchase-order');
+  await browser.pause(5000);
+})
+
+
+When ('User click "btnSearch" in "PO" page', async() => {
+  await POV4.btnSearch.click();
+  await browser.pause(1000);
+})
+
+
+When ('User input "kodeInvoice" into "fieldInputSearch"', async() => {
+  await POV4.fieldInputSearch.setValue(kodeInvoice);
+  await browser.pause(1000);
+})
+
+
+Then ('User verified "status po" for "textStatusPO" is {string}', async(textStatusPO) => {
+  await browser.waitUntil(async() => {
+    return await POV4.textStatusPO.isDisplayed();
+  }, {
+    timeout:10000,
+    timeoutMsg:'textStatusPO still can not scroll'
+  })
+  const textStatus = await POV4.textStatusPO.getText();
+  console.log(textStatus);
+  expect (await textStatus).toEqual(textStatusPO);
+
+})
+
+
+Then ('User able to see "Purchase Order berhasil diupdate" message verification', async() => {
+  await browser.pause(5000);
+})
+
+
+Given ('a',async() => {
+  await browser.url('https://v3-web-app-micro.staging.superapp.co.id/purchasing/purchase-order');
   await browser.pause(5000);
 })
