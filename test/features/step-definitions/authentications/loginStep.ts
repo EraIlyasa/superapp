@@ -77,4 +77,5 @@ Then('I see usernameDisplay', async () => {
     } else {
         console.error('usernameDisplay element not found.');
     }
+    await browser.pause(1000);
 });

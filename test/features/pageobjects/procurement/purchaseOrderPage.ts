@@ -33,12 +33,14 @@ export default new class purchaseOrderPage {
     get kodePOPR() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[3]/*[1]'); }
     get prepaymentStatus() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[8]/*/*[contains(text() "Ditolak")]'); }
     get statusPOCanceled() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[10]/*/*[contains(text() "Cancelled")]'); }
+    get textVerification() {return $('//*[contains(text(), "Purchase Order status berhasil diupdate")]');}
+    get allertKosong() {return $('//*[@class="ant-notification ant-notification-top"]');}
 
     // Edit PO
     get btnDetailRow0() { return $('//*[@id="purchase-po-code-0"]'); }
     get btnEditPO() { return $('//*[@id="btn-edit-po"]'); }
     get btnCancelPO() { return $('//*[@data-testid="btn-cancel"]'); }
-    get btnLanjutkanCancel() { return $('//button//*[text()="Ya Lanjutkan"]'); }
+    get btnLanjutkanCancel() { return $('//button//*[text()="Ya, Lanjutkan"]'); }
     get btnAturProdukBonus() { return $('//*[@id="btn-open-modal-bonus"]'); }
     get btnForceClose() { return $('//*[@data-testid="btn-cancel"]'); }
     get btnSubmitFC() { return $('//*[@data-testid="btn-submit"]'); }
@@ -128,12 +130,12 @@ export default new class purchaseOrderPage {
     get fieldProdukModalPO() {return $('//*[@data-testid="product_id"]')}
     get fieldProdukModalPO2() {return $('(//*[@data-testid="product_id"])[2]')}
     get fieldSatuanModalPO() {return $ ('(//div[@class="ant-select-selector"])[6]')}
-    get fieldSatuanModalPOId() {return $('product-unit-dropdown-0')}
+    get fieldSatuanModalPOId() {return $('//*[@class="ant-select-selection-item"]')}
     get fieldQtyModalPO() {return $('//*[@id="product-quantity-input-0"]')}
     get fieldHargaSatuanModalPO() {return $('//*[@id="product-purchase-price-input-0"]')}
     get fieldDiskon1ModalPO() {return $('//*[@id="product-discount-input-0"]')}
     get togglePPNModalPO() {return $('//*[@id="product-ppn-switch-0"]')}
-    get fieldSatuanModalPO2() {return $('//*[@id="product-unit-dropdown-1"]')}
+    get fieldSatuanModalPO2() {return $('(//*[@class="ant-select-selector"])[7]')}
     get fieldQtyModalPO2() {return $('//*[@id="product-quantity-input-1"]')}
     get fieldHargaSatuanModalPO2() {return $('//*[@id="product-purchase-price-input-1"]')}
     get fieldDiskon1ModalPO2() {return $('//*[@id="product-discount-input-1"]')}
@@ -148,13 +150,16 @@ export default new class purchaseOrderPage {
     get optPengirimanLocco() {return $('//*[@data-testid="dropdown-options" and @title="Locco"]')}
     get uploadFilePO() {return $('//*[@data-id="drager-modal-import"]');}
     get btnCancelImport() {return $('(//*[@data-testid="btn-cancel"])[2]');}
+    get allertProdukDupl() {return $('//*[@class="ant-notification ant-notification-top"]')}
 
     //Option Section 2 Daftar Pembelian
      get optProdukModalPO() {return $('//*[@id="Tamiya Broken G (Jangan Dipakai)"]')}
      get optProdukModalPO2() {return $('//*[@id="Automated Stock | ra"]');}
-     get optProdukModalPORaw() {return $('//*[@id="Automated Raw"]');}
+     get optProdukModalPORaw0() {return $('//*[@id="Automated Raw"]');}
+     get optProdukModalPORaw1() {return $('//*[@id="Automated Raw 2"]');}
+
      get optSatuanModalPO() {return $('//*[@data-testid="dropdown-options" and @title="Bag"]')}
-     get optSatuanModalPO2() {return $('//*[@data-testid="dropdown-options" and @title="Bag"]')}
+     get optSatuanModalPO2() {return $('(//*[@data-testid="dropdown-options" and @title="Bag"])[2]')}
 
     //Section 3 Detail Biaya
      get textValueDPP() {return $('(//*[@class="stripedTable"]//td)[2]')}

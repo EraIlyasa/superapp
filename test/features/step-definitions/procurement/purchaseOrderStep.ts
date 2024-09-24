@@ -1,6 +1,8 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import purchaseOrderPage from "../../pageobjects/procurement/purchaseOrderPage";
 import path from "path";
+import { throws } from "assert";
+import { error } from "console";
 const POV4 = purchaseOrderPage;
 
 
@@ -115,6 +117,8 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   
   
   When('User clicks "fieldPengiriman" button in "PO" page', async () => {
+    await POV4.fieldPengiriman.scrollIntoView();
+    await browser.pause(1000);
     await POV4.fieldPengiriman.click();
   });
   
@@ -171,8 +175,13 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   
   
   When('User fill "fieldProdukModalPO" with value {string} in "PO" page', async (productName) => {
-      await POV4.fieldProdukModalPO.setValue(productName); }
-  );
+      await POV4.fieldProdukModalPO.setValue(productName);
+  })
+
+
+  When ('User fill "fieldProdukModalPO" produk bonus with value {string} in "PO" page', async(productName2) =>{
+    await POV4.fieldProdukModalPO.setValue(productName2)
+  })
   
   
   // Given ('User can wait loading application for "5" seconds', async () => { await browser.pause(5000)})
@@ -196,6 +205,11 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   When ('User fill "fieldQtyModalPO" with value {string} in "PO" page', async (qty) => {
       await POV4.fieldQtyModalPO.setValue(qty);
     });
+
+  
+  When (' User fill "fieldQtyModalPO" with value {string} in "PO" page', async (qty2) => {
+    await POV4.fieldQtyModalPO.setValue(qty2);
+  });
 
 
   When ('User fill "fieldHargaSatuanModalPO" with value {string} in "PO" page', async (price) => {
@@ -271,10 +285,11 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   
   When ('User click "btnTambahProdukModalPO" button in "PO" page', async() => {
       await POV4.btnTambahProdukModalPO.click();
+      await browser.pause(1000);
   });
 
 
-  When ('And User clicks "fieldProdukModalPO2" button in "PO" page', async() => {
+  When ('User clicks "fieldProdukModalPO2" button in "PO" page', async() => {
       await POV4.fieldProdukModalPO2.click();
   });
 
@@ -285,12 +300,19 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
 
 
   When ('User fill "fieldQtyModalPO2" with value {string} in "PO" page', async (qty) => {
-      await POV4.fieldQtyModalPO2.setValue(qty);
+    await browser.waitUntil(async() => {
+      return await POV4.fieldQtyModalPO2.isClickable();
+    }, {
+      timeout:10000,
+      timeoutMsg:'fieldQtyModalPO2 still not clickable'
+    })  
+    await POV4.fieldQtyModalPO2.setValue(qty);
   });
 
 
-  When ('User fill "fieldHargaSatuanModalPO2" with value "<price>" in "PO" page', async () => {
-      
+  When ('User fill "fieldHargaSatuanModalPO2" with value {string} in "PO" page', async (price) => {
+      await POV4.fieldHargaSatuanModalPO2.setValue(price);
+      await browser.pause(1000);
 
   });
   When ('User fill "fieldDiskon1ModalPO2" with value {string} in "PO" page', async (diskon1) => {
@@ -298,7 +320,7 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   });
 
 
-  When ('And User clicks "togglePPNModalPO2" button in "PO" page', async () => {
+  When ('User clicks "togglePPNModalPO2" button in "PO" page', async () => {
       await POV4.togglePPNModalPO2.click();
   });
   
@@ -318,7 +340,7 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   );
 
   
-  Then('User able to see "Gagal menyimpan PO" message verification', async () => {
+  Then(' User able to see "Gagal menyimpan PO" message verification', async () => {
       await browser.closeWindow();
       // await browser.deleteSession();
       // await browser.url('http://v3-web-app-micro.staging.superapp.co.id/auth/login');
@@ -326,9 +348,16 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   });
   
   Then ('User able to see "Terdapat info yang belum lengkap" message verification', async() => {
+    await browser.waitUntil(async() => {
       await browser.pause(3000);
+      return expect (await POV4.allertProdukDupl.isDisplayed());  
+    }, {
+      timeout:10000,
+      timeoutMsg:'allertProdukDupl still not displayed'
+    })
   });
   
+
   Then ('User "able" to see "alertPengajuan" in "PO" page', async() => {
       await browser.pause(3000);
   })
@@ -401,7 +430,7 @@ When ('User click "btnPrepayment" button in "PO" page', async() => {
 When ('User upload image to "imgUploadNotaPengajuan" in "PO" page', async() => {
   const uploadElement = await POV4.imgUploadNotaPengajuan;
 
-  await uploadElement.waitForExist({ timeout: 5000 });
+  await uploadElement.waitForExist({ timeout: 10000 });
 
   await browser.execute((el:HTMLElement) => {
         el.style.display = 'block';
@@ -411,7 +440,7 @@ When ('User upload image to "imgUploadNotaPengajuan" in "PO" page', async() => {
 
   await uploadElement.setValue(uploadFile);
   await browser.keys(['Enter'])
-  await browser.pause(2000);
+  await browser.pause(5000);
 })
 
 
@@ -596,7 +625,7 @@ When ('User clicks "optJenisPORM" button in "PO" page', async() => {
 
 
 When ('User clicks "optProdukModalPORaw" button in "PO" page', async() => {
-  await POV4.optProdukModalPORaw.click();
+  await POV4.optProdukModalPORaw0.click();
   await browser.pause(1000);
 })
 
@@ -614,6 +643,7 @@ When ('User click "btnSubmitImport" button in "PO" page', async() => {
 
 
 When ('User click "btnImportCSVPO" button in "PO" page', async() => {
+  await POV4.btnImportCSVPO.scrollIntoView();
   await POV4.btnImportCSVPO.click();
   await browser.pause(1000);
 })
@@ -678,4 +708,116 @@ Then ('User able to see "Purchase Order berhasil diupdate" message verification'
 Given ('a',async() => {
   await browser.url('https://v3-web-app-micro.staging.superapp.co.id/purchasing/purchase-order');
   await browser.pause(5000);
+})
+
+
+When ('User send "template-PO-RAW-2.csv" in "uploadFilePO" in "PO" page', async() => {
+  const uploadCSV = await POV4.uploadFilePO;
+  await uploadCSV.waitForExist({timeout:10000})
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCSV);
+    const filePath = path.resolve('file-csv\\template-PO-RAW-2.csv');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCSV.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(2000);
+})
+
+
+When ('User click "btnEditProdukPO" in "Edit PO" page', async() => {
+  await POV4.btnEditProdukPO.scrollIntoView();
+  await POV4.btnEditProdukPO.click();
+  await browser.pause(1000);
+})
+
+
+When ('User click "btnHapusRow1ModalPO" in "Edit produk modal"', async() => {
+  await browser.waitUntil(async() => {
+    return POV4.btnHapusRow1ModalPO.isClickable();
+  }, {
+    timeout:10000,
+    timeoutMsg:'btnHapusRow1ModalPO still not clickable'
+  })
+  await POV4.btnHapusRow1ModalPO.click();
+
+})
+
+
+When ('User click "btnSimpanModalPO" in "Edit produk modal"', async() => {
+  await POV4.btnSimpanModalPO.click();
+  await browser.pause(3000);
+})
+
+
+When ('User click "btnCancelPO" in "PO" page', async() => {
+  await browser.waitUntil(async() => {
+    await POV4.btnCancelPO.scrollIntoView();
+    return POV4.btnCancelPO.isDisplayed();
+  }, {
+    timeout:10000,
+    timeoutMsg:'btnCancelPO still not displayed'
+  })
+  await POV4.btnCancelPO.click();
+  await browser.pause(1000);
+})
+
+
+When ('User click "btnLanjutkanCancel" to proceed cancelation', async() => {
+  await POV4.btnLanjutkanCancel.click();
+  await browser.pause(1000);
+})
+
+
+Then ('User able to see "Data Berhasil Dibatalkan" message verification', async() => {
+  await POV4.textVerification.isDisplayed();
+  await browser.pause(3000);
+})
+
+
+Given ('User get to dashboard url', async() =>{
+  await browser.url('https://v3-web-app-micro.staging.superapp.co.id/dashboard');
+  await browser.pause(7000);
+})
+
+
+When ('User clicks "optProdukModalPORaw1" button in "PO" page', async() => {
+  await POV4.optProdukModalPORaw1.click();
+  await browser.pause(1000);
+})
+
+
+When ('User click "btnAturProdukBonus" in "PO" page', async() =>{
+  await POV4.btnAturProdukBonus.scrollIntoView();
+  await POV4.btnAturProdukBonus.click();
+  await browser.pause(1000);
+})
+
+
+When ('User clicks "fieldSatuanModalPOId" button in "PO" page', async() => {
+  await POV4.fieldSatuanModalPOId.click();
+  await browser.pause(1000);
+})
+
+
+Then ('User able to see "Gagal menyimpan PO" message verification', async() => {
+  await browser.waitUntil(async() => {
+      await browser.pause(5000);
+      return expect (await POV4.allertKosong.isDisplayed())
+  }, {
+    timeout:10000,
+    timeoutMsg:'allertKosong still not displayed'
+  })
+})
+
+
+When ('User clicks "fieldSatuanModalPO2" button in "PO" page', async() => {
+  await POV4.fieldSatuanModalPO2.click();
+  await browser.pause(1000);
+})
+
+
+When ('User clicks "optSatuanModalPO2" button in "PO" page', async() => {
+  await POV4.optSatuanModalPO2.click();
+  await browser.pause(1000);
 })
