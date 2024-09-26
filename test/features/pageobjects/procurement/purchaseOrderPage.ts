@@ -25,8 +25,8 @@ export default new class purchaseOrderPage {
     // get textStatusPO() { return $('//*[contains(@id "purchase-status")]'); }
     get textStatusPO() {return $('//tbody[@class="ant-table-tbody"]/*[2]/*[10]/*[1]');}
     get textStatusPaymentRequest() { return $('//*[@id="payment-request-prepayment-status-0"]'); }
-    get textProductName() { return $('(//*[@class="ant-table-cell"])[11]'); }
-    get textProductName2() { return $('(//*[@class="ant-table-cell"])[20]'); }
+    get textProductName() { return $('(//*[@class="ant-table-cell"])[11]/*[1]'); }
+    get textProductName2() { return $('(//*[@class="ant-table-cell"])[20]/*[1]'); }
     get textBonusProductPO() { return $('Card_bonus'); }
     get kodePORow0() { return $('//*[@id="purchase-po-code-0"]'); }
     get kodePORow1() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[2]/*[1]'); }
@@ -62,7 +62,7 @@ export default new class purchaseOrderPage {
     get imgUploadRPNP() {return $('#upload-file')}
     get btnSimpanRPModal() {return $('#updateBtnEdit');}
     get btnBatalRPModal() {return $('#cancelBtnEdit');}
-    // get btnSimpanPrepayment() { return $('//*[@data-testid="btn-start-searching"]'); }
+    get btnSimpanPrepayment() { return $('//*[@data-testid="btn-start-searching"]'); }
     get btnYes() { return $('//*[@id="btn-yes"]'); }
     get allertNotaPengajuan() { return $('(//*[@class="ant-alert-message"])[2]'); } 
     get allertNotaPengajuanTempo() {return $('(//*[@class="ant-alert-message"])'); }
@@ -151,9 +151,10 @@ export default new class purchaseOrderPage {
     get uploadFilePO() {return $('//*[@data-id="drager-modal-import"]');}
     get btnCancelImport() {return $('(//*[@data-testid="btn-cancel"])[2]');}
     get allertProdukDupl() {return $('//*[@class="ant-notification ant-notification-top"]')}
+    get allertCSVDup() {return $('//*[@class="ant-notification-notice-description"]');}
 
     //Option Section 2 Daftar Pembelian
-     get optProdukModalPO() {return $('//*[@id="Tamiya Broken G (Jangan Dipakai)"]')}
+     get optProdukModalPO() {return $('//*[@id="Automated Testing hehe"]')}
      get optProdukModalPO2() {return $('//*[@id="Automated Stock | ra"]');}
      get optProdukModalPORaw0() {return $('//*[@id="Automated Raw"]');}
      get optProdukModalPORaw1() {return $('//*[@id="Automated Raw 2"]');}

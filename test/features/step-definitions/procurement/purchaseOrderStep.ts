@@ -1,9 +1,9 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import purchaseOrderPage from "../../pageobjects/procurement/purchaseOrderPage";
 import path from "path";
-import { throws } from "assert";
-import { error } from "console";
 const POV4 = purchaseOrderPage;
+
+
 
 
 
@@ -190,6 +190,11 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   When('User clicks "optProdukModalPO2" button in "PO" page', async () => {
     await POV4.optProdukModalPO2.click();
   });
+
+
+  When('User clicks "optProdukModalPO" button in "PO" page', async () => {
+    await POV4.optProdukModalPO.click();
+  });
   
   
   When('User clicks "fieldSatuanModalPO" button in "PO" page', async () => {
@@ -325,7 +330,7 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   });
   
 
-  Then ('User able to see "Purchase Order berhasil dibuat!" message verification', async () => {
+  Then ('', async () => {
       await browser.pause(5000);
       console.log("Purchase Order berhasil dibuat!");
     
@@ -340,14 +345,14 @@ When('User click "navMenuPurchasing" button in "Global" page', async () => {
   );
 
   
-  Then(' User able to see "Gagal menyimpan PO" message verification', async () => {
+  Then(' User able to see Gagal menyimpan PO message verification', async () => {
       await browser.closeWindow();
       // await browser.deleteSession();
       // await browser.url('http://v3-web-app-micro.staging.superapp.co.id/auth/login');
       // await browser.maximizeWindow();
   });
   
-  Then ('User able to see "Terdapat info yang belum lengkap" message verification', async() => {
+  Then ('User able to see Terdapat info yang belum lengkap message verification', async() => {
     await browser.waitUntil(async() => {
       await browser.pause(3000);
       return expect (await POV4.allertProdukDupl.isDisplayed());  
@@ -455,8 +460,77 @@ When ('User send "template-PO-RAW.csv" in "uploadFilePO" in "PO" page', async() 
     await uploadCSV.setValue(uploadFile);
     await browser.keys(['Enter']);
     await browser.pause(2000);
+})
 
-  
+
+When ('User send "template-PO-FG" in "uploadFilePO" in "PO" page', async() =>{
+  const uploadCSV = await POV4.uploadFilePO;
+  await uploadCSV.waitForExist({timeout:10000})
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCSV);
+    const filePath = path.resolve('file-csv\\template-PO-FG.csv');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCSV.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(2000);
+})
+
+
+When ('User send "template-invalid-qty-decimal-PO-FG" in "uploadFilePO" in "PO" page', async() => {
+  const uploadCSV = await POV4.uploadFilePO;
+  await uploadCSV.waitForExist({timeout:10000})
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCSV);
+    const filePath = path.resolve('file-csv\\template-invalid-qty-decimal-PO-FG.csv');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCSV.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(2000);
+})
+
+
+
+When ('User send "template-invalid-sku-PO-FG" in "uploadFilePO" in "PO" page', async() => {
+  const uploadCSV = await POV4.uploadFilePO;
+  await uploadCSV.waitForExist({timeout:10000})
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCSV);
+    const filePath = path.resolve('file-csv\\template-invalid-sku-PO-FG.csv');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCSV.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(2000);
+})
+
+
+When ('User send "template-invalid-sku-PO-RAW" in "uploadFilePO" in "PO" page', async() => {
+  const uploadCSV = await POV4.uploadFilePO;
+  await uploadCSV.waitForExist({timeout:10000})
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCSV);
+    const filePath = path.resolve('file-csv\\template-invalid-sku-PO-RAW.csv');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCSV.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(2000);
+})
+
+
+When ('User send "template-invalid-qty decimal-PO-RAW" in "uploadFilePO" in "PO" page', async() => {
+  const uploadCSV = await POV4.uploadFilePO;
+  await uploadCSV.waitForExist({timeout:10000})
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCSV);
+    const filePath = path.resolve('file-csv\\template-invalid-qty decimal-PO-RAW.csv');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCSV.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(2000);
 })
 
 
@@ -503,11 +577,11 @@ When ('User fill "fieldDeskripsiPrepayment" with value "Notes Prepayment" in "PO
 
  When ('User click "btnDetailRow0" button in "PO" page', async() => {
   await POV4.btnDetailRow0.click();
-  await browser.pause(1000);
+  await browser.pause(2000);
  })
 
 
-Then ('User able to see "Data has been updated" message verification', async() => {
+Then ('User able to see Data has been updated message verification', async() => {
   await browser.pause(3000);
 })
 
@@ -557,6 +631,7 @@ Then ('User "able" to see "allertNotaPengajuanTempo" in "PO" page', async() => {
     timeout:10000,
     timeoutMsg:'allertNotaPengajuanTempo still not displayed after timeout'
   })
+  await browser.pause(1000);
   console.log('allertNotaPengajuanTempo is displayed')
 })
 
@@ -575,7 +650,7 @@ When ('User choose metode pembayaran {string}', async(metodePembayaran:string) =
 
 When ('User click "btnSubmitPO" in detail page', async() => {
   await POV4.btnSubmitPO.click();
-  await browser.pause(1000);
+  await browser.pause(5000);
 })
 
 
@@ -638,7 +713,7 @@ When ('User back to previous in page "PO"', async() =>{
 
 When ('User click "btnSubmitImport" button in "PO" page', async() => {
   await POV4.btnSubmitImport.click();
-  await browser.pause(1000);
+  await browser.pause(5000);
 })
 
 
@@ -686,21 +761,21 @@ When ('User input "kodeInvoice" into "fieldInputSearch"', async() => {
 })
 
 
-Then ('User verified "status po" for "textStatusPO" is {string}', async(textStatusPO) => {
-  await browser.waitUntil(async() => {
-    return await POV4.textStatusPO.isDisplayed();
-  }, {
-    timeout:10000,
-    timeoutMsg:'textStatusPO still can not scroll'
-  })
-  const textStatus = await POV4.textStatusPO.getText();
-  console.log(textStatus);
-  expect (await textStatus).toEqual(textStatusPO);
+// Then ('User verified "status po" for "textStatusPO" is {string}', async(textStatusPO) => {
+//   await browser.waitUntil(async() => {
+//     return await POV4.textStatusPO.isDisplayed();
+//   }, {
+//     timeout:10000,
+//     timeoutMsg:'textStatusPO still can not scroll'
+//   })
+//   const textStatus = await POV4.textStatusPO.getText();
+//   console.log(textStatus);
+//   expect (await textStatus).toEqual(textStatusPO);
 
-})
+// })
 
 
-Then ('User able to see "Purchase Order berhasil diupdate" message verification', async() => {
+Then ('User able to see Purchase Order berhasil dibuat! message', async() => {
   await browser.pause(5000);
 })
 
@@ -708,6 +783,20 @@ Then ('User able to see "Purchase Order berhasil diupdate" message verification'
 Given ('a',async() => {
   await browser.url('https://v3-web-app-micro.staging.superapp.co.id/purchasing/purchase-order');
   await browser.pause(5000);
+})
+
+
+When ('User send "template-PO-FG-2" in "uploadFilePO" in "PO" page', async() => {
+  const uploadCSV = await POV4.uploadFilePO;
+  await uploadCSV.waitForExist({timeout:10000})
+  await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCSV);
+    const filePath = path.resolve('file-csv\\template-PO-FG-2.csv');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCSV.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(2000);
 })
 
 
@@ -769,7 +858,7 @@ When ('User click "btnLanjutkanCancel" to proceed cancelation', async() => {
 })
 
 
-Then ('User able to see "Data Berhasil Dibatalkan" message verification', async() => {
+Then ('User able to see Data Berhasil Dibatalkan message verification', async() => {
   await POV4.textVerification.isDisplayed();
   await browser.pause(3000);
 })
@@ -800,7 +889,7 @@ When ('User clicks "fieldSatuanModalPOId" button in "PO" page', async() => {
 })
 
 
-Then ('User able to see "Gagal menyimpan PO" message verification', async() => {
+Then ('User able to see Gagal menyimpan PO message verification', async() => {
   await browser.waitUntil(async() => {
       await browser.pause(5000);
       return expect (await POV4.allertKosong.isDisplayed())
@@ -821,3 +910,116 @@ When ('User clicks "optSatuanModalPO2" button in "PO" page', async() => {
   await POV4.optSatuanModalPO2.click();
   await browser.pause(1000);
 })
+
+
+Then ('User able to see {string} message verification', async(alert) => {
+  let A = '3 INVALID_ARGUMENT: Item Automated Raw [Bag] [RAW-0140] Duplikat';
+  let B = '3 INVALID_ARGUMENT: raw material dengan SKU: RAW-01400 tidak ditemukan';
+  let C = '3 INVALID_ARGUMENT: Quantity RAW-0140 Automated Raw [Bag] harus bilangan bulat';
+  let D = '3 INVALID_ARGUMENT: finished good dengan SKU: EMT-01400 tidak ditemukan'
+  let E = '3 INVALID_ARGUMENT: Item Automated Testing hehe [Bag] [AGR-0016] Duplikat';
+  let F = '3 INVALID_ARGUMENT: Quantity AGR-0016 Automated Testing hehe [Bag] harus bilangan bulat';
+
+  if (alert === A) {
+    await POV4.allertCSVDup.waitForExist({timeout:10000, timeoutMsg:'allertCSVDup still not displayed'});
+    const textAlert = await POV4.allertCSVDup.getText();
+    console.log(textAlert);
+    expect (await textAlert).toEqual(alert);
+    await browser.pause(2000);
+
+  } else if (alert === B) {
+    await POV4.allertCSVDup.waitForExist({timeout:10000, timeoutMsg:'allertCSVDup still not displayed'});
+    const textAlert = await POV4.allertCSVDup.getText();
+    console.log(textAlert);
+    expect (await textAlert).toEqual(alert);
+    await browser.pause(2000);
+
+  } else if (alert === C) {
+    await POV4.allertCSVDup.waitForExist({timeout:10000, timeoutMsg:'allertCSVDup still not displayed'});
+    const textAlert = await POV4.allertCSVDup.getText();
+    console.log(textAlert);
+    expect (await textAlert).toEqual(alert);
+    await browser.pause(2000);
+
+  } else if (alert === D) {
+    await POV4.allertCSVDup.waitForExist({timeout:10000, timeoutMsg:'allertCSVDup still not displayed'});
+    const textAlert = await POV4.allertCSVDup.getText();
+    console.log(textAlert);
+    expect (await textAlert).toEqual(alert);
+    await browser.pause(2000);
+
+  } else if (alert === E) {
+    await POV4.allertCSVDup.waitForExist({timeout:10000, timeoutMsg:'allertCSVDup still not displayed'});
+    const textAlert = await POV4.allertCSVDup.getText();
+    console.log(textAlert);
+    expect (await textAlert).toEqual(alert);
+    await browser.pause(2000);
+
+  } else if (alert === F) {
+    await POV4.allertCSVDup.waitForExist({timeout:10000, timeoutMsg:'allertCSVDup still not displayed'});
+    const textAlert = await POV4.allertCSVDup.getText();
+    console.log(textAlert);
+    expect (await textAlert).toEqual(alert);
+    await browser.pause(2000);
+
+  }
+  
+})
+
+
+Then ('User verified "status po" for "textStatusPO" is {string}', async(textStatusPO) => {
+    if (textStatusPO === 'Set') {
+      let set = await POV4.textStatusPO.getText();
+      expect (await set).toEqual(textStatusPO);
+      await browser.pause(1000);
+
+    } else if (textStatusPO === 'Submitted') {
+      let submitted = await POV4.textStatusPO.getText();
+      expect (await submitted).toEqual(textStatusPO);
+      await browser.pause(1000);
+
+    } else if (textStatusPO === 'Cancelled') {
+      let cancelled = await POV4.textStatusPO.getText();
+      expect (await cancelled).toEqual(textStatusPO);
+      await browser.pause(1000);
+
+    } else if (textStatusPO === 'Closed') {
+      let closed = await POV4.textStatusPO.getText();
+      expect (await closed).toEqual(textStatusPO);
+      await browser.pause(1000);
+
+    } else if (textStatusPO === 'Force Closed') {
+      let forceClosed = await POV4.textStatusPO.getText();
+      expect (await forceClosed).toEqual(textStatusPO);
+      await browser.pause(1000);
+    }
+})
+
+
+When ('User clicks "optJenisPOFinishGood" button in "PO" page', async() => {
+  await POV4.optJenisPOFinishGood.click();
+  await browser.pause(1000);
+})
+
+
+When ('User click "btnSimpanPrepayment" button in "PO" page', async() => {
+  await POV4.btnSimpanPrepayment.click();
+  await browser.pause(2000);
+})
+
+
+Then ('User verified "product name" for "textProductName2" is {string}', async(productName2) => {
+  let productName = await POV4.textProductName2.getText();
+  console.log(productName)
+  expect (await productName).toEqual(productName2);
+  await browser.pause(2000);
+})
+
+
+When ('User fill "fieldProdukModalPO2" with value {string} in "PO" page', async(productName) => {
+  await POV4.fieldProdukModalPO2.setValue(productName);
+  await browser.pause(1000);
+})
+// Then ('User able to see "Purchase Order berhasil dibuat!" message', async() => {
+//   await browser.pause(5000);
+// })
