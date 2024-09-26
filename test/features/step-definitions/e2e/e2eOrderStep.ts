@@ -13,6 +13,7 @@ let orderId: number;
 let orderItemId: number;
 let orderDelivery: string;
 let invoiceNumber: string;
+let grandTotal: string;
 // let amount: number;
 
 When ('User wait for 1 minute', async () => {
@@ -21,6 +22,10 @@ When ('User wait for 1 minute', async () => {
 
 When ('User wait for 45 seconds', async () => {
     await browser.pause(45000);
+})
+
+When ('User wait for 3 second', async () => {
+    await browser.pause(3000);
 })
 
 When ('User click "navMenuOrder" in global page', async() => {
@@ -35,6 +40,8 @@ When ('User click "menuPenjualan" in "navMenuOrder"', async() => {
 When ('User click "btnAddOrder"', async () => {
     await order.btnAddOrder.click();
 })
+
+//order marketplace
 
 When ('User click "btnMarketPlace" in "btnAddOrder"', async () => {
     await order.btnMarketPlace.click();
@@ -118,23 +125,21 @@ When ('User click "btnSubmitOrder"', async () => {
 })
 
 When ('User select the invoice number', async () => {
-        // Locate the element by XPath
-        const element = await $(`//span[contains(@id, 'detail-invoice-penjualan-')]`);
+    const invoiceElement = await $(`span[id^="detail-invoice-penjualan-"]`);
 
-        // Use JavaScript to select the text inside the element
-        await browser.execute((el: HTMLElement) => {
-            const range = document.createRange();
-            range.selectNodeContents(el);
-            const sel = window.getSelection();
-            sel?.removeAllRanges();
-            sel?.addRange(range);
-        }, element);
+    const invoiceNumber = await invoiceElement.getText();
 
-        if (process.platform === 'darwin') {
-            await browser.keys(['Meta', 'c']); // Cmd+C for macOS
-        } else {
-            await browser.keys(['Control', 'c']); // Ctrl+C for Windows/Linux
-        }
+    console.log('Invoice Number:', invoiceNumber);
+
+    await browser.execute((code) => {
+        navigator.clipboard.writeText(code);
+    }, invoiceNumber);
+
+    if (process.platform === 'darwin') {
+        await browser.keys(['Meta', 'c']); // Cmd+C for macOS
+    } else {
+        await browser.keys(['Control', 'c']); // Ctrl+C for Windows/Linux
+    }
 })
 
 When ('User click "navMenuLogistic"', async () => {
@@ -196,17 +201,63 @@ When ('User click "detailOutgoingBtn"', async () => {
     await order.detailOutgoingBtn.click();
 })
 
+When ('User click "detailOutgoingBtn2"', async () => {
+    await order.detailOutgoingBtn2.click();
+});
+
 When ('User click "checkBox"', async () => {
     await order.checkBox.click();
 })
 
+When ('User click "checkbox"', async () => {
+    await order.checkbox.click();
+});
+
+When ('User click "gantiVendor"', async () => {
+    await order.gantiVendor.click();
+});
+
+When ('User click "vendorTujuan"', async () => {
+    await order.vendorTujuan.click();
+});
+
+When ('User type {string} in "vendorTujuan"', async (nama) => {
+    await order.vendorTujuan.setValue(nama);
+    await browser.keys('Enter');
+});
+
+When ('User click "optVendor"', async () => {
+    await order.optVendor.click();
+});
+
+When ('User click "alasan"', async () => {
+    await order.alasan.click();
+});
+
+When ('User click "optAlasan"', async () => {
+    await order.optAlasan.click();
+});
+
+When ('User type {string} in "alasan"', async (alasan) => {
+    await order.alasan.setValue(alasan);
+    await browser.keys('Enter');
+});
+
+When ('User click "btnGanti"', async () => {
+    await order.btnGanti.click();
+});
+
+When ('User click "btnBack"', async () => {
+    await order.btnBack.click();
+});
+
 When ('User click "btnSiapDikirim"', async () => {
     await order.btnSiapDikirim.click();
-})
+});
 
 When ('User click "btnUbahStatus"', async () => {
     await order.btnUbahStatus.click();
-})
+});
 
 When ('User click "btnDikirim"', async () => {
     await order.btnDikirim.click();
@@ -265,6 +316,9 @@ When ('User click detail of the transaction', async () => {
     orderDelivery = response.data.result.order_delivery.date;
     console.log(`Order Delivery: ${orderDelivery}`);
 
+    grandTotal = response.data.result.grand_total;
+    console.log(`Grand Total: ${grandTotal}`);
+
     invoiceNumber = response.data.result.invoice;
     console.log(`Invoice Number: ${invoiceNumber}`);
 })
@@ -297,14 +351,14 @@ When('User perform a transaction with specific ID', async function () {
         reject_reason: "Customer: Fraud Potential",
         payments: [
             {
-                amount: 120000,
+                amount: grandTotal,
                 payment_photo: "https://dressup.s3.ap-southeast-1.amazonaws.com/test/2024/07/18/image-e001ddc7-0b18-45fb-ac4b-de63dfd35115.png",
                 payment_type: "cash"
             }
         ],
         orders: [
             {
-                grand_total: 120000,
+                grand_total: grandTotal,
                 is_no_rejected: false,
                 order_id: orderId,
                 items: [
@@ -336,6 +390,11 @@ When ('User click "navMenuFinance" in global page', async () => {
     await order.navMenuFinance.click();
 });
 
+When ('User click "menuFinance" in global page', async () => {
+    await order.menuFinance.scrollIntoView();
+    await order.menuFinance.click();
+})
+
 When ('User click "menuSetoran" in "navMenuFinance"', async () => {
     await order.menuSetoran.click();
 });
@@ -360,6 +419,10 @@ When ('User click "pilihGudangAloha"', async () => {
     await order.pilihGudangAloha.click();
 });
 
+When ('User click "pilihGudangAlohaRTP"', async () => {
+    await order.pilihGudangAlohaRTP.click();
+});
+
 When ('User click "pilihKurirVendor"', async () => {
     await order.pilihKurirVendor.click();
 });
@@ -378,7 +441,7 @@ When ('User click "uploadFileCSV"', async () => {
 });
 
 When ('User upload file to "uploadFileCSV"', async () => {
-    async function updateCSVFile(filePath: string, newDate: string, newInvoice: string) {
+    async function updateCSVFile(filePath: string, newDate: string, newInvoice: string, newCash: string) {
         // Read csv file
         let csvContent = fs.readFileSync(filePath, 'utf8');
 
@@ -386,6 +449,7 @@ When ('User upload file to "uploadFileCSV"', async () => {
         const firstDataRow = rows[1].split(',');
         firstDataRow[0] = newDate;
         firstDataRow[1] = newInvoice;
+        firstDataRow[2] = newCash;
         rows[1] = firstDataRow.join(',');
         const updatedCSVContent = rows.join('\n');
 
@@ -397,9 +461,10 @@ When ('User upload file to "uploadFileCSV"', async () => {
 const filePath = path.resolve('/Users/hazzledazzle/Documents/git/griya-super/file-27bf619c-62ce-4bb7-8c04-cc549f75d0c6 (1).csv');
 const newDate = orderDelivery;
 const newInvoice = invoiceNumber;
+const newCash = grandTotal;
 
 async function updateAndUploadCSV() {
-    await updateCSVFile(filePath, newDate, newInvoice);
+    await updateCSVFile(filePath, newDate, newInvoice, newCash);
 
     const uploadElement = await order.fileCSV;
     await uploadElement.waitForExist({ timeout: 5000 });
@@ -515,3 +580,144 @@ Then ('User able to see "Complete Order berhasil diupdate" message verification'
     await browser.pause(5000);
 });
 
+//order direct
+Then ('User click "tipePenjualanDirect"', async () => {
+    await order.tipePenjualanDirect.click();
+});
+
+Then ('User click "optRTP" in "tipePenjualanDirect"', async () => {
+    await order.optRTP.click();
+});
+
+Then ('User click "btnDirect" in "btnAddOrder"', async () => {
+    await order.btnDirect.click();
+});
+
+Then ('User click "agenPemesanDirect"', async () => {
+    await order.agenPemesanDirect.click();
+});
+
+Then ('User click "optAgenPemesan" in "agenPemesanDirect"', async () => {
+    await order.optAgenPemesan.click();
+});
+
+Then ('User click "alamatKirimDirect"', async () => {
+    await order.alamatKirimDirect.click();
+});
+
+Then ('User click "optAlamatKirimDirect" in "alamatKirimDirect"', async () => {
+    await order.optAlamatKirimDirect.click();
+});
+
+Then ('User click "tipePtDirect"', async () => {
+    await order.tipePtDirect.click();
+});
+
+Then ('User click "optTipePTDirect" in "tipePtDirect"', async () => {
+    await order.optTipePTDirect.click();
+});
+
+Then ('User click "superAgenDirect"', async () => {
+    await order.superAgenDirect.click();
+});
+
+Then ('User click "optSuperAgenDirect" in "superAgenDirect"', async () => {
+    await order.optSuperAgenDirect.click();
+});
+
+Then ('User click "addProductDirect"', async () => {
+    await order.addProductDirect.scrollIntoView();
+    await order.addProductDirect.click();
+});
+
+Then ('User click "addProductModalDirect"', async () => {
+    await order.addProductModalDirect.click();
+});
+
+Then ('User click "pilihProductModalDirect"', async () => {
+    await order.pilihProductModalDirect.click();
+});
+
+Then ('User input {string} in "pilihProductModalDirect"', async (namaProduk) => {
+    await order.pilihProductModalDirect.setValue(namaProduk);
+});
+
+Then ('User click "optPilihProductModalDirect" in "pilihProductModalDirect"', async () => {
+    await order.optPilihProductModalDirect.click();
+});
+
+Then ('User click "inputSatuanModalDirect"', async () => {
+    await order.inputSatuanModalDirect.click();
+});
+
+Then ('User click "optSatuanModalDirect" in "inputSatuanModalDirect"', async () => {
+    await order.optSatuanModalDirect.click();
+});
+
+Then ('User click "inputQtyModalDirect"', async () => {
+    await order.inputQtyModalDirect.click();
+});
+
+Then ('User input {string} in "inputQtyModalDirect"', async (qty) => {
+    await order.inputQtyModalDirect.setValue(qty);
+});
+
+Then ('User click "btnModalSimpanListDirect"', async () => {
+    await order.btnModalSimpanListDirect.click();
+});
+
+Then ('User click "btnModalSimpanDirect"', async () => {
+    await order.btnModalSimpanDirect.click();
+});
+
+Then ('User click "selectGudang"', async () => {
+    await order.selectGudang.click();
+});
+
+Then ('User click "optGudangAlohaRTP" in "selectGudang"', async () => {
+    await order.optGudangAlohaRTP.click();
+});
+
+Then ('User click "applyGudang"', async () => {
+    await order.applyGudang.click();
+});
+
+Then ('User click "btnEditOrder"', async () => {
+    await order.btnEditOrder.click();
+});
+
+Then ('User click "btnEditVoucher"', async () => {
+    await order.btnEditVoucher.click();
+});
+
+Then ('User click "btnUpdateOrder"', async () => {
+    await order.btnUpdateOrder.click();
+});
+
+Then ('User click "btnConfirmUpdateOrder"', async () => {
+    await order.btnConfirmUpdateOrder.click();
+});
+
+Then ('User click "pilihFilterGudang"', async () => {
+    await order.pilihFilterGudang.click();
+});
+
+Then ('User click "pilihFilterGudangAlohaRTP" in "pilihFilterGudang"', async () => {
+    await order.pilihFilterGudangAlohaRTP.click();
+});
+
+Then ('User click "btnApplyFilterModal"', async () => {
+    await order.btnApplyFilterModal.click();
+});
+
+Then ('User click "pilihFilterGudangSetoran"', async () => {
+    await order.pilihFilterGudangSetoran.click();
+});
+
+Then ('User click "pilihFilterGudangCompleteOrder"', async () => {
+    await order.pilihFilterGudangCompleteOrder.click();
+});
+
+Then ('User click "pilihFilterGudangAlohaRTP" in "pilihFilterGudangCompleteOrder"', async () => {
+    await order.pilihFilterGudangAlohaRTP.click();
+});

@@ -14,7 +14,7 @@ export default new class e2eOrderPage {
         return $('//*[contains(text(), "MarketPlace")]');
     }
     public get btnDirect() {
-        return $('//*[contains(text(), "Direct")]')
+        return $('(//*[@class="cursor-pointer"])[3]')
     }
     public get inputSearchList() {
         return $('//input[@placeholder="Cari kode penjualan"]');
@@ -27,6 +27,9 @@ export default new class e2eOrderPage {
     }
     public get textStatus() {
         return $('//tr[@data-row-key="1435418948"]/*[11]/*[2]'); //untuk assertion status order (getText)
+    }
+    public get filterGudangV3(){
+        return $('(//*[@class="ant-btn ant-btn-default additionalButton bg-white h-12 w-full"])[2]');
     }
 
 
@@ -105,6 +108,9 @@ export default new class e2eOrderPage {
     public get btnSimpanVoucher(){
         return $('//*[@class="ant-btn ant-btn-primary ant-btn-lg"]');
     }
+    public get btnEditVoucher(){
+        return $('(//*[@data-testid="btn-edit-product"])[2]');
+    }
 
 
     //Direct Order
@@ -113,11 +119,14 @@ export default new class e2eOrderPage {
     public get alamatKirimDirect(){
         return $('//input[@id="Pilih alamat kirim"]');
     }
-    public get agenPemesananDirect() {
+    public get agenPemesanDirect() {
         return $('//input[@id="Agen Pemesan"]');
     }
     public get tipePenjualanDirect() {
         return $('//span[@class="ant-select-selection-item" and @title="NON-RTP"]');
+    }
+    public get optRTP(){
+        return $('//*[@data-id="undefined-1"]');
     }
     
     public get metodePembayaranDirect() {
@@ -127,10 +136,7 @@ export default new class e2eOrderPage {
         return $('//input[@id="Tipe PT"]');
     }
     public get superAgenDirect() {
-        return $('//div[@class="s_2qdcJJli  s_PSIUVpV- "]/*[@id="Superagen"]');
-    }
-    public get agenPemesanDirect(){
-        return $('//input[@id="Agen Pemesan"]');
+        return $('//input[@id="Superagen"]');
     }
     public get btnTambahProduk() {
         return $('//button[@class="ant-btn ant-btn-default ant-btn-lg btn"]/*[contains(text(), "Tambah Produk")]');
@@ -139,9 +145,8 @@ export default new class e2eOrderPage {
         return $('//input[@placeholder="Cari kode penjualan"]');
     }
 
-    //section 1 option
     public get optTipePTDirect() {
-        return $('//ul[@role="listbox"]/*[@id="react-autowhatever-1--item-0"]');
+        return $('//*[@id="react-autowhatever-1--item-4"]');
     }
     public get optMetodePembayaran() {
         return $('//div[@data-id="undefined-1"]');
@@ -150,19 +155,21 @@ export default new class e2eOrderPage {
         return $('//div[@class="rc-virtual-list-holder-inner"]/*[@title="NON-RTP"]');
     }
     public get optAgenPemesanDirect() {
-        return $('//ul[@role="listbox"]/*[@id="react-autowhatever-1--item-0"]');
+        return $('//ul[@role="listbox"]/*[@id="react-autowhatever-1--item-4"]');
     }
     public get optAlamatKirimDirect() {
-        return $('//*[contains(text(), "Warung")]');
+        return $('//*[contains(text(), "Alamat Utama")]');
     }
     public get optSuperAgenDirect() {
-        return $('//*[contains(text(), "Bobby")]');
+        return $('//*[contains(text(), "Bobby |  SF-195520")]');
     }
 
-
     //section 2 detail list
-    public get tambahkanProdukDirect() {
-        return $('//button[@class="ant-btn ant-btn-link"]/*[2]');
+    public get addProductDirect(){
+        return $('//*[@class="ant-btn ant-btn-link"]');
+    }
+    public get addProductModalDirect(){
+        return $('(//*[@data-testid="btn-cancel"])[3]');
     }
     public get pilihProductModalDirect() {
         return $('//input[@id="Produk"]');
@@ -188,10 +195,32 @@ export default new class e2eOrderPage {
 
     // section 2 order list option 
     public get optPilihProductModalDirect() {
-        return $('//ul[@role="listbox"]/*[contains(text(), "ABC Kecap Manis 135ml")]')
+        return $('//ul[@role="listbox"]/*[contains(text(), "Supercow")]')
     }
     public get optSatuanModalDirect() {
-        return $('//div[@data-id="undefined-0" and @title="Botol"]');
+        return $('//div[@data-id="undefined-0" and @title="Karton"]');
+    }
+
+    //select gudang
+    public get selectGudang(){
+        return $('(//*[@class="ant-btn ant-btn-default additionalButton bg-white h-12 w-full"])[2]');
+    }
+    public get optGudangAlohaRTP(){
+        return $('(//*[@class="ant-radio-input"])[3]');
+    }
+    public get applyGudang(){
+        return $('//*[@data-id="filter-apply-button"]');
+    }
+
+    //edit order
+    public get btnEditOrder(){
+        return $('//*[@data-testid="btn-submit"]');
+    }
+    public get btnUpdateOrder(){
+        return $('//*[@data-testid="btn-submit"]');
+    }
+    public get btnConfirmUpdateOrder(){
+        return $('//*[@class="ant-btn ant-btn-default ant-btn-sm ant-btn-block s_wvibGNsL undefined s_Ct2S1-z5"]');
     }
 
     // select specific order
@@ -245,7 +274,7 @@ export default new class e2eOrderPage {
         return $('//*[@data-id="btn-detail-outgoing"]');
     }
     public get checkbox() {
-        return $('//*[@data-id="checkbox-0"]');
+        return $('(//*[@data-testid="checkbox-"])[2]');
         
     }
     // public get inputSearchDetail() {
@@ -305,6 +334,26 @@ export default new class e2eOrderPage {
         return $('//*[@title="Hari Ini"]');
     }
 
+    public get pilihFilterGudang(){
+        return $('(//*[@class="ant-tag Table_filterItem__x3tSg Chips_container__Uk_w2 Chips_large__DNi_I css-1vp3ixv"])[1]');
+    }
+
+    public get pilihFilterGudangSetoran(){
+        return $('(//*[@data-testid="chip-large-gudang-aloha"])[2]');
+    }
+
+    public get pilihFilterGudangCompleteOrder(){
+        return $('(//*[@class="ant-tag Table_filterItem__x3tSg Chips_container__Uk_w2 Chips_large__DNi_I css-1vp3ixv"])[3]');
+    }
+
+    public get pilihFilterGudangAlohaRTP(){
+        return $('(//*[@class="ant-radio-input"])[3]');
+    }
+
+    public get btnApplyFilterModal(){
+        return $('//*[@data-testid="modal-apply-filter"]');
+    }
+
     public get Custom() {
         return $('//*[contains(text(), "Custom")]');
     }
@@ -314,22 +363,35 @@ export default new class e2eOrderPage {
     public get detailOutgoingBtn() {
         return $('(//*[@class="ant-btn css-1vp3ixv ant-btn-link ant-btn-sm Table_regularCellButton__Ad8rl Button_button__QU6uO Button_link__6Ik2O Button_small__YB_NF"])[2]');
     }
+    public get detailOutgoingBtn2() {
+        return $('(//*[@class="ant-btn css-1vp3ixv ant-btn-link ant-btn-sm Table_regularCellButton__Ad8rl Button_button__QU6uO Button_link__6Ik2O Button_small__YB_NF"])[1]');
+    }
     public get gantiVendor() {
-        return $('//div[@data-id="btn-ganti-vendor"]');
+        return $('//*[@data-testid="button-outline-medium-ganti-vendor"]');
     }
     public get vendorTujuan() {
-        return $('//*[contains(text(), "Pilih Vendor")]');
-    }public get alasan() {
-        return $('//*[contains(text(), "Pilih alasan vendor diganti")]')
+        return $('(//*[@class="ant-select ant-select-outlined ant-select-compact-item ant-select-compact-first-item ant-select-compact-last-item css-1vp3ixv ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search"])[1]');
+    }
+    public get optVendor(){
+        return $('//*[@title="INHOUSE MOTORIS AGUS RTP"]');
+    }
+    public get alasan() {
+        return $('(//*[@class="ant-select ant-select-outlined ant-select-compact-item ant-select-compact-first-item ant-select-compact-last-item css-1vp3ixv ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search"])[1]')
+    }
+    public get optAlasan(){
+        return $('//*[@title="Order jumlah besar"]');
     }
     public get btnGanti() {
-        return $('//div[@data-id="btn-submit-modal"]'); 
+        return $('//*[@data-testid="button-solid-large-ganti"]'); 
     }
     public get btnCancel() {
         return $('//div[@data-id="btn-cancel-modal"]');
     }
     public get btnFilter() {
         return $('//button[@data-id="filter-modal-trigger"]');
+    }
+    public get btnBack(){
+        return $('//*[@data-testid="page-header-back-btn"]');
     }
 
 
@@ -403,11 +465,11 @@ export default new class e2eOrderPage {
     }
 
     public get pilihInhouse(){
-        return $('//*[contains(text(), "inhouse")]')
+        return $('//*[contains(text(), "inhouse")]');
     }
 
     public get pilihVendor(){
-        return $('(//*[@class="ant-select-item ant-select-item-option"])[1]')
+        return $('(//*[@class="ant-select-item ant-select-item-option"])[1]');
     }
 
     public get pilihGudang(){
@@ -415,7 +477,11 @@ export default new class e2eOrderPage {
     }
 
     public get pilihGudangAloha(){
-        return $('(//*[@class="ant-select-item ant-select-item-option"])[3]')
+        return $('(//*[@class="ant-select-item ant-select-item-option"])[3]');
+    }
+
+    public get pilihGudangAlohaRTP(){
+        return $('(//*[@class="ant-select-item ant-select-item-option"])[4]');
     }
 
     public get pilihKurirVendor(){
@@ -498,5 +564,9 @@ export default new class e2eOrderPage {
 
     public get btnConfirmCompleteOrder(){
         return $('(//*[@class="ant-btn css-1vp3ixv ant-btn-primary ant-btn-lg Button_button__QU6uO Button_solid__yWcC4 Button_large__Z_hZd"])[2]');
+    }
+
+    public get menuFinance(){
+        return $('(//*[@class="ant-menu-submenu-title"])[5]');
     }
 }
