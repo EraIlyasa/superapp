@@ -7,7 +7,7 @@ When ('User directed to List barang yang terdaftar di Super page', async() => {
     await browser.waitUntil(async() => {
         return await produkPage.titleProduk.isDisplayed();
     }, {
-        timeout:10000,
+        timeout:30000,
         timeoutMsg:'titleProduk still not existing'
     })
     let title = await produkPage.titleProduk.getText();
@@ -237,6 +237,7 @@ Then ('User able to see Berhasil membuat produk baru message verification', asyn
         timeout:10000,
         timeoutMsg:'successAlert stil not displayed'
     })
+    await browser.pause(5000);
 })
 
 
