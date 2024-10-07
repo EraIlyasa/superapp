@@ -21,6 +21,20 @@ export default new class sideMenuBarPage {
     get outgoingGoodsV3() {
         return $('//span[@class="ant-menu-title-content"]/a[@data-testid="menu-New Outgoing Goods"]')
     }
-    get menuProduk() { return $('//*[@data-testid="Menu-Product"]')}
+    get menuProduk() { 
+        return $('//*[@data-testid="Menu-Product"]')
+    }
+    get navMenuStock() { 
+        return $('//*[@data-testid="Menu-Stock"]')
+    }
+    get menuStockBermasalahV4() { 
+        return $('//*[@data-testid="Menu-StokBermasalah V4"]')
+    }
+    get menuInventory() { 
+        return $('//*[@data-testid="Menu-InventoryV3"]')
+    }
+
+
+
 
 }

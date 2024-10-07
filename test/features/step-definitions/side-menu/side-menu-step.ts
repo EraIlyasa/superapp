@@ -33,3 +33,21 @@ When('I click outgoing goods v3', async() => {
 When ('User click produk menu in Product page', async() => {
     await sideMenuBarPage.menuProduk.click();
 })
+
+When('User click menuInventory in side menu page', async () => {
+    await browser.waitUntil(async () => {
+            await sideMenuBarPage.menuInventory.scrollIntoView();
+            return sideMenuBarPage.menuInventory.isClickable();
+        },
+        {
+            timeout: 17000, // Wait for up to 17 seconds
+            timeoutMsg: 'menuInventory was not clickable after 17s'
+        }
+    );
+    await sideMenuBarPage.menuInventory.click();
+});
+
+When ('User click navMenuStock in side menu page', async() => {
+    await sideMenuBarPage.navMenuStock.click();
+    await browser.pause(5000);
+})
