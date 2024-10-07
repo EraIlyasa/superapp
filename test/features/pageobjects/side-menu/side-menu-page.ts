@@ -21,5 +21,6 @@ export default new class sideMenuBarPage {
     get outgoingGoodsV3() {
         return $('//span[@class="ant-menu-title-content"]/a[@data-testid="menu-New Outgoing Goods"]')
     }
+    get menuProduk() { return $('//*[@data-testid="Menu-Product"]')}
 
 }

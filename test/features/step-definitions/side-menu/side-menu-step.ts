@@ -1,5 +1,6 @@
 import { When } from '@cucumber/cucumber';
 import sideMenuBarPage from '../../pageobjects/side-menu/side-menu-page';
+import produkPage from '../../pageobjects/procurement/produkPage';
 
 When('I click order', async() => {
     await sideMenuBarPage.order.scrollIntoView();
@@ -29,3 +30,6 @@ When('I click outgoing goods v3', async() => {
     // await sideMenuBarPage.outgoingGoodsV3.click()
 });
 
+When ('User click produk menu in Product page', async() => {
+    await sideMenuBarPage.menuProduk.click();
+})
