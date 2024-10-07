@@ -742,6 +742,12 @@ When ('User fill fieldInputSearch with value {string} in Product page', async(sk
 })
 
 
+When ('User fill fieldInputSearch with value in Product page', async() => {
+    await produkPage.fieldInputSearch.setValue('testing \u263A');
+    await browser.pause(1000);
+})
+
+
 When ('User click btnCari button in Product page', async() => {
     await produkPage.btnCari.click();
     await browser.pause(5000);
@@ -823,15 +829,28 @@ Then ('User able to see {string} in product list', async(produkName) => {
             throw new Error('produk name is not same')
         }  
 
-    } else if (produkName === 'RTP-ingredients') {
+    } else if (produkName === 'Automated Test') {
         try {
             await browser.waitUntil(async() => {
-                return (await produkPage.namaProduk('RTP-ingredients')).isDisplayed();
+                return (await produkPage.namaProduk('Automated Test')).isDisplayed();
             }, {
                 timeout:10000,
                 timeoutMsg:'namaProduk still not displayed'
             })
-            let text = (await produkPage.namaProduk('RTP-ingredients')).getText();
+            let text = (await produkPage.namaProduk('Automated Test')).getText();
+            expect(await text).toEqual(produkName);
+        } catch {
+            throw new Error('produk name is not same')
+        } 
+    } else if (produkName === 'Produk Otomatis 0') {
+        try {
+            await browser.waitUntil(async() => {
+                return (await produkPage.namaProduk('Produk Otomatis 0')).isDisplayed();
+            }, {
+                timeout:10000,
+                timeoutMsg:'namaProduk still not displayed'
+            })
+            let text = (await produkPage.namaProduk('Produk Otomatis 0')).getText();
             expect(await text).toEqual(produkName);
         } catch {
             throw new Error('produk name is not same')
@@ -933,10 +952,6 @@ Then ('User able to see statusIngredients is disable in product page', async() =
 }) 
 
 
-// When ('User click produk menu in Product page', async() => {
-//     await produkPage.menuProduk.click();
-// })
-
 When ('User click "btnFilter" in product list modal', async() => {
     await produkPage.btnFilter.click();
     await browser.pause(1000);
@@ -969,16 +984,23 @@ When ('User click "btnTerapkanModal" in product list modal', async() => {
 
 Then ('User able to see selected radio default is {string}', async(option) => {
     try {
-        expect (await produkPage.optSemuaChecked.isSelected());
+        expect (await produkPage.optCheckedTag.isSelected());
     } catch (error) {
         console.error('element is not selected by default')
     } 
     await browser.pause(3000);
-    let text = await produkPage.optSemuaChecked.getText();
+    let text = await produkPage.optCheckedTag.getText();
     expect (await text).toEqual(option)
-    console.log(await text);
+    console.log('option selected : ', await text);
 
 })
+
+
+When ('User click navFilterModal tag produk in filter modal', async() => {
+    (await produkPage.navFilterModal('product_tag')).click();
+    await browser.pause(1000);
+})
+
 
 When ('User click navFilterModal tipe produk in filter modal', async() => {
     (await produkPage.navFilterModal('type')).click();
@@ -986,8 +1008,213 @@ When ('User click navFilterModal tipe produk in filter modal', async() => {
 })
 
 
-When ('User click optTPRTP in filter modal', async() => {
-    await produkPage.optTPRTP.click();
+When ('User click navFilterModal sub tipe in filter modal', async() => {
+    (await produkPage.navFilterModal('subtype_id')).click();
     await browser.pause(1000);
 })
 
+
+When ('User click optSubTipe0 in filter modal', async() => {
+    await produkPage.optSubTipe0.click();
+    await browser.pause(1000);
+})
+
+
+When ('User click optTPRTP in filter modal', async() => {
+    (await produkPage.optTPRTP('[16]')).click();
+    await browser.pause(1000);
+})
+
+
+When ('User click optTPRTP15 in filter modal', async() => {
+    (await produkPage.optTPRTP('[15]')).click();
+    await browser.pause(1000);
+})
+
+
+When ('User click optNonRTP in filter modal', async() => {
+    await produkPage.optNonRTP.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User able to see selected radio default is {string} in filter status', async(option) => {
+    try {
+        expect (await produkPage.optCheckedStatus.isSelected())
+    } catch (error) {
+        console.error('element is not selected by default')
+    } 
+    await browser.pause(3000);
+    let text = await produkPage.optCheckedStatus.getText();
+    expect (await text).toEqual(option)
+    console.log('option selected : ', await text);
+})
+
+
+When ('User click navFilterModal satuan in filter modal', async() => {
+    (await produkPage.navFilterModal('unit')).click();
+    await browser.pause(1000);
+})
+
+
+When ('User click optSatuanBag in filter modal', async() => {
+    await produkPage.optSatuanBag.click();
+    await browser.pause(1000);
+})
+
+
+When ('User click navFilterModal status in filter modal', async() => {
+    (await produkPage.navFilterModal('status')).click();
+    await browser.pause(1000);
+})
+
+
+When ('User click optAktif in filter modal', async() => {
+    await produkPage.optAktif.click();
+    await browser.pause(1000);
+})
+
+When ('User click optTidakAktif in filter modal', async() => {
+    await produkPage.optTidakAktif.click();
+    await browser.pause(1000);
+})
+
+
+When ('User click navFilterModal kategori in filter modal', async() => {
+    (await produkPage.navFilterModal('category_id')).click();
+    await browser.pause(1000);
+})
+
+
+When ('User click navFilterModal pin produk in filter modal', async() => {
+    (await produkPage.navFilterModal('pin')).click();
+    await browser.pause(1000);
+})
+
+
+When ('User click optBahanDapur in filter modal', async() => {
+    await produkPage.optBahanDapur.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User able to see selected radio default is {string} in filter pin produk', async(option) => {
+    try {
+        expect (await produkPage.optCheckedPin.isSelected())
+    } catch (error) {
+        console.error('element is not selected by default')
+    } 
+    await browser.pause(3000);
+    let text = await produkPage.optCheckedPin.getText();
+    expect (await text).toEqual(option)
+    console.log('option selected : ', await text);
+})
+
+
+When ('User click {string} in filter pin produk', async(x:string) => {
+    if (x === 'optPinYa') {
+        await produkPage.optPinYa.click();
+        await browser.pause(1000);
+
+    } else if (x === 'optPinTidak') {
+        await produkPage.optPinTidak.click();
+        await browser.pause(1000);
+        
+    }
+})
+
+
+When ('User click btnResetModal in filter modal', async() => {
+    await produkPage.btnResetModal.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User able to see {string} radio default', async(option) => {
+    try {
+        //assertion tag produk
+        let text1 = (await produkPage.selectedRadio('[5]')).getText();
+        expect (await text1).toEqual(option)
+        console.log('Tag Produk : ', await text1)
+        await browser.pause(2000)
+    } catch (error) {
+        console.error('option selected is not changing to default')
+    } 
+
+    try {
+        //assertion status
+        let text2 = (await produkPage.selectedRadio('[6]')).getText();
+        expect (await text2).toEqual(option)
+        console.log('Status : ', await text2)
+        await browser.pause(2000)
+    } catch (error) {
+        console.error('option selected is not changing to default')
+    }
+
+    try {
+        //assertion satuan
+        let text3 = (await produkPage.selectedRadio('[7]')).getText();
+        expect (await text3).toEqual(option)
+        console.log('Satuan : ', await text3)
+        await browser.pause(2000)
+    } catch (error) {
+        console.error('option selected is not changing to default')
+    }
+
+    try {
+        //assertion tipe produk
+        let text4 = (await produkPage.selectedRadio('[8]')).getText();
+        expect (await text4).toEqual(option)
+        console.log('Tipe Produk : ', await text4)
+        await browser.pause(2000)
+    } catch (error) {
+        console.error('option selected is not changing to default')
+    }
+
+    try {
+        //assertion sub tipe
+        let text5 = (await produkPage.selectedRadio('[9]')).getText();
+        expect (await text5).toEqual(option)
+        console.log('Sub Tipe : ', await text5)
+        await browser.pause(2000)
+    } catch (error) {
+        console.error('option selected is not changing to default')
+    }
+
+    try {
+        //assertion kategori
+        let text6 = (await produkPage.selectedRadio('[10]')).getText();
+        expect (await text6).toEqual(option)
+        console.log('Kategori : ', await text6)
+        await browser.pause(2000)
+    } catch (error) {
+        console.error('option selected is not changing to default')
+    }
+
+    try {
+        //assertion sub tipe
+        let text7 = (await produkPage.selectedRadio('[11]')).getText();
+        expect (await text7).toEqual(option)
+        console.log('Pin Produk : ', await text7)
+        await browser.pause(2000)
+    } catch (error) {
+        console.error('option selected is not changing to default')
+    }
+})
+
+Then ('User able to see {string} message verification in product page', async(message) => {
+    if (message === 'No data') {
+        expect (await produkPage.emptyData.isDisplayed());
+        let text = await produkPage.emptyData.getText();
+        expect (await text).toEqual(message);
+        console.log('Message is ', await text);
+    
+    } else if (message === '3 INVALID_ARGUMENT: Karakter pencarian Tidak Valid: emoji tidak diperbolehkan') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).toEqual(message);
+        console.log('Message is ', await text);
+
+    }
+
+})

@@ -8,13 +8,18 @@ export default new class produkPage {
     get btnCari() { return $('//*[@data-id="enter-btn"]')}
     get btnFilter() { return $('//*[@data-id="filter-modal-trigger"]')}
     get btnCreateProduk() { return $('(//*[@id="product-create-btn"])')}
-    get successAlert() { return $('//*[@class="ant-notification-notice-description"]')}
+    get successAlert() { return $('//*[@class="ant-notification-notice-description"]')} 
     get failedAlert() { return $('//*[@class="ant-notification-notice-description"]')}
     get failedAlert2() { return $('//*[@class="ant-message-custom-content ant-message-error"]')}
     get skuProduk() { return $('#C')}
     get fieldSearchModal() { return $('//*[@placeholder="Search Tag Produk"]')}
     get btnTerapkanModal() { return $('//*[@data-id="filter-apply-button"]')}
     get btnResetModal() { return $('//*[@data-id="filter-reset-button"]')}
+    get emptyData() { return $('(//*[@class="ant-empty-description"])')}
+    async selectedRadio(x:string) { 
+        return $('(//*[@data-id="selection-tag"])'+x+'')
+        // start from [5] to [12]
+    }
     async namaProduk(x:string) { 
         return $('//*[@id="product-name-'+x+'"]')
         //write your product id here
@@ -33,9 +38,22 @@ export default new class produkPage {
     }
 
     //List Option
-    get optSemuaChecked() { return $('(//*[@class="ant-radio-wrapper ant-radio-wrapper-checked"])')}
-    get optTPRTP() { return $('(//*[contains(text(), "RTP")])[16]')}
+    get optSubTipe0() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[5]//*[@value="90"]')} //('(//*[contains(text(), "White Label")])[8]')}
+    get optSatuanBag() { return $('(//*[contains(text(), "Bag")])')}
+    get optPinYa() { return $('(//*[contains(text(), "Ya")])[3]')}
+    get optPinTidak() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[7]/*[3]')} //('(//*[contains(text(), "Tidak")])[11]')}
+    get optBahanDapur() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[6]/*[2]')} //('(//*[contains(text(), "Bahan Dapur")])[8]')}
+    get optTidakAktif() { return $('(//*[contains(text(), "Tidak Aktif")])')}
+    get optAktif() { return $('(//*[contains(text(), "Aktif")])[11]')}
+    get optCheckedPin() { return $('(//*[@class="ant-radio-wrapper ant-radio-wrapper-checked"])[2]')}
+    get optCheckedStatus() { return $('(//*[@class="ant-radio-wrapper ant-radio-wrapper-checked"])[2]')}
+    get optCheckedTag() { return $('(//*[@class="ant-radio-wrapper ant-radio-wrapper-checked"])')}
     get optNonRTP() { return $('(//*[contains(text(), "Non-RTP")])[6]')}
+    async optTPRTP(x:string) { 
+        return $('(//*[contains(text(), "RTP")])'+x+'')
+        //[15] and [16]
+    }
+
     async navFilterModal(x:string) { 
         return $('(//*[@data-node-key="'+x+'"])')
     }
