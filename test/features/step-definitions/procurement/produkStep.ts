@@ -952,6 +952,11 @@ Then ('User able to see statusIngredients is disable in product page', async() =
 }) 
 
 
+// When ('User click produk menu in Product page', async() => {
+//     await produkPage.menuProduk.click();
+// })
+
+
 When ('User click "btnFilter" in product list modal', async() => {
     await produkPage.btnFilter.click();
     await browser.pause(1000);
@@ -965,8 +970,15 @@ When ('User click "fieldSearchModal" in product list modal', async() => {
 
 
 When ('User fill {string} into fieldSearchModal', async(keyword) => {
-    await produkPage.fieldSearchModal.setValue(keyword);
-    await browser.pause(3000);
+    if (keyword === 'Automated Hehe') {
+        await produkPage.fieldSearchModal.setValue(keyword);
+        await browser.pause(3000);
+    
+    } else if (keyword === 'Era Ilyasa') {
+        await produkPage.inputSearchPICFilter.setValue(keyword);
+        await browser.pause(3000);
+
+    }
 })
 
 
@@ -1202,6 +1214,7 @@ Then ('User able to see {string} radio default', async(option) => {
     }
 })
 
+
 Then ('User able to see {string} message verification in product page', async(message) => {
     if (message === 'No data') {
         expect (await produkPage.emptyData.isDisplayed());
@@ -1216,5 +1229,133 @@ Then ('User able to see {string} message verification in product page', async(me
         console.log('Message is ', await text);
 
     }
+})
 
+
+When ('User click navTabProduk pic produk in produk page', async() => {
+    (await produkPage.navTabProduk('pic_product')).click();
+    await browser.pause(1000);
+})
+
+
+Then ('User be able to see {string} in pic list produk', async(produkName) => {
+    if (produkName === 'Automated Testing hehe') {
+        let text = (await produkPage.textPICProduk('[1]')).getText();
+        expect (await text).toEqual(produkName);
+        console.log('Name : ', text);
+
+    } 
+})
+
+
+When ('User click navFilterModal warehouse in filter modal', async() => {
+    (await produkPage.navFilterModal('warehouse_id')).click();
+    await browser.pause(1000);
+})
+
+
+When ('User click navFilterModal pic produk in filter modal', async() => {
+    (await produkPage.navFilterModal('pic_user')).click();
+    await browser.pause(1000);
+})
+
+
+Then ('User be able to see {string} as a warehouse default', async(option) => {
+    try {
+       expect (await produkPage.optSelectedWarehouse.isSelected());
+       let text = await produkPage.optSelectedWarehouse.getText();
+       expect (await text).toEqual(option);
+       console.log('Selected Warehouse : ', text);
+    } catch (error){
+        console.error('Aloha is not set as a default warehouse')
+    }
+}) 
+
+
+When ('User click optWarehouseJember in filter modal PIC produk', async() => {
+    await produkPage.optWarehouseJember.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User able to see table only shows {string} on Gudang section', async(warehouseName) => {
+    await produkPage.selectedGudang.scrollIntoView();
+    try {
+        await browser.waitUntil(async() => {
+            return await produkPage.selectedGudang.isDisplayed();
+
+        }, {
+            timeout:10000,
+            timeoutMsg:'selected gudang is not displayed'
+        })
+        let text = await produkPage.selectedGudang.getText();
+        console.log('Warehouse : ', await text)
+        expect(await text).toEqual(warehouseName)
+    }catch {
+        console.error('Warehouse is not same as selected')
+    }
+})
+
+
+Then ('User be able to see {string} selected as a pic produk default', async(option) => {
+    try {
+        expect (await produkPage.optSelectedPICProduk.isSelected());
+        let text =await produkPage.optSelectedPICProduk.getText();
+        expect(await text).toEqual(option)
+        console.log('PIC Selected : ', await text)
+    } catch {
+        console.error('Semua Pic is not set as a default pic')
+    }
+
+}) 
+
+
+When ('User click "EraIlyasa" after search modal', async() => {
+    await produkPage.optPICEra.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User able to see table shows {string} on Gudang section', async(picName) => {
+    try {
+        await produkPage.picName.isDisplayed();
+        let text = await produkPage.picName.getText();
+        console.log('PIC : ', await text);
+        expect (await text).toEqual(picName);
+    
+    }catch (error) {
+        console.error('pic is not displayed on gudang section')
+    }
+})
+
+
+When ('User click fieldSearchModal in pic filter', async() => {
+    await produkPage.inputSearchPICFilter.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User able to see {string} radio as default warehouse', async(option1) => {
+        try {
+            let text8 = (await produkPage.selectedRadio('[3]')).getText();
+            expect (await text8).toEqual(option1)
+            console.log('Warehouse Default : ', await text8)
+            await browser.pause(2000)
+
+        } catch (error) {
+            console.error('selectedRadio is not as a default', error);
+        }
+})
+
+
+Then ('User able to see {string} radio as default pic produk', async(option2) => {
+    try {
+        let text9 = (await produkPage.selectedRadio('[4]')).getText();
+        expect (await text9).toEqual(option2)
+        console.log('PIC Produk Default : ', await text9)
+        await browser.pause(2000)
+
+    } catch (error) {
+        console.error('selectedRadio is not as a default', error);
+    }
 })

@@ -16,6 +16,15 @@ export default new class produkPage {
     get btnTerapkanModal() { return $('//*[@data-id="filter-apply-button"]')}
     get btnResetModal() { return $('//*[@data-id="filter-reset-button"]')}
     get emptyData() { return $('(//*[@class="ant-empty-description"])')}
+    get selectedGudang() { return $('(//*[@class="ant-table-cell"])[17]')}
+    get inputSearchPICFilter() { return $('(//*[@placeholder="Search Pic Product"])')}
+    async textPICProduk(x:string) { 
+        return $('(//*[@class="ant-table-cell"])[18]/*/*'+x+'')
+    }
+    async navTabProduk(x:string) { 
+        return $('(//*[@data-node-key="'+x+'"])')
+        //
+    }
     async selectedRadio(x:string) { 
         return $('(//*[@data-id="selection-tag"])'+x+'')
         // start from [5] to [12]
@@ -36,8 +45,16 @@ export default new class produkPage {
         return $('(//*[@data-testid="tab-'+x+'-btn"])')
         //1, 0 = x
     }
+    async navFilterModal(x:string) { 
+        return $('(//*[@data-node-key="'+x+'"])')
+    }
 
     //List Option
+    get picName() { return $('(//*[@id="product-pic-7564"])[2]/*[1]')}
+    get optPICEra() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Era Ilyasa")]')}
+    get optSelectedPICProduk() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[2]/*[1]')}
+    get optSelectedWarehouse() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[1]/*[2]')}
+    get optWarehouseJember() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])/*[3]')}
     get optSubTipe0() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[5]//*[@value="90"]')} //('(//*[contains(text(), "White Label")])[8]')}
     get optSatuanBag() { return $('(//*[contains(text(), "Bag")])')}
     get optPinYa() { return $('(//*[contains(text(), "Ya")])[3]')}
@@ -52,10 +69,6 @@ export default new class produkPage {
     async optTPRTP(x:string) { 
         return $('(//*[contains(text(), "RTP")])'+x+'')
         //[15] and [16]
-    }
-
-    async navFilterModal(x:string) { 
-        return $('(//*[@data-node-key="'+x+'"])')
     }
     async optTagProduk(x:string) { 
         return $('(//*[@class="ant-radio-wrapper"])'+x+'')
