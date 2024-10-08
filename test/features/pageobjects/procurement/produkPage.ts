@@ -18,6 +18,7 @@ export default new class produkPage {
     get emptyData() { return $('(//*[@class="ant-empty-description"])')}
     get selectedGudang() { return $('(//*[@class="ant-table-cell"])[17]')}
     get inputSearchPICFilter() { return $('(//*[@placeholder="Search Pic Product"])')}
+    get btnPilihPIC() { return $('(//*[@class="ant-btn ant-btn-default"])')}
     async textPICProduk(x:string) { 
         return $('(//*[@class="ant-table-cell"])[18]/*/*'+x+'')
     }
@@ -47,6 +48,17 @@ export default new class produkPage {
     }
     async navFilterModal(x:string) { 
         return $('(//*[@data-node-key="'+x+'"])')
+    }
+
+    //PIC Modal
+    get picLama() { return $('(//*[@class="ant-col ant-col-12"])[7]/*[2]')}
+    get dropdownModalPICBaru() { return $('#input-city-supplier')} //(//*[@id="input-city-supplier"])
+    get textPICLama() { return $('(//*[@class="ant-col ant-col-12"])[5]/*[2]')}
+    get btnSimpanModalPIC() { return $('(//*[@data-testid="btn-submit"])')}
+    get btnCancelModalPIC() { return $('(//*[@data-testid="btn-cancel"])')}
+    async logPIC(x:string) { 
+        return $('(//*[@class="ant-table-row ant-table-row-level-0"])[3]/*'+x+'')
+        //[1], [2]
     }
 
     //List Option
