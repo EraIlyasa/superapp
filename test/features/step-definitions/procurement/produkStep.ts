@@ -1,6 +1,7 @@
 import { When, Then, Given } from "@cucumber/cucumber";
 import produkPage from "../../pageobjects/procurement/produkPage";
 import path from "path";
+import { buffer } from "stream/consumers";
 // import sideMenuBarPage from "../../pageobjects/side-menu/side-menu-page"
 
 When ('User directed to List barang yang terdaftar di Super page', async() => {
@@ -1228,7 +1229,13 @@ Then ('User able to see {string} message verification in product page', async(me
         expect (await text).toEqual(message);
         console.log('Message is ', await text);
 
-    }
+    } else if (message === 'Berhasil memperbarui pic produk') {
+        expect (await produkPage.successAlert.isDisplayed());
+        let text = await produkPage.successAlert.getText();
+        expect (await text).toEqual(message);
+        console.log('Message is ', await text);
+
+    } 
 })
 
 
@@ -1242,7 +1249,7 @@ Then ('User be able to see {string} in pic list produk', async(produkName) => {
     if (produkName === 'Automated Testing hehe') {
         let text = (await produkPage.textPICProduk('[1]')).getText();
         expect (await text).toEqual(produkName);
-        console.log('Name : ', text);
+        console.log('Name : ', await text);
 
     } 
 })
@@ -1358,4 +1365,104 @@ Then ('User able to see {string} radio as default pic produk', async(option2) =>
     } catch (error) {
         console.error('selectedRadio is not as a default', error);
     }
+})
+
+
+Then ('User able to see {string} on Gudang section', async(x) => {
+    if (x === 'button') {
+        try {
+            await produkPage.btnPilihPIC.isDisplayed();
+            await browser.pause(2000);
+    
+        } catch (error) {
+            console.error('btnPilihPIC is not displayed', error)
+        }
+    }
+    let text = await produkPage.btnPilihPIC.getText();
+    expect(await text).toEqual(x)    
+    console.log('Text : ', await text);
+
+})
+
+
+Then ('User able to see {string} message', async(x:string) => {
+    if (x === 'PIC Sebelumnya') {
+        expect((await produkPage.logPIC('[1]')).isDisplayed());
+        let text = (await produkPage.logPIC('[1]')).getText();
+        console.log('PIC Sebelumnya :', await text);
+    } else if (x === 'PIC Sekarang') {
+        expect((await produkPage.logPIC('[2]')).isDisplayed());
+        let text = (await produkPage.logPIC('[2]')).getText();
+        console.log('PIC Sekarang :', await text);
+    }
+}) 
+
+
+When ('User click btnPilihPIC on gudang section', async() => {
+    await produkPage.btnPilihPIC.click();
+    await browser.pause(1000);
+}) 
+
+
+When ('User able to see PIC LAMA value is {string}',async(picValue) => {
+    try {
+        await browser.waitUntil(async() => {
+            return await produkPage.textPICLama.isDisplayed();
+
+        }, {
+            timeout:10000,
+            timeoutMsg:'textPICLama is not displayed'
+        })
+        let text = await produkPage.textPICLama.getText();
+        console.log(await text);
+        expect (await text).toEqual(picValue)
+    } catch (error) {
+        console.error('picValue is not as expected, there is pic', error)
+    }
+})
+
+
+When ('User click dropdownModalPICBaru button in Product page', async() => {
+    await produkPage.dropdownModalPICBaru.click();
+    await browser.pause(2000);
+})
+
+
+When ('User fill dropdownModalPICBaru with value {string} in Product page', async(picValue) => {
+    await produkPage.dropdownModalPICBaru.setValue(picValue);
+    await browser.pause(2000);
+    await browser.keys(['Enter']);
+})
+
+
+When ('User click btnSimpanModalPIC in product page', async() => {
+    await produkPage.btnSimpanModalPIC.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User able to see diubah oleh {string} and tanggal is {string}', async(x, y) =>{
+    if (x === 'Era Ilyasa') {
+        try {
+            (await produkPage.logPIC('[3]')).isDisplayed();
+            let text = (await produkPage.logPIC('[3]')).getText();
+            expect (await text).toEqual(x)
+            console.log('Diubah oleh:',await text)
+
+            if (y === '08 Oct 2024') {
+                (await produkPage.logPIC('[4]')).isDisplayed();
+                let text = (await produkPage.logPIC('[4]')).getText();
+                expect (await text).toEqual(y)
+                console.log('Date:',await text)
+            }
+        } catch (error) {
+            console.error('pic is not displayed', error)
+        }
+    }
+})
+
+
+When ('User click btnCancelModalPIC in product page', async() => {
+    await produkPage.btnCancelModalPIC.click();
+    await browser.pause(1000);
 })

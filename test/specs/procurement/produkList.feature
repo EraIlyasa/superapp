@@ -53,7 +53,7 @@ Feature: List - Product
       | option |
       |  Semua |
 
-@PR-0056
+  @PR-0056
   Scenario Outline: Ensure user able to select product type non rtp from related filter
     # Given User login
     When api user login
@@ -76,7 +76,7 @@ Feature: List - Product
         | namaProduk      | produkName      |
         | Automated Test  | Automated Test  |
 
-@PR-0057
+  @PR-0057
   Scenario Outline: Ensure user able to select product type rtp from related filter
     # Given User login
     When api user login
@@ -161,7 +161,7 @@ Feature: List - Product
         | namaProduk        | produkName      |
         | Produk Otomatis 0 | Produk Otomatis 0 |
 
-@PR-0061
+  @PR-0061
   Scenario Outline: Ensure user able to select spesific category
     # Given User login
     When api user login
@@ -199,7 +199,7 @@ Feature: List - Product
         | namaProduk        | produkName      | option |
         | RTP-ingredients   | RTP-ingredients | Semua  |
 
-@PR-0063
+  @PR-0063
   Scenario Outline: Ensure user able to select pinned product from related filter
     # Given User login
     When api user login
