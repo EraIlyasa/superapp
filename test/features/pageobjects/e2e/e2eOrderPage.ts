@@ -1,4 +1,4 @@
-import { firstLine, secondLine, thirdLine, fourthLine, fifthLine, sixthLine, seventhLine, eighthLine, invoiceNumber } from "../../step-definitions/e2e/e2eOrderStep";
+import { firstLine, secondLine, thirdLine, fourthLine, fifthLine, sixthLine, seventhLine, eighthLine } from "../../step-definitions/e2e/e2eOrderStep";
 export default new class e2eOrderPage {
     //Order menu
     public get navMenuOrder() {
@@ -101,7 +101,6 @@ export default new class e2eOrderPage {
     }
     //section 3 option modal
     public get optNamaProduct() {
-        // return $('//*[contains(text(), "Abang Kopi Cap MJ (JGN DIPAKAI)")]');
         return $('//*[contains(text(), "ABC Kecap Manis 520ml")]');
     }
     public get optNamaProduct2() {
@@ -115,6 +114,9 @@ export default new class e2eOrderPage {
     }
     public get optNamaProduct5() {
         return $('//*[contains(text(), "Cap Opung Beras 1kg")]');
+    }
+    public get optNamaProduct6() {
+    return $('//*[contains(text(), "Abang Kopi Cap MJ (JGN DIPAKAI)")]');
     }
     public get optSatuanModalMP() {
         return $('//*[contains(text(), "Karton")]');
@@ -253,7 +255,7 @@ export default new class e2eOrderPage {
         return $('(//span[contains(@id, "detail-invoice-penjualan-")])[1]')
     }
     public get searchTransaction(){
-        return $('//*[@placeholder="Cari kode penjualan"]');
+        return $('//input[@placeholder="Cari kode penjualan"]');
     }
     //Out Going Goods menu
     public get navMenuLogistic() {
@@ -339,7 +341,7 @@ export default new class e2eOrderPage {
         return $('//button[@data-id="btn-search-detail-outgoing"]');
     }
     public get inputSearchKodeInvoice() {
-        return $('//*[@placeholder="Cari kode invoice"]'); 
+        return $('//input[@placeholder="Cari kode invoice"]'); 
     }
     public get tanggalKirim() {
         return $('(//*[@class="ant-select-selector"])[2]');
@@ -474,10 +476,10 @@ export default new class e2eOrderPage {
         return $('(//*[@class="ant-select-selection-search-input"])[3]');
     }
     public get pilihGudangAloha(){
-        return $('(//*[@class="ant-select-item ant-select-item-option"])[3]');
+        return $('(//*[@title="Aloha"])[2]');
     }
     public get pilihGudangAlohaRTP(){
-        return $('(//*[@class="ant-select-item ant-select-item-option"])[4]');
+        return $('(//*[@class="ant-select-item ant-select-item-option"])[3]');
     }
     public get pilihKurirVendor(){
         return $('(//*[@class="ant-select-selection-search-input"])[4]');
@@ -489,7 +491,6 @@ export default new class e2eOrderPage {
         return $('//*[@data-testid="btn-import-csv"]');
     }
     public get uploadFileCSV(){
-        return $('//*[@class="css-f7vrd6 ant-upload ant-upload-drag"]');
         return $('//*[@class="ant-upload-drag-container"]');
     }
     public get fileCSV(){
@@ -510,7 +511,8 @@ export default new class e2eOrderPage {
     public get tabInvoiceSudahDisetor(){
         return $('(//*[@class="Tabs_label__kDTL_"])[2]');
     }
-    public get inputSearchKodeInvoiceSudahDisetor() { return $('(//*[@placeholder="Cari Kode Setoran / Kode Invoice"])[2]');
+    public get inputSearchKodeInvoiceSudahDisetor() { 
+        return $('(//input[@placeholder="Cari Kode Setoran / Kode Invoice"])[2]');
     }
     public get btnSelesaikanPesanan(){
         return $('//*[@data-testid="btn-complete-transaction"]');
@@ -530,7 +532,8 @@ export default new class e2eOrderPage {
     public get menuCompleteOrder(){
         return $('//*[@data-testid="Menu-CompleteOrder"]');
     }
-    public get inputSearchKodeBulkInvoice() { return $('//*[@placeholder="Cari Kode Invoice / bulk invoice"]');
+    public get inputSearchKodeBulkInvoice() {
+        return $('//input[@placeholder="Cari Kode Invoice / bulk invoice"]');
     }
     public get btnDetailBulkInvoice(){
         return $('//*[@class="ant-btn css-1vp3ixv ant-btn-link ant-btn-sm Table_regularCellButton__Ad8rl Button_button__QU6uO Button_link__6Ik2O Button_small__YB_NF"]');
@@ -583,6 +586,10 @@ export default new class e2eOrderPage {
         return $('//*[@title="100 / page"]');
     }
 
+    public get btnNextPage(){
+        return $('(//*[@class="ant-pagination-item-link"])[4]');
+    }
+
     //voucher
     public get allProductVoucher() {
         return $(`//tr[.//span[text()="${firstLine}"]]//input[@class="ant-checkbox-input"]`);
@@ -616,7 +623,7 @@ export default new class e2eOrderPage {
         return $(`//tr[.//span[text()="${eighthLine}"]]//input[@class="ant-checkbox-input"]`);
     }
     public get successAlert() {
-        return $('//*[@class="ant-notification-notice-description"]')
+        return $('//*[@class="Toast_contentTitle__ut5ya"]');
     }
 }
 

@@ -19,7 +19,7 @@ Feature: Create-e2e-order
     And User click "optSuperAgenMarketPlace" in "superAgenMarketPlace"
     And User click "addProductMP"
     And User click "namaProductModalMP"
-    And User click "optNamaProduct" in "namaProductModalMP"
+    And User click "optNamaProduct6" in "namaProductModalMP"
     And User click "inputSatuanModalMP"
     And User click "optSatuanModalMP" in "inputSatuanModalMP"
     And User click "inputQtyModalMP"
@@ -1243,11 +1243,11 @@ Feature: Create-e2e-order
     And User input "2" in "inputQtyModalMP"
     And User click "btnSimpanModalListMP"
     And User click "btnSimpanModalMP"
-    And User click "btnTambahVoucher"
-    And User wait for 3 seconds
-    And User click "checkboxVoucher"
-    And User click "btnSimpanVoucher"
-    And User wait for 3 seconds
+    # And User click "btnTambahVoucher"
+    # And User wait for 3 seconds
+    # And User click "checkboxVoucher"
+    # And User click "btnSimpanVoucher"
+    # And User wait for 3 seconds
     And User click "btnSubmitOrder"
     And User wait for 10 seconds
     And User select the invoice number
@@ -1255,6 +1255,7 @@ Feature: Create-e2e-order
     And User click "menuOutgoingGoods" in "navMenuLogistic"
     And User wait for 5 seconds
     And User refresh the page
+    And User click "tabMotor" 
     And User wait for 5 seconds
     And User click "tanggalKirim"
     And User click "pilihHariIni" in "tanggalKirim"
@@ -1301,7 +1302,7 @@ Feature: Create-e2e-order
     And User click "pilihGudang"
     And User click "pilihGudangAloha"
     And User click "pilihKurirVendor"
-    And User type "SANGAR SURABAYA" into "pilihKurirVendor"
+    And User type "inhouse motoris agus" into "pilihKurirVendor"
     And User click "inputSearchKodeInvoice"
     And User paste the copied invoice number into "inputSearchKodeInvoice"
     And User click "btnImportCSV"
