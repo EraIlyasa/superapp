@@ -19,6 +19,8 @@ export default new class produkPage {
     get selectedGudang() { return $('(//*[@class="ant-table-cell"])[17]')}
     get inputSearchPICFilter() { return $('(//*[@placeholder="Search Pic Product"])')}
     get btnPilihPIC() { return $('(//*[@class="ant-btn ant-btn-default"])')}
+    get btnExportFile() { return $('//*[contains(text(), "Export File")]')}
+    get btnImportFile() { return $('//*[contains(text(), "Import File")]')}
     async textPICProduk(x:string) { 
         return $('(//*[@class="ant-table-cell"])[18]/*/*'+x+'')
     }
