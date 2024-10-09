@@ -64,6 +64,8 @@ export default new class produkPage {
     }
 
     //List Option
+    get optSemuaGudang() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Semua Gudang")]')}
+    get optPICSemua() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Semua Pic")]')}
     get picName() { return $('(//*[@id="product-pic-7564"])[2]/*[1]')}
     get optPICEra() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Era Ilyasa")]')}
     get optSelectedPICProduk() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[2]/*[1]')}

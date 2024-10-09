@@ -1242,19 +1242,25 @@ Then ('User able to see {string} message verification in product page', async(me
         expect (await produkPage.emptyData.isDisplayed());
         let text = await produkPage.emptyData.getText();
         expect (await text).equal(message);
-        console.log('Message is ', await text);
+        console.log('Message is:', await text);
     
     } else if (message === '3 INVALID_ARGUMENT: Karakter pencarian Tidak Valid: emoji tidak diperbolehkan') {
         expect (await produkPage.failedAlert.isDisplayed());
         let text = await produkPage.failedAlert.getText();
         expect (await text).equal(message);
-        console.log('Message is ', await text);
+        console.log('Message is:', await text);
 
     } else if (message === 'Berhasil memperbarui pic produk') {
         expect (await produkPage.successAlert.isDisplayed());
         let text = await produkPage.successAlert.getText();
         expect (await text).equal(message);
-        console.log('Message is ', await text);
+        console.log('Message is:', await text);
+
+    } else if (message === 'Saat ini export PIC produk hanya dapat dilakukan per satu gudang, silakan ganti filter Warehouse') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
 
     } 
 })
@@ -1340,6 +1346,18 @@ Then ('User be able to see {string} selected as a pic produk default', async(opt
 
 When ('User click "EraIlyasa" after search modal', async() => {
     await produkPage.optPICEra.click();
+    await browser.pause(1000);
+})
+
+
+When ('User click "optPICSemua" after search modal', async() => {
+    await produkPage.optPICSemua.click();
+    await browser.pause(1000);
+})
+
+
+When ('User click "optSemuaGudang" after search modal', async() => {
+    await produkPage.optSemuaGudang.click();
     await browser.pause(1000);
 })
 
@@ -1507,7 +1525,7 @@ Then ('User verify the CSV file has been downloaded', async function (){
         console.log(`file exist: ${downloadPath}`)
         return fileExist 
     }, {
-        timeout: 60000, 
+        timeout: 90000, 
         timeoutMsg: 'File tidak ditemukan dalam waktu yang ditentukan'
     });
 
