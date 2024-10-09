@@ -1,8 +1,10 @@
 import voucherPage from '../../pageobjects/Engagement/voucherPage.ts';
+import e2eTransferGoods from '../../pageobjects/e2e/e2eTransferGoodsPage.ts';
 import { Given, When, Then } from '@cucumber/cucumber';
 import * as path from 'path';
 import fs from 'fs';
 const voucher = voucherPage;
+const tg = e2eTransferGoods;
 let csvData: string;
 
 When ('User click "menuVoucher" inside "navMenuMarketing"', async () => {
@@ -103,7 +105,11 @@ When ('User click "optBotol"', async () => {
     await voucher.optBotol.click();
 });
 When ('User click "btnAddProductModal"', async () => {
+    if (await voucher.btnAddProductModal.isDisplayed()) {
     await voucher.btnAddProductModal.click();
+    } else if (await tg.btnAddProductModal.isDisplayed()) {
+        await tg.btnAddProductModal.click();
+    };
 });
 When ('User click "selectVoucherStartDate"', async () => {
     await voucher.selectVoucherStartDate.click();

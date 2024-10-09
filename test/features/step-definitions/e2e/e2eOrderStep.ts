@@ -13,8 +13,9 @@ let orderId: number;
 let orderItemId: number;
 let orderItemId1: number;
 let orderDelivery: string;
-let invoiceNumber: string;
 let grandTotal: string;
+let invoiceNumber: string
+let qty: number;
 let firstLine: string;
 let secondLine: string;
 let thirdLine: string;
@@ -28,7 +29,11 @@ When ('User wait for 1 minute', async () => {
     await browser.pause(60000);
 })
 
-When ('User wait for 45 seconds', async () => {
+When ('User wait for 20 seconds', async () => {
+    await browser.pause(20000);
+})
+
+When('User wait for 45 seconds', async () => {
     await browser.pause(45000);
 })
 
@@ -119,6 +124,10 @@ When ('User click "optNamaProduct4" in "namaProductModalMP"', async () => {
 When ('User click "optNamaProduct5" in "namaProductModalMP"', async () => {
     await order.optNamaProduct5.scrollIntoView();
     await order.optNamaProduct5.click();
+})
+
+When ('User click "optNamaProduct6" in "namaProductModalMP"', async () => {
+    await order.optNamaProduct6.click();
 })
 
 When ('User type {string} in "namaProductModalMP2"', async (nama) => {
@@ -231,19 +240,22 @@ When('User select the invoice number', async () => {
     let invoiceElement = await $(`span[id^="detail-invoice-penjualan-"]`);
 
     // Get the invoice number
-    let invoiceNumber = await invoiceElement.getText();
+    invoiceNumber = ((await invoiceElement.getText()));
+    invoiceNumber = invoiceNumber.toString();
     console.log('Invoice Number:', invoiceNumber);
 
     // Execute script to copy the invoice number to the clipboard
-    await browser.execute(async (code) => {
-        try {
-            await navigator.clipboard.writeText(code);
-            console.log('Invoice number copied to clipboard:', code);
-        } catch (err) {
-            console.error('Failed to copy text to clipboard', err);
-        }
-    }, invoiceNumber);
+    // await browser.execute(async (code) => {
+    //     try {
+    //         await navigator.clipboard.writeText(code);
+    //         console.log('Invoice number copied to clipboard:', code);
+    //     } catch (err) {
+    //         console.error('Failed to copy text to clipboard', err);
+    //     }
+    // }, invoiceNumber);
 });
+
+export { invoiceNumber };
 
 When ('User click "navMenuLogistic"', async () => {
     await order.navMenuLogistic.scrollIntoView();
@@ -281,20 +293,22 @@ When ('User click "selectOrderNewest"', async () => {
 
 When ('User paste the copied invoice number into "searchTransaction"', async () => {
     await order.searchTransaction.click();
-    if (process.platform === 'darwin') {
-        await browser.keys(['Meta', 'v']); // for mac
-    } else {
-        await browser.keys(['Control', 'v']); // for windows
-    }
+    // if (process.platform === 'darwin') {
+    //     await browser.keys(['Meta', 'v']); // for mac
+    // } else {
+    //     await browser.keys(['Control', 'v']); // for windows
+    // }
+    await order.searchTransaction.addValue(invoiceNumber);
 })
 
 When ('User paste the copied invoice number into "inputSearchKodeInvoice"', async () => {
     await order.inputSearchKodeInvoice.click();
-    if (process.platform === 'darwin') {
-        await browser.keys(['Meta', 'v']); // for mac
-    } else {
-        await browser.keys(['Control', 'v']); // for windows
-    }
+    // if (process.platform === 'darwin') {
+    //     await browser.keys(['Meta', 'v']); // for mac
+    // } else {
+    //     await browser.keys(['Control', 'v']); // for windows
+    // }
+    await order.inputSearchKodeInvoice.addValue(invoiceNumber);
 })
 
 When ('User type enter button', async () => {
@@ -431,6 +445,9 @@ When ('User click detail of the transaction', async () => {
 
     invoiceNumber = response.data.result.invoice;
     console.log(`Invoice Number: ${invoiceNumber}`);
+
+    qty = response.data.result.detail_items[0].quantity;
+    console.log(`Quantity Stock: ${qty}`);
 })
 
 When('User logged in and have obtained a valid token', async function () {
@@ -657,7 +674,7 @@ When ('User upload file to "uploadFileCSV"', async () => {
         console.log('CSV file updated successfully.');
 }
 
-const filePath = path.resolve('../file-csv/file-27bf619c-62ce-4bb7-8c04-cc549f75d0c6 (1).csv');
+const filePath = path.resolve('../griya-super/file-csv/file-27bf619c-62ce-4bb7-8c04-cc549f75d0c6 (1).csv');
 const newDate = orderDelivery;
 const newInvoice = invoiceNumber;
 const newCash = grandTotal;
@@ -704,11 +721,12 @@ When ('User click "inputSearchKodeInvoiceSudahDisetor"', async () => {
 
 When ('User paste the copied invoice number into "inputSearchKodeInvoiceSudahDisetor"', async () => {
     await order.inputSearchKodeInvoiceSudahDisetor.click();
-    if (process.platform === 'darwin') {
-        await browser.keys(['Meta', 'v']); // for mac
-    } else {
-        await browser.keys(['Control', 'v']); // for windows
-    }
+    // if (process.platform === 'darwin') {
+    //     await browser.keys(['Meta', 'v']); // for mac
+    // } else {
+    //     await browser.keys(['Control', 'v']); // for windows
+    // }
+    await order.inputSearchKodeInvoiceSudahDisetor.addValue(invoiceNumber);
 });
 
 When ('User click "checkboxInvoice"', async () => {
@@ -731,7 +749,7 @@ When ('User upload file to "uploadBuktiBayar"', async () => {
     await browser.execute((el:HTMLElement) => {
         el.style.display = 'block';
     }, uploadElement);
-    const filePath = path.resolve('../Images/16Photo0094_1.jpg');
+    const filePath = path.resolve('../griya-super/Images/16Photo0094_1.jpg');
     const uploadFile = await browser.uploadFile(filePath)
 
     await uploadElement.setValue(uploadFile);
@@ -756,11 +774,12 @@ When ('User click "inputSearchKodeBulkInvoice"', async () => {
 
 When ('User paste the copied invoice number into "inputSearchKodeBulkInvoice"', async () => {
     await order.inputSearchKodeBulkInvoice.click();
-    if (process.platform === 'darwin') {
-        await browser.keys(['Meta', 'v']); // for mac
-    } else {
-        await browser.keys(['Control', 'v']); // for windows
-    }
+    // if (process.platform === 'darwin') {
+    //     await browser.keys(['Meta', 'v']); // for mac
+    // } else {
+    //     await browser.keys(['Control', 'v']); // for windows
+    // }
+    await order.inputSearchKodeBulkInvoice.addValue(invoiceNumber);
 });
 
 When ('User click "btnDetailBulkInvoice"', async () => {
@@ -825,12 +844,41 @@ Then ('User click "show100DataPerPageMutasiStock"', async () => {
 Then ('User select the row element', async () => {
 
     let rowElement = await $(`//tr[.//span[text()="${invoiceNumber}"]]`);
-    await rowElement.scrollIntoView();
-    qtyStock = await rowElement.$('.//span[@class="text-danger-50"]').getText();
-    qtyStock = qtyStock.replace('-', '');
-    console.log('Stock: ' + qtyStock);
-    console.log(`Real Quantity: ${qty}`);
-    expect(qtyStock).to.equal(qty);
+
+    if(await rowElement.isDisplayed()){
+        await rowElement.scrollIntoView();
+
+        let qtyStock = await rowElement.$('.//span[@class="text-danger-50"]').getText();
+        qtyStock = qtyStock.replace('-', '');
+        let qtyStockInt = parseInt(qtyStock, 10);
+        console.log('Stock Mutasi: ' + qtyStock);
+        console.log(`Real Quantity: ${qty}`);
+
+        expect(qtyStockInt).to.equal(qty);
+        if(qtyStockInt === qty){
+            console.log('Test passed: Stock Mutasi and Real Quantity are the same');
+        } else {
+            console.log('Test failed: Stock Mutasi and Real Quantity are not the same');
+        };
+
+    } else {
+        await order.btnNextPage.scrollIntoView();
+        await order.btnNextPage.click();
+        await rowElement.scrollIntoView();
+
+        let qtyStock = await rowElement.$('.//span[@class="text-danger-50"]').getText();
+        qtyStock = qtyStock.replace('-', '');
+        let qtyStockInt = parseInt(qtyStock, 10);
+        console.log('Stock Mutasi: ' + qtyStock);
+        console.log(`Real Quantity: ${qty}`);
+
+        expect(qtyStockInt).to.equal(qty);
+        if(qtyStockInt === qty){
+            console.log('Test passed: Stock Mutasi and Real Quantity are the same');
+        } else {
+            console.log('Test failed: Stock Mutasi and Real Quantity are not the same');
+        };
+    };
 });
 
 //order direct
