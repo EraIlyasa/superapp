@@ -19,6 +19,8 @@ export default new class produkPage {
     get selectedGudang() { return $('(//*[@class="ant-table-cell"])[17]')}
     get inputSearchPICFilter() { return $('(//*[@placeholder="Search Pic Product"])')}
     get btnPilihPIC() { return $('(//*[@class="ant-btn ant-btn-default"])')}
+    get btnExportFile() { return $('//*[contains(text(), "Export File")]')}
+    get btnImportFile() { return $('//*[contains(text(), "Import File")]')}
     async textPICProduk(x:string) { 
         return $('(//*[@class="ant-table-cell"])[18]/*/*'+x+'')
     }
@@ -62,6 +64,8 @@ export default new class produkPage {
     }
 
     //List Option
+    get optSemuaGudang() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Semua Gudang")]')}
+    get optPICSemua() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Semua Pic")]')}
     get picName() { return $('(//*[@id="product-pic-7564"])[2]/*[1]')}
     get optPICEra() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Era Ilyasa")]')}
     get optSelectedPICProduk() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[2]/*[1]')}

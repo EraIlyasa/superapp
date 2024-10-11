@@ -1,4 +1,9 @@
 import type { Options } from '@wdio/types'
+import { resolve } from 'path';
+
+let downloadDir: any
+downloadDir = resolve(__dirname, './downloads');
+
 export const config: Options.Testrunner = {
     //
     // ====================
@@ -54,7 +59,15 @@ export const config: Options.Testrunner = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            prefs: {
+                'download.default_directory': downloadDir,
+                'download.prompt_for_download': false,
+                'download.directory_upgrade': true,
+                'safebrowsing.enabled': true
+            }
+        },
     }],
 
     //
