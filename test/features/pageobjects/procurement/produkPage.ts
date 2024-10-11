@@ -2,6 +2,7 @@ export default new class produkPage {
 
     get menuProduk() { return $('//*[@data-testid="Menu-Product"]')}
     //List 
+    get csvUpload() { return $('//*[@data-id="drager-modal-import"]')}
     get titleProduk() { return $('#page-title')}
     get btnSearch() { return $('//*[@id="btnSearch"]')}
     get fieldInputSearch() { return $('//*[@data-testid="search-bar"]')}
@@ -66,7 +67,7 @@ export default new class produkPage {
     //List Option
     get optSemuaGudang() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Semua Gudang")]')}
     get optPICSemua() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Semua Pic")]')}
-    get picName() { return $('(//*[@id="product-pic-7564"])[2]/*[1]')}
+    get picName() { return $('(//*[@id="product-pic-7473"])[2]/*[1]')}
     get optPICEra() { return $('//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(), "Era Ilyasa")]')}
     get optSelectedPICProduk() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[2]/*[1]')}
     get optSelectedWarehouse() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[1]/*[2]')}

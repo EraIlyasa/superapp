@@ -3,6 +3,7 @@ import produkPage from "../../pageobjects/procurement/produkPage";
 import path, { join, resolve } from "path";
 import fs from 'fs';
 import { expect } from 'chai'
+import { createObjectCsvWriter } from 'csv-writer';
 
 // import sideMenuBarPage from "../../pageobjects/side-menu/side-menu-page"
 
@@ -1262,7 +1263,55 @@ Then ('User able to see {string} message verification in product page', async(me
         expect (await text).equal(message);
         console.log('Message is:', await text);
 
-    } 
+    } else if (message === 'Semua Data Berhasil Di Simpan!') {
+        expect (await produkPage.successAlert.isDisplayed());
+        let text = await produkPage.successAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Data file xlsx kosong') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, PIC dengan ID 2930138 tidak ditemukan') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Gudang kaca kaca bukan tape uli tidak ditemukan') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Format data pada row 2 tidak valid') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, SKU agr-0016 Satuan baggggs tidak ditemukan') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Status Gudang dengan nama angga inactive Non Aktif') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Status User dengan ID 441 Non Aktif') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    }
 })
 
 
@@ -1362,17 +1411,50 @@ When ('User click "optSemuaGudang" after search modal', async() => {
 })
 
 
-Then ('User able to see table shows {string} on Gudang section', async(picName) => {
+Then ('User able to see table shows {string} on Gudang section', async function(picName) {
     try {
         await produkPage.picName.isDisplayed();
         let text = await produkPage.picName.getText();
-        console.log('PIC : ', await text);
+        console.log('PIC: ', await text);
         expect (await text).equal(picName);
+
+        this.text = text
     
     }catch (error) {
         console.error('pic is not displayed on gudang section')
     }
 })
+
+
+Then ('User able to see table shows {string} on Gudang section2', async function(x) {
+    if (x === 'a') {
+        try {
+            await produkPage.picName.isDisplayed();
+            let text = await produkPage.picName.getText();
+            console.log('PIC: ', await text);
+            // expect (await text).equal(x);
+    
+            this.text = text
+        
+        }catch (error) {
+            console.error('pic is not displayed on gudang section')
+        }
+    
+    } else if (x === 'aa') {
+        try {
+            await produkPage.picName.isDisplayed();
+            let text = await produkPage.picName.getText();
+            console.log('PIC: ', await text);
+            // expect (await text).equal(x);
+    
+            this.text = text
+        
+        }catch (error) {
+            console.error('pic is not displayed on gudang section')
+        }
+    }
+})
+
 
 
 When ('User click fieldSearchModal in pic filter', async() => {
@@ -1480,6 +1562,12 @@ When ('User click btnSimpanModalPIC in product page', async() => {
 })
 
 
+When ('User click btn submit csv in product page', async() => {
+    await produkPage.btnSimpanModalPIC.click();
+    await browser.pause(1000);
+})
+
+
 Then ('User able to see diubah oleh {string} and tanggal is {string}', async(x, y) =>{
     if (x === 'Era Ilyasa') {
         try {
@@ -1516,6 +1604,13 @@ When ('User click btnExportPIC button in Product page', async() => {
 })
 
 
+When ('User click btnImportFile button in Product page', async() => {
+    await produkPage.btnImportFile.waitForClickable({timeout:10000})
+    await produkPage.btnImportFile.click();
+    await browser.pause(1000);
+})
+
+
 Then ('User verify the CSV file has been downloaded', async function (){
             
     downloadPath = path.join('downloads', `export-product-pic_${getTodayDateTime()}.xlsx`);
@@ -1538,4 +1633,692 @@ Then ('User verify the CSV file has been downloaded', async function (){
         console.log('File tidak valid atau tidak ditemukan.');
     }
 
-   })
+})
+
+
+When ('User write csv file and store it', async function() {
+    
+    let picId
+
+    if (this.text === 'Era Ilyasa') {
+        picId = '846'
+    } else if (this.text === 'Ariansyah Riwendi') {
+        picId = '841'
+    }
+
+    const csvWriter = createObjectCsvWriter({
+        path: './file-csv/import-pic.xlsx',  
+        header: [
+            { id: 'sku', title: 'SKU' },
+            { id: 'produk', title: 'Produk' },
+            { id: 'satuan', title: 'Satuan' },
+            { id: 'gudang', title: 'Gudang' },
+            { id: 'pic', title: 'PIC' }
+
+        ]
+    });
+
+    const csvImportPIC = [{ 
+        sku: 'AGR-0016', 
+        produk: 'Automated Testing hehe', 
+        satuan: 'bag', 
+        gudang:'Aloha', 
+        pic: picId 
+        }
+    ];
+    console.log('ID:',await picId);
+
+    // function createDynamicFile(BaseFileName: string): string {
+    //     let fileName = BaseFileName;
+    //     let counter = 1;
+
+    //     while (fs.existsSync(fileName)) {
+    //         fileName = `${BaseFileName}-${counter}`;
+    //         counter++;
+    //     }
+    //     fs.mkdirSync(fileName);
+    //     return fileName; 
+    // }
+
+    async function writeImportCsv() {
+        try {
+            if (!fs.existsSync('./file-csv')) {
+                fs.mkdirSync('./file-csv');
+            }
+    
+            await csvWriter.writeRecords(csvImportPIC);
+            console.log('Berhasil ditulis ke CSV di folder file-csv.');
+        } catch (error) {
+            console.error('Gagal menulis ke CSV:', error);
+        }
+    }
+
+    writeImportCsv();
+})
+
+
+When ('User write csv file and store it2', async function() {
+    
+    const csvWriter = createObjectCsvWriter({
+        path: './file-csv/import-pic2.xlsx',  
+        header: [
+            { id: 'sku', title: 'SKU' },
+            { id: 'produk', title: 'Produk' },
+            { id: 'satuan', title: 'Satuan' },
+            { id: 'gudang', title: 'Gudang' },
+            { id: 'pic', title: 'PIC' }
+
+        ]
+    });
+
+    const csvImportPIC = [{ 
+        sku: 'AGR-0016', 
+        produk: 'Automated Testing hehe', 
+        satuan: 'bag', 
+        gudang:'Aloha', 
+        pic: '841' 
+        }
+    ];
+
+    async function writeImportCsv() {
+        try {
+            if (!fs.existsSync('./file-csv')) {
+                fs.mkdirSync('./file-csv');
+            }
+    
+            await csvWriter.writeRecords(csvImportPIC);
+            console.log('Berhasil ditulis ke CSV di folder file-csv.');
+        } catch (error) {
+            console.error('Gagal menulis ke CSV:', error);
+        }
+    }
+
+    writeImportCsv();
+})
+
+
+When ('User write csv file with empty pic and store it', async function() {
+    
+    const csvWriter = createObjectCsvWriter({
+        path: './file-csv/import-no-pic.xlsx',  
+        header: [
+            { id: 'sku', title: 'SKU' },
+            { id: 'produk', title: 'Produk' },
+            { id: 'satuan', title: 'Satuan' },
+            { id: 'gudang', title: 'Gudang' },
+            { id: 'pic', title: 'PIC' }
+
+        ]
+    });
+
+    const csvImportPIC = [{ 
+        sku: 'AGR-0016', 
+        produk: 'Automated Testing hehe', 
+        satuan: 'bag', 
+        gudang:'Aloha', 
+        pic: '' 
+        }
+    ];
+
+    async function writeImportCsv() {
+        try {
+            if (!fs.existsSync('./file-csv')) {
+                fs.mkdirSync('./file-csv');
+            }
+    
+            await csvWriter.writeRecords(csvImportPIC);
+            console.log('Berhasil ditulis ke CSV di folder file-csv.');
+        } catch (error) {
+            console.error('Gagal menulis ke CSV:', error);
+        }
+    }
+
+    writeImportCsv();
+})
+
+
+When ('User write {string} csv file and store it', async function(csvCondition) {
+    
+    
+    if (csvCondition === 'empty csv') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-empty-value.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: '', 
+            produk: '', 
+            satuan: '', 
+            gudang:'', 
+            pic: '' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'unregistered pic') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-unregistered-pic.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'bag', 
+            gudang:'Aloha', 
+            pic: '2930138' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'unregistered warehouse') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-unregistered-warehouse.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'bag', 
+            gudang:'kaca kaca bukan tape uli', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'unregistered product and warehouse') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-unregistered-product-and-warehouse.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'produk tidak ada', 
+            satuan: 'bag', 
+            gudang:'kaca kaca bukan tape uli', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'empty product sku') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-empty-product-sku.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: '', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'bag', 
+            gudang:'Aloha', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'invalid satuan') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-invalid-satuan.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'baggggs', 
+            gudang:'Aloha', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'empty satuan') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-empty-satuan.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: '', 
+            gudang:'Aloha', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'empty warehouse') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-empty-warehouse.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: '', 
+            gudang:'Aloha', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'inactive warehouse') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-inactive-warehouse.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'Bag', 
+            gudang:'angga', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'inactive pic') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-inactive-pic.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'Bag', 
+            gudang:'Aloha', 
+            pic: '441' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    }
+
+
+})
+
+
+
+When ('User uplaod csvUpload to import csv PIC product', async() => {
+    const uploadCsv = await produkPage.csvUpload;
+    await uploadCsv.waitForExist({timeout:10000})
+    await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCsv);
+    const filePath = path.resolve('file-csv\\import-pic.xlsx');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCsv.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(3000);
+})
+
+
+When ('User upload csvUpload {string} to import csv PIC product', async(condition) => {
+    if (condition === 'no pic') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-pic.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+    
+    } else if (condition === 'empty') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-empty-value.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'unregistered pic') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-unregistered-pic.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'unregistered warehouse') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-unregistered-warehouse.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'unregistered product and warehouse') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-unregistered-product-and-warehouse.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'empty product sku') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-empty-product-sku.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'invalid satuan') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-invalid-satuan.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'empty satuan') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-empty-satuan.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'empty warehouse') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-empty-warehouse.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'inactive warehouse') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-inactive-warehouse.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'inactive pic') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-inactive-pic.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    }
+})
+
+
+When ('User click btnCancelModalPIC in modal import PIC', async() => {
+    await produkPage.btnCancelModalPIC.click();
+    await browser.pause(1000);
+})
