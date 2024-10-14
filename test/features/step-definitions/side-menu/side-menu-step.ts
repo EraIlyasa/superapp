@@ -95,9 +95,20 @@ Given ('User click menu {string} in side menu page', async(x:string) => {
             return await sideMenuBarPage.navMenuOrder.isClickable();
             }, {
                 timeout:60000,
-                timeoutMsg:'navMenuAdministrator still not clickable'
+                timeoutMsg:'navMenuOrder still not clickable'
             })
         await sideMenuBarPage.navMenuOrder.click();
+        await browser.pause(1000);
+    
+    } else if (x === 'navMenuFinance') {
+        await browser.waitUntil(async() => {
+            await sideMenuBarPage.navMenuFinance.scrollIntoView();
+            return await sideMenuBarPage.navMenuFinance.isClickable();
+            }, {
+                timeout:60000,
+                timeoutMsg:'navMenuFinance still not clickable'
+            })
+        await sideMenuBarPage.navMenuFinance.click();
         await browser.pause(1000);
     
     }
@@ -119,7 +130,12 @@ When ('User click submenu {string} in side menu page', async(x:string) => {
         await sideMenuBarPage.menuPenjualan.click();
         await browser.pause(5000);
     
-    } 
+    } else if (x === 'menuPaymentRequest') {
+        await sideMenuBarPage.menuPaymentRequest.scrollIntoView();
+        await sideMenuBarPage.menuPaymentRequest.click();
+        await browser.pause(5000);
+    
+    }
 })
 
 // Given ('User click "navMenuConfig" in side menu page', async() => {

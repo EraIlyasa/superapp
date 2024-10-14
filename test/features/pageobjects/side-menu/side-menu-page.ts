@@ -21,8 +21,15 @@ export default new class sideMenuBarPage {
     get navMenuOrder() {
         return $('(//*[@data-testid="Menu-Order"])')
     }
+    get navMenuFinance() { 
+        return $('//*[@data-testid="Menu-Finances"]')
+    }
+
 
     //Sub Menu
+    get menuPaymentRequest() { 
+        return $('//*[@data-testid="Menu-PaymentRequest"]')
+    }
     get menuPenjualan() {
         return $('(//*[@data-testid="Menu-Penjualan"])')
     }
