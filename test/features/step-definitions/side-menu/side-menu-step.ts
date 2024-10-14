@@ -1,6 +1,10 @@
-import { When } from '@cucumber/cucumber';
+import { When, Given } from '@cucumber/cucumber';
 import sideMenuBarPage from '../../pageobjects/side-menu/side-menu-page';
-import produkPage from '../../pageobjects/procurement/produkPage';
+
+Given ('User get dashboard url', async() => {
+    await browser.url('https://v3-web-app-micro.staging.superapp.co.id/dashboard');
+    await browser.pause(5000);
+})
 
 When('I click order', async() => {
     await sideMenuBarPage.order.scrollIntoView();
@@ -51,3 +55,105 @@ When ('User click navMenuStock in side menu page', async() => {
     await sideMenuBarPage.navMenuStock.click();
     await browser.pause(5000);
 })
+
+When ('User get window handle', async() => {
+    const allWindowHandles = await browser.getWindowHandles();
+    const newWindowHandle = allWindowHandles[allWindowHandles.length - 1];
+    await browser.switchToWindow(newWindowHandle);
+    const currentWindow = await browser.getWindowHandle();
+    console.log('Current Window Handle:', currentWindow);
+    await browser.pause(5000);
+    await browser.refresh();
+})
+
+Given ('User click menu {string} in side menu page', async(x:string) => {
+    if (x === 'navMenuConfig') {
+        await sideMenuBarPage.navMenuConfig.scrollIntoView();
+        await browser.waitUntil(async() => {
+            return await sideMenuBarPage.navMenuConfig.isClickable(); 
+          }, {
+            timeout:60000,
+            timeoutMsg: 'navMenuConfig still not clickable'
+          })  
+        await sideMenuBarPage.navMenuConfig.click();
+        await browser.pause(1000);
+
+    } else if (x === 'navMenuAdministrator') {
+        await sideMenuBarPage.navMenuAdministrator.scrollIntoView();
+        await browser.waitUntil(async() => {
+            return await sideMenuBarPage.navMenuAdministrator.isClickable();
+            }, {
+                timeout:60000,
+                timeoutMsg:'navMenuAdministrator still not clickable'
+            })
+        await sideMenuBarPage.navMenuAdministrator.click();
+        await browser.pause(1000);
+            
+    } else if (x === 'navMenuOrder') {
+        await browser.waitUntil(async() => {
+            await sideMenuBarPage.navMenuOrder.scrollIntoView();
+            return await sideMenuBarPage.navMenuOrder.isClickable();
+            }, {
+                timeout:60000,
+                timeoutMsg:'navMenuAdministrator still not clickable'
+            })
+        await sideMenuBarPage.navMenuOrder.click();
+        await browser.pause(1000);
+    
+    }
+})
+
+When ('User click submenu {string} in side menu page', async(x:string) => {
+    if (x === 'menuGudangV4') {
+        await sideMenuBarPage.menuGudangV4.scrollIntoView();
+        await sideMenuBarPage.menuGudangV4.click();
+        await browser.pause(5000);
+    
+    } else if (x === 'menuGeneral') {
+        await sideMenuBarPage.menuGeneral.scrollIntoView();
+        await sideMenuBarPage.menuGeneral.click();
+        await browser.pause(5000);
+    
+    } else if (x === 'menuPenjualan') {
+        await sideMenuBarPage.menuPenjualan.scrollIntoView();
+        await sideMenuBarPage.menuPenjualan.click();
+        await browser.pause(5000);
+    
+    } 
+})
+
+// Given ('User click "navMenuConfig" in side menu page', async() => {
+//     await sideMenuBarPage.navMenuConfig.scrollIntoView();
+//     await browser.waitUntil(async() => {
+//         return await sideMenuBarPage.navMenuConfig.isClickable(); 
+//       }, {
+//         timeout:45000,
+//         timeoutMsg: 'navMenuConfig still not clickable'
+//       })  
+//     await sideMenuBarPage.navMenuConfig.click();
+//     await browser.pause(1000);
+// })
+
+// When ('User click "menuGudangV4" in side menu page', async() => {
+//     await sideMenuBarPage.menuGudangV4.scrollIntoView();
+//     await sideMenuBarPage.menuGudangV4.click();
+//     await browser.pause(1000);
+// }) 
+
+// When ('User click "navMenuAdministrator" in side menu page', async() => {
+//     await sideMenuBarPage.navMenuAdministrator.scrollIntoView();
+//     await browser.waitUntil(async() => {
+//         return await sideMenuBarPage.navMenuAdministrator.isClickable();
+//     }, {
+//         timeout:45000,
+//         timeoutMsg:'navMenuAdministrator still not clickable'
+//     })
+//     await sideMenuBarPage.navMenuAdministrator.click();
+//     await browser.pause(1000);
+// })
+
+// When ('User click "menuGeneral" in side menu page', async() => {
+//     await sideMenuBarPage.menuGeneral.scrollIntoView();
+//     await sideMenuBarPage.menuGeneral.click();
+//     await browser.pause(1000);
+// })
