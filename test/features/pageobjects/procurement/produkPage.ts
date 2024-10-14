@@ -52,6 +52,10 @@ export default new class produkPage {
     async navFilterModal(x:string) { 
         return $('(//*[@data-node-key="'+x+'"])')
     }
+    async btnUbahAturHarga(x:string) {
+        return $('(//*[@id="product-tiering-'+x+'"])[4]//*[contains(text(), "Ubah")]')
+        //1, 2, etc = x
+    }
 
     //PIC Modal
     get picLama() { return $('(//*[@class="ant-col ant-col-12"])[7]/*[2]')}

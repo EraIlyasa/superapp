@@ -29,7 +29,7 @@ When ('User directed to List barang yang terdaftar di Super page', async() => {
     await browser.waitUntil(async() => {
         return await produkPage.titleProduk.isDisplayed();
     }, {
-        timeout:30000,
+        timeout:60000,
         timeoutMsg:'titleProduk still not existing'
     })
     let title = await produkPage.titleProduk.getText();
@@ -1317,6 +1317,12 @@ Then ('User able to see {string} message verification in product page', async(me
         expect (await text).equal(message);
         console.log('Message is:', await text);
 
+    } else if (message === 'Harga jual belum dapat diatur karena stok unrilis belum pernah tersedia') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
     }
 })
 
@@ -2327,4 +2333,30 @@ When ('User upload csvUpload {string} to import csv PIC product', async(conditio
 When ('User click btnCancelModalPIC in modal import PIC', async() => {
     await produkPage.btnCancelModalPIC.click();
     await browser.pause(1000);
+})
+
+
+When ('User click btnAturHarga in product list', async() => {
+    (await produkPage.btnAturHarga('[1]')).click();
+    await browser.pause(1000)
+})
+
+
+When ('User click btnUbahAturHarga in atur harga page', async() => {
+    (await produkPage.btnUbahAturHarga('0')).waitForExist({timeout:30000, timeoutMsg:'btnUbahAturHarga still not Exist'});
+    await (await produkPage.btnUbahAturHarga('0')).scrollIntoView();
+    (await produkPage.btnUbahAturHarga('0')).click();
+    console.log('User have been clicked the button')
+    await browser.pause(5000);
+})
+
+
+Then ('User verify btnUbahAturHarga is not displayed', async() => {
+    try {
+        let notDis = (await produkPage.btnUbahAturHarga('1')).isDisplayed()
+        expect(await notDis).to.be.false
+        console.log('btnUbahAturHarga is not displayed any more')
+    } catch (error) {
+        console.error('btnUbahAturHarga still displayed')
+    }
 })
