@@ -1305,7 +1305,13 @@ Then ('User able to see {string} message verification in product page', async(me
         expect (await text).equal(message);
         console.log('Message is:', await text);
 
-    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Status User dengan ID 441 Non Aktif') {
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Status User dengan ID 854 Non Aktif') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Status Gudang dengan nama gudangrra Non Aktif') {
         expect (await produkPage.failedAlert.isDisplayed());
         let text = await produkPage.failedAlert.getText();
         expect (await text).equal(message);
@@ -2102,7 +2108,7 @@ When ('User write {string} csv file and store it', async function(csvCondition) 
             sku: 'AGR-0016', 
             produk: 'Automated Testing hehe', 
             satuan: 'Bag', 
-            gudang:'angga', 
+            gudang:'gudangRra', 
             pic: '841' 
             }
         ];
@@ -2141,7 +2147,7 @@ When ('User write {string} csv file and store it', async function(csvCondition) 
             produk: 'Automated Testing hehe', 
             satuan: 'Bag', 
             gudang:'Aloha', 
-            pic: '441' 
+            pic: '854' 
             }
         ];
 

@@ -189,7 +189,7 @@ Examples:
 | Semua Data Berhasil Di Simpan! | AGR-0016 | Ariansyah Riwendi |
 
 @PR-0097
-Scenario: Ensure user able to see changes after import PIC
+Scenario: Ensure user able to replace existing PIC with newest PIC
 When api user login
 When open dashboard superapp
 When User click "navMenuPurchasing" button in "Global" page
@@ -421,7 +421,7 @@ Examples:
 | 3 INVALID_ARGUMENT: Pada baris ke 2, SKU agr-0016 Satuan baggggs tidak ditemukan  | invalid satuan  | invalid satuan  |
 
 @PR-0108
-Scenario: Ensure user get alert after import with invalid satuan
+Scenario: Ensure user get alert after import with empty satuan
 When api user login
 When open dashboard superapp
 When User click "navMenuPurchasing" button in "Global" page
@@ -458,41 +458,41 @@ Examples:
 | message                                                 | condition          | csvCondition       |
 | 3 INVALID_ARGUMENT: Format data pada row 2 tidak valid  | empty warehouse    | empty warehouse    |
 
-# @PR-0110
-# Scenario: Ensure user get alert after not active warehouse
-# When api user login
-# When open dashboard superapp
-# When User click "navMenuPurchasing" button in "Global" page
-# And User click produk menu in Product page
-# And User directed to List barang yang terdaftar di Super page
-# And User click navTabProduk pic produk in produk page
-# And User click btnImportFile button in Product page
-# And User write "<csvCondition>" csv file and store it
-# And User upload csvUpload "<condition>" to import csv PIC product
-# And User click btn submit csv in product page
-# And User wait for 5 seconds
-# Then User able to see "<message>" message verification in product page
+@PR-0110
+Scenario: Ensure user get alert after not active warehouse
+When api user login
+When open dashboard superapp
+When User click "navMenuPurchasing" button in "Global" page
+And User click produk menu in Product page
+And User directed to List barang yang terdaftar di Super page
+And User click navTabProduk pic produk in produk page
+And User click btnImportFile button in Product page
+And User write "<csvCondition>" csv file and store it
+And User upload csvUpload "<condition>" to import csv PIC product
+And User click btn submit csv in product page
+And User wait for 5 seconds
+Then User able to see "<message>" message verification in product page
 
-# Examples: 
-# | message                                                                                  | condition             | csvCondition          |
-# | 3 INVALID_ARGUMENT: Pada baris ke 2, Status Gudang dengan nama angga inactive Non Aktif  | inactive warehouse    | inactive warehouse    |
+Examples: 
+| message                                                                               | condition             | csvCondition          |
+| 3 INVALID_ARGUMENT: Pada baris ke 2, Status Gudang dengan nama gudangrra Non Aktif    | inactive warehouse    | inactive warehouse    |
 
-# @PR-0111
-# Scenario: Ensure user get alert after import using not active PIC
-# When api user login
-# When open dashboard superapp
-# When User click "navMenuPurchasing" button in "Global" page
-# And User click produk menu in Product page
-# And User directed to List barang yang terdaftar di Super page
-# And User click navTabProduk pic produk in produk page
-# And User click btnImportFile button in Product page
-# And User write "<csvCondition>" csv file and store it
-# And User upload csvUpload "<condition>" to import csv PIC product
-# And User click btn submit csv in product page
-# And User wait for 5 seconds
-# Then User able to see "<message>" message verification in product page
+@PR-0111
+Scenario: Ensure user get alert after import using not active PIC
+When api user login
+When open dashboard superapp
+When User click "navMenuPurchasing" button in "Global" page
+And User click produk menu in Product page
+And User directed to List barang yang terdaftar di Super page
+And User click navTabProduk pic produk in produk page
+And User click btnImportFile button in Product page
+And User write "<csvCondition>" csv file and store it
+And User upload csvUpload "<condition>" to import csv PIC product
+And User click btn submit csv in product page
+And User wait for 5 seconds
+Then User able to see "<message>" message verification in product page
 
-# Examples: 
-# | message                                                                   | condition       | csvCondition    |
-# | 3 INVALID_ARGUMENT: Pada baris ke 2, Status User dengan ID 441 Non Aktif  | inactive pic    | inactive pic    |
+Examples: 
+| message                                                                   | condition       | csvCondition    |
+| 3 INVALID_ARGUMENT: Pada baris ke 2, Status User dengan ID 854 Non Aktif  | inactive pic    | inactive pic    |
 
