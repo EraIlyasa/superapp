@@ -111,6 +111,17 @@ Given ('User click menu {string} in side menu page', async(x:string) => {
         await sideMenuBarPage.navMenuFinance.click();
         await browser.pause(1000);
     
+    } else if (x === 'logistic') {
+        await browser.waitUntil(async() => {
+            await sideMenuBarPage.logistic.scrollIntoView();
+            return await sideMenuBarPage.logistic.isClickable();
+            }, {
+                timeout:60000,
+                timeoutMsg:'navMenuFinance still not clickable'
+            })
+        await sideMenuBarPage.logistic.click();
+        await browser.pause(1000);
+    
     }
 })
 
@@ -133,6 +144,11 @@ When ('User click submenu {string} in side menu page', async(x:string) => {
     } else if (x === 'menuPaymentRequest') {
         await sideMenuBarPage.menuPaymentRequest.scrollIntoView();
         await sideMenuBarPage.menuPaymentRequest.click();
+        await browser.pause(5000);
+    
+    } else if (x === 'outgoingGoodsV3') {
+        await sideMenuBarPage.outgoingGoodsV3.scrollIntoView();
+        await sideMenuBarPage.outgoingGoodsV3.click();
         await browser.pause(5000);
     
     }

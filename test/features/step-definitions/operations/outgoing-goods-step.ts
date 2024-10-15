@@ -1,6 +1,28 @@
 import { Given, When, Then } from '@cucumber/cucumber'
 import outgoingGoodsPage from '../../pageobjects/operations/outgoing-goods-page.ts';
 import { kodeTransaksi } from '../../step-definitions/procurement/penjualan-step.ts'
+import { expect } from 'chai';
+import axios from 'axios'
+
+let title: any
+let getTomorrowDate: any
+let year: any
+let day: any
+let month: any
+let tomorrow: any
+let requestBody: any
+let response: any
+
+
+getTomorrowDate = (): string => {
+    tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    year = tomorrow.getFullYear()
+    month = String(tomorrow.getMonth() + 1).padStart(2, '0')
+    day = String(tomorrow.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+}
+
 
 When('I click tanggal kirim', async() => {
     await outgoingGoodsPage.tanggalKirim.click();
@@ -127,6 +149,122 @@ When('I click dikirim', async() => {
     await browser.pause(2000)
     await outgoingGoodsPage.btnDikirim.click();
 });
+
+Then ('User verify titlePage in outgoing goods page', async() => {
+    await browser.waitUntil(async() => {
+        return await outgoingGoodsPage.titlePage.isDisplayed()
+    }, {
+        timeout:120000, timeoutMsg:'titlePage still not displayed'
+    })
+    title = await outgoingGoodsPage.titlePage.getText();
+    console.log('### ',await title);
+    expect(outgoingGoodsPage.titlePage.isDisplayed).to.be.true
+})
+
+When ('User create order from api', async function() {
+    
+    requestBody = {
+        customer_id: 195945,
+        superagent_id: 46823,
+        customer_level: "SA",
+        customer_address_id: 166855,
+        payment_type: "COD",
+        note: "",
+        delivery_date: getTomorrowDate(),
+        group_type: "grosir",
+        promos: [],
+        promo_type: "",
+        use_point: true,
+        grand_total: 900000,
+        sub_total: 900000,
+        discount: 0,
+        items: [
+            {
+                sub_total: 900000,
+                promos: [],
+                id: null,
+                item_id: null,
+                product_detail_id: 22647,
+                product_attribute_id: 11622,
+                product_id: 7504,
+                product_name: "Automated Stock | ra",
+                product_sku: "",
+                selling_price: 90000,
+                discount: 0,
+                selling_price_now: 0,
+                conversion_points: 0,
+                deduction_points: 0,
+                unit: "Bag",
+                content: "",
+                dimension_length: "",
+                dimension_height: "",
+                dimension_width: "",
+                weight: "0",
+                delete: 0,
+                quantity: 10,
+                type: "regular"
+            }
+        ],
+        superagent_discount: 0,
+        warehouse_company_id: "0",
+        discount_percent: 0,
+        page_id: "dummy page id",
+        token: "WAgyQtzpfnKAEPCgA-Wj",
+        profit: 0,
+        cash_received: 0,
+        deduction_points: 0
+    }
+    
+    response = await axios.post('https://staging-api-dashboard.superapp.co.id/api/order/create', requestBody, {
+        headers: {
+            "Authorization": `Bearer ${this.token}`
+            
+        }
+    }) 
+    let error: any
+    console.error('Error response:', error.response?.data || error.message) 
+})
+
+When ('User input {string} into inputKodeInvoice outgoing goods page', async(kode) => {
+    await outgoingGoodsPage.btnSearch.click();
+    await browser.pause(1000);
+    await outgoingGoodsPage.inputDetailKodeInvoice.setValue(kode)
+    await browser.pause(1000);
+}) 
+
+When ('User click cariKodeInvoice in outgoing goods', async() => {
+    await outgoingGoodsPage.cariKodeInvoice.click();
+    await browser.pause(3000);
+}) 
+
+Then ('User able to see {string} in outgoing goods page', async(x:string) => {
+    if (x === 'list mobil') {
+        await browser.waitUntil(async() => {
+            let exist = await outgoingGoodsPage.listMobil.isDisplayed();
+            return expect(await exist).to.be.true
+            ;
+        }, {
+            timeout:60000,
+            timeoutMsg: 'list mobil still not displayed'
+        })
+        await browser.pause(5000);
+
+    } else if (x === 'list mobil') {
+        await outgoingGoodsPage.btnTabMotor.click();
+        await browser.waitUntil(async() => {
+            let exist = await outgoingGoodsPage.listMobil.isDisplayed();
+            return expect(await exist).to.be.true
+            ;
+        }, {
+            timeout:60000,
+            timeoutMsg: 'list mobil still not displayed'
+        })
+        await browser.pause(5000);
+            
+    }
+}) 
+
+
 
 
 
