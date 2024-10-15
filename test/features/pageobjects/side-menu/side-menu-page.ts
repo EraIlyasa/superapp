@@ -29,6 +29,9 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get menuPICVendor() {
+        return $('(//*[@data-testid="Menu-PICVendor"])')
+    }
     get menuWarehouse() {
         return $('(//*[@data-testid="Menu-GudangV4"])[1]')
     }

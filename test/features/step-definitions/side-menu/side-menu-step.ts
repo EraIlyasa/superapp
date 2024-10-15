@@ -198,6 +198,11 @@ When ('User click submenu {string} in side menu page', async(x:string) => {
         await sideMenuBarPage.menuWarehouse.click();
         await browser.pause(5000);
     
+    } else if (x === 'menuPICVendor') {
+        await sideMenuBarPage.menuPICVendor.scrollIntoView();
+        await sideMenuBarPage.menuPICVendor.click();
+        await browser.pause(5000);
+    
     }
 })
 
