@@ -117,9 +117,20 @@ Given ('User click menu {string} in side menu page', async(x:string) => {
             return await sideMenuBarPage.logistic.isClickable();
             }, {
                 timeout:60000,
-                timeoutMsg:'navMenuFinance still not clickable'
+                timeoutMsg:'logistic still not clickable'
             })
         await sideMenuBarPage.logistic.click();
+        await browser.pause(1000);
+    
+    } else if (x === 'navMenuMasterData') {
+        await browser.waitUntil(async() => {
+            await sideMenuBarPage.navMenuMasterData.scrollIntoView();
+            return await sideMenuBarPage.navMenuMasterData.isClickable();
+            }, {
+                timeout:60000,
+                timeoutMsg:'navMenuMasterData still not clickable'
+            })
+        await sideMenuBarPage.navMenuMasterData.click();
         await browser.pause(1000);
     
     }
@@ -149,6 +160,16 @@ When ('User click submenu {string} in side menu page', async(x:string) => {
     } else if (x === 'outgoingGoodsV3') {
         await sideMenuBarPage.outgoingGoodsV3.scrollIntoView();
         await sideMenuBarPage.outgoingGoodsV3.click();
+        await browser.pause(5000);
+    
+    } else if (x === 'menuOutgoingRecap') {
+        await sideMenuBarPage.menuOutgoingRecap.scrollIntoView();
+        await sideMenuBarPage.menuOutgoingRecap.click();
+        await browser.pause(5000);
+    
+    } else if (x === 'menuWarehouseRack') {
+        await sideMenuBarPage.menuWarehouseRack.scrollIntoView();
+        await sideMenuBarPage.menuWarehouseRack.click();
         await browser.pause(5000);
     
     }
