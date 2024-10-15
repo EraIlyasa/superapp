@@ -29,6 +29,9 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get menuWarehouse() {
+        return $('(//*[@data-testid="Menu-GudangV4"])[1]')
+    }
     get menuManajemenStok() {
         return $('(//*[@data-testid="Menu-ManajemenStok"])')
     }
