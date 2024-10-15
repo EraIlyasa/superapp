@@ -28,7 +28,6 @@ export default new class sideMenuBarPage {
         return $('(//*[@data-testid="Menu-MasterData"])')
     }
 
-
     //Sub Menu
     get menuWarehouseRack() {
         return $('(//*[@data-testid="Menu-WarehouseRack"])')
