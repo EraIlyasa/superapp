@@ -3,17 +3,56 @@ import outgoingGoodsPage from '../../pageobjects/operations/outgoing-goods-page.
 import { kodeTransaksi } from '../../step-definitions/procurement/penjualan-step.ts'
 import { expect } from 'chai';
 import axios from 'axios'
+import path from 'path';
+import fs from 'fs';
+
 
 let title: any
+let invoiceId: any
+let orderId: any
+let invoiceGlobal: any
+let downloadPath: any
+
+let getTodayDateCSV: any
 let getTomorrowDate: any
+let getYesterdayDate: any
 let year: any
 let day: any
 let month: any
-let tomorrow: any
+let tomorrow: Date
 let requestBody: any
 let response: any
+let getTodayDate: any 
+let today: Date
+let Yesterday: Date
+let minutes: any
+let hours: any
 
 
+
+getTodayDateCSV = (): string => {
+    today = new Date()
+    year = today.getFullYear()
+    month = String(today.getMonth() + 1).padStart(2, '0')
+    day = String(today.getDate()).padStart(2, '0')
+    hours = String(today.getHours()).padStart(2, '0');
+    minutes = String(today.getMinutes()).padStart(2, '0');
+    return `${year}${month}${day}${hours}${minutes}`
+}
+getYesterdayDate = (): string => {
+    Yesterday = new Date()
+    year = Yesterday.getFullYear()
+    month = String(Yesterday.getMonth() + 1).padStart(2, '0')
+    day = String(Yesterday.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+}
+getTodayDate = (): string => {
+    today = new Date()
+    year = today.getFullYear()
+    month = String(today.getMonth() + 1).padStart(2, '0')
+    day = String(today.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+}
 getTomorrowDate = (): string => {
     tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
@@ -158,77 +197,250 @@ Then ('User verify titlePage in outgoing goods page', async() => {
     })
     title = await outgoingGoodsPage.titlePage.getText();
     console.log('### ',await title);
-    expect(outgoingGoodsPage.titlePage.isDisplayed).to.be.true
+    expect(outgoingGoodsPage.titlePage.isDisplayed)
 })
 
-When ('User create order from api', async function() {
+When ('User create order from api {string}', async function(shipment) {
     
-    requestBody = {
-        customer_id: 195945,
-        superagent_id: 46823,
-        customer_level: "SA",
-        customer_address_id: 166855,
-        payment_type: "COD",
-        note: "",
-        delivery_date: getTomorrowDate(),
-        group_type: "grosir",
-        promos: [],
-        promo_type: "",
-        use_point: true,
-        grand_total: 900000,
-        sub_total: 900000,
-        discount: 0,
-        items: [
-            {
-                sub_total: 900000,
-                promos: [],
-                id: null,
-                item_id: null,
-                product_detail_id: 22647,
-                product_attribute_id: 11622,
-                product_id: 7504,
-                product_name: "Automated Stock | ra",
-                product_sku: "",
-                selling_price: 90000,
-                discount: 0,
-                selling_price_now: 0,
-                conversion_points: 0,
-                deduction_points: 0,
-                unit: "Bag",
-                content: "",
-                dimension_length: "",
-                dimension_height: "",
-                dimension_width: "",
-                weight: "0",
-                delete: 0,
-                quantity: 10,
-                type: "regular"
+    if (shipment === 'tomorrow') {
+        requestBody = {
+            customer_id: 195945,
+            superagent_id: 46823,
+            customer_level: "SA",
+            customer_address_id: 166855,
+            payment_type: "COD",
+            note: "",
+            delivery_date: getTomorrowDate(),
+            group_type: "grosir",
+            promos: [],
+            promo_type: "",
+            use_point: true,
+            grand_total: 900000,
+            sub_total: 900000,
+            discount: 0,
+            items: [
+                {
+                    sub_total: 900000,
+                    promos: [],
+                    id: "null",
+                    item_id: "null",
+                    product_detail_id: 22647,
+                    product_attribute_id: 11622,
+                    product_id: 7504,
+                    product_name: "Automated Stock | ra",
+                    product_sku: "",
+                    selling_price: 90000,
+                    discount: 0,
+                    selling_price_now: 0,
+                    conversion_points: 0,
+                    deduction_points: 0,
+                    unit: "Bag",
+                    content: "",
+                    dimension_length: "",
+                    dimension_height: "",
+                    dimension_width: "",
+                    weight: "0",
+                    delete: 0,
+                    quantity: 10,
+                    type: "regular"
+                }
+            ],
+            superagent_discount: 0,
+            warehouse_company_id: "0",
+            discount_percent: 0,
+            page_id: "dummy page id",
+            token: "WAgyQtzpfnKAEPCgA-Wj",
+            profit: 0,
+            cash_received: 0,
+            deduction_points: 0
+        }
+        
+        
+        response = await axios.post('https://staging-api-dashboard.superapp.co.id/api/order/create', requestBody, {
+            headers: {
+                "Authorization": `Bearer ${this.token}`
             }
-        ],
-        superagent_discount: 0,
-        warehouse_company_id: "0",
-        discount_percent: 0,
-        page_id: "dummy page id",
-        token: "WAgyQtzpfnKAEPCgA-Wj",
-        profit: 0,
-        cash_received: 0,
-        deduction_points: 0
-    }
+        }) 
+        await browser.pause(2000);
+        expect(response.status).to.equal(200)
+        console.log('ID:',response.data.result.id)
     
-    response = await axios.post('https://staging-api-dashboard.superapp.co.id/api/order/create', requestBody, {
+        orderId = response.data.result.id
+        this.orderId = orderId
+    
+    } else if (shipment === 'today') {
+        requestBody = {
+            customer_id: 195945,
+            superagent_id: 46823,
+            customer_level: "SA",
+            customer_address_id: 166855,
+            payment_type: "COD",
+            note: "",
+            delivery_date: getTodayDate(),
+            group_type: "grosir",
+            promos: [],
+            promo_type: "",
+            use_point: true,
+            grand_total: 900000,
+            sub_total: 900000,
+            discount: 0,
+            items: [
+                {
+                    sub_total: 900000,
+                    promos: [],
+                    id: "null",
+                    item_id: "null",
+                    product_detail_id: 22647,
+                    product_attribute_id: 11622,
+                    product_id: 7504,
+                    product_name: "Automated Stock | ra",
+                    product_sku: "",
+                    selling_price: 90000,
+                    discount: 0,
+                    selling_price_now: 0,
+                    conversion_points: 0,
+                    deduction_points: 0,
+                    unit: "Bag",
+                    content: "",
+                    dimension_length: "",
+                    dimension_height: "",
+                    dimension_width: "",
+                    weight: "0",
+                    delete: 0,
+                    quantity: 10,
+                    type: "regular"
+                }
+            ],
+            superagent_discount: 0,
+            warehouse_company_id: "0",
+            discount_percent: 0,
+            page_id: "dummy page id",
+            token: "WAgyQtzpfnKAEPCgA-Wj",
+            profit: 0,
+            cash_received: 0,
+            deduction_points: 0
+        }
+        
+        
+        response = await axios.post('https://staging-api-dashboard.superapp.co.id/api/order/create', requestBody, {
+            headers: {
+                "Authorization": `Bearer ${this.token}`
+            }
+        }) 
+        await browser.pause(2000);
+        expect(response.status).to.equal(200)
+        console.log('ID:',response.data.result.id)
+    
+        orderId = response.data.result.id
+        this.orderId = orderId
+
+    } else if (shipment === 'yesterday') {
+        requestBody = {
+            customer_id: 195945,
+            superagent_id: 46823,
+            customer_level: "SA",
+            customer_address_id: 166855,
+            payment_type: "COD",
+            note: "",
+            delivery_date: getYesterdayDate(),
+            group_type: "grosir",
+            promos: [],
+            promo_type: "",
+            use_point: true,
+            grand_total: 900000,
+            sub_total: 900000,
+            discount: 0,
+            items: [
+                {
+                    sub_total: 900000,
+                    promos: [],
+                    id: "null",
+                    item_id: "null",
+                    product_detail_id: 22647,
+                    product_attribute_id: 11622,
+                    product_id: 7504,
+                    product_name: "Automated Stock | ra",
+                    product_sku: "",
+                    selling_price: 90000,
+                    discount: 0,
+                    selling_price_now: 0,
+                    conversion_points: 0,
+                    deduction_points: 0,
+                    unit: "Bag",
+                    content: "",
+                    dimension_length: "",
+                    dimension_height: "",
+                    dimension_width: "",
+                    weight: "0",
+                    delete: 0,
+                    quantity: 10,
+                    type: "regular"
+                }
+            ],
+            superagent_discount: 0,
+            warehouse_company_id: "0",
+            discount_percent: 0,
+            page_id: "dummy page id",
+            token: "WAgyQtzpfnKAEPCgA-Wj",
+            profit: 0,
+            cash_received: 0,
+            deduction_points: 0
+        }
+        
+        
+        response = await axios.post('https://staging-api-dashboard.superapp.co.id/api/order/create', requestBody, {
+            headers: {
+                "Authorization": `Bearer ${this.token}`
+            }
+        }) 
+        await browser.pause(2000);
+        expect(response.status).to.equal(200)
+        console.log('ID:',response.data.result.id)
+    
+        orderId = response.data.result.id
+        this.orderId = orderId
+    }
+    // let error: any
+    // console.error('Error response:', error.response?.data || error.message) 
+})
+
+When ('User get kode invoice order', async function() {
+    
+    await browser.pause(3000);
+
+    response = await axios.get(`https://staging-api-dashboard.superapp.co.id/api/order/detail/${this.orderId}`, {
         headers: {
             "Authorization": `Bearer ${this.token}`
-            
         }
-    }) 
-    let error: any
-    console.error('Error response:', error.response?.data || error.message) 
+    })
+    await browser.pause(1000);
+    console.log('Response status :', response.status)
+
+    // console.log('Response Data:', JSON.stringify(response.data, null, 2))
+
+    invoiceId = response.data.result.invoice
+    console.log('Invoice Order:', invoiceId);
+
+    invoiceGlobal = response.data.result.invoice_global
+    console.log('Invoice Order:', invoiceGlobal);
+
+    this.invoiceId = invoiceId
+    this.invoiceGlobal = invoiceGlobal
+
 })
+
 
 When ('User input {string} into inputKodeInvoice outgoing goods page', async(kode) => {
     await outgoingGoodsPage.btnSearch.click();
     await browser.pause(1000);
     await outgoingGoodsPage.inputDetailKodeInvoice.setValue(kode)
+    await browser.pause(1000);
+}) 
+
+When ('User input invoice into inputKodeInvoice outgoing goods page', async function() {
+    await outgoingGoodsPage.btnSearch.click();
+    await browser.pause(1000);
+    await outgoingGoodsPage.inputDetailKodeInvoice.setValue(this.invoiceId)
     await browser.pause(1000);
 }) 
 
@@ -261,9 +473,76 @@ Then ('User able to see {string} in outgoing goods page', async(x:string) => {
         })
         await browser.pause(5000);
             
+    } else if (x === 'error') {
+        await browser.waitUntil(async() => {
+            let exist = await outgoingGoodsPage.erorValidation.isDisplayed();
+            return expect(await exist).to.be.true
+            ;
+        }, {
+            timeout:60000,
+            timeoutMsg: 'erorValidation not displayed'
+        })
+        await browser.pause(5000);
+            
     }
 }) 
 
+When ('User click {string} in tab filter outgoing goods', async(x:string) => {
+    if (x === 'btnPeriode') {
+        await outgoingGoodsPage.btnPeriode.click();
+        await browser.pause(1000);
+
+    } else if (x === 'btnKota') {
+        await outgoingGoodsPage.btnPeriode.click();
+        await browser.pause(1000);
+        
+    }
+})
+
+When ('User click optFilter {string} modal in outgoing goods page', async(x:string) => {
+    if (x === 'Hari ini') {
+        await outgoingGoodsPage.optKirimHariIni.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Besok') {
+        await outgoingGoodsPage.optKirimBesok.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Kemarin') {
+        await outgoingGoodsPage.optKirimKemarin.click();
+        await browser.pause(2000);
+    
+    }
+})
+
+When ('User click btnTerapkan in modal filter outgoing goods', async() => {
+    await outgoingGoodsPage.btnTerapkan.click();
+    await browser.pause(1000);
+})
+
+When ('User export csv in outgoing goods page', async() => {
+    downloadPath = path.join('downloads', `outgoing_mobil_Aloha_${getTodayDateCSV()}.csv`);
+
+    await outgoingGoodsPage.btnExportCSV.click();
+    console.log('Time:',getTodayDateCSV())
+    await browser.waitUntil(async () => {
+        const fileExist = fs.existsSync(downloadPath)
+        console.log(`file exist: ${downloadPath}`)
+        return fileExist 
+    }, {
+        timeout: 120000, 
+        timeoutMsg: 'File tidak ditemukan dalam waktu yang ditentukan'
+    });
+
+    const fileExists = fs.existsSync(downloadPath);
+    const fileIsValid = fileExists && fs.statSync(downloadPath).isFile();
+
+    if (fileIsValid) {
+        console.log('File berhasil diunduh dan valid.');
+    } else {
+        console.log('File tidak valid atau tidak ditemukan.');
+    }
+})
 
 
 

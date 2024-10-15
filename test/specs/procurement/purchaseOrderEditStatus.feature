@@ -20,7 +20,7 @@ Examples:
 |transfer        |
 
 @PO-0062
-Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method cod
+Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method transfer
 When api user login
 And User create PO API finished goods "<metodePembayaran>" 
 And User get kode invoice purchase order
@@ -127,7 +127,7 @@ Examples:
 |cod             |
 
 @PO-0068
-Scenario Outline: Memastikan  berhasil melakukan approve di payment request(Paymnet method COD)
+Scenario Outline: Memastikan  berhasil melakukan approve di payment request(Paymnet method transfer)
 When api user login
 And User create PO API finished goods "<metodePembayaran>" 
 And User get kode invoice purchase order
@@ -195,7 +195,7 @@ Examples:
 |cod             | Putri Zizi |
 
 @PO-0070
-Scenario Outline: Memastikan  berhasil melakukan pembayaran di payment request(Paymnet method COD)
+Scenario Outline: Memastikan  berhasil melakukan pembayaran di payment request(Paymnet method TF)
 When api user login
 And User create PO API finished goods "<metodePembayaran>" 
 And User get kode invoice purchase order
