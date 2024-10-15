@@ -1,6 +1,20 @@
-class manajemenStock {
-    public get inputSearch() {
+export default new class manajemenStock {
+    
+    //List
+    public get noDataAlert() {
+        return $('(//*[@class="s_vnxcOuqb "])')
+    }
+    public get infoProduk() {
+        return $('(//*[@data-id="product-name-0"])/*[1]')
+    }
+    public get titlePage() {
+        return $('(//*[@class="s_qzwtq9Zy"])')
+    }
+    public get fieldInputSearch() {
         return $('//*[@data-testid="search-bar"]');
+    }
+    public get btnSearch() {
+        return $('(//*[@id="btnSearch"])')
     }
     public get btnCari() {
         return $('//*[@data-id="enter-btn"]');
