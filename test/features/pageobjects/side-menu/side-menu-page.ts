@@ -24,9 +24,18 @@ export default new class sideMenuBarPage {
     get navMenuFinance() { 
         return $('//*[@data-testid="Menu-Finances"]')
     }
+    get navMenuMasterData() {
+        return $('(//*[@data-testid="Menu-MasterData"])')
+    }
 
 
     //Sub Menu
+    get menuWarehouseRack() {
+        return $('(//*[@data-testid="Menu-WarehouseRack"])')
+    }
+    get menuOutgoingRecap() { 
+        return $('(//*[@data-testid="Menu-OutgoingRecap"])[1]')
+    }
     get menuPaymentRequest() { 
         return $('//*[@data-testid="Menu-PaymentRequest"]')
     }
@@ -49,7 +58,7 @@ export default new class sideMenuBarPage {
         return $('//span[@class="ant-menu-title-content"]/a[@data-testid="Menu-OutgoingGoods V4"]')
     }
     get outgoingGoodsV3() {
-        return $('//span[@class="ant-menu-title-content"]/a[@data-testid="menu-New Outgoing Goods"]')
+        return $('(//*[@data-testid="Menu-NewOutgoing Goods"])')
     }
     get menuProduk() { 
         return $('//*[@data-testid="Menu-Product"]')
