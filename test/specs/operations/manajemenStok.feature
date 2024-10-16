@@ -45,7 +45,7 @@ And User wait for 5 seconds
 And User click btnSearch in manajemen stock
 And User input rak "<produk>" into fieldInputSearch manajemen stock
 And User click btnCari in manajemen stock
-And User able to see "produk tidak akan ada" in manajemen stock
+Then User able to see "produk tidak akan ada" in manajemen stock
 And User wait for 5 seconds 
 
 Examples: 

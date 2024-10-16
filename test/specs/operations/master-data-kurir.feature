@@ -30,7 +30,7 @@ Examples:
 | Kurir Spesial |
 
 @Kurir-003
-Scenario: Memastikan user dapat cari nama kurir 
+Scenario: Memastikan user tidak dapat cari nama kurir invalid 
 When api user login
 When open dashboard superapp
 Given User click menu "navMenuMasterData" in side menu page

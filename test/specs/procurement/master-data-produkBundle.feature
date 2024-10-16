@@ -3,7 +3,7 @@ Feature: Master Data - Produk Bundle
 
 
 @PB-001
-Scenario: Memastikan user dapat masuk ke mutasi stok
+Scenario: Memastikan user dapat masuk ke produk bundle
 When api user login
 When open dashboard superapp
 Given User click menu "navMenuPurchasing" in side menu page

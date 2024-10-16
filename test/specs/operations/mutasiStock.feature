@@ -15,7 +15,7 @@ Examples:
 | b |
 
 @MS-002
-Scenario: Memastikan user dapat masuk ke mutasi stok
+Scenario: Memastikan user dapat create mutasi stok rusak
 When api user login
 When open dashboard superapp
 Given User click menu "navMenuStock" in side menu page

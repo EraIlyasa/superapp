@@ -177,7 +177,6 @@ Examples:
 | radioBTn                 | value  | value2 | message1                              | agenPemesanan | alamatKirim | produk   | message2                                                                                                                                  |
 | Berdasarkan Create Order | 200000 | 500000 | Gudang \"Aloha-RTP\" berhasil diubah  | AsrulTesting  | Warung      | Supercow | 3 INVALID_ARGUMENT: Pesanan kurang dari minimum order sebesar Rp 500000 Tambahkan barang/quantity untuk mencapai jumlah minimum pesanan. |
 
-
 @e2e-penjualan-rtp-004
 Scenario Outline: Memastikan tidak tampil validasi minimum order ketika memenuhi minimum order (Create - Direct (RTP) -> Lifestyle fullfill minimum order
 When api user login

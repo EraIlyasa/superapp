@@ -31,7 +31,7 @@ Examples:
 | Cath Non Aktif |
 
 @Kategori-003
-Scenario: Memastikan user tidak dapat cari raw kategori invalid
+Scenario: Memastikan user tidak dapat cari kategori invalid
 When api user login
 When open dashboard superapp
 Given User click menu "navMenuMasterData" in side menu page

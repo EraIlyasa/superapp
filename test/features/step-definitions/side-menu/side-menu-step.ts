@@ -293,10 +293,10 @@ When ('User click {string} in navMenuMasterData', async(x:string) => {
         await sideMenuBarPage.menuSupllier.click();
         await browser.pause(5000);
         
-    } else if (x === 'MenuMerek') {
-        await sideMenuBarPage.MenuMerek.scrollIntoView();
+    } else if (x === 'menuMerek') {
+        await sideMenuBarPage.menuMerek.scrollIntoView();
         await browser.pause(1000);
-        await sideMenuBarPage.MenuMerek.click();
+        await sideMenuBarPage.menuMerek.click();
         await browser.pause(5000);
         
     }

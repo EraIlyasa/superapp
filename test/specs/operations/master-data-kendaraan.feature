@@ -30,7 +30,7 @@ Examples:
 | Mercy     |
 
 @Kendaraan-003
-Scenario: Memastikan user dapat cari kendaraan
+Scenario: Memastikan user tidak dapat cari kendaraan invalid
 When api user login
 When open dashboard superapp
 Given User click menu "navMenuMasterData" in side menu page
