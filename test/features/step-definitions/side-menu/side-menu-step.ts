@@ -265,8 +265,43 @@ When ('User click {string} in navMenuPurchasing', async(x:string) => {
         await sideMenuBarPage.menuRawMaterial.click();
         await browser.pause(5000);
         
+    } else if (x === 'menuKategori') {
+        await sideMenuBarPage.menuKategori.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuKategori.click();
+        await browser.pause(5000);
+        
     }
 })
+
+When ('User click {string} in navMenuMasterData', async(x:string) => {
+    if (x === 'menuKategori') {
+        await sideMenuBarPage.menuKategori.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuKategori.click();
+        await browser.pause(5000);
+        
+    } else if (x === 'menuSubKategori') {
+        await sideMenuBarPage.menuSubKategori.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuSubKategori.click();
+        await browser.pause(5000);
+        
+    } else if (x === 'menuSupllier') {
+        await sideMenuBarPage.menuSupllier.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuSupllier.click();
+        await browser.pause(5000);
+        
+    } else if (x === 'MenuMerek') {
+        await sideMenuBarPage.MenuMerek.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.MenuMerek.click();
+        await browser.pause(5000);
+        
+    }
+})
+
 // Given ('User click "navMenuConfig" in side menu page', async() => {
 //     await sideMenuBarPage.navMenuConfig.scrollIntoView();
 //     await browser.waitUntil(async() => {
