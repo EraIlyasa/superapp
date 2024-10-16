@@ -258,6 +258,12 @@ When ('User click {string} in navMenuPurchasing', async(x:string) => {
         await browser.pause(1000);
         await sideMenuBarPage.menuProdukBundle.click();
         await browser.pause(5000);
+
+    } else if (x === 'menuRawMaterial') {
+        await sideMenuBarPage.menuRawMaterial.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuRawMaterial.click();
+        await browser.pause(5000);
         
     }
 })

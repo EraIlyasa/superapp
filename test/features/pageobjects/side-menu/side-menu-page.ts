@@ -32,6 +32,9 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get menuRawMaterial() {
+        return $('(//*[@data-testid="Menu-RawMaterial V3"])')
+    }
     get menuProdukBundle() {
         return $('(//*[@data-testid="Menu-ProductBundle"])')
     }
