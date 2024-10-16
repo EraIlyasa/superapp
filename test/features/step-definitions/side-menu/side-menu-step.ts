@@ -144,6 +144,17 @@ Given ('User click menu {string} in side menu page', async(x:string) => {
         await sideMenuBarPage.navMenuStock.click();
         await browser.pause(1000);
     
+    } else if (x === 'navMenuPurchasing') {
+        await browser.waitUntil(async() => {
+            await sideMenuBarPage.navMenuPurchasing.scrollIntoView();
+            return await sideMenuBarPage.navMenuPurchasing.isClickable();
+            }, {
+                timeout:60000,
+                timeoutMsg:'navMenuPurchasing still not clickable'
+            })
+        await sideMenuBarPage.navMenuPurchasing.click();
+        await browser.pause(1000);
+    
     }
 })
 
@@ -241,6 +252,15 @@ When ('User click submenu {string} in side menu page', async(x:string) => {
     }
 })
 
+When ('User click {string} in navMenuPurchasing', async(x:string) => {
+    if (x === 'menuProdukBundle') {
+        await sideMenuBarPage.menuProdukBundle.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuProdukBundle.click();
+        await browser.pause(5000);
+        
+    }
+})
 // Given ('User click "navMenuConfig" in side menu page', async() => {
 //     await sideMenuBarPage.navMenuConfig.scrollIntoView();
 //     await browser.waitUntil(async() => {
