@@ -29,6 +29,9 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get menuMutasiStock() {
+        return $('(//*[@data-testid="Menu-MutasiStock V4"])')
+    }
     get menuKendaraan() {
         return $('(//*[@data-testid="Menu-KendaraanV4"])')
     }
