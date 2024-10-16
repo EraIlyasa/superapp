@@ -1,4 +1,4 @@
-import mutasiStock from '../../pageobjects/operations/MutasiStock';
+import mutasiStock from '../../pageobjects/operations/mutasiStock';
 import { addAttachment } from '@wdio/allure-reporter';
 import { When, Then, Given } from '@cucumber/cucumber';
 import { expect } from 'chai';

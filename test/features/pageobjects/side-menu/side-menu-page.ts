@@ -32,6 +32,18 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get menuSupllier() {
+        return $('(//*[@data-testid="Menu-SuppliersV4"])')
+    }
+    get MenuMerek() {
+        return $('(//*[@data-testid="Menu-Merk"])')
+    }
+    get menuSubKategori() {
+        return $('(//*[@data-testid="Menu-SubCategory"])')
+    }
+    get menuKategori() {
+        return $('(//*[@data-testid="Menu-Category"])')
+    }
     get menuRawMaterial() {
         return $('(//*[@data-testid="Menu-RawMaterial V3"])')
     }
