@@ -1,10 +1,89 @@
 import masterData_Kendaraanv4 from '../../pageobjects/operations/masterData_Kendaraanv4';
 import { addAttachment } from '@wdio/allure-reporter';
+import { When, Then, Given } from '@cucumber/cucumber';
+import { expect } from 'chai';
+
+let result: any 
+let text: any
+let displayed: any
 
 function uniqueNumber(max: number): number {
     return Math.floor(Math.random() * max);
 }
+function licensePlate(): number {
+    return Math.floor(1000 + Math.random() * 9000);
+}
+function randomLetter(): string {
+    const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    result = '';
+    for (let i = 0; i < 3; i++) {
+        const random = Math.floor(Math.random() * letter.length)
+        result += letter[random]
+    }
+    return result;
+}
 
+
+When ('User input {string} into fieldInputSearch kukendaraan', async(kendaraan) => {
+    await masterData_Kendaraanv4.fieldInputSearch.click();
+    await masterData_Kendaraanv4.fieldInputSearch.setValue(kendaraan)
+    await browser.pause(3000);
+})
+
+Then ('User able to see {string} in kendaraan page', async(x:string) => {
+    if (x === 'Mercy') {
+        try {
+            await browser.waitUntil(async() => {
+                return expect(await masterData_Kendaraanv4.textNamaKendaraan.isDisplayed());
+            }, {
+                timeout:45000,
+                timeoutMsg:'kendaraan still not displayed'
+            })
+            console.log('Kendaraan:', await masterData_Kendaraanv4.textNamaKendaraan.getText())
+            await browser.pause(5000);
+
+        } catch {
+            console.error('kendaraan is not displayed in kendaraan page')
+        }
+    
+    } else {
+        await browser.waitUntil(async() => {
+            return await masterData_Kendaraanv4.noDataKendaraan.isDisplayed();
+        }, {
+            timeout:30000,
+            timeoutMsg:'noDataKendaraan still not displayed'
+        })
+        text = await masterData_Kendaraanv4.noDataKendaraan.getText();
+        displayed = await masterData_Kendaraanv4.noDataKendaraan.isDisplayed();
+        console.log('text is:',await text);
+        expect (await displayed).to.be.true;
+
+    } 
+})
+
+Then ('User verify titlePage in kendaraan', async() => {
+    try {
+        await browser.waitUntil(async() => {
+            return expect (await masterData_Kendaraanv4.titlePage.isDisplayed());
+        }, {
+            timeout:30000,
+        })
+        text = await masterData_Kendaraanv4.titlePage.getText();
+        console.log('Title:',await text);
+        await browser.pause(5000);
+    } catch {
+        console.error('titlePage is not displayed or element could be not found')
+    }
+})
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////
 let randomNumber = uniqueNumber(1000);
 console.log(randomNumber); // returns a unique number
 let uniqueChar = Math.random().toString(36).substring(2, 5).toUpperCase();
