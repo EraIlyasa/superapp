@@ -29,6 +29,9 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get menuKurir() {
+        return $('(//*[@data-testid="Menu-Kurir4"])')
+    }
     get menuPICVendor() {
         return $('(//*[@data-testid="Menu-PICVendor"])')
     }

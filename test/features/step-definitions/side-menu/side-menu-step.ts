@@ -150,57 +150,74 @@ Given ('User click menu {string} in side menu page', async(x:string) => {
 When ('User click submenu {string} in side menu page', async(x:string) => {
     if (x === 'menuGudangV4') {
         await sideMenuBarPage.menuGudangV4.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuGudangV4.click();
         await browser.pause(5000);
     
     } else if (x === 'menuGeneral') {
         await sideMenuBarPage.menuGeneral.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuGeneral.click();
         await browser.pause(5000);
     
     } else if (x === 'menuPenjualan') {
         await sideMenuBarPage.menuPenjualan.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuPenjualan.click();
         await browser.pause(5000);
     
     } else if (x === 'menuPaymentRequest') {
         await sideMenuBarPage.menuPaymentRequest.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuPaymentRequest.click();
         await browser.pause(5000);
     
     } else if (x === 'outgoingGoodsV3') {
         await sideMenuBarPage.outgoingGoodsV3.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.outgoingGoodsV3.click();
         await browser.pause(5000);
     
     } else if (x === 'menuOutgoingRecap') {
         await sideMenuBarPage.menuOutgoingRecap.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuOutgoingRecap.click();
         await browser.pause(5000);
     
     } else if (x === 'menuWarehouseRack') {
         await sideMenuBarPage.menuWarehouseRack.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuWarehouseRack.click();
         await browser.pause(5000);
     
     } else if (x === 'menuInventory') {
         await sideMenuBarPage.menuInventory.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuInventory.click();
         await browser.pause(5000);
     
     } else if (x === 'menuManajemenStok') {
         await sideMenuBarPage.menuManajemenStok.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuManajemenStok.click();
         await browser.pause(5000);
     
     } else if (x === 'menuWarehouse') {
         await sideMenuBarPage.menuWarehouse.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuWarehouse.click();
         await browser.pause(5000);
     
     } else if (x === 'menuPICVendor') {
         await sideMenuBarPage.menuPICVendor.scrollIntoView();
+        await browser.pause(1000);
         await sideMenuBarPage.menuPICVendor.click();
+        await browser.pause(5000);
+    
+    } else if (x === 'menuKurir') {
+        await sideMenuBarPage.menuKurir.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuKurir.click();
         await browser.pause(5000);
     
     }
