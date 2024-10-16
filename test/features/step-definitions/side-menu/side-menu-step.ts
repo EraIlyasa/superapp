@@ -226,6 +226,12 @@ When ('User click submenu {string} in side menu page', async(x:string) => {
         await sideMenuBarPage.menuKendaraan.click();
         await browser.pause(5000);
     
+    } else if (x === 'menuStockBermasalahV4') {
+        await sideMenuBarPage.menuStockBermasalahV4.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuStockBermasalahV4.click();
+        await browser.pause(5000);
+    
     }
 })
 
