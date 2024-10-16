@@ -9,24 +9,24 @@ Given ('User get dashboard url', async() => {
 When('I click order', async() => {
     await sideMenuBarPage.order.scrollIntoView();
     await sideMenuBarPage.order.click();
-        });
+});
     
 When('I click penjualan', async() => {
     await sideMenuBarPage.penjualan.scrollIntoView();
     await sideMenuBarPage.penjualan.click();
-        });
+});
 
 When('I click logistic', async() => {
     await sideMenuBarPage.logistic.scrollIntoView();
     await sideMenuBarPage.logistic.click();
     await browser.pause(3000);
-        });
+});
 
 When('I click new outgoing goods', async() => {
     await sideMenuBarPage.newOutgoingGoods.scrollIntoView();
     await sideMenuBarPage.newOutgoingGoods.click();
     await browser.pause(3000);
-        });
+});
 
 When('I click outgoing goods v3', async() => {
     await browser.url('https://v3-web-app-micro.staging.superapp.co.id/logistic/new-outgoing-goods')
@@ -230,6 +230,12 @@ When ('User click submenu {string} in side menu page', async(x:string) => {
         await sideMenuBarPage.menuStockBermasalahV4.scrollIntoView();
         await browser.pause(1000);
         await sideMenuBarPage.menuStockBermasalahV4.click();
+        await browser.pause(5000);
+    
+    } else if (x === 'menuMutasiStock') {
+        await sideMenuBarPage.menuMutasiStock.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuMutasiStock.click();
         await browser.pause(5000);
     
     }
