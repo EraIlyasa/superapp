@@ -27,8 +27,14 @@ export default new class sideMenuBarPage {
     get navMenuMasterData() {
         return $('(//*[@data-testid="Menu-MasterData"])')
     }
+    get navMenuPurchasing() {
+        return $('(//*[@data-testid="Menu-Purchasing"])')
+    }
 
     //Sub Menu
+    get menuProdukBundle() {
+        return $('(//*[@data-testid="Menu-ProductBundle"])')
+    }
     get menuMutasiStock() {
         return $('(//*[@data-testid="Menu-MutasiStock V4"])')
     }
