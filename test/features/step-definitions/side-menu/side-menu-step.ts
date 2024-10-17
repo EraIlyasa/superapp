@@ -302,6 +302,16 @@ When ('User click {string} in navMenuMasterData', async(x:string) => {
     }
 })
 
+When ('User click {string} in navMenuOrder', async(x:string) => {
+    if (x === 'menuKonsinyasi') {
+        await sideMenuBarPage.menuKonsinyasi.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuKonsinyasi.click();
+        await browser.pause(5000);
+        
+    } 
+})
+
 // Given ('User click "navMenuConfig" in side menu page', async() => {
 //     await sideMenuBarPage.navMenuConfig.scrollIntoView();
 //     await browser.waitUntil(async() => {

@@ -385,46 +385,46 @@ When ('User change input increase {string} on quantity modal order page', async(
 //     await order.optRTP.click();
 // });
 
-Then ('User click "btnDirect" in "btnAddOrder"', async () => {
-    await order.btnDirect.click();
-});
+// Then ('User click "btnDirect" in "btnAddOrder"', async () => {
+//     await order.btnDirect.click();
+// });
 
-Then ('User click "agenPemesanDirect"', async () => {
-    await order.agenPemesanDirect.click();
-});
+// Then ('User click "agenPemesanDirect"', async () => {
+//     await order.agenPemesanDirect.click();
+// });
 
-Then ('User click "optAgenPemesan" in "agenPemesanDirect"', async () => {
-    await order.optAgenPemesan.click();
-});
+// Then ('User click "optAgenPemesan" in "agenPemesanDirect"', async () => {
+//     await order.optAgenPemesan.click();
+// });
 
-Then ('User click "alamatKirimDirect"', async () => {
-    await order.alamatKirimDirect.click();
-});
+// Then ('User click "alamatKirimDirect"', async () => {
+//     await order.alamatKirimDirect.click();
+// });
 
-Then ('User click "optAlamatKirimDirect" in "alamatKirimDirect"', async () => {
-    await order.optAlamatKirimDirect.click();
-});
+// Then ('User click "optAlamatKirimDirect" in "alamatKirimDirect"', async () => {
+//     await order.optAlamatKirimDirect.click();
+// });
 
-Then ('User click "tipePtDirect"', async () => {
-    await order.tipePtDirect.click();
-});
+// Then ('User click "tipePtDirect"', async () => {
+//     await order.tipePtDirect.click();
+// });
 
-Then ('User click "optTipePTDirect" in "tipePtDirect"', async () => {
-    await order.optTipePTDirect.click();
-});
+// Then ('User click "optTipePTDirect" in "tipePtDirect"', async () => {
+//     await order.optTipePTDirect.click();
+// });
 
-Then ('User click "superAgenDirect"', async () => {
-    await order.superAgenDirect.click();
-});
+// Then ('User click "superAgenDirect"', async () => {
+//     await order.superAgenDirect.click();
+// });
 
-Then ('User click "optSuperAgenDirect" in "superAgenDirect"', async () => {
-    await order.optSuperAgenDirect.click();
-});
+// Then ('User click "optSuperAgenDirect" in "superAgenDirect"', async () => {
+//     await order.optSuperAgenDirect.click();
+// });
 
-Then ('User click "addProductDirect"', async () => {
-    await order.addProductDirect.scrollIntoView();
-    await order.addProductDirect.click();
-});
+// Then ('User click "addProductDirect"', async () => {
+//     await order.addProductDirect.scrollIntoView();
+//     await order.addProductDirect.click();
+// });
 
          
          

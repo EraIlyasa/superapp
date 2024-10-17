@@ -32,6 +32,9 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get menuKonsinyasi() {
+        return $('(//*[@data-testid="Menu-Konsinyasi"])')
+    }
     get menuSupllier() {
         return $('(//*[@data-testid="Menu-SuppliersV4"])')
     }
