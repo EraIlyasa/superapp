@@ -309,7 +309,13 @@ When ('User click {string} in navMenuOrder', async(x:string) => {
         await sideMenuBarPage.menuKonsinyasi.click();
         await browser.pause(5000);
         
-    } 
+    } if (x === 'menuReturPenjualan') {
+        await sideMenuBarPage.menuReturPenjualan.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuReturPenjualan.click();
+        await browser.pause(5000);
+        
+    }
 })
 
 // Given ('User click "navMenuConfig" in side menu page', async() => {
