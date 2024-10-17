@@ -65,7 +65,7 @@ Examples:
 @OG-003
 Scenario Outline: Memastikan user dapat cari kode invoice
 # When api user login
-# When User create order from api
+# When User create order from api "<shipment>"
 When api user login
 When open dashboard superapp
 Given User click menu "logistic" in side menu page
@@ -78,6 +78,117 @@ And User wait for 5 seconds
 Then User able to see "list mobil" in outgoing goods page 
 
 Examples: 
-| kode        |
-| T241015-886 |
+| kode        | shipment |
+| T241015-886 | tomorrow |
 
+@OG-004
+Scenario Outline: Memastikan user tidak dapat cari kode invoice invalid
+# When api user login
+# When User create order from api "<shipment>"
+When api user login
+When open dashboard superapp
+Given User click menu "logistic" in side menu page
+And User click submenu "outgoingGoodsV3" in side menu page
+And User verify titlePage in outgoing goods page
+
+And User input "<kode>" into inputKodeInvoice outgoing goods page 
+And User click cariKodeInvoice in outgoing goods 
+And User wait for 5 seconds
+Then User able to see "list mobil" in outgoing goods page 
+
+Examples: 
+| kode            | shipment |
+| T241015-88asd16 | tomorrow |
+
+@OG-005
+Scenario Outline: Memastikan user dapat cari kode invoice periode hari ini
+# When api user login
+# When User create order from api "<shipment>"
+# And User get kode invoice order
+When api user login
+When open dashboard superapp
+Given User click menu "logistic" in side menu page
+And User click submenu "outgoingGoodsV3" in side menu page
+And User verify titlePage in outgoing goods page
+
+And User click "btnPeriode" in tab filter outgoing goods
+And User click optFilter "Hari ini" modal in outgoing goods page
+And User click btnTerapkan in modal filter outgoing goods
+And User input "<kode>" into inputKodeInvoice outgoing goods page 
+And User click cariKodeInvoice in outgoing goods 
+And User wait for 5 seconds
+Then User able to see "list mobil" in outgoing goods page 
+
+Examples: 
+| kode        | shipment |
+| T241015-900 | today    |
+
+@OG-006
+Scenario Outline: Memastikan user dapat cari kode invoice periode besok
+# When api user login
+# When User create order from api "<shipment>"
+# And User get kode invoice order
+When api user login
+When open dashboard superapp
+Given User click menu "logistic" in side menu page
+And User click submenu "outgoingGoodsV3" in side menu page
+And User verify titlePage in outgoing goods page
+
+And User click "btnPeriode" in tab filter outgoing goods
+And User click optFilter "Besok" modal in outgoing goods page
+And User click btnTerapkan in modal filter outgoing goods
+And User input "<kode>" into inputKodeInvoice outgoing goods page 
+And User click cariKodeInvoice in outgoing goods 
+And User wait for 5 seconds
+Then User able to see "list mobil" in outgoing goods page 
+
+Examples: 
+| kode        | shipment |
+| T241015-898 | today    |
+
+@OG-007
+Scenario Outline: Memastikan user dapat cari kode invoice periode kemarin
+When api user login
+When User create order from api "<shipment>"
+And User get kode invoice order
+When api user login
+When open dashboard superapp
+Given User click menu "logistic" in side menu page
+And User click submenu "outgoingGoodsV3" in side menu page
+And User verify titlePage in outgoing goods page
+
+And User click "btnPeriode" in tab filter outgoing goods
+And User click optFilter "Kemarin" modal in outgoing goods page
+And User click btnTerapkan in modal filter outgoing goods
+And User input invoice into inputKodeInvoice outgoing goods page
+And User click cariKodeInvoice in outgoing goods 
+And User wait for 5 seconds
+Then User able to see "list mobil" in outgoing goods page 
+
+Examples: 
+| kode        | shipment   |
+| T241015-901 | yesterday  |
+
+@OG-008
+Scenario Outline: Memastikan user dapat export csv
+When api user login
+When User create order from api "<shipment>"
+And User get kode invoice order
+When api user login
+When open dashboard superapp
+Given User click menu "logistic" in side menu page
+And User click submenu "outgoingGoodsV3" in side menu page
+And User verify titlePage in outgoing goods page
+
+And User click "btnPeriode" in tab filter outgoing goods
+And User click optFilter "Kemarin" modal in outgoing goods page
+And User click btnTerapkan in modal filter outgoing goods
+And User input invoice into inputKodeInvoice outgoing goods page
+And User click cariKodeInvoice in outgoing goods 
+And User wait for 5 seconds
+Then User able to see "list mobil" in outgoing goods page 
+And User export csv in outgoing goods page
+
+Examples: 
+| shipment   |
+| yesterday  |

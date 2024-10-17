@@ -2,7 +2,7 @@
 Feature: Master Data - Sub Kategori
 
 @SK-001
-Scenario: Memastikan user dapat masuk ke halaman Kategori
+Scenario: Memastikan user dapat masuk ke halaman sub kategori
 When api user login
 When open dashboard superapp
 Given User click menu "navMenuMasterData" in side menu page

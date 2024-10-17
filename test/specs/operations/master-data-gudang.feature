@@ -30,7 +30,7 @@ Examples:
 | gudangRra  |
 
 @Gudang-003
-Scenario: Memastikan user dapat cari gudang di gudang page 
+Scenario: Memastikan user dapat cari gudang invalid di gudang page 
 When api user login
 When open dashboard superapp
 Given User click menu "navMenuConfig" in side menu page

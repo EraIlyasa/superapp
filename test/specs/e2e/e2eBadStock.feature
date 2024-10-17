@@ -6,8 +6,8 @@ Feature: Create - Bad Bad Stock
             Given I send login url
              When I login with credential
              Then I see usernameDisplay
-             When User click "navMenuStock" button in "Global" page
-              And User click "menuInventory" button in "Stock"
+             When User click navMenuStock in side menu page
+              And User click menuInventory in side menu page
               And User wait for 10 seconds
               And User click "btnSearch" button in inventory page
               And User click "fieldInputSearchStock" button in inventory page

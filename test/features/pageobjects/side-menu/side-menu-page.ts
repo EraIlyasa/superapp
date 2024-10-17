@@ -35,7 +35,7 @@ export default new class sideMenuBarPage {
     get menuSupllier() {
         return $('(//*[@data-testid="Menu-SuppliersV4"])')
     }
-    get MenuMerek() {
+    get menuMerek() {
         return $('(//*[@data-testid="Menu-Merk"])')
     }
     get menuSubKategori() {
