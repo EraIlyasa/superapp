@@ -309,7 +309,29 @@ When ('User click {string} in navMenuOrder', async(x:string) => {
         await sideMenuBarPage.menuKonsinyasi.click();
         await browser.pause(5000);
         
-    } 
+    } if (x === 'menuReturPenjualan') {
+        await sideMenuBarPage.menuReturPenjualan.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuReturPenjualan.click();
+        await browser.pause(5000);
+        
+    }
+})
+
+When ('User click {string} in navMenuFinance', async(x:string) => {
+    if (x === 'menuSetoran') {
+        await sideMenuBarPage.menuSetoran.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuSetoran.click();
+        await browser.pause(5000);
+        
+    } else if (x === 'menuPaymentRequest') {
+        await sideMenuBarPage.menuPaymentRequest.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuPaymentRequest.click();
+        await browser.pause(5000);
+    
+    }
 })
 
 // Given ('User click "navMenuConfig" in side menu page', async() => {
