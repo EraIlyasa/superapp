@@ -32,6 +32,9 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get setoranTOP() {
+        return $('(//*[@data-testid="Menu-SetoranTOP"])')
+    }
     get menuSetoran() {
         return $('(//*[@data-testid="Menu-Setoran"])')
     }
