@@ -331,6 +331,12 @@ When ('User click {string} in navMenuFinance', async(x:string) => {
         await sideMenuBarPage.menuPaymentRequest.click();
         await browser.pause(5000);
     
+    } else if (x === 'setoranTOP') {
+        await sideMenuBarPage.setoranTOP.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.setoranTOP.click();
+        await browser.pause(5000);
+    
     }
 })
 
