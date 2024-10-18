@@ -318,6 +318,22 @@ When ('User click {string} in navMenuOrder', async(x:string) => {
     }
 })
 
+When ('User click {string} in navMenuFinance', async(x:string) => {
+    if (x === 'menuSetoran') {
+        await sideMenuBarPage.menuSetoran.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuSetoran.click();
+        await browser.pause(5000);
+        
+    } else if (x === 'menuPaymentRequest') {
+        await sideMenuBarPage.menuPaymentRequest.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuPaymentRequest.click();
+        await browser.pause(5000);
+    
+    }
+})
+
 // Given ('User click "navMenuConfig" in side menu page', async() => {
 //     await sideMenuBarPage.navMenuConfig.scrollIntoView();
 //     await browser.waitUntil(async() => {

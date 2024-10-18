@@ -1,7 +1,100 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import setoranPage from '../../pageobjects/procurement/setoranPage';
 import path from 'path';
+import { expect } from 'chai';
 const setoran = setoranPage;
+
+
+let text: any
+let displayed: any
+
+
+When ('User click {string} filter setoran', async(x:string) => {
+    if (x === 'tglSetoranFilter') {
+        await setoran.tglSetoranFilter.click();
+        await browser.pause(1000);
+    
+    }
+})
+
+When ('User choose {string} in tglSetoran setoran', async(x:string) => {
+    if (x === 'Hari Ini') {
+        await setoran.hariIni.waitForDisplayed();
+        await setoran.hariIni.click();
+        await browser.pause(1000);
+
+    } else if (x === '7 Hari Terakhir') {
+        await setoran.lastWeek.waitForDisplayed();
+        await setoran.lastWeek.click();
+        await browser.pause(1000);
+
+    } else if (x === '30 Hari Terakhir') {
+        await setoran.lastMonth.waitForDisplayed();
+        await setoran.lastMonth.click();
+        await browser.pause(1000);
+
+    } else if (x === 'Custom') {
+        await setoran.custom.waitForDisplayed();
+        await setoran.custom.click();
+        await browser.pause(1000);
+
+    }
+})
+When ('User input {string} into fieldInputSearch setoran', async(kodeSetoran) => {
+    await setoran.fieldInputSearch.waitForClickable({timeout:40000, timeoutMsg:'field inptu search still not clickable'});
+    await setoran.fieldInputSearch.click();
+    await setoran.fieldInputSearch.setValue(kodeSetoran)
+    await browser.pause(3000);
+})
+
+Then ('User able to see {string} in setoran', async(x:string) => {
+    if (x === 'STR241017-1') {
+        try {
+            await browser.waitUntil(async() => {
+                return expect(await setoran.kodeSetoran.isDisplayed());
+            }, {
+                timeout:45000,
+                timeoutMsg:'Kode setoran still not displayed'
+            })
+            console.log('Kode Setoran:', await setoran.kodeSetoran.getText())
+            await browser.pause(5000);
+
+        } catch {
+            console.error('Kode setoran is not displayed in merek page')
+        }
+    
+    } else {
+        await browser.waitUntil(async() => {
+            return await setoran.noDataSetoran.isDisplayed();
+        }, {
+            timeout:30000,
+            timeoutMsg:'noDataSetoran still not displayed'
+        })
+        text = await setoran.noDataSetoran.getText();
+        displayed = await setoran.noDataSetoran.isDisplayed();
+        console.log('Kode Setoran:',await text);
+        expect (await displayed).to.be.true;
+
+    } 
+})
+
+Then ('User verify titlePage in setoran', async() => {
+    try {
+        await browser.waitUntil(async() => {
+            return expect (await setoran.titlePage.isDisplayed());
+        }, {
+            timeout:30000,
+        })
+        text = await setoran.titlePage.getText();
+        console.log('Title:',await text);
+        await browser.pause(2000);
+    } catch {
+        console.error('titlePage is not displayed or element could be not found')
+    }
+})
+
+
+
 
 When ('User click "navMenuFinance" in global page', async() => {
     // await browser.waitUntil(async() => {

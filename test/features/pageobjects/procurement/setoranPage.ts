@@ -4,7 +4,18 @@ export default new class setoranPage {
     get menuSetoran() {return $('(//*[@data-testid="Menu-Setoran"])');}
 
     //List Menu Setoran
-    get btnBuatSetoranNew() {return $('(//*[contains(text(), "Buat Setoran")])');}
+    get tglSetoranFilter() { return $('(//*[@data-testid="dropdown-filter-periode"])')}
+    get btnBuatSetoranNew() {return $('(//*[contains(text(), "Buat Setoran")])');} 
+    get titlePage() { return $('(//*[@class="flex gap-size-16"])')}
+    get fieldInputSearch() {return $('(//*[@placeholder="Cari Kode Setoran / Kode Invoice"])')}
+    get kodeSetoran() { return $('(//*[@data-testid="code-0"])/*/*[1]')}
+    get noDataSetoran() { return $('(//*[@class="css-1vp3ixv ant-empty"])')}
+
+    //tglSetoran
+    get hariIni() { return $('(//*[@class="rc-virtual-list-holder-inner"])//*[@title="Hari Ini"]')}
+    get lastWeek() { return $('(//*[@class="rc-virtual-list-holder-inner"])//*[@title="7 hari terakhir"]')}
+    get lastMonth() { return $('(//*[@class="rc-virtual-list-holder-inner"])//*[@title="30 hari terakhir"]')}
+    get custom() { return $('(//*[@class="rc-virtual-list-holder-inner"])//*[@title="Custom"]')}
     
     //Create Setoran
     get btnBuatSetoran() {return $('(//*[@data-testid="btn-setor"])');}
