@@ -35,6 +35,7 @@ export default new class purchaseOrderPage {
     get statusPOCanceled() { return $('//tbody[@class="ant-table-tbody"]/*[2]/*[10]/*/*[contains(text() "Cancelled")]'); }
     get textVerification() {return $('//*[contains(text(), "Purchase Order status berhasil diupdate")]');}
     get allertKosong() {return $('//*[@class="ant-notification ant-notification-top"]');}
+    get successAlert() { return $('(//*[@class="ant-notification-notice-description"])')}
 
     // Edit PO
     get btnDetailRow0() { return $('//*[@id="purchase-po-code-0"]'); }

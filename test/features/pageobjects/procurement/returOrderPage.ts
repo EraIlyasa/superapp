@@ -1,13 +1,34 @@
 export default new class returOrderPage {
 
     //List 
+    get titlePage() { return $('(//*[@class="s_qzwtq9Zy"])')}
+    get noDataReturOrder() { return $('(//*[@class="s_vnxcOuqb "])')}
+    get kodeRetur() { return $('(//*[@id="detail-invoice-penjualan-undefined"])')}
     get btnSearch() { return $('//*[@id="btnSearch"]')}
     get fieldInputSearch() { return $('//*[@data-testid="search-bar"]')}
     get btnCari() { return $('//*[@data-id="enter-btn"]')}
-    get btnMoreFilter() { return $('//*[@data-id="filter-modal-trigger"]')}
+    get btnFilter() { return $('//*[@data-id="filter-modal-trigger"]')}
     get kodeInvoice0() { return $('(//*[@id="detail-invoice-penjualan-undefined"])[1]')}
     get btnDetailInvoice() { return $('(//*[@class="color-primary d-flex align-center gap-1"])[1]')}
     get btnCreateRetur() { return $('(//*[@id="btnAdd"])')}
+
+    //Filter Modal 
+    get btnTerapkan() { return $('(//*[@data-id="filter-apply-button"])')}
+    get btnReset() { return $('(//*[@data-id="filter-reset-button"])')}
+    get navGudang() { return $('(//*[@data-node-key="warehouse_id"])')}
+    get navVendor() { return $('(//*[@data-node-key="vendor_pic_id"])')}
+    get navPeriode() { return $('(//*[@data-node-key="period"])')}
+    get navStatus() { return $('(//*[@data-node-key="status"])')}
+    get navKlasifikasi() { return $('(//*[@data-node-key="classification"])')}
+    //navGudang
+    get optGudangAloha() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(),"Aloha")])[1]')}
+    get optGudangAlohaRTP() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(),"Aloha-RTP")])[1]')}
+    get optGudangBandung() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"]//*[contains(text(),"Bandung")])[1]')}
+    //navPeriode
+    get hariIni() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[3]//*[contains(text(),"Hari Ini")]')}
+    get lastWeek() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[3]//*[contains(text(),"7 Hari Terakhir")]')}
+    get lastMonth() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[3]//*[contains(text(),"30 Hari Terakhir")]')}
+    get custom() { return $('(//*[@class="ant-radio-group ant-radio-group-outline"])[3]//*[contains(text(),"Custom")]')}
 
     //Create Retur Penjualan
     get btnSimpan() { return $('//*[@data-testid="btn-submit"]')}

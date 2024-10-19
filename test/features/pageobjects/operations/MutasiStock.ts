@@ -1,4 +1,4 @@
-class MutasiStock {
+class mutasiStock {
     public get inventory() {
         return $('//span[@data-testid="Menu-Stock"]');
     }
@@ -6,14 +6,18 @@ class MutasiStock {
         return $('//span[@class="ant-menu-title-content"]/*[@data-testid="Menu-MutasiStock V4"]')
     }
     public get stockBagusTab() {
-        return $('//div[@class="ant-tabs-nav-list"]/*[@data-node-key="good"]')
+        return $('(//*[@data-testid="tabs-label-stok-bagus"])')
     }
     public get stockRusakTab() {
-        return $('//div[@class="ant-tabs-nav-list"]/*[@data-node-key="good"]')
+        return $('(//*[@data-testid="tabs-label-stok-rusak"])')
     }
     public get stockVendorTab() {
-        return $('//div[@class="ant-tabs-nav-list"]/*[@data-node-key="good"]')
+        return $('(//*[@data-testid="tabs-label-stok-vendor"])')
     }
+    public get titlePage() { 
+        return $('(//*[@class="flex gap-size-16"])')
+    }
+
 
     //mutasi
     public get stockBagus() {
@@ -26,19 +30,19 @@ class MutasiStock {
         return $('//*[@id="rc-tabs-0-tab-good"]/div/div/span"]');
     }
     public get startDate() {
-        return $('//*[@data-testid="filter-datepicker-good"]');
+        return $('(//*[@data-testid="filter-start-date-good"])//*[@data-testid="filter-datepicker-good"]');
     }
-    public get choosenStartDate() {
+    public get optStartDate() {
         return $('//td[@title="2023-09-01"]');
     }
     public get btnPrevyear() {
         return $('//button[@aria-label="super-prev-year"]')
     }
     public get startTime() {
-        return $('//*[@id="rc-tabs-0-panel-good"]//div[1]/div[2]/main//div[1]/div[2]//div/span/input');
+        return $('');
     }
     public get endDate() {
-        return $('//*[@data-testid="filter-end-date-good"]');
+        return $('(//*[@data-testid="filter-end-date-good"])//*[@data-testid="filter-datepicker-good"]');
     }
     public get endTime() {
         return $('//*[@id="rc-tabs-0-panel-good"]//div[1]/div[2]/main//div[2]/div[2]//div/span/input');
@@ -46,28 +50,28 @@ class MutasiStock {
     public get warehouseGoods() {
         return $('//*[@data-testid="filter-warehouse-good"]/*[2]'); //('//*[@data-testid="filter-warehouse-good"]');
     }
-    public get choosenWarehouseGoods() {
+    public get optWarehouseGoods() {
         return $('//div[@class="rc-virtual-list-holder-inner"]/*[@title="Aloha"]')
     }
     public get productGoods() {
         return $('//*[@data-testid="filter-product-good"]/*[2]'); //('//*[@data-testid="filter-product-good]');
     }
-    public get choosenProductGoods() {
+    public get optProductGoods() {
         return $('//div[@class="rc-virtual-list-holder-inner"]/*[@title="SKL"]');
     }
     public get satuan() {
         return $('//div[@data-testid="filter-unit-good"]/*[2]');
     }
-    public get choosenSatuan() {
+    public get optSatuan() {
         return $('//div[@class="rc-virtual-list-holder-inner"]/*[@title="Karton"]');
     }
     public get unitGoods() {
         return $('//*[@data-testid="filter-unit-good"]');
     }
     public get companyType() {
-        return $('//*[@data-testid="filter-company-type-good"]');
+        return $('//*[@data-testid="filter-company-type-good"]/*[2]');
     }
-    public get choosenCompanyType() {
+    public get optCompanyType() {
         return $('//div[@class="rc-virtual-list-holder-inner"]/*[@title="PT. Putra Abyudaya Nusantara"][1]');
     }
     public get btnShow() {
@@ -78,6 +82,9 @@ class MutasiStock {
     }
 
     //Expect
+    get namaProduk() {
+        return $('(//*[@class="ant-table-tbody"])/*[2]/*[2]/*/*[2]')
+    }
     public get mutasiListStockBagus() {
         return $('(//tbody[@class="ant-table-tbody"])[position()=1]');
     }
@@ -157,4 +164,4 @@ class MutasiStock {
         return $('(//tbody[@class="ant-table-tbody"])/*[10]');
     }
 }
-export default new  MutasiStock();
+export default new  mutasiStock();
