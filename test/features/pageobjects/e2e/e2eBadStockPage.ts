@@ -186,6 +186,9 @@ export default new class e2eBadStockPage {
     public get optGudangAloha() {
         return $('(//*[@class="ant-select-item-option-content"])[3]');
     }
+    public get optGudangAloha_1() {
+        return $('(//*[@class="ant-select-item-option-content"])[2]');
+    }
     public get selectTipePT() {
         return $('//*[@data-testid="warehouse_company_id"]');
     }
@@ -264,11 +267,17 @@ export default new class e2eBadStockPage {
     public get menuLogisticV3_2() {
         return $('(//*[@class="ant-menu-submenu ant-menu-submenu-inline"])[10]');
     }
+    public get menuLogisticV3_3() {
+        return $('//*[@data-testid="Menu-Logistic"]');
+    }
     public get filterGudangV3() {
         return $('(//*[@class="ant-btn ant-btn-default Modal_filterButton__kNBQ1"])[1]');
     }
     public get warehouseSumberPangan() {
         return $('//label[span[text()="CV Sumber Pangan"]]');
+    }
+    public get warehouseJember() {
+        return $('//label[span[text()="Jember"]]');
     }
     public get btnTerapkanFilterWarehouse() {
         return $('//*[@data-testid="filter-apply-button"]');
@@ -380,11 +389,17 @@ export default new class e2eBadStockPage {
     public get optKategoriRM() {
         return $('//*[@data-id="button-segment-1"]');
     }
+    public get optKategoriFG() {
+        return $('//*[@data-id="button-segment-1"]');
+    }
     public get selectGudangRM() {
         return $('//*[@class="ant-select-selector"]');
     }
     public get optGudangRMSumberPangan() {
         return $('//*[@title="CV Sumber Pangan"]');
+    }
+    public get optGudangFGJember() {
+        return $('//*[@title="Jember"]');
     }
     public get cariProdukBermasalah () { 
         return $('//input[@placeholder="Cari produk"]');
@@ -439,6 +454,24 @@ export default new class e2eBadStockPage {
     }
     public get optTipeStokRetur() {
         return $('//*[@data-testid="stok-retur"]');
+    }
+    public get btnQtyRusakDariRM() {
+        return $('//*[@data-testid="btn-modal-raw-material"]');
+    }
+    public get btnExpandRowIngredients() {
+        return $('//button[@class="ant-table-row-expand-icon ant-table-row-expand-icon-collapsed"]');
+    }
+    public get qtyRusakModalRM() {
+        return $('(//input[@class="ant-input-number-input"])[1]');
+    }
+    public get qtyDiperlukan() {
+        return $('(//input[@class="ant-input-number-input"])[2]');
+    }
+    public get catatanRusakModalRM() {
+        return $('//textarea[@id="notes-ingredients"]');
+    }
+    public get catatanStokRusak() {
+        return $('//textarea[@id="notes"]');
     }
 
     //return v3
@@ -531,6 +564,9 @@ export default new class e2eBadStockPage {
     public get btnDikeluarkan() {
         return $('//*[@data-testid="btn-dikeluarkan"]');
     }
+    public get filterGudangV4() {
+        return $('//*[@data-testid="chip-large-gudang-aloha"]')
+    }
 
     //product v3
     public get menuProductV3() {
@@ -563,21 +599,75 @@ export default new class e2eBadStockPage {
 
     //pro v4
     public get menuPROV4() {
-        return $('//*[@data-testid="menu-Production Order"');
+        return $('//*[@data-testid="menu-Production Order"]');
     }
     public get btnBuatPRO() {
         return $('//*[@data-testid="button-solid-large-buat-pro"]');
     }
+    public get selectGudangPRO() {
+        return $('(//input[@class="ant-select-selection-search-input"])[2]');
+    }
+    public get selectGudangPROJember() {
+        return $('(//*[@class="ant-select-item-option-content"])[2]');
+    }
     public get selectTipePT_2() {
-        return $('(//*[@class="ant-select-selector"])[3]');
+        return $('(//input[@class="ant-select-selection-search-input"])[3]');
     }
     public get selectSupplierPRO() {
-        return $('(//*[@class="ant-select-selector"])[4]');
+        return $('(//input[@class="ant-select-selection-search-input"])[4]');
     }
     public get pilihPengirimanPRO() {
-        return $('(//*[@class="ant-select-selector"])[5]');
+        return $('(//input[@class="ant-select-selection-search-input"])[5]');
     }
     public get pilihPICPRO() {
-        return $('(//*[@class="ant-select-selector"])[6]');
+        return $('(//input[@class="ant-select-selection-search-input"])[6]');
+    }
+    public get pilihGudangStok() {
+        return $('(//input[@class="ant-select-selection-search-input"])[7]');
+    }
+    public get btnTambahBarangPRO() {
+        return $('//*[@class="flex gap-size-8 items-center mt-size-24 justify-center cursor-pointer"]');
+    }
+    public get btnTambahBarangModalPRO() {
+        return $('//*[@data-testid="btn-tambah-barang"]');
+    }
+    public get pilihProdukModalPRO() {
+        return $('(//*[@class="Dropdown_selectContainer__CJTkE"])[8]');
+    }
+    public get inputProdukPRO() {
+        return $('(//input[@class="ant-select-selection-search-input"])[8]')
+    }
+    public get pilihIngredientsModalPRO() {
+        return $('(//*[@class="Dropdown_selectContainer__CJTkE"])[9]');
+    }
+    public get inputIngredientsPRO() {
+        return $('(//input[@class="ant-select-selection-search-input"])[9]')
+    }
+    public get inputQtyPRO() {
+        return $('//input[@class="ant-input ant-input-sm css-1vp3ixv"]');
+    }
+    public get checklistProduct() {
+        return $('(//*[@class="cursor-pointer"])[1]');
+    }
+    public get btnSimpanModalPRO() {
+        return $('(//button[@data-testid="btn-simpan"])[2]');
+    }
+    public get btnSubmitPRO() {
+        return $('(//button[@data-testid="btn-simpan"])[1]');
+    }
+    public get filterGudangPRO() {
+        return $('//*[@data-testid="chip-large-gudang-aloha"]');
+    }
+    public get selectGudangJember() {
+        return $('(//input[@class="ant-radio-input"])[15]');
+    }
+    public get applyFilterGudangPRO() {
+        return $('//*[@data-testid="modal-apply-filter"]');
+    }
+    public get btnDetailPRO() {
+        return $('(//button[@data-testid="button-link-small-detail"])[1]');
+    }
+    public get kodePRO() {
+        return $('//*[@data-testid="page-header-subtitle"]');
     }
 }

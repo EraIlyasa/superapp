@@ -271,7 +271,7 @@ Feature: Create - Bad Bad Stock
     And User click "btnBuatRetur"
     And User wait for 3 seconds
     And User click "selectGudangRetur"
-    # And User click "optGudangAloha" in "selectGudangRetur" 
+    And User click "optGudangAloha_1" in "selectGudangRetur"
     # And User wait for 10 seconds
     And User click "selectKategoriRetur"
     And User click "optKategoriReturRM" in "selectKategoriRetur"
@@ -416,8 +416,10 @@ Feature: Create - Bad Bad Stock
     And User type product name into "inputNamaProdukRTP"
     And User click "pilihMerek2"
     And User type "Keraton" into "pilihMerek2"
+    And User wait for 3 seconds
     And User click "pilihKategori2"
     And User type "frozen snack" into "pilihKategori2"
+    And User wait for 3 seconds
     And User click "checkboxIngredients"
     And User click "btnTambahAttribute"
     And User click "inputSatuan"
@@ -444,30 +446,213 @@ Feature: Create - Bad Bad Stock
     And User click "inputQtyImbalanRetur"
     And User type "1" into "inputQtyImbalanRetur"
     And User wait for 3 seconds
-    And User click "inputHargaBeliImbalanRetur"
-    And User wait for 3 seconds
     And User click "btnSimpanAttribute"
+    And User wait for 3 seconds
     And User click "btnSimpanRM"
     And User wait for 3 seconds
     And User click "menuPROV4"
     And User wait for 3 seconds
     And User click "btnBuatPRO"
     And User wait for 3 seconds
-    And User click "selectGudang"
-    And User type "Aloha" into "selectGudang"
+    And User click "selectGudangPRO"
+    And User wait for 3 seconds
+    And User type "jember" into "selectGudangPRO"
+    And User wait for 3 seconds
     And User click "selectTipePT_2"
-    And User type "PAN" into "selectTipePT_2"
+    And User wait for 3 seconds
+    And User type "cmi" into "selectTipePT_2"
+    And User wait for 3 seconds
     And User click "selectSupplierPRO"
+    And User wait for 3 seconds
     And User type "Ali Boedi Santoso" into "selectSupplierPRO"
+    And User wait for 3 seconds
     And User click "pilihPengirimanPRO"
     And User type "Locco" into "pilihPengirimanPRO"
+    And User wait for 3 seconds
     And User click "pilihPICPRO"
     And User type "admin" into "pilihPICPRO"
-
-
-
-
-    
-
-
-
+    And User wait for 3 seconds
+    And User click "pilihGudangStok"
+    And User wait for 3 seconds
+    And User click "btnTambahBarangPRO"
+    And User wait for 3 second
+    And User click "btnTambahBarangModalPRO"
+    And User click "pilihProdukModalPRO"
+    And User wait for 3 second
+    And User type product name into "pilihProdukModalPRO"
+    And User wait for 3 seconds
+    And User click "pilihIngredientsModalPRO"
+    And User click "inputQtyPRO"
+    And User wait for 3 second
+    And User type "100" into "inputQtyPRO"
+    And User click "checklistProduct"
+    And User click "btnSimpanModalPRO"
+    And User wait for 3 second
+    And User click "btnSubmitPRO"
+    And User wait for 3 second
+    And User click "filterGudangPRO"
+    And User click "selectGudangJember"
+    And User click "applyFilterGudangPRO"
+    And User wait for 3 second
+    And User click "btnDetailPRO"
+    And User get "kodePRO"
+    And User click "menuLogisticV3_3"
+    And User click "menuIncomingGoodsV3"
+    And User wait for 3 seconds
+    And User click "filterGudangV3"
+    And User click "warehouseJember" in "filterGudangV3"
+    And User click "btnTerapkanFilterWarehouse"
+    And User wait for 3 seconds
+    And User click "btnSearchV3"
+    And User click "searchBarV3"
+    And User type PRO code to "searchBarV3"
+    And User click "btnCariV3"
+    And User wait for 3 seconds
+    And User click "btnAmbilAntrian"
+    And User click "imgUploadSuratJalan"
+    And User upload file to "imgUploadSuratJalan"
+    And User wait for 3 seconds
+    And User click "inputNamaDriver"
+    And User type "Budi" into "inputNamaDriver"
+    And User click "btnCheckIn"
+    And User wait for 3 seconds
+    And User click "menuLogisticV3_2"
+    And User click "menuIncomingChecker" in "navMenuLogistic"
+    And User wait for 3 seconds
+    And User click "filterGudangV3"
+    And User click "warehouseJember" in "filterGudangV3"
+    And User click "btnTerapkanFilterWarehouse"
+    And User wait for 3 seconds
+    And User click "btnSearchV3"
+    And User click "searchBarIncomingChecker"
+    And User type PRO code to "searchBarIncomingChecker"
+    And User wait for 3 seconds
+    And User click "btnInputIncomingV3"
+    And User click "addProductInputIncoming"
+    And User click "imgUploadProductIncoming"
+    And User upload file to "imgUploadProductIncoming"
+    And User wait for 3 seconds
+    And User click "selectProductIncoming"
+    And User click "selectUnitIncoming"
+    And User click "inputQuantityIncoming"
+    And User type "00" into "inputQuantityIncoming"
+    And User click "selectProductionDate"
+    And User click "selectProductionDateToday" in "selectProductionDate"
+    And User click "btnSubmitIncomingModal"
+    And User click "btnConfirmSubmitIncomingModal"
+    And User wait for 5 seconds
+    And User click "menuIncomingGoods" in "navMenuLogistic"
+    And User click "filterGudangV3"
+    And User click "warehouseJember" in "filterGudangV3"
+    And User click "btnTerapkanFilterWarehouse"
+    And User wait for 3 seconds
+    And User click "btnSearchV3"
+    And User click "searchBarV3"
+    And User type PRO code to "searchBarV3"
+    And User click "btnCariV3"
+    And User click "btnValidasiChecker"
+    And User click "btnSubmitIncomingModal"
+    And User click "btnSubmitValidasiIncoming"
+    And User wait for 3 seconds
+    And User click "menuStockV3"
+    And User click "menuStokBermasalah" in "menuStockV3"
+    And User click "btnTambahStokBermasalah"
+    And User wait for 3 seconds
+    And User click "selectGudangRM"
+    And User click "optGudangFGJember" in "selectGudangFG"
+    And User wait for 10 seconds
+    And User click "btntambahProduk"
+    And User click "cariProdukBermasalah"
+    And User type product name into "cariProdukBermasalah"
+    And User click "pilihKodeSource"
+    And User click "checkboxKodeSource"
+    And User wait for 3 seconds
+    And User click "btnQtyRusakDariRM"
+    And User wait for 3 seconds
+    And User click "btnExpandRowIngredients"
+    And User click "qtyDiperlukan"
+    And User type "50" into "qtyDiperlukan"
+    And User click "qtyRusakModalRM"
+    And User type "50" into "qtyRusakModalRM"
+    And User type "rusak" into "catatanRusakModalRM"
+    And User click "btnSubmitModalProdukBermasalah"
+    And User click "imgUploadBuktiRusak"
+    And User upload file to "imgUploadBuktiRusak"
+    And User wait for 3 seconds
+    And User type "rusak" into "catatanStokRusak"
+    And User click "btnSubmitModalProdukBermasalah"
+    And User wait for 3 seconds
+    And User click "gambarPermintaanBarang"
+    And User upload file to "gambarPermintaanBarang"
+    And User wait for 3 seconds
+    And User click "tabBuktiAlokasiBarang"
+    And User wait for 5 seconds
+    And User click "imgUploadBuktiAlokasiBarang"
+    And User upload file to "imgUploadBuktiAlokasiBarang"
+    And User wait for 3 seconds
+    And User click "btnSubmitBuatStokBermasalah"
+    And User wait for 3 seconds
+    And User click "filterGudang"
+    And User click "warehouseJember" in "filterGudangV3"
+    And User click "btnTerapkanFilterWarehouse"
+    And User wait for 3 seconds
+    And User click "btnAjukan"
+    And User click "btnConfirmAjukan"
+    And User wait for 3 seconds
+    And User click "btnSetujuAjukan"
+    And User wait for 3 seconds
+    And User click "optTipeStokRetur"
+    And User wait for 3 seconds
+    #reusable
+    And User click "btnSubmitIncomingModal" 
+    And User click "btnConfirmAjukan"
+    And User wait for 3 seconds
+    And User click "btnTambahStokBermasalah"
+    And User wait for 3 seconds
+    And User click "selectGudangRM"
+    And User click "optGudangFGJember" in "selectGudangFG"
+    And User wait for 10 seconds
+    And User click "btntambahProduk"
+    And User click "cariProdukBermasalah"
+    And User type product name into "cariProdukBermasalah"
+    And User click "pilihKodeSource"
+    And User click "checkboxKodeSource"
+    And User wait for 3 seconds
+    And User click "btnQtyRusakDariRM"
+    And User wait for 3 seconds
+    And User click "btnExpandRowIngredients"
+    And User click "qtyDiperlukan"
+    And User type "50" into "qtyDiperlukan"
+    And User click "qtyRusakModalRM"
+    And User type "50" into "qtyRusakModalRM"
+    And User type "rusak" into "catatanRusakModalRM"
+    And User click "btnSubmitModalProdukBermasalah"
+    And User click "imgUploadBuktiRusak"
+    And User upload file to "imgUploadBuktiRusak"
+    And User wait for 3 seconds
+    And User type "rusak" into "catatanStokRusak"
+    And User click "btnSubmitModalProdukBermasalah"
+    And User wait for 3 seconds
+    And User click "gambarPermintaanBarang"
+    And User upload file to "gambarPermintaanBarang"
+    And User wait for 3 seconds
+    And User click "tabBuktiAlokasiBarang"
+    And User wait for 5 seconds
+    And User click "imgUploadBuktiAlokasiBarang"
+    And User upload file to "imgUploadBuktiAlokasiBarang"
+    And User wait for 3 seconds
+    And User click "btnSubmitBuatStokBermasalah"
+    And User wait for 3 seconds
+    And User click "filterGudang"
+    And User click "warehouseJember" in "filterGudangV3"
+    And User click "btnTerapkanFilterWarehouse"
+    And User wait for 3 seconds
+    And User click "btnAjukan"
+    And User click "btnConfirmAjukan"
+    And User wait for 3 seconds
+    And User click "btnSetujuAjukan"
+    And User wait for 3 seconds
+    #reusable
+    And User click "btnSubmitIncomingModal" 
+    And User click "btnConfirmAjukan"
+    And User wait for 3 seconds

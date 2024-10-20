@@ -8,7 +8,8 @@ let POCode : string;
 let namaRM_1 : string;
 let namaRM_2 : string;
 let kodeRetur : string;
-let namaPRO : string;
+let namaPRO = 'PRO-201024-154637';
+let PROCode : string;
 
 When('User click "menuInventory" button in "Stock"', async () => {
     await browser.waitUntil(async () => {
@@ -448,12 +449,22 @@ When('User click "menuLogisticV3_2"', async () => {
     await bs.menuLogisticV3_2.click();
 })
 
+When('User click "menuLogisticV3_3"', async () => {
+    await bs.menuLogisticV3_3.scrollIntoView();
+    await bs.menuLogisticV3_3.click();
+})
+
 When('User click "filterGudangV3"', async () => {
     await bs.filterGudangV3.click();
 })
 
 When('User click "warehouseSumberPangan" in "filterGudangV3"', async () => {
     await bs.warehouseSumberPangan.click();
+    await browser.pause(2000);
+})
+
+When('User click "warehouseJember" in "filterGudangV3"', async () => {
+    await bs.warehouseJember.click();
     await browser.pause(2000);
 })
 
@@ -473,12 +484,20 @@ When('User type PO code to "searchBarV3"', async () => {
     await bs.searchBarV3.setValue(POCode);
 })
 
+When('User type PRO code to "searchBarV3"', async () => {
+    await bs.searchBarV3.setValue(PROCode);
+})
+
 When('User click "searchBarIncomingChecker"', async () => {
     await bs.searchBarIncomingChecker.click();
 })
 
 When('User type PO code to "searchBarIncomingChecker"', async () => {
     await bs.searchBarIncomingChecker.setValue(POCode);
+})
+
+When('User type PRO code to "searchBarIncomingChecker"', async () => {
+    await bs.searchBarIncomingChecker.setValue(PROCode);
 })
 
 When('User click "btnCariV3"', async () => {
@@ -664,12 +683,49 @@ When('User click "optGudangSumberPangan" in "selectGudangRM"', async () => {
     checkElementAndStop();
 })
 
+When('User click "optGudangFGJember" in "selectGudangFG"', async () => {
+    async function sendArrowDownMultipleTimes(n: number) {
+        for (let i = 0; i < n; i++) {
+            await browser.keys(Key.ArrowDown);
+        }
+    }
+    async function checkElementAndStop() {
+        const maxRetries = 100; // Set a limit for retries
+        let found = false;
+    
+        for (let i = 0; i < maxRetries; i++) {
+            const element = await bs.optGudangFGJember;
+            
+            if (await element.isDisplayed()) { // Check if the element is displayed
+                console.log('Found');
+                found = true;
+                await bs.optGudangFGJember.click();
+                break; // Exit the loop if the element is found
+            } else {
+                await sendArrowDownMultipleTimes(3); // Send Arrow Down multiple times
+                await browser.pause(1000); // Wait for a second before retrying
+            }
+        }
+    
+        if (!found) {
+            console.log('Element not found after maximum retries.');
+        }
+    }
+    checkElementAndStop();
+})
+
 When('User click "cariProdukBermasalah"', async () => {
     await bs.cariProdukBermasalah.click();
 })
 
 When('User type raw material name into "cariProdukBermasalah"', async () => {
     await bs.cariProdukBermasalah.setValue(namaRM_1);
+    await browser.pause(2000);
+    await browser.keys(['Enter']);
+})
+
+When('User type product name into "cariProdukBermasalah"', async () => {
+    await bs.cariProdukBermasalah.setValue(namaPRO);
     await browser.pause(2000);
     await browser.keys(['Enter']);
 })
@@ -810,7 +866,6 @@ When('User click "btnBuatRetur"', async () => {
 
 When('User click "selectGudangRetur"', async () => {
     await bs.selectGudangRetur.click();
-    await browser.keys(['Enter']);
 })
 
 When('User click "optGudangSumberPangan" in "selectGudangRetur"', async () => {
@@ -838,6 +893,10 @@ When('User click "optGudangSumberPangan" in "selectGudangRetur"', async () => {
 
 When('User click "optGudangAloha" in "selectGudangRetur"', async () => {
     await bs.optGudangAloha.click();
+})
+
+When('User click "optGudangAloha_1" in "selectGudangRetur"', async () => {
+    await bs.optGudangAloha_1.click();
 })
 
 When('User click "selectKategoriRetur"', async () => {
@@ -938,6 +997,7 @@ When('User get "kodeRetur"', async () => {
     kodeRetur = await bs.kodeRetur.getText();
     kodeRetur = kodeRetur.toString();
     console.log(kodeRetur);
+    await browser.pause(5000);
     await browser.refresh();
 })
 
@@ -1037,7 +1097,7 @@ When('User click "pilihSubtipeProduk"', async () => {
 
 When('User type {string} into "pilihSubtipeProduk"', async (tipe) => {
     await bs.pilihSubtipeProduk.setValue(tipe);
-    await browser.pause(2000);
+    await browser.pause(3000);
     await browser.keys(['Enter']);
 })
 
@@ -1062,6 +1122,7 @@ When('User type product name into "inputNamaProdukRTP"', async () => {
     const nama = generatePROName();
     await bs.inputNamaProdukRTP.setValue(nama);
     namaPRO = nama;
+    namaPRO = namaPRO.toString();
     console.log(namaPRO);
     await browser.pause(2000);
 })
@@ -1069,11 +1130,13 @@ When('User type product name into "inputNamaProdukRTP"', async () => {
 export { namaPRO }
 
 When('User click "pilihMerek2"', async () => {
+    await bs.pilihMerek2.scrollIntoView();
     await bs.pilihMerek2.click();
 })
 
 When('User type {string} into "pilihMerek2"', async (merek) => {
     await bs.pilihMerek2.setValue(merek);
+    await browser.pause(2000);
     await browser.keys(['Enter']);
 })
 
@@ -1083,6 +1146,7 @@ When('User click "pilihKategori2"', async () => {
 
 When('User type {string} into "pilihKategori2"', async (kategori) => {
     await bs.pilihKategori2.setValue(kategori);
+    await browser.pause(2000);
     await browser.keys(['Enter']);
 })
 
@@ -1106,6 +1170,7 @@ When('User type product name into "pilihProdukRetur"', async () => {
 
 When('User click "menuPROV4"', async () => {
     await bs.menuPROV4.click();
+    await browser.pause(10000);
 })
 
 When('User click "tabReturSupplierIncomingCheckerV3"', async () => {
@@ -1137,47 +1202,179 @@ When('User click "btnValidasiChecker_2"', async () => {
     await bs.btnValidasiChecker_2.click();
 })
 
-When('User click "selectGudang"', async () => {
-    await bs.selectGudang.click();
+When('User click "selectGudangPRO"', async () => {
+    await bs.selectGudangPRO.click();
+    await browser.pause(2000);
 })
 
-When('User type {string} into "selectGudang"', async (gudang) => {
-    await bs.selectGudang.setValue(gudang);
-    await browser.keys(['Enter']);
+When('User type {string} into "selectGudangPRO"', async (gudang) => {
+    // await bs.selectGudangPRO.setValue(gudang);
+    await bs.selectGudangPROJember.click();
+    // await browser.keys(['Enter']);
+    await browser.pause(1000);
 })
 
 When('User click "selectTipePT_2"', async () => {
     await bs.selectTipePT_2.click();
+    await browser.pause(2000);
 })
 
 When('User type {string} into "selectTipePT_2"', async (tipe) => {
-    await bs.selectTipePT_2.setValue(tipe);
+    // await bs.selectTipePT_2.setValue(tipe);
     await browser.keys(['Enter']);
+    await browser.pause(1000);
 })
 
 When('User click "selectSupplierPRO"', async () => {
     await bs.selectSupplierPRO.click();
+    await browser.pause(2000);
 })
 
 When('User type {string} into "selectSupplierPRO"', async (supplier) => {
     await bs.selectSupplierPRO.setValue(supplier);
     await browser.keys(['Enter']);
+    await browser.pause(1000);
 })
 
 When('User click "pilihPengirimanPRO"', async () => {
     await bs.pilihPengirimanPRO.click();
+    await browser.pause(2000);
 })
 
 When('User type {string} into "pilihPengirimanPRO"', async (pengiriman) => {
     await bs.pilihPengirimanPRO.setValue(pengiriman);
     await browser.keys(['Enter']);
+    await browser.pause(1000);
 })
 
 When('User click "pilihPICPRO"', async () => {
     await bs.pilihPICPRO.click();
+    await browser.pause(2000);
 });
 
 When('User type {string} into "pilihPICPRO"', async (pic) => {
     await bs.pilihPICPRO.setValue(pic);
     await browser.keys(['Enter']);
+    await browser.pause(1000);
 });
+
+When('User click "pilihGudangStok"', async () => {
+    await bs.pilihGudangStok.scrollIntoView();
+    await browser.pause(1000);
+    await bs.pilihGudangStok.click();
+    await browser.pause(1000);
+    await bs.pilihGudangStok.setValue('Aloha');
+    await browser.keys(['Enter']);
+    await browser.pause(1000);
+})
+
+When('User click "btnTambahBarangPRO"', async () => {
+    await bs.btnTambahBarangPRO.click();
+})
+
+When('User click "btnTambahBarangModalPRO"', async () => {
+    await bs.btnTambahBarangModalPRO.click();
+})
+
+When('User click "pilihProdukModalPRO"', async () => {
+    await bs.pilihProdukModalPRO.click();
+})
+
+When('User type product name into "pilihProdukModalPRO"', async () => {
+    await bs.inputProdukPRO.addValue(namaPRO);
+    await browser.pause(4000);
+    await browser.keys(['Enter']);
+})
+
+When('User click "pilihIngredientsModalPRO"', async () => {
+    await bs.pilihIngredientsModalPRO.click();
+    await browser.keys(['Enter']);
+})
+
+When('User click "inputQtyPRO"', async () => {
+    await bs.inputQtyPRO.click();
+})
+
+When('User type {string} into "inputQtyPRO"', async (qty) => {
+    await bs.inputQtyPRO.setValue(qty);
+})
+
+When('User click "checklistProduct"', async () => {
+    await bs.checklistProduct.click();
+})
+
+When('User click "btnSimpanModalPRO"', async () => {
+    await bs.btnSimpanModalPRO.click();
+})
+
+When('User click "btnSubmitPRO"', async () => {
+    await bs.btnSubmitPRO.click();
+})
+
+When('User click "filterGudangPRO"', async () => {
+    await bs.filterGudangPRO.click();
+})
+
+When('User click "selectGudangJember"', async () => {
+    await bs.selectGudangJember.click();
+    await browser.pause(2000);
+})
+
+When('User click "applyFilterGudangPRO"', async () => {
+    await bs.applyFilterGudangPRO.click();
+})
+
+When('User click "btnDetailPRO"', async () => {
+    await bs.btnDetailPRO.click();
+})
+
+When('User get "kodePRO"', async () => {
+    const kodePRO = await bs.kodePRO.getText();
+    PROCode = kodePRO.replace('Kode PRO: ', '');
+    console.log(PROCode);
+})
+
+export { PROCode }
+
+When('User click "btnQtyRusakDariRM"', async () => {
+    await bs.btnQtyRusakDariRM.click();
+})
+
+When('User click "btnExpandRowIngredients"', async () => {
+    await bs.btnExpandRowIngredients.click();
+    await browser.pause(1000);
+})
+
+When('User click "qtyDiperlukan"', async () => {
+    await bs.qtyDiperlukan.click();
+    await browser.pause(1000);
+})
+
+When('User type {string} into "qtyDiperlukan"', async (qty) => {
+    await bs.qtyDiperlukan.setValue(qty);
+    await browser.pause(1000);
+})
+
+When('User click "qtyRusakModalRM"', async () => {
+    await bs.qtyRusakModalRM.click();
+    await browser.pause(1000);
+})
+
+When('User type {string} into "qtyRusakModalRM"', async (qty) => {
+    await bs.qtyRusakModalRM.setValue(qty);
+    await browser.pause(1000);
+})
+
+When('User type "rusak" into "catatanRusakModalRM"', async (notes) => {
+    await bs.catatanRusakModalRM.click();
+    await browser.pause(1000);
+    await bs.catatanRusakModalRM.setValue(notes);
+    await browser.pause(1000);
+})
+
+When('User type "rusak" into "catatanStokRusak"', async (notes) => {
+    await bs.catatanStokRusak.click();
+    await browser.pause(1000);
+    await bs.catatanStokRusak.setValue(notes);
+    await browser.pause(1000);
+})
