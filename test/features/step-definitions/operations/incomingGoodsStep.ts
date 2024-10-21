@@ -2,7 +2,7 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import incomingGoodsPage from "../../pageobjects/operations/incomingGoodsPage";
 import path from "path";
 const incomingGoods = incomingGoodsPage;
-import { kodeInvoice } from "./purchaseOrderStep";
+import { kodeInvoice } from "../procurement/purchaseOrderStep";
 
 When ('User click "fieldInputSearch" button in "Incoming" page', async() => {
     await incomingGoods.fieldInputSearch.click();

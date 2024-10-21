@@ -2,8 +2,63 @@ import { $ } from '@wdio/globals';
 
 export default new class outgoingGoodsPage {
 
+    //List 
+    get btnExportCSV() {
+        return $('(//*[@data-id="export-csv-outgoing-goods"])')
+    }
+    get btnKecamatan() {
+        return $('(//*[@data-id="district"])')
+    }
+    get btnKota() {
+        return $('(//*[@data-id="city"])')
+    }
+    get btnGudang() {
+        return $('(//*[@data-id="warehouse_id"])')
+    }
+    get btnPeriode() {
+        return $('(//*[@data-id="period"])')
+    }
+    get btnTabMotor() {
+        return $('(//*[@id="btn-tab-motor"])')
+    }
+    get btnSearch() {
+        return $('(//*[@id="btnSearch"])')
+    }
+    get listMobil() {
+        return $('(//*[@class="detailWrapper"])')
+    }
+    get titlePage() {
+        return $('(//*[@class="s_qzwtq9Zy"])')
+    }
     get tanggalKirim() {
         return $('//button[@data-id="period"]');
+    }
+    get inputDetailKodeInvoice() {
+        return $('//input[@placeholder="Kode Invoice"]');
+    }
+    get inputKodeTransaksi() {
+        return $('//input[@placeholder="Cari kode transaksi"]');
+    }
+
+    //Filter option
+    get btnTerapkan() {
+        return $('(//*[@data-id="filter-apply-button"])')
+    }
+    get optKirimHariIni() {
+        return $('(//*[@class="ant-radio-group ant-radio-group-outline"])//*[contains(text(),"Hari ini")]')
+    }
+    get optKirimBesok() {
+        return $('(//*[@class="ant-radio-group ant-radio-group-outline"])//*[contains(text(),"Besok")]')
+    }
+    get optKirimKemarin() {
+        return $('(//*[@class="ant-radio-group ant-radio-group-outline"])//*[contains(text(),"Kemarin")]')
+    }
+
+
+
+    //Alert
+    get erorValidation() {
+        return $('(//*[@class="s_RR3nZRCC"])')
     }
 
     get tanggalKirimV4() {
@@ -34,10 +89,6 @@ export default new class outgoingGoodsPage {
         return $('//button[@data-id="btn-search-detail-outgoing"]');
     }
 
-    get inputDetailKodeInvoice() {
-        return $('//input[@placeholder="Kode Invoice"]');
-    }
-
     get inputKodeInvoiceV4() {
         return $('//input[@placeholder="Cari kode invoice"]');
     }
@@ -48,10 +99,6 @@ export default new class outgoingGoodsPage {
 
     get seeDetails() {
         return $('//a[@data-id="btn-detail-outgoing"]');
-    }
-
-    get inputKodeTransaksi() {
-        return $('//input[@placeholder="Cari kode transaksi"]');
     }
 
     get checkbox() {

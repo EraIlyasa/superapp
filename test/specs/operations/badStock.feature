@@ -1,13 +1,13 @@
 @BadStock
 Feature: Create - Bad Bad Stock
 
-  @BadStock-0001
+  @BS-0001
   Scenario Outline: Memastikan User dapat create bad stock finished good
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
-    When User click "navMenuStock" button in "Global" page
-    And User click "menuStockBermasalahV4" button in "Stock" page
+    When api user login
+    When open dashboard superapp
+
+    Given User click menu "navMenuStock" in side menu page
+    And User click submenu "menuStockBermasalahV4" in side menu page
     And User wait for 5 seconds
     Given User click "btnCreateStokBermasalah"
     And User wait for 5 seconds
@@ -26,12 +26,12 @@ Feature: Create - Bad Bad Stock
     And User wait for 5 seconds
     # And User click "fieldInputCatatan"
     And User input "<catatan>" into "fieldInputCatatanModal"
-    # And User click "btnSimpanModal" in BS page
-    # And User wait for 5 seconds
-    # And User upload file to "imgUploadPB"
-    # And User click "menuBuktiAlokasiBarang"
-    # And User upload file into "imgUploadBAB0"
-    # And User click "btnSimpan" to create BS
+    And User click "btnSimpanModal" in BS page
+    And User wait for 5 seconds
+    And User upload file to "imgUploadPB"
+    And User click "menuBuktiAlokasiBarang"
+    And User upload file into "imgUploadBAB0"
+    And User click "btnSimpan" to create BS
     # And User click "btnYaSimpanModal" to create BS
     # Then User able to see "Success Message"
 

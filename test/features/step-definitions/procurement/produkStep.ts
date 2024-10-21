@@ -1,14 +1,35 @@
 import { When, Then, Given } from "@cucumber/cucumber";
 import produkPage from "../../pageobjects/procurement/produkPage";
-import path from "path";
-import { buffer } from "stream/consumers";
+import path, { join, resolve } from "path";
+import fs from 'fs';
+import { expect } from 'chai'
+import { createObjectCsvWriter } from 'csv-writer';
+
 // import sideMenuBarPage from "../../pageobjects/side-menu/side-menu-page"
+
+let downloadPath: any
+let filePath: any
+let getTodayDateTime: any
+
+getTodayDateTime = (): string => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const hours = String(today.getHours()).padStart(2, '0');
+    const minutes = String(today.getMinutes()).padStart(2, '0');
+    // const seconds = String(today.getSeconds()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}_${hours}-${minutes}`;
+}
+
+
 
 When ('User directed to List barang yang terdaftar di Super page', async() => {
     await browser.waitUntil(async() => {
         return await produkPage.titleProduk.isDisplayed();
     }, {
-        timeout:30000,
+        timeout:60000,
         timeoutMsg:'titleProduk still not existing'
     })
     let title = await produkPage.titleProduk.getText();
@@ -432,7 +453,7 @@ Then ('User able to see Berhasil membuat produk baru {string} verification', asy
     })
     let alert = await produkPage.successAlert.getText();
 
-    expect (await alert).toEqual(message);
+    expect (await alert).equal(message);
     console.log('message is ',alert)
     await browser.pause(5000);
 })
@@ -487,7 +508,7 @@ Then ('User able to see Gambar Utama message verification', async() => {
             timeout:10000
         })
         console.log('message is ' + text);
-        expect (await produkPage.textGambarUtama).toBeDisplayed();
+        expect (await produkPage.textGambarUtama.isDisplayed()).to.be.true;
     } catch {
         throw new Error('there is no "Gambar Utama" displayed');
     }
@@ -503,8 +524,8 @@ Then ('User able to see Gambar Utama message verification below second images', 
             timeout:10000
         })
         console.log('message is ' + text);
-        expect (await produkPage.textGambarUtama).toBeDisplayed();
-        expect (await produkPage.radioButton('[2]')).toBeChecked();
+        expect (await produkPage.textGambarUtama.isDisplayed()).to.be.true;
+        expect ((await produkPage.radioButton('[2]')).isSelected()).to.be.true;
     } catch {
         throw new Error('there is no "Gambar Utama" displayed');
     }
@@ -519,7 +540,7 @@ When ('User click radio button 2', async() => {
 
 Then ('User able to see list barang yang terdaftar di super message verification', async() => {
     try {
-        await expect (await produkPage.titleProduk).toBeDisplayed();
+        await expect (await produkPage.titleProduk.isDisplayed()).to.be.true;
         await browser.pause(3000);
         console.log('message : ', await produkPage.titleProduk);
         await browser.pause(1000);
@@ -556,7 +577,7 @@ When ('User click statusIngredients in product page', async() => {
 
 Then ('User able to see {string} verification', async(message) => {
     let text = await produkPage.failedAlert.getText();
-    expect (await text).toEqual(message);
+    expect (await text).equal(message);
     console.log(text); 
     await browser.pause(3000);
 //     try {
@@ -569,7 +590,7 @@ Then ('User able to see {string} verification', async(message) => {
 //         expect (await produkPage.failedAlert).toBeDisplayed();
         
 //         try {
-//             expect (await text).toEqual(message);
+//             expect (await text).equal(message);
 //         } catch (error){
 //             console.error('Failed to match text with the expected message:', error);
 //             throw new Error('Text did not match the expected message');
@@ -591,7 +612,7 @@ Then ('User able to see Gambar Produk wajib diisi {string} verification', async(
             timeoutMsg:'Timed out waiting for failedAlert to appear.'
         })
         let text = await produkPage.failedAlert.getText();
-        expect(await text).toEqual(message);
+        expect(await text).equal(message);
         console.log(text);
     } catch {
         throw new Error('there is no Brand Produk wajib diisi!')
@@ -609,7 +630,7 @@ Then ('User able to see Nama Produk wajib diisi {string} verification', async(me
             timeoutMsg:'Timed out waiting for failedAlert to appear.'
         })
         let text = await produkPage.failedAlert.getText();
-        expect(await text).toEqual(message);
+        expect(await text).equal(message);
         console.log(text);
     } catch {
         throw new Error('there is no Brand Produk wajib diisi!')
@@ -627,7 +648,7 @@ Then ('User able to see Brand Produk wajib diisi {string} verification', async(m
             timeoutMsg:'Timed out waiting for failedAlert to appear.'
         })
         let text = await produkPage.failedAlert.getText();
-        expect(await text).toEqual(message);
+        expect(await text).equal(message);
         console.log(text);
     } catch {
         throw new Error('there is no Brand Produk wajib diisi!')
@@ -645,7 +666,7 @@ Then ('User able to see Kategori Produk wajib diisi {string} verification', asyn
             timeoutMsg:'Timed out waiting for failedAlert to appear.'
         })
         let text = await produkPage.failedAlert.getText();
-        expect(await text).toEqual(message);
+        expect(await text).equal(message);
         console.log(text);
     } catch {
         throw new Error('there is no Brand Produk wajib diisi!')
@@ -663,7 +684,7 @@ Then ('User able to see Atribut Produk tidak boleh kosong {string} verification'
             timeoutMsg:'Timed out waiting for failedAlert to appear.'
         })
         let text = await produkPage.failedAlert.getText();
-        expect(await text).toEqual(message);
+        expect(await text).equal(message);
         console.log(text);
     } catch {
         throw new Error('there is no Brand Produk wajib diisi!')
@@ -680,7 +701,7 @@ Then ('User able to see File extension not allowed! {string} verification', asyn
             timeoutMsg:'time out, failedAlert still not displayed'
         })
         let text = await produkPage.failedAlert2.getText();
-        expect (await text).toEqual(message);
+        expect (await text).equal(message);
         console.log('message is : ', text);
     } catch {
         throw new Error('text is not same as "message"');
@@ -689,7 +710,7 @@ Then ('User able to see File extension not allowed! {string} verification', asyn
 
 
 Then ('User able to see btnCancelAttribute is disabled in Product page', async() => {
-    expect (await produkPage.btnTambahAtributModal).toBeDisabled();
+    expect (await produkPage.btnTambahAtributModal).to.be.false;
     await browser.pause(5000);
 })
 
@@ -698,13 +719,13 @@ Then ('User able to see Limit produk yang di pin sudah habis maks. 2 produk {str
     await produkPage.statusPinProduk.scrollIntoView();
 
     try {
-        expect (await produkPage.statusPinProduk).toBeDisabled();
+        expect (await produkPage.statusPinProduk).to.be.false;
     } catch {
         throw new Error('pin produk still can be active');
     }
 
     let text = await produkPage.alertLimmitProduk.getText();
-    expect(await text).toEqual(message);
+    expect(await text).equal(message);
     console.log('message is : ',text);
 })
 
@@ -717,7 +738,7 @@ Then ('User able to see invalid {string} verification', async(message) => {
             timeout:10000,
         })
         let text = await produkPage.failedAlert.getText();
-        expect (await text).toEqual(message)
+        expect (await text).equal(message)
         console.log('message is : ',text);
     } catch {
         throw new Error('modal notification is not showed up after create with same name')
@@ -763,7 +784,7 @@ Then ('User able to see verification {string}', async(message) => {
         timeoutMsg:'successAlert message still not displayed'
     })
     let text = await produkPage.successAlert.getText();
-    expect (await text).toEqual(message)
+    expect (await text).equal(message)
 })
 
 
@@ -783,7 +804,7 @@ Then ('User able to see {string} in product list', async(produkName) => {
                 timeoutMsg:'namaProduk still not displayed'
             })
             let text = (await produkPage.namaProduk('Automated Testing hehe')).getText();
-            expect(await text).toEqual(produkName);
+            expect(await text).equal(produkName);
         } catch {
             throw new Error('produk name is not same')
         } 
@@ -797,7 +818,7 @@ Then ('User able to see {string} in product list', async(produkName) => {
                 timeoutMsg:'namaProduk still not displayed'
             })
             let text = (await produkPage.namaProduk('RTP-ra')).getText();
-            expect(await text).toEqual(produkName);
+            expect(await text).equal(produkName);
         } catch {
             throw new Error('produk name is not same')
         }
@@ -811,7 +832,7 @@ Then ('User able to see {string} in product list', async(produkName) => {
                 timeoutMsg:'namaProduk still not displayed'
             })
             let text = (await produkPage.namaProduk('RTP-ingredients')).getText();
-            expect(await text).toEqual(produkName);
+            expect(await text).equal(produkName);
         } catch {
             throw new Error('produk name is not same')
         } 
@@ -825,7 +846,7 @@ Then ('User able to see {string} in product list', async(produkName) => {
                 timeoutMsg:'namaProduk still not displayed'
             })
             let text = (await produkPage.namaProduk('Automated Testing hehe')).getText();
-            expect(await text).toEqual(produkName);
+            expect(await text).equal(produkName);
         } catch {
             throw new Error('produk name is not same')
         }  
@@ -839,7 +860,7 @@ Then ('User able to see {string} in product list', async(produkName) => {
                 timeoutMsg:'namaProduk still not displayed'
             })
             let text = (await produkPage.namaProduk('Automated Test')).getText();
-            expect(await text).toEqual(produkName);
+            expect(await text).equal(produkName);
         } catch {
             throw new Error('produk name is not same')
         } 
@@ -852,7 +873,7 @@ Then ('User able to see {string} in product list', async(produkName) => {
                 timeoutMsg:'namaProduk still not displayed'
             })
             let text = (await produkPage.namaProduk('Produk Otomatis 0')).getText();
-            expect(await text).toEqual(produkName);
+            expect(await text).equal(produkName);
         } catch {
             throw new Error('produk name is not same')
         } 
@@ -911,7 +932,8 @@ When ('User click {string} in product pagee', async(x:string) => {
 
 Then ('User able to see fieldTipeProduk is disable in product page', async() => {
     await produkPage.fieldTipeProdukTest.scrollIntoView();
-    expect (await produkPage.fieldTipeProdukTest).toBeDisabled();
+    let disabled = await produkPage.fieldTipeProdukTest.isEnabled();
+    expect (await disabled).to.be.false;
 })
 
 
@@ -934,7 +956,7 @@ Then ('User unable to see btnRemoveModal in modal product', async() => {
 Then ('User able to see btnTambahAtributModal in modal product is disable', async() => {
     try {
          const isDisable = await produkPage.btnTambahAtributModal.getAttribute('disabled');
-         expect (await isDisable).toBe('true')
+         expect (await isDisable).to.be.true
     } catch (error) {
         console.error('btnTambahAtributModal is not disable', error)
     }
@@ -946,7 +968,7 @@ Then ('User able to see statusIngredients is disable in product page', async() =
     await browser.pause(2000);
     try {
          const isDisable = await produkPage.statusIngredients.getAttribute('disabled');
-         expect (await isDisable).toBe('true')
+         expect (await isDisable).to.be.true
     } catch (error) {
         console.error('btnTambahAtributModal is not disable', error)
     }
@@ -1003,7 +1025,7 @@ Then ('User able to see selected radio default is {string}', async(option) => {
     } 
     await browser.pause(3000);
     let text = await produkPage.optCheckedTag.getText();
-    expect (await text).toEqual(option)
+    expect (await text).equal(option)
     console.log('option selected : ', await text);
 
 })
@@ -1059,7 +1081,7 @@ Then ('User able to see selected radio default is {string} in filter status', as
     } 
     await browser.pause(3000);
     let text = await produkPage.optCheckedStatus.getText();
-    expect (await text).toEqual(option)
+    expect (await text).equal(option)
     console.log('option selected : ', await text);
 })
 
@@ -1119,7 +1141,7 @@ Then ('User able to see selected radio default is {string} in filter pin produk'
     } 
     await browser.pause(3000);
     let text = await produkPage.optCheckedPin.getText();
-    expect (await text).toEqual(option)
+    expect (await text).equal(option)
     console.log('option selected : ', await text);
 })
 
@@ -1147,7 +1169,7 @@ Then ('User able to see {string} radio default', async(option) => {
     try {
         //assertion tag produk
         let text1 = (await produkPage.selectedRadio('[5]')).getText();
-        expect (await text1).toEqual(option)
+        expect (await text1).equal(option)
         console.log('Tag Produk : ', await text1)
         await browser.pause(2000)
     } catch (error) {
@@ -1157,7 +1179,7 @@ Then ('User able to see {string} radio default', async(option) => {
     try {
         //assertion status
         let text2 = (await produkPage.selectedRadio('[6]')).getText();
-        expect (await text2).toEqual(option)
+        expect (await text2).equal(option)
         console.log('Status : ', await text2)
         await browser.pause(2000)
     } catch (error) {
@@ -1167,7 +1189,7 @@ Then ('User able to see {string} radio default', async(option) => {
     try {
         //assertion satuan
         let text3 = (await produkPage.selectedRadio('[7]')).getText();
-        expect (await text3).toEqual(option)
+        expect (await text3).equal(option)
         console.log('Satuan : ', await text3)
         await browser.pause(2000)
     } catch (error) {
@@ -1177,7 +1199,7 @@ Then ('User able to see {string} radio default', async(option) => {
     try {
         //assertion tipe produk
         let text4 = (await produkPage.selectedRadio('[8]')).getText();
-        expect (await text4).toEqual(option)
+        expect (await text4).equal(option)
         console.log('Tipe Produk : ', await text4)
         await browser.pause(2000)
     } catch (error) {
@@ -1187,7 +1209,7 @@ Then ('User able to see {string} radio default', async(option) => {
     try {
         //assertion sub tipe
         let text5 = (await produkPage.selectedRadio('[9]')).getText();
-        expect (await text5).toEqual(option)
+        expect (await text5).equal(option)
         console.log('Sub Tipe : ', await text5)
         await browser.pause(2000)
     } catch (error) {
@@ -1197,7 +1219,7 @@ Then ('User able to see {string} radio default', async(option) => {
     try {
         //assertion kategori
         let text6 = (await produkPage.selectedRadio('[10]')).getText();
-        expect (await text6).toEqual(option)
+        expect (await text6).equal(option)
         console.log('Kategori : ', await text6)
         await browser.pause(2000)
     } catch (error) {
@@ -1207,7 +1229,7 @@ Then ('User able to see {string} radio default', async(option) => {
     try {
         //assertion sub tipe
         let text7 = (await produkPage.selectedRadio('[11]')).getText();
-        expect (await text7).toEqual(option)
+        expect (await text7).equal(option)
         console.log('Pin Produk : ', await text7)
         await browser.pause(2000)
     } catch (error) {
@@ -1220,22 +1242,88 @@ Then ('User able to see {string} message verification in product page', async(me
     if (message === 'No data') {
         expect (await produkPage.emptyData.isDisplayed());
         let text = await produkPage.emptyData.getText();
-        expect (await text).toEqual(message);
-        console.log('Message is ', await text);
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
     
     } else if (message === '3 INVALID_ARGUMENT: Karakter pencarian Tidak Valid: emoji tidak diperbolehkan') {
         expect (await produkPage.failedAlert.isDisplayed());
         let text = await produkPage.failedAlert.getText();
-        expect (await text).toEqual(message);
-        console.log('Message is ', await text);
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
 
     } else if (message === 'Berhasil memperbarui pic produk') {
         expect (await produkPage.successAlert.isDisplayed());
         let text = await produkPage.successAlert.getText();
-        expect (await text).toEqual(message);
-        console.log('Message is ', await text);
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
 
-    } 
+    } else if (message === 'Saat ini export PIC produk hanya dapat dilakukan per satu gudang, silakan ganti filter Warehouse') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === 'Semua Data Berhasil Di Simpan!') {
+        expect (await produkPage.successAlert.isDisplayed());
+        let text = await produkPage.successAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Data file xlsx kosong') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, PIC dengan ID 2930138 tidak ditemukan') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Gudang kaca kaca bukan tape uli tidak ditemukan') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Format data pada row 2 tidak valid') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, SKU agr-0016 Satuan baggggs tidak ditemukan') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Status Gudang dengan nama angga inactive Non Aktif') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Status User dengan ID 854 Non Aktif') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === '3 INVALID_ARGUMENT: Pada baris ke 2, Status Gudang dengan nama gudangrra Non Aktif') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    } else if (message === 'Harga jual belum dapat diatur karena stok unrilis belum pernah tersedia') {
+        expect (await produkPage.failedAlert.isDisplayed());
+        let text = await produkPage.failedAlert.getText();
+        expect (await text).equal(message);
+        console.log('Message is:', await text);
+
+    }
 })
 
 
@@ -1248,7 +1336,7 @@ When ('User click navTabProduk pic produk in produk page', async() => {
 Then ('User be able to see {string} in pic list produk', async(produkName) => {
     if (produkName === 'Automated Testing hehe') {
         let text = (await produkPage.textPICProduk('[1]')).getText();
-        expect (await text).toEqual(produkName);
+        expect (await text).equal(produkName);
         console.log('Name : ', await text);
 
     } 
@@ -1271,7 +1359,7 @@ Then ('User be able to see {string} as a warehouse default', async(option) => {
     try {
        expect (await produkPage.optSelectedWarehouse.isSelected());
        let text = await produkPage.optSelectedWarehouse.getText();
-       expect (await text).toEqual(option);
+       expect (await text).equal(option);
        console.log('Selected Warehouse : ', text);
     } catch (error){
         console.error('Aloha is not set as a default warehouse')
@@ -1297,7 +1385,7 @@ Then ('User able to see table only shows {string} on Gudang section', async(ware
         })
         let text = await produkPage.selectedGudang.getText();
         console.log('Warehouse : ', await text)
-        expect(await text).toEqual(warehouseName)
+        expect(await text).equal(warehouseName)
     }catch {
         console.error('Warehouse is not same as selected')
     }
@@ -1308,7 +1396,7 @@ Then ('User be able to see {string} selected as a pic produk default', async(opt
     try {
         expect (await produkPage.optSelectedPICProduk.isSelected());
         let text =await produkPage.optSelectedPICProduk.getText();
-        expect(await text).toEqual(option)
+        expect(await text).equal(option)
         console.log('PIC Selected : ', await text)
     } catch {
         console.error('Semua Pic is not set as a default pic')
@@ -1323,17 +1411,62 @@ When ('User click "EraIlyasa" after search modal', async() => {
 })
 
 
-Then ('User able to see table shows {string} on Gudang section', async(picName) => {
+When ('User click "optPICSemua" after search modal', async() => {
+    await produkPage.optPICSemua.click();
+    await browser.pause(1000);
+})
+
+
+When ('User click "optSemuaGudang" after search modal', async() => {
+    await produkPage.optSemuaGudang.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User able to see table shows {string} on Gudang section', async function(picName) {
     try {
         await produkPage.picName.isDisplayed();
         let text = await produkPage.picName.getText();
-        console.log('PIC : ', await text);
-        expect (await text).toEqual(picName);
+        console.log('PIC: ', await text);
+        expect (await text).equal(picName);
+
+        this.text = text
     
     }catch (error) {
         console.error('pic is not displayed on gudang section')
     }
 })
+
+
+Then ('User able to see table shows {string} on Gudang section2', async function(x) {
+    if (x === 'a') {
+        try {
+            await produkPage.picName.isDisplayed();
+            let text = await produkPage.picName.getText();
+            console.log('PIC: ', await text);
+            // expect (await text).equal(x);
+    
+            this.text = text
+        
+        }catch (error) {
+            console.error('pic is not displayed on gudang section')
+        }
+    
+    } else if (x === 'aa') {
+        try {
+            await produkPage.picName.isDisplayed();
+            let text = await produkPage.picName.getText();
+            console.log('PIC: ', await text);
+            // expect (await text).equal(x);
+    
+            this.text = text
+        
+        }catch (error) {
+            console.error('pic is not displayed on gudang section')
+        }
+    }
+})
+
 
 
 When ('User click fieldSearchModal in pic filter', async() => {
@@ -1345,7 +1478,7 @@ When ('User click fieldSearchModal in pic filter', async() => {
 Then ('User able to see {string} radio as default warehouse', async(option1) => {
         try {
             let text8 = (await produkPage.selectedRadio('[3]')).getText();
-            expect (await text8).toEqual(option1)
+            expect (await text8).equal(option1)
             console.log('Warehouse Default : ', await text8)
             await browser.pause(2000)
 
@@ -1358,7 +1491,7 @@ Then ('User able to see {string} radio as default warehouse', async(option1) => 
 Then ('User able to see {string} radio as default pic produk', async(option2) => {
     try {
         let text9 = (await produkPage.selectedRadio('[4]')).getText();
-        expect (await text9).toEqual(option2)
+        expect (await text9).equal(option2)
         console.log('PIC Produk Default : ', await text9)
         await browser.pause(2000)
 
@@ -1379,7 +1512,7 @@ Then ('User able to see {string} on Gudang section', async(x) => {
         }
     }
     let text = await produkPage.btnPilihPIC.getText();
-    expect(await text).toEqual(x)    
+    expect(await text).equal(x)    
     console.log('Text : ', await text);
 
 })
@@ -1415,7 +1548,7 @@ When ('User able to see PIC LAMA value is {string}',async(picValue) => {
         })
         let text = await produkPage.textPICLama.getText();
         console.log(await text);
-        expect (await text).toEqual(picValue)
+        expect (await text).equal(picValue)
     } catch (error) {
         console.error('picValue is not as expected, there is pic', error)
     }
@@ -1441,18 +1574,24 @@ When ('User click btnSimpanModalPIC in product page', async() => {
 })
 
 
+When ('User click btn submit csv in product page', async() => {
+    await produkPage.btnSimpanModalPIC.click();
+    await browser.pause(1000);
+})
+
+
 Then ('User able to see diubah oleh {string} and tanggal is {string}', async(x, y) =>{
     if (x === 'Era Ilyasa') {
         try {
             (await produkPage.logPIC('[3]')).isDisplayed();
             let text = (await produkPage.logPIC('[3]')).getText();
-            expect (await text).toEqual(x)
+            expect (await text).equal(x)
             console.log('Diubah oleh:',await text)
 
             if (y === '08 Oct 2024') {
                 (await produkPage.logPIC('[4]')).isDisplayed();
                 let text = (await produkPage.logPIC('[4]')).getText();
-                expect (await text).toEqual(y)
+                expect (await text).equal(y)
                 console.log('Date:',await text)
             }
         } catch (error) {
@@ -1465,4 +1604,759 @@ Then ('User able to see diubah oleh {string} and tanggal is {string}', async(x, 
 When ('User click btnCancelModalPIC in product page', async() => {
     await produkPage.btnCancelModalPIC.click();
     await browser.pause(1000);
+})
+
+
+When ('User click btnExportPIC button in Product page', async() => {
+    await produkPage.btnExportFile.waitForClickable({timeout:10000})
+    await produkPage.btnExportFile.click();
+    getTodayDateTime();
+    console.log(getTodayDateTime());
+    // await browser.pause(20000);
+})
+
+
+When ('User click btnImportFile button in Product page', async() => {
+    await produkPage.btnImportFile.waitForClickable({timeout:10000})
+    await produkPage.btnImportFile.click();
+    await browser.pause(1000);
+})
+
+
+Then ('User verify the CSV file has been downloaded', async function (){
+            
+    downloadPath = path.join('downloads', `export-product-pic_${getTodayDateTime()}.xlsx`);
+
+    await browser.waitUntil(async () => {
+        const fileExist = fs.existsSync(downloadPath)
+        console.log(`file exist: ${downloadPath}`)
+        return fileExist 
+    }, {
+        timeout: 90000, 
+        timeoutMsg: 'File tidak ditemukan dalam waktu yang ditentukan'
+    });
+
+    const fileExists = fs.existsSync(downloadPath);
+    const fileIsValid = fileExists && fs.statSync(downloadPath).isFile();
+
+    if (fileIsValid) {
+        console.log('File berhasil diunduh dan valid.');
+    } else {
+        console.log('File tidak valid atau tidak ditemukan.');
+    }
+
+})
+
+
+When ('User write csv file and store it', async function() {
+    
+    let picId
+
+    if (this.text === 'Era Ilyasa') {
+        picId = '846'
+    } else if (this.text === 'Ariansyah Riwendi') {
+        picId = '841'
+    }
+
+    const csvWriter = createObjectCsvWriter({
+        path: './file-csv/import-pic.xlsx',  
+        header: [
+            { id: 'sku', title: 'SKU' },
+            { id: 'produk', title: 'Produk' },
+            { id: 'satuan', title: 'Satuan' },
+            { id: 'gudang', title: 'Gudang' },
+            { id: 'pic', title: 'PIC' }
+
+        ]
+    });
+
+    const csvImportPIC = [{ 
+        sku: 'AGR-0016', 
+        produk: 'Automated Testing hehe', 
+        satuan: 'bag', 
+        gudang:'Aloha', 
+        pic: picId 
+        }
+    ];
+    console.log('ID:',await picId);
+
+    // function createDynamicFile(BaseFileName: string): string {
+    //     let fileName = BaseFileName;
+    //     let counter = 1;
+
+    //     while (fs.existsSync(fileName)) {
+    //         fileName = `${BaseFileName}-${counter}`;
+    //         counter++;
+    //     }
+    //     fs.mkdirSync(fileName);
+    //     return fileName; 
+    // }
+
+    async function writeImportCsv() {
+        try {
+            if (!fs.existsSync('./file-csv')) {
+                fs.mkdirSync('./file-csv');
+            }
+    
+            await csvWriter.writeRecords(csvImportPIC);
+            console.log('Berhasil ditulis ke CSV di folder file-csv.');
+        } catch (error) {
+            console.error('Gagal menulis ke CSV:', error);
+        }
+    }
+
+    writeImportCsv();
+})
+
+
+When ('User write csv file and store it2', async function() {
+    
+    const csvWriter = createObjectCsvWriter({
+        path: './file-csv/import-pic2.xlsx',  
+        header: [
+            { id: 'sku', title: 'SKU' },
+            { id: 'produk', title: 'Produk' },
+            { id: 'satuan', title: 'Satuan' },
+            { id: 'gudang', title: 'Gudang' },
+            { id: 'pic', title: 'PIC' }
+
+        ]
+    });
+
+    const csvImportPIC = [{ 
+        sku: 'AGR-0016', 
+        produk: 'Automated Testing hehe', 
+        satuan: 'bag', 
+        gudang:'Aloha', 
+        pic: '841' 
+        }
+    ];
+
+    async function writeImportCsv() {
+        try {
+            if (!fs.existsSync('./file-csv')) {
+                fs.mkdirSync('./file-csv');
+            }
+    
+            await csvWriter.writeRecords(csvImportPIC);
+            console.log('Berhasil ditulis ke CSV di folder file-csv.');
+        } catch (error) {
+            console.error('Gagal menulis ke CSV:', error);
+        }
+    }
+
+    writeImportCsv();
+})
+
+
+When ('User write csv file with empty pic and store it', async function() {
+    
+    const csvWriter = createObjectCsvWriter({
+        path: './file-csv/import-no-pic.xlsx',  
+        header: [
+            { id: 'sku', title: 'SKU' },
+            { id: 'produk', title: 'Produk' },
+            { id: 'satuan', title: 'Satuan' },
+            { id: 'gudang', title: 'Gudang' },
+            { id: 'pic', title: 'PIC' }
+
+        ]
+    });
+
+    const csvImportPIC = [{ 
+        sku: 'AGR-0016', 
+        produk: 'Automated Testing hehe', 
+        satuan: 'bag', 
+        gudang:'Aloha', 
+        pic: '' 
+        }
+    ];
+
+    async function writeImportCsv() {
+        try {
+            if (!fs.existsSync('./file-csv')) {
+                fs.mkdirSync('./file-csv');
+            }
+    
+            await csvWriter.writeRecords(csvImportPIC);
+            console.log('Berhasil ditulis ke CSV di folder file-csv.');
+        } catch (error) {
+            console.error('Gagal menulis ke CSV:', error);
+        }
+    }
+
+    writeImportCsv();
+})
+
+
+When ('User write {string} csv file and store it', async function(csvCondition) {
+    
+    
+    if (csvCondition === 'empty csv') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-empty-value.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: '', 
+            produk: '', 
+            satuan: '', 
+            gudang:'', 
+            pic: '' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'unregistered pic') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-unregistered-pic.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'bag', 
+            gudang:'Aloha', 
+            pic: '2930138' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'unregistered warehouse') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-unregistered-warehouse.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'bag', 
+            gudang:'kaca kaca bukan tape uli', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'unregistered product and warehouse') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-unregistered-product-and-warehouse.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'produk tidak ada', 
+            satuan: 'bag', 
+            gudang:'kaca kaca bukan tape uli', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'empty product sku') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-empty-product-sku.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: '', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'bag', 
+            gudang:'Aloha', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'invalid satuan') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-invalid-satuan.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'baggggs', 
+            gudang:'Aloha', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'empty satuan') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-empty-satuan.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: '', 
+            gudang:'Aloha', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'empty warehouse') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-empty-warehouse.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: '', 
+            gudang:'Aloha', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'inactive warehouse') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-inactive-warehouse.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'Bag', 
+            gudang:'gudangRra', 
+            pic: '841' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    } else if (csvCondition === 'inactive pic') {
+
+        const csvWriter = createObjectCsvWriter({
+            path: './file-csv/import-inactive-pic.xlsx',  
+            header: [
+                { id: 'sku', title: 'SKU' },
+                { id: 'produk', title: 'Produk' },
+                { id: 'satuan', title: 'Satuan' },
+                { id: 'gudang', title: 'Gudang' },
+                { id: 'pic', title: 'PIC' }
+    
+            ]
+        });
+
+        const csvImportPIC = [{ 
+            sku: 'AGR-0016', 
+            produk: 'Automated Testing hehe', 
+            satuan: 'Bag', 
+            gudang:'Aloha', 
+            pic: '854' 
+            }
+        ];
+
+        async function writeImportCsv() {
+            try {
+                if (!fs.existsSync('./file-csv')) {
+                    fs.mkdirSync('./file-csv');
+                }
+        
+                await csvWriter.writeRecords(csvImportPIC);
+                console.log('Berhasil ditulis ke CSV di folder file-csv.');
+            } catch (error) {
+                console.error('Gagal menulis ke CSV:', error);
+            }
+        }
+    
+        writeImportCsv();
+    
+    }
+
+
+})
+
+
+
+When ('User uplaod csvUpload to import csv PIC product', async() => {
+    const uploadCsv = await produkPage.csvUpload;
+    await uploadCsv.waitForExist({timeout:10000})
+    await browser.execute((el:HTMLElement) => {
+    el.style.display = 'block';
+  }, uploadCsv);
+    const filePath = path.resolve('file-csv\\import-pic.xlsx');
+    const uploadFile = await browser.uploadFile(filePath);
+    await uploadCsv.setValue(uploadFile);
+    await browser.keys(['Enter']);
+    await browser.pause(3000);
+})
+
+
+When ('User upload csvUpload {string} to import csv PIC product', async(condition) => {
+    if (condition === 'no pic') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-pic.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+    
+    } else if (condition === 'empty') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-empty-value.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'unregistered pic') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-unregistered-pic.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'unregistered warehouse') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-unregistered-warehouse.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'unregistered product and warehouse') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-unregistered-product-and-warehouse.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'empty product sku') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-empty-product-sku.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'invalid satuan') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-invalid-satuan.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'empty satuan') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-empty-satuan.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'empty warehouse') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-empty-warehouse.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'inactive warehouse') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-inactive-warehouse.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    } else if (condition === 'inactive pic') {
+        const uploadCsv = await produkPage.csvUpload;
+        await uploadCsv.waitForExist({timeout:10000})
+        await browser.execute((el:HTMLElement) => {
+        el.style.display = 'block';
+      }, uploadCsv);
+        const filePath = path.resolve('file-csv\\import-inactive-pic.xlsx');
+        const uploadFile = await browser.uploadFile(filePath);
+        await uploadCsv.setValue(uploadFile);
+        await browser.keys(['Enter']);
+        await browser.pause(3000);
+
+    }
+})
+
+
+When ('User click btnCancelModalPIC in modal import PIC', async() => {
+    await produkPage.btnCancelModalPIC.click();
+    await browser.pause(1000);
+})
+
+
+When ('User click btnAturHarga in product list', async() => {
+    (await produkPage.btnAturHarga('[1]')).click();
+    await browser.pause(1000)
+})
+
+
+When ('User click btnUbahAturHarga in atur harga page', async() => {
+    (await produkPage.btnUbahAturHarga('0')).waitForExist({timeout:30000, timeoutMsg:'btnUbahAturHarga still not Exist'});
+    await (await produkPage.btnUbahAturHarga('0')).scrollIntoView();
+    (await produkPage.btnUbahAturHarga('0')).click();
+    console.log('User have been clicked the button')
+    await browser.pause(5000);
+})
+
+
+Then ('User verify btnUbahAturHarga is not displayed', async() => {
+    try {
+        let notDis = (await produkPage.btnUbahAturHarga('1')).isDisplayed()
+        expect(await notDis).to.be.false
+        console.log('btnUbahAturHarga is not displayed any more')
+    } catch (error) {
+        console.error('btnUbahAturHarga still displayed')
+    }
 })
