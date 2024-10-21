@@ -165,6 +165,9 @@ export default new class e2eBadStockPage {
     public get menuPurchasingV3() {
         return $('(//*[@class="ant-menu-submenu ant-menu-submenu-inline"])[4]');
     }
+    public get menuPurchasingV4() {
+        return $('//*[@data-testid="Menu-Purchasing"]')
+    }
     public get menuPurchaseOrderV3() {
         return $('//*[@data-testid="menu-Purchase Order V3"]');
     }
@@ -268,7 +271,7 @@ export default new class e2eBadStockPage {
         return $('(//*[@class="ant-menu-submenu ant-menu-submenu-inline"])[10]');
     }
     public get menuLogisticV3_3() {
-        return $('//*[@data-testid="Menu-Logistic"]');
+        return $('(//*[@class="ant-menu-submenu-title"])[10]');
     }
     public get filterGudangV3() {
         return $('(//*[@class="ant-btn ant-btn-default Modal_filterButton__kNBQ1"])[1]');
@@ -668,6 +671,9 @@ export default new class e2eBadStockPage {
         return $('(//button[@data-testid="button-link-small-detail"])[1]');
     }
     public get kodePRO() {
-        return $('//*[@data-testid="page-header-subtitle"]');
+        return $('(//button[@data-testid="button-link-small-detail"]/preceding-sibling::span)[1]');
+    }
+    public get btnBackPRO() {
+        return $('//*[@data-testid="page-header-back-btn"]');
     }
 }

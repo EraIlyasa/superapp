@@ -8,8 +8,12 @@ let POCode : string;
 let namaRM_1 : string;
 let namaRM_2 : string;
 let kodeRetur : string;
-let namaPRO = 'PRO-201024-154637';
+let namaPRO : string;
 let PROCode : string;
+
+When('User wait for 1 second', async () => {
+    await browser.pause(1000);
+})
 
 When('User click "menuInventory" button in "Stock"', async () => {
     await browser.waitUntil(async () => {
@@ -60,7 +64,7 @@ When ('User verify amount of "textStokBlmRilis"', async() => {
     await bs.textStokBlmRilis.scrollIntoView();
     const stokBlmRilis = await bs.textStokBlmRilis.getText();
     console.log('Stok belum rilis before : ', await stokBlmRilis);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 
@@ -68,7 +72,7 @@ When ('User verify amount of "textStokTemporary"', async() => {
     await bs.textStokTemporary.scrollIntoView();
     const StokTemporary = await bs.textStokTemporary.getText();
     console.log('Stok temporary before : ', await StokTemporary);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 
@@ -76,7 +80,7 @@ When ('User verify amount of "textStokRusak"', async() => {
     await bs.textStokRusak.scrollIntoView();
     const StokRusak = await bs.textStokRusak.getText();
     console.log('Stok rusak before : ', await StokRusak);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 
@@ -84,7 +88,7 @@ When ('User verify amount of "textStokRetur"', async() => {
     await bs.textStokRetur.scrollIntoView();
     const StokRetur = await bs.textStokRetur.getText();
     console.log('Stok retur before : ', await StokRetur);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 
@@ -100,6 +104,7 @@ When ('User directed to "Stok Bermasalah" via {string}', async(url) => {
 When ('User click "menuRawMaterialV3" inside "navMenuPurchasing"', async() => {
     await bs.menuRawMaterialV3.scrollIntoView();
     await bs.menuRawMaterialV3.click();
+    await browser.pause(750);
 })
 
 When ('User click "menuRawMaterialV3_2" inside "navMenuPurchasing"', async() => {
@@ -126,6 +131,7 @@ When('User upload file to "imgUploadRM"', async() => {
     const uploadFile = await browser.uploadFile(filePath)
 
     await uploadElement.setValue(uploadFile);
+    await browser.pause(2000);
 })
 
 When('User click "pilihMerek"', async() => {
@@ -136,6 +142,7 @@ When('User click "pilihMerek"', async() => {
 When('User type {string} in "pilihMerek"', async(merek) => {
     await bs.pilihMerek.setValue(merek);
     await browser.keys(['Enter']);
+    await browser.pause(750);
 })
 
 When('User click "inputNamaRM"', async() => {
@@ -232,6 +239,7 @@ When('User click "menuPurchasingV3"', async() => {
 When('User click "menuPurchaseOrderV3" inside "menuPurchasingV3"', async () => {
     await bs.menuPurchaseOrderV3.scrollIntoView();
     await bs.menuPurchaseOrderV3.click();
+    await browser.pause(750);
 })
 
 When('User click "btnCreatePO"', async () => {
@@ -365,7 +373,6 @@ When('User click "selectSatuan"', async () => {
 
 When('User click "inputQty"', async () => {
     await bs.inputQty.click();
-    await browser.pause(2000);
 })
 
 When('User type {string} into "inputQty"', async (qty) => {
@@ -389,7 +396,6 @@ When('User type {string} into "inputHargaSatuan"', async (harga) => {
 
 When('User click "btnSimpanTambahProduk"', async () => {
     await bs.btnSimpanTambahProduk.click();
-    await browser.pause(2000);
     await browser.pause(2000);
 })
 
@@ -452,6 +458,7 @@ When('User click "menuLogisticV3_2"', async () => {
 When('User click "menuLogisticV3_3"', async () => {
     await bs.menuLogisticV3_3.scrollIntoView();
     await bs.menuLogisticV3_3.click();
+    await browser.pause(750);
 })
 
 When('User click "filterGudangV3"', async () => {
@@ -617,7 +624,7 @@ When('User click "btnSubmitIncomingModal"', async () => {
 
 When('User click "btnConfirmSubmitIncomingModal"', async () => {
     await bs.btnConfirmSubmitIncomingModal.click();
-    await browser.pause(2000);
+    await browser.pause(3000);
 })
 
 When('User click "btnValidasiChecker"', async () => {
@@ -646,6 +653,7 @@ When('User click "btnTambahStokBermasalah"', async () => {
 
 When('User click "optKategoriRM"', async () => {
     await bs.optKategoriRM.click();
+    await browser.pause(750);
 })
 
 When('User click "selectGudangRM"', async() => {
@@ -672,7 +680,7 @@ When('User click "optGudangSumberPangan" in "selectGudangRM"', async () => {
                 break; // Exit the loop if the element is found
             } else {
                 await sendArrowDownMultipleTimes(3); // Send Arrow Down multiple times
-                await browser.pause(1000); // Wait for a second before retrying
+                await browser.pause(750); // Wait for a second before retrying
             }
         }
     
@@ -703,7 +711,7 @@ When('User click "optGudangFGJember" in "selectGudangFG"', async () => {
                 break; // Exit the loop if the element is found
             } else {
                 await sendArrowDownMultipleTimes(3); // Send Arrow Down multiple times
-                await browser.pause(1000); // Wait for a second before retrying
+                await browser.pause(750); // Wait for a second before retrying
             }
         }
     
@@ -775,6 +783,7 @@ When('User type {string} into "inputCatatanRusak"', async (catatanRusak) => {
     await bs.inputCatatanRusak.clearValue();
     await browser.pause(500);
     await bs.inputCatatanRusak.setValue(catatanRusak);
+    await browser.pause(2000);
 })
 
 When('User click "btnSubmitModalProdukBermasalah"', async () => {
@@ -842,14 +851,17 @@ When('User click "btnAjukan"', async () => {
 
 When('User click "btnConfirmAjukan"', async () => {
     await bs.btnConfirmAjukan.click();
+    await browser.pause(750);
 })
 
 When('User click "btnSetujuAjukan"', async () => {
     await bs.btnSetujuAjukan.click();
+    await browser.pause(750);
 })
 
 When('User click "optTipeStokRetur"', async () => {
     await bs.optTipeStokRetur.click();
+    await browser.pause(750);
 })
 
 When('User click "MenuPurchasingV3"', async () => {
@@ -862,6 +874,7 @@ When('User click "menuReturnV3"', async () => {
 
 When('User click "btnBuatRetur"', async () => {
     await bs.btnBuatRetur.click();
+    await browser.pause(2000);
 })
 
 When('User click "selectGudangRetur"', async () => {
@@ -882,7 +895,7 @@ When('User click "optGudangSumberPangan" in "selectGudangRetur"', async () => {
             }
     
             await browser.keys(Array(3).fill('ArrowDown'));
-            await browser.pause(1000);
+            await browser.pause(750);
         }
     
         console.log('Element not found after maximum retries.');
@@ -967,6 +980,7 @@ When('User type raw material name into "pilihProdukRetur"', async() => {
 When('User click "pilihUnitRetur"', async () => {
     await bs.pilihUnitRetur.click();
     await browser.keys(['Enter']);
+    await browser.pause(750);
 })
 
 When('User click "inputQtyImbalanRetur"', async () => {
@@ -983,6 +997,7 @@ When('User click "inputHargaBeliImbalanRetur"', async () => {
 
 When('User type {string} into "inputHargaBeliImbalanRetur"', async (hrg) => {
     await bs.inputHargaBeliImbalanRetur.setValue(hrg);
+    await browser.pause(2000);
 })
 
 When('User click "btnSubmitRetur"', async () => {
@@ -1009,6 +1024,7 @@ When('User click "btnSubmitReturModal"', async () => {
 
 When('User click "btnSetujuRetur"', async () => {
     await bs.btnSetujuRetur.click();
+    await browser.pause(750);
 })
 
 When('User click "tabReturSupplier"', async () => {
@@ -1170,7 +1186,7 @@ When('User type product name into "pilihProdukRetur"', async () => {
 
 When('User click "menuPROV4"', async () => {
     await bs.menuPROV4.click();
-    await browser.pause(10000);
+    await browser.pause(7500);
 })
 
 When('User click "tabReturSupplierIncomingCheckerV3"', async () => {
@@ -1211,7 +1227,7 @@ When('User type {string} into "selectGudangPRO"', async (gudang) => {
     // await bs.selectGudangPRO.setValue(gudang);
     await bs.selectGudangPROJember.click();
     // await browser.keys(['Enter']);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User click "selectTipePT_2"', async () => {
@@ -1222,7 +1238,7 @@ When('User click "selectTipePT_2"', async () => {
 When('User type {string} into "selectTipePT_2"', async (tipe) => {
     // await bs.selectTipePT_2.setValue(tipe);
     await browser.keys(['Enter']);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User click "selectSupplierPRO"', async () => {
@@ -1233,7 +1249,7 @@ When('User click "selectSupplierPRO"', async () => {
 When('User type {string} into "selectSupplierPRO"', async (supplier) => {
     await bs.selectSupplierPRO.setValue(supplier);
     await browser.keys(['Enter']);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User click "pilihPengirimanPRO"', async () => {
@@ -1244,7 +1260,7 @@ When('User click "pilihPengirimanPRO"', async () => {
 When('User type {string} into "pilihPengirimanPRO"', async (pengiriman) => {
     await bs.pilihPengirimanPRO.setValue(pengiriman);
     await browser.keys(['Enter']);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User click "pilihPICPRO"', async () => {
@@ -1255,17 +1271,17 @@ When('User click "pilihPICPRO"', async () => {
 When('User type {string} into "pilihPICPRO"', async (pic) => {
     await bs.pilihPICPRO.setValue(pic);
     await browser.keys(['Enter']);
-    await browser.pause(1000);
+    await browser.pause(750);
 });
 
 When('User click "pilihGudangStok"', async () => {
     await bs.pilihGudangStok.scrollIntoView();
-    await browser.pause(1000);
+    await browser.pause(750);
     await bs.pilihGudangStok.click();
-    await browser.pause(1000);
+    await browser.pause(750);
     await bs.pilihGudangStok.setValue('Aloha');
     await browser.keys(['Enter']);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User click "btnTambahBarangPRO"', async () => {
@@ -1329,9 +1345,9 @@ When('User click "btnDetailPRO"', async () => {
 })
 
 When('User get "kodePRO"', async () => {
-    const kodePRO = await bs.kodePRO.getText();
-    PROCode = kodePRO.replace('Kode PRO: ', '');
+    PROCode = await bs.kodePRO.getText();
     console.log(PROCode);
+    // await browser.back();
 })
 
 export { PROCode }
@@ -1342,39 +1358,55 @@ When('User click "btnQtyRusakDariRM"', async () => {
 
 When('User click "btnExpandRowIngredients"', async () => {
     await bs.btnExpandRowIngredients.click();
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User click "qtyDiperlukan"', async () => {
     await bs.qtyDiperlukan.click();
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User type {string} into "qtyDiperlukan"', async (qty) => {
     await bs.qtyDiperlukan.setValue(qty);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User click "qtyRusakModalRM"', async () => {
     await bs.qtyRusakModalRM.click();
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
 When('User type {string} into "qtyRusakModalRM"', async (qty) => {
     await bs.qtyRusakModalRM.setValue(qty);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
-When('User type "rusak" into "catatanRusakModalRM"', async (notes) => {
+When('User click "catatanRusakModalRM"', async () => {
     await bs.catatanRusakModalRM.click();
-    await browser.pause(1000);
-    await bs.catatanRusakModalRM.setValue(notes);
-    await browser.pause(1000);
+    await browser.pause(750);
 })
 
-When('User type "rusak" into "catatanStokRusak"', async (notes) => {
+When('User type {string} into "catatanRusakModalRM"', async (notes) => {
+    await bs.catatanRusakModalRM.setValue(notes);
+    await browser.pause(750);
+})
+
+When('User click "catatanStokRusak"', async () => {
     await bs.catatanStokRusak.click();
-    await browser.pause(1000);
+    await browser.pause(750);
+})
+
+When('User type {string} into "catatanStokRusak"', async (notes) => {
     await bs.catatanStokRusak.setValue(notes);
-    await browser.pause(1000);
+    await browser.pause(750);
+})
+
+When('User click "menuPurchasingV4"', async () => {
+    await bs.menuPurchasingV4.click();
+    await browser.pause(2000);
+})
+
+When('User click "btnBackPRO"', async () => {
+    await bs.btnBackPRO.click();
+    await browser.pause(750);
 })

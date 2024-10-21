@@ -69,20 +69,16 @@ Feature: Create - Bad Bad Stock
     When open dashboard superapp
     And User click "navMenuPurchasing" button in "Global" page
     And User click "menuRawMaterialV3" inside "navMenuPurchasing"
-    And User wait for 3 seconds
     And User click "btnCreateRM"
     And User click "imgUploadRM"
     And User upload file to "imgUploadRM"
-    And User wait for 3 seconds
     And User click "pilihMerek"
     And User type "Keraton" in "pilihMerek"
-    And User wait for 3 seconds
     And User click "inputNamaRM"
     And User type raw material name into "inputNamaRM1"
-    And User wait for 3 seconds
     And User click "pilihKategori"
     And User type "frozen snack" into "pilihKategori"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "btnTambahAttribute"
     And User click "inputSatuan"
     And User type "cup" into "inputSatuan"
@@ -95,7 +91,6 @@ Feature: Create - Bad Bad Stock
     And User wait for 5 seconds
     And User click "menuPurchasingV3"
     And User click "menuPurchaseOrderV3" inside "menuPurchasingV3"
-    And User wait for 3 seconds
     And User click "btnCreatePO"
     And User click "selectJenisPO"
     And User select "optJenisPORawMaterial" in "selectJenisPO"
@@ -121,10 +116,11 @@ Feature: Create - Bad Bad Stock
     And User click "selectSatuan"
     And User click "inputQty"
     And User type "100" into "inputQty"
+    And User wait for 1 second
     And User click "inputHargaSatuan"
     And User type "100000" into "inputHargaSatuan"
+    And User wait for 1 second
     And User click "btnSimpanTambahProduk"
-    And User wait for 3 seconds
     And User click "imgUploadNotaPengajuan"
     And User upload file to "imgUploadNotaPengajuan"
     And User wait for 3 seconds
@@ -134,12 +130,11 @@ Feature: Create - Bad Bad Stock
     And User click "btnDetailPO"
     And User click "btnRequestPrepayment"
     And User click "btnSimpanRequestPrepayment"
-    And User wait for 3 seconds
     And User click "menuLogisticV3_1"
     And User click "menuIncomingGoods" in "navMenuLogistic"
-    # And User click "filterGudangV3"
-    # And User click "warehouseSumberPangan" in "filterGudangV3"
-    # And User click "btnTerapkanFilterWarehouse"
+    And User click "filterGudangV3"
+    And User click "warehouseSumberPangan" in "filterGudangV3"
+    And User click "btnTerapkanFilterWarehouse"
     And User wait for 3 seconds
     And User click "btnSearchV3"
     And User click "searchBarV3"
@@ -153,7 +148,6 @@ Feature: Create - Bad Bad Stock
     And User click "inputNamaDriver"
     And User type "Budi" into "inputNamaDriver"
     And User click "btnCheckIn"
-    And User wait for 3 seconds
     And User click "menuLogisticV3_2"
     And User click "menuIncomingChecker" in "navMenuLogistic"
     And User wait for 3 seconds
@@ -179,7 +173,6 @@ Feature: Create - Bad Bad Stock
     And User click "selectProductionDateToday" in "selectProductionDate"
     And User click "btnSubmitIncomingModal"
     And User click "btnConfirmSubmitIncomingModal"
-    And User wait for 5 seconds
     And User click "menuIncomingGoods" in "navMenuLogistic"
     # And User click "filterGudangV3"
     # And User click "warehouseSumberPangan" in "filterGudangV3"
@@ -192,12 +185,10 @@ Feature: Create - Bad Bad Stock
     And User click "btnValidasiChecker"
     And User click "btnSubmitIncomingModal"
     And User click "btnSubmitValidasiIncoming"
-    And User wait for 3 seconds
     And User click "menuStockV3"
     And User click "menuStokBermasalah" in "menuStockV3"
     And User click "btnTambahStokBermasalah"
     And User click "optKategoriRM"
-    And User wait for 3 seconds
     # And User click "selectGudangRM"
     # And User click "optGudangSumberPangan" in "selectGudangRM"
     # And User wait for 10 seconds
@@ -213,14 +204,12 @@ Feature: Create - Bad Bad Stock
     And User wait for 3 seconds
     And User click "inputCatatanRusak"
     And User type "Kualitas buruk" into "inputCatatanRusak"
-    And User wait for 3 seconds
     And User click "btnSubmitModalProdukBermasalah"
-    And User wait for 3 seconds
     And User click "gambarPermintaanBarang"
     And User upload file to "gambarPermintaanBarang"
     And User wait for 3 seconds
     And User click "tabBuktiAlokasiBarang"
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     And User click "imgUploadBuktiAlokasiBarang"
     And User upload file to "imgUploadBuktiAlokasiBarang"
     And User wait for 3 seconds
@@ -232,15 +221,11 @@ Feature: Create - Bad Bad Stock
     # And User wait for 3 seconds
     And User click "btnAjukan"
     And User click "btnConfirmAjukan"
-    And User wait for 3 seconds
     And User click "btnSetujuAjukan"
-    And User wait for 3 seconds
     And User click "optTipeStokRetur"
-    And User wait for 3 seconds
     #reusable
     And User click "btnSubmitIncomingModal" 
     And User click "btnConfirmAjukan"
-    And User wait for 3 seconds
     And User click "MenuPurchasingV3"
     And User click "menuRawMaterialV3_2" inside "navMenuPurchasing"
     And User wait for 3 seconds
@@ -269,7 +254,6 @@ Feature: Create - Bad Bad Stock
     And User click "menuReturnV3"
     And User wait for 3 seconds
     And User click "btnBuatRetur"
-    And User wait for 3 seconds
     And User click "selectGudangRetur"
     And User click "optGudangAloha_1" in "selectGudangRetur"
     # And User wait for 10 seconds
@@ -278,34 +262,32 @@ Feature: Create - Bad Bad Stock
     And User wait for 3 seconds
     And User click "selectSupplierRetur"
     And User type "Ali Boedi Santoso" into "selectSupplierRetur"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "selectKodeTransaksiRetur"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User type PO code into "selectKodeTransaksiRetur"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "btntambahProduk"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "inputQtyRetur"
     And User type "100" into "inputQtyRetur"
     #reusable
     And User click "btnCheckIn"
-    And User wait for 3 seconds
     And User click "selectTipeRetur"
     And User click "optTipeReturBarang" in "selectTipeRetur"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "btntambahProduk"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "pilihProdukRetur"
     And User type raw material name into "pilihProdukRetur"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "pilihUnitRetur"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "inputQtyImbalanRetur"
     And User type "100" into "inputQtyImbalanRetur"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "inputHargaBeliImbalanRetur"
     And User type "100000" into "inputHargaBeliImbalanRetur"
-    And User wait for 3 seconds
     And User click "btnSubmitRetur"
     And User wait for 3 seconds
     #reusable
@@ -322,7 +304,6 @@ Feature: Create - Bad Bad Stock
     And User wait for 3 seconds
     And User click "btnSubmitReturModal"
     And User click "btnSetujuRetur"
-    And User wait for 3 seconds
     And User click "menuLogisticV3_2"
     And User click "menuOutgoingGoods" in "navMenuLogistic"
     And User wait for 3 seconds
@@ -365,12 +346,11 @@ Feature: Create - Bad Bad Stock
     And User click "inputNamaDriver"
     And User type "Budi" into "inputNamaDriver"
     And User click "btnCheckIn"
-    And User wait for 3 seconds
     And User click "menuLogisticV3_2"
     And User click "menuIncomingChecker" in "navMenuLogistic"
     And User wait for 3 seconds
     And User click "tabReturSupplierIncomingCheckerV3"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "btnSearchV3"
     And User click "searchBarV3_2"
     And User type return code to "searchBarV3_2"
@@ -400,7 +380,6 @@ Feature: Create - Bad Bad Stock
     And User click "btnValidasiChecker_2"
     And User click "btnSubmitIncomingModal"
     And User click "btnSubmitValidasiIncoming"
-    And User wait for 3 seconds
     And User click "menuPurchasingV3"
     And User click "menuProductV3"
     #reusable
@@ -440,69 +419,69 @@ Feature: Create - Bad Bad Stock
     #reusable
     And User click "pilihProdukRetur"
     And User type product name into "pilihProdukRetur"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "pilihUnitRetur"
-    And User wait for 3 seconds
     And User click "inputQtyImbalanRetur"
     And User type "1" into "inputQtyImbalanRetur"
     And User wait for 3 seconds
     And User click "btnSimpanAttribute"
-    And User wait for 3 seconds
     And User click "btnSimpanRM"
     And User wait for 3 seconds
     And User click "menuPROV4"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "btnBuatPRO"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "selectGudangPRO"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User type "jember" into "selectGudangPRO"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "selectTipePT_2"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User type "cmi" into "selectTipePT_2"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "selectSupplierPRO"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User type "Ali Boedi Santoso" into "selectSupplierPRO"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "pilihPengirimanPRO"
     And User type "Locco" into "pilihPengirimanPRO"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "pilihPICPRO"
     And User type "admin" into "pilihPICPRO"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "pilihGudangStok"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "btnTambahBarangPRO"
-    And User wait for 3 second
+    And User wait for 3 seconds
     And User click "btnTambahBarangModalPRO"
     And User click "pilihProdukModalPRO"
-    And User wait for 3 second
+    And User wait for 3 seconds
     And User type product name into "pilihProdukModalPRO"
     And User wait for 3 seconds
     And User click "pilihIngredientsModalPRO"
     And User click "inputQtyPRO"
-    And User wait for 3 second
+    And User wait for 3 seconds
     And User type "100" into "inputQtyPRO"
     And User click "checklistProduct"
     And User click "btnSimpanModalPRO"
-    And User wait for 3 second
+    And User wait for 3 seconds
     And User click "btnSubmitPRO"
-    And User wait for 3 second
+    And User wait for 3 seconds
     And User click "filterGudangPRO"
     And User click "selectGudangJember"
     And User click "applyFilterGudangPRO"
-    And User wait for 3 second
-    And User click "btnDetailPRO"
+    And User wait for 3 seconds
+    # And User click "btnDetailPRO"
     And User get "kodePRO"
+    And User wait for 1 second
+    # And User click "btnBackPRO"
     And User click "menuLogisticV3_3"
     And User click "menuIncomingGoodsV3"
     And User wait for 3 seconds
     And User click "filterGudangV3"
     And User click "warehouseJember" in "filterGudangV3"
     And User click "btnTerapkanFilterWarehouse"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "btnSearchV3"
     And User click "searchBarV3"
     And User type PRO code to "searchBarV3"
@@ -515,7 +494,6 @@ Feature: Create - Bad Bad Stock
     And User click "inputNamaDriver"
     And User type "Budi" into "inputNamaDriver"
     And User click "btnCheckIn"
-    And User wait for 3 seconds
     And User click "menuLogisticV3_2"
     And User click "menuIncomingChecker" in "navMenuLogistic"
     And User wait for 3 seconds
@@ -553,7 +531,6 @@ Feature: Create - Bad Bad Stock
     And User click "btnValidasiChecker"
     And User click "btnSubmitIncomingModal"
     And User click "btnSubmitValidasiIncoming"
-    And User wait for 3 seconds
     And User click "menuStockV3"
     And User click "menuStokBermasalah" in "menuStockV3"
     And User click "btnTambahStokBermasalah"
@@ -574,11 +551,13 @@ Feature: Create - Bad Bad Stock
     And User type "50" into "qtyDiperlukan"
     And User click "qtyRusakModalRM"
     And User type "50" into "qtyRusakModalRM"
+    And User click "catatanRusakModalRM"
     And User type "rusak" into "catatanRusakModalRM"
     And User click "btnSubmitModalProdukBermasalah"
     And User click "imgUploadBuktiRusak"
     And User upload file to "imgUploadBuktiRusak"
     And User wait for 3 seconds
+    And User click "catatanStokRusak"
     And User type "rusak" into "catatanStokRusak"
     And User click "btnSubmitModalProdukBermasalah"
     And User wait for 3 seconds
@@ -586,7 +565,7 @@ Feature: Create - Bad Bad Stock
     And User upload file to "gambarPermintaanBarang"
     And User wait for 3 seconds
     And User click "tabBuktiAlokasiBarang"
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     And User click "imgUploadBuktiAlokasiBarang"
     And User upload file to "imgUploadBuktiAlokasiBarang"
     And User wait for 3 seconds
@@ -598,9 +577,7 @@ Feature: Create - Bad Bad Stock
     And User wait for 3 seconds
     And User click "btnAjukan"
     And User click "btnConfirmAjukan"
-    And User wait for 3 seconds
     And User click "btnSetujuAjukan"
-    And User wait for 3 seconds
     And User click "optTipeStokRetur"
     And User wait for 3 seconds
     #reusable
@@ -617,7 +594,7 @@ Feature: Create - Bad Bad Stock
     And User type product name into "cariProdukBermasalah"
     And User click "pilihKodeSource"
     And User click "checkboxKodeSource"
-    And User wait for 3 seconds
+    And User wait for 1 second
     And User click "btnQtyRusakDariRM"
     And User wait for 3 seconds
     And User click "btnExpandRowIngredients"
@@ -625,11 +602,13 @@ Feature: Create - Bad Bad Stock
     And User type "50" into "qtyDiperlukan"
     And User click "qtyRusakModalRM"
     And User type "50" into "qtyRusakModalRM"
+    And User click "catatanRusakModalRM"
     And User type "rusak" into "catatanRusakModalRM"
     And User click "btnSubmitModalProdukBermasalah"
     And User click "imgUploadBuktiRusak"
     And User upload file to "imgUploadBuktiRusak"
     And User wait for 3 seconds
+    And User click "catatanStokRusak"
     And User type "rusak" into "catatanStokRusak"
     And User click "btnSubmitModalProdukBermasalah"
     And User wait for 3 seconds
@@ -642,16 +621,13 @@ Feature: Create - Bad Bad Stock
     And User upload file to "imgUploadBuktiAlokasiBarang"
     And User wait for 3 seconds
     And User click "btnSubmitBuatStokBermasalah"
-    And User wait for 3 seconds
     And User click "filterGudang"
     And User click "warehouseJember" in "filterGudangV3"
     And User click "btnTerapkanFilterWarehouse"
     And User wait for 3 seconds
     And User click "btnAjukan"
     And User click "btnConfirmAjukan"
-    And User wait for 3 seconds
     And User click "btnSetujuAjukan"
-    And User wait for 3 seconds
     #reusable
     And User click "btnSubmitIncomingModal" 
     And User click "btnConfirmAjukan"
