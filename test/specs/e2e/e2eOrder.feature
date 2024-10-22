@@ -3,8 +3,8 @@ Feature: Create-e2e-order
 
     @marketplace
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     # Then I see usernameDisplay
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
@@ -108,8 +108,8 @@ Feature: Create-e2e-order
 
     @direct
     Scenario Outline: User berhasil melakukan create order e2e untuk direct
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     # Then I see usernameDisplay
     # And User refresh the page
     And User wait for 3 seconds
@@ -280,8 +280,8 @@ Feature: Create-e2e-order
 
     @marketplace-discount-all-product
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace dengan voucher all product
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
     And User wait for 10 seconds
@@ -387,8 +387,8 @@ Feature: Create-e2e-order
 
     @marketplace-discount-all-product-except-kecap-manis-abc-135ml-botol
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace dengan voucher all product except
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
     And User wait for 10 seconds
@@ -503,8 +503,8 @@ Feature: Create-e2e-order
 
     @marketplace-discount-all-product-except-special-kecap-manis-abc-135ml-botol
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace dengan voucher all product except special
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
     And User wait for 10 seconds
@@ -624,9 +624,8 @@ Feature: Create-e2e-order
 
     @marketplace-discount-all-product-except-cigarette
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace dengan voucher all product except cigarette
-    Given I send login url
-    When I login with credential
-    And User wait for 10 seconds
+    Given api user login
+    When open dashboard superapp
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
     And User wait for 10 seconds
@@ -752,8 +751,8 @@ Feature: Create-e2e-order
 
     @marketplace-discount-and
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace dengan voucher and
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
     And User wait for 10 seconds
@@ -868,8 +867,8 @@ Feature: Create-e2e-order
 
     @marketplace-discount-or
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace dengan voucher or
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
     And User wait for 10 seconds
@@ -984,8 +983,8 @@ Feature: Create-e2e-order
 
     @marketplace-discount-and-special
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace dengan voucher and special
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
     And User wait for 10 seconds
@@ -1100,8 +1099,8 @@ Feature: Create-e2e-order
 
     @marketplace-discount-or-special
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace dengan voucher or special
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     And User click "navMenuOrder" in global page
     And User click "menuPenjualan" in "navMenuOrder"
     And User wait for 10 seconds
@@ -1219,8 +1218,8 @@ Feature: Create-e2e-order
 
     @marketplace-cek-mutasi
     Scenario Outline: User berhasil melakukan create order e2e untuk marketplace - cek mutasi
-    Given I send login url
-    When I login with credential
+    Given api user login
+    When open dashboard superapp
     # Then I see usernameDisplay
     And User wait for 10 seconds
     And User click "navMenuOrder" in global page
@@ -1333,3 +1332,331 @@ Feature: Create-e2e-order
     And User click "btnSimpanCompleteOrder"
     And User click "btnConfirmCompleteOrder"
     Then User able to see message verification
+
+    @marketplace-cek-lepas-voucher
+    Scenario Outline: Memastikan voucher lepas saat user edit produk dan tidak memenuhi minimum voucher
+    Given api user login
+    When open dashboard superapp
+    And User click "navMenuOrder" in global page
+    And User click "menuPenjualan" in "navMenuOrder"
+    And User wait for 3 second
+    And User click "btnAddOrder"
+    And User click "btnMarketPlace" in "btnAddOrder"
+    And User click "agenPemesanMarketPlace"
+    And User wait for 3 second
+    And User type "082210803538" into "agenPemesanMarketPlace"
+    And User wait for 3 second
+    And User type enter button
+    And User click "alamatKirimMarketPlace"
+    And User wait for 1 second
+    And User type "warung" into "alamatKirimMarketPlace"
+    And User wait for 1 second
+    And User type enter button
+    And User click "addProductMP"
+    And User click "namaProductModalMP"
+    And User type "ABC Kecap Manis 520ml" into "namaProductModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputSatuanModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputQtyModalMP"
+    And User input "10" in "inputQtyModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "btnSimpanModalListMP"
+    And User click "btnSimpanModalMP"
+    And User click "btnTambahVoucher"
+    And User wait for 3 seconds
+    And User select voucher discount all product specific rj
+    And User click "allProductRJ"
+    And User click "btnSimpanVoucher"
+    And User wait for 3 seconds
+    And User click "btnSubmitOrder"
+    And User wait for 10 seconds
+    And User select the invoice number
+    And User click "searchTransaction"
+    And User paste the copied invoice number into "searchTransaction"
+    And User type enter button
+    And User click "selectOrderNewest"
+    And User wait for 3 seconds
+    And User get grand total before
+    And User wait for 1 second
+    And User click "btnEditOrder_2"
+    And User wait for 1 second
+    And User click "editProductMP_2"
+    And User wait for 1 second
+    And User click "btnUbah"
+    And User wait for 1 second
+    And User click "inputQtyModalMP"
+    And User clear value
+    And User wait for 3 seconds
+    And User click "btnSimpanModalListMP"
+    And User click "btnSimpanModalMP"
+    And User wait for 1 second
+    And User should see toast message voucher lepas
+    And User click "btnSubmitOrder"
+    And User wait for 10 seconds
+    And User click "searchTransaction"
+    And User paste the copied invoice number into "searchTransaction"
+    And User type enter button
+    And User click "selectOrderNewest"
+    And User get grand total after
+    And the nominal should be changed
+    And User click "btnPrintSJ"
+    And User wait for 3 seconds
+    And the nominal of grand total on SJ should be equal to detail
+    And User close the new tab
+    And User refresh the page
+    And User click "btnPrintInvoice"
+    And User wait for 3 seconds
+    Then the nominal of grand total on Invoice should be equal to detail
+
+
+    @marketplace-edit-produk-order
+    Scenario Outline: Memastikan voucher tidak lepas dan nominal bertambah sesuai dengan produk yang ditambahkan
+    Given api user login
+    When open dashboard superapp
+    And User click "navMenuOrder" in global page
+    And User click "menuPenjualan" in "navMenuOrder"
+    And User wait for 3 second
+    And User click "btnAddOrder"
+    And User click "btnMarketPlace" in "btnAddOrder"
+    And User click "agenPemesanMarketPlace"
+    And User wait for 3 second
+    And User type "082210803538" into "agenPemesanMarketPlace"
+    And User wait for 3 second
+    And User type enter button
+    And User click "alamatKirimMarketPlace"
+    And User wait for 1 second
+    And User type "warung" into "alamatKirimMarketPlace"
+    And User wait for 1 second
+    And User type enter button
+    And User click "addProductMP"
+    And User click "namaProductModalMP"
+    And User type "ABC Kecap Manis 520ml" into "namaProductModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputSatuanModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputQtyModalMP"
+    And User input "5" in "inputQtyModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "btnSimpanModalListMP"
+    And User click "btnTambahProdukModal_2"
+    And User wait for 3 seconds
+    And User click "namaProductModalMP"
+    And User type "ABC Kecap Manis 135ml" into "namaProductModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputSatuanModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputQtyModalMP"
+    And User input "5" in "inputQtyModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "btnSimpanModalListMP"
+    And User click "btnTambahProdukModal_2"
+    And User wait for 3 seconds
+    And User click "namaProductModalMP"
+    And User type "**Agarasa Chocolate 22g - Inner Box" into "namaProductModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputSatuanModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputQtyModalMP"
+    And User input "5" in "inputQtyModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "btnSimpanModalListMP"
+    And User click "btnSimpanModalMP"
+    And User click "btnTambahVoucher"
+    And User wait for 3 seconds
+    And User select voucher discount all product specific rj
+    And User click "allProductRJ"
+    And User click "btnSimpanVoucher"
+    And User wait for 3 seconds
+    And User click "btnSubmitOrder"
+    And User wait for 10 seconds
+    And User select the invoice number
+    And User click "searchTransaction"
+    And User paste the copied invoice number into "searchTransaction"
+    And User type enter button
+    And User click "selectOrderNewest"
+    And User get grand total before
+    And User wait for 1 second
+    And User click "btnEditOrder_2"
+    And User wait for 1 second
+    And User click "editProductMP_2"
+    And User wait for 1 second
+    And User click "btnUbah_2"
+    And User wait for 1 second
+    And User click "inputQtyModalMP"
+    And User decrease the value
+    And User wait for 3 seconds
+    And User click "btnSimpanModalListMP"
+    And User click "btnTambahProdukModal_2"
+    And User click "namaProductModalMP_last"
+    And User type "ABC Kopi Susu Gula Aren 27g" into "namaProductModalMP_last"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputSatuanModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputQtyModalMP_last"
+    And User input "5" in "inputQtyModalMP_last"
+    And User wait for 1 second
+    And User type enter button
+    And User click "btnSimpanModalListMP"
+    And User click "btnSimpanModalMP"
+    And User click "btnSubmitOrder"
+    And User wait for 10 seconds
+    And User click "searchTransaction"
+    And User paste the copied invoice number into "searchTransaction"
+    And User type enter button
+    And User click "selectOrderNewest"
+    And User get grand total after
+    And the grand total should be changed
+    And User click "btnPrintSJ"
+    And User wait for 3 seconds
+    And the nominal of grand total on SJ should be equal to detail
+    And User close the new tab
+    And User refresh the page
+    And User click "btnPrintInvoice"
+    And User wait for 3 seconds
+    Then the nominal of grand total on Invoices should be equal to detail
+
+    @marketplace-cek-status-ditolak
+    Scenario Outline: Memastikan status order 'Ditolak' saat orderan ditolak
+    Given api user login
+    When open dashboard superapp
+    And User click "navMenuOrder" in global page
+    And User click "menuPenjualan" in "navMenuOrder"
+    And User wait for 3 second
+    And User click "btnAddOrder"
+    And User click "btnMarketPlace" in "btnAddOrder"
+    And User click "agenPemesanMarketPlace"
+    And User wait for 3 second
+    And User type "082210803538" into "agenPemesanMarketPlace"
+    And User wait for 3 second
+    And User type enter button
+    And User click "alamatKirimMarketPlace"
+    And User wait for 1 second
+    And User type "warung" into "alamatKirimMarketPlace"
+    And User wait for 1 second
+    And User type enter button
+    And User click "addProductMP"
+    And User click "namaProductModalMP"
+    And User type "ABC Kecap Manis 520ml" into "namaProductModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputSatuanModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputQtyModalMP"
+    And User input "10" in "inputQtyModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "btnSimpanModalListMP"
+    And User click "btnSimpanModalMP"
+    And User wait for 3 seconds
+    And User click "btnSubmitOrder"
+    And User wait for 10 seconds
+    And User select the invoice number
+    And User click "searchTransaction"
+    And User paste the copied invoice number into "searchTransaction"
+    And User type enter button
+    And User click "btnRejectOrder"
+    And User click "pilihAlasanTolakPesanan"
+    And User type enter button
+    And User click "btnSimpanTolakPesanan"
+    And User wait for 1 second
+    And User click "selectOrderNewest"
+    And User wait for 3 seconds
+    Then the order status should be ditolak
+
+    @marketplace-cek-incoming-apabila-ditolak
+    Scenario Outline: Memastikan produk dari order status SD masuk ke incoming tolakan vendor
+    Given api user login
+    When open dashboard superapp
+    And User click "navMenuOrder" in global page
+    And User click "menuPenjualan" in "navMenuOrder"
+    And User wait for 3 second
+    And User click "btnAddOrder"
+    And User click "btnMarketPlace" in "btnAddOrder"
+    And User click "agenPemesanMarketPlace"
+    And User wait for 3 second
+    And User type "082210803538" into "agenPemesanMarketPlace"
+    And User wait for 3 second
+    And User type enter button
+    And User click "alamatKirimMarketPlace"
+    And User wait for 1 second
+    And User type "warung" into "alamatKirimMarketPlace"
+    And User wait for 1 second
+    And User type enter button
+    And User click "addProductMP"
+    And User click "namaProductModalMP"
+    And User type "ABC Kecap Manis 520ml" into "namaProductModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputSatuanModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "inputQtyModalMP"
+    And User input "50" in "inputQtyModalMP"
+    And User wait for 1 second
+    And User type enter button
+    And User click "btnSimpanModalListMP"
+    And User click "btnSimpanModalMP"
+    And User wait for 3 seconds
+    And User click "btnSubmitOrder"
+    And User wait for 10 seconds
+    And User select the invoice number
+    And User click "navMenuLogistic"
+    And User click "menuOutgoingGoods" in "navMenuLogistic"
+    And User wait for 5 seconds
+    And User refresh the page
+    And User wait for 5 seconds
+    And User click "tanggalKirim"
+    And User click "pilihHariIni" in "tanggalKirim"
+    And User wait for 3 seconds
+    And User click "inputSearchKodeInvoice"
+    And User paste the copied invoice number into "inputSearchKodeInvoice"
+    And User wait for 10 seconds
+    And User click "detailOutgoingBtn"
+    And User click "checkBox"
+    And User click "btnSiapDikirim"
+    And User click "btnUbahStatus"
+    And User wait for 3 seconds
+    And User click "navMenuOrder2"
+    And User click "menuPenjualan2" in "navMenuOrder2"
+    And User wait for 3 seconds
+    And User click "searchTransaction"
+    And User paste the copied invoice number into "searchTransaction"
+    And User type enter button
+    And User click "btnRejectOrder"
+    And User click "pilihAlasanTolakPesanan"
+    And User type enter button
+    And User click "btnSimpanTolakPesanan"
+    And User wait for 1 second
+    And User click "selectOrderNewest"
+    And User wait for 3 seconds
+    And the order status should be ditolak
+    And User get the total qty order
+    And User wait for 1 second
+    And User click "navMenuLogistic"
+    And User click "menuIncomingGoods" in "navMenuLogistic"
+    And User click "tabTolakanVendor"
+    And User click "btnSearchV3"
+    And User click "searchBarV3"
+    And User wait for 1 second
+    And User type invoice code to "searchBarV3"
+    And User click "btnCariV3"
+    And User wait for 3 seconds
+    And User click "btnInputTolakanPending"
+    And User get total qty tolakan pesanan
+    Then the number of qty order should be same as the number of qty tolakan pesanan
