@@ -1,11 +1,17 @@
-import { firstLine, secondLine, thirdLine, fourthLine, fifthLine, sixthLine, seventhLine, eighthLine } from "../../step-definitions/e2e/e2eOrderStep";
+import { firstLine, secondLine, thirdLine, fourthLine, fifthLine, sixthLine, seventhLine, eighthLine, ninthLine } from "../../step-definitions/e2e/e2eOrderStep";
 export default new class e2eOrderPage {
     //Order menu
     public get navMenuOrder() {
         return $('//span[@data-testid="Menu-Order"]')
     }
+    public get navMenuOrder2() {
+        return $('(//*[@class="ant-menu-submenu ant-menu-submenu-inline"])[8]');
+    }
     public get menuPenjualan() {
         return $('//span[@class="ant-menu-title-content"]/a[@data-testid="Menu-Penjualan"]');
+    }
+    public get menuPenjualan2() {
+        return $('//a[@data-testid="Menu-Penjualan"]');
     }
     public get btnAddOrder() {
         return $('//button[@id="btnAdd"]');
@@ -35,8 +41,11 @@ export default new class e2eOrderPage {
     public get btnSimpanPage() {
         return $('//button[@data-testid="btn-submit"]')
     }
-    public get btnCancelPage() {
-        return $('//button[@data-testid="btn-cancel"]')
+    public get btnTambahProdukModal_2() {
+        return $('//button[@class="ant-btn ant-btn-default ant-btn-lg btn"]')
+    }
+    public get btnEditOrder_2() {
+        return $('//*[@data-testid="btn-submit"]');
     }
     //Market Order
     //section 1 customer info
@@ -66,8 +75,20 @@ export default new class e2eOrderPage {
     public get editProductMP(){
         return $('//*[@data-testid="btn-edit-product"]');
     }
+    public get editProductMP_2(){
+        return $('(//*[@data-testid="btn-edit-product"])[1]');
+    }
     public get namaProductModalMP() {
         return $('//input[@id="Produk"]');
+    }
+    public get namaProductModalMP_2() {
+        return $('(//input[@id="Produk"])[2]');
+    }
+    public get namaProductModalMP_3() {
+        return $('(//input[@id="Produk"])[3]');
+    }
+    public get namaProductModalMP_last() {
+        return $('(//input[@id="Produk"])[last()]');
     }
     public get namaProductModalMP2() {
         return $('//*[@class="s_2qdcJJli   w-full"]');
@@ -80,6 +101,12 @@ export default new class e2eOrderPage {
     }
     public get inputQtyModalMP2() {
         return $('(//input[@id="quantity"])[2]');
+    }
+    public get inputQtyModalMP3() {
+        return $('(//input[@id="quantity"])[3]');
+    }
+    public get inputQtyModalMP_last() {
+        return $('(//input[@id="quantity"])[last()]');
     }
     public get btnSimpanModalListMP() {
         return $('//span[@data-testid="btn-save"]');
@@ -98,6 +125,12 @@ export default new class e2eOrderPage {
     }
     public get btnDeleteProductModal(){
         return $('(//*[@data-testid="btn-delete"])[2]');
+    }
+    public get btnUbah() {
+        return $('//*[@data-testid="btn-ubah"]');
+    }
+    public get btnUbah_2() {
+        return $('(//*[@data-testid="btn-ubah"])[last()]');
     }
     //section 3 option modal
     public get optNamaProduct() {
@@ -622,8 +655,82 @@ export default new class e2eOrderPage {
     public get orSpecialVoucher() {
         return $(`//tr[.//span[text()="${eighthLine}"]]//input[@class="ant-checkbox-input"]`);
     }
+
+    public get allProductRJ() {
+        return $(`//tr[.//span[text()="${ninthLine}"]]//input[@class="ant-checkbox-input"]`);
+    }
+
     public get successAlert() {
         return $('//*[@class="Toast_contentTitle__ut5ya"]');
+    }
+    public get subTotalOrder() {
+        return $('(//div[@class="ant-col ant-col-12 d-flex justify-end"])[10]//span[1]//span[1]');
+    }
+    public get totalDiscount() {
+        return $('(//div[@class="ant-col ant-col-12 d-flex justify-end"])[11]//span[1]//span[1]');
+    }
+    public get gtBefore() {
+        return $('(//div[@class="ant-col ant-col-12 d-flex justify-end"])[12]//span[1]//span[1]');
+    }
+    public get gtAfter() {
+        return $('(//div[@class="ant-col ant-col-12 d-flex justify-end"])[12]//span[1]//span[1]');
+    }
+    public get toastDescription() {
+        return $('//*[@class="ant-notification-notice-description"]');
+    }
+    public get textQtyItem() {
+        return $('(//*[@class="ant-row m-bottom-1"])[28]');
+    }
+    public get hargaPerUnit() {
+        return $('(//*[@class="ant-table-cell"]//span)[3]');
+    }
+    public get decreaseQty() {
+        return $('//*[@class="ant-input-number-handler ant-input-number-handler-down"]');
+    }
+    public get decreaseQty2() {
+        return $('(//*[@class="ant-input-number-handler ant-input-number-handler-down"])[last()]');
+    }
+    public get btnPrintSJ() {
+        return $('(//button[@class="ant-btn ant-btn-default btn-primary"])[1]');
+    }
+    public get btnPrintInvoice() {
+        return $('(//button[@class="ant-btn ant-btn-default btn-primary"])[2]')
+    }
+    public get nominalGrandTotalSJ() {
+        return $('(//*[@class="deliverydoc_tableSummary__fI52h"])[2]//span//span');
+    }
+    public get nominalGrandTotalInvoice() {
+        return $('(//*[@class="ant-col ant-col-9 Components_summary_price__Lgkwj"]//div[2])[1]');
+    }
+    public get nominalGrandTotalInvoice2() {
+        return $('(//*[@class="ant-col ant-col-9 Components_summary_price__Lgkwj"]//div[2])[last()]');
+    }
+    public get btnRejectOrder() {
+        return $('//*[@data-testid="cancel"]')
+    }
+    public get pilihAlasanTolakPesanan() {
+        return $('(//input[@class="ant-select-selection-search-input"])[2]');
+    }
+    public get statusOrder() {
+        return $('(//span[@class="s_BI07J5km s_tUvd09Bq"])[last()]/div');
+    }
+    public get btnSimpanTolakPesanan() {
+        return $('//button[@class="ant-btn ant-btn-default btn button-primary"]');
+    }
+    public get tabTolakanVendor() {
+        return $('//*[@id="rc-tabs-0-tab-canceledPending"]/div/span');
+    }
+    public get searchBarV3() {
+        return $('//input[@data-id="search-bar"]');
+    }
+    public get btnInputTolakanPending() {
+        return $('(//*[@data-testid="button-submit-1"])[2]');
+    }
+    public get totalQtyTolakanPesanan() {
+        return $('(//tr[@class="ant-table-row ant-table-row-level-0"]/td[3])[3]');
+    }
+    public get totalQtyPesan() {
+        return $('(//*[@class="ant-row m-bottom-1"])[28]');
     }
 }
 
