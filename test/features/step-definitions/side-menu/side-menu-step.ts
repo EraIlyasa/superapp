@@ -30,6 +30,7 @@ When('I click new outgoing goods', async() => {
 
 When('I click outgoing goods v3', async() => {
     await browser.url('https://v3-web-app-micro.staging.superapp.co.id/logistic/new-outgoing-goods')
+    await browser.pause(5000);
     // await sideMenuBarPage.outgoingGoodsV3.scrollIntoView()
     // await sideMenuBarPage.outgoingGoodsV3.click()
 });
@@ -155,6 +156,17 @@ Given ('User click menu {string} in side menu page', async(x:string) => {
         await sideMenuBarPage.navMenuPurchasing.click();
         await browser.pause(1000);
     
+    } else if (x === 'navMenuMarketing') {
+        await browser.waitUntil(async() => {
+            await sideMenuBarPage.navMenuMarketing.scrollIntoView();
+            return await sideMenuBarPage.navMenuMarketing.isClickable();
+            }, {
+                timeout:60000,
+                timeoutMsg:'navMenuMarketing still not clickable'
+            })
+        await sideMenuBarPage.navMenuMarketing.click();
+        await browser.pause(1000);
+    
     }
 })
 
@@ -271,6 +283,12 @@ When ('User click {string} in navMenuPurchasing', async(x:string) => {
         await sideMenuBarPage.menuKategori.click();
         await browser.pause(5000);
         
+    } else if (x === 'menuReturn') {
+        await sideMenuBarPage.menuReturn.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuReturn.click();
+        await browser.pause(5000);
+        
     }
 })
 
@@ -309,10 +327,16 @@ When ('User click {string} in navMenuOrder', async(x:string) => {
         await sideMenuBarPage.menuKonsinyasi.click();
         await browser.pause(5000);
         
-    } if (x === 'menuReturPenjualan') {
+    } else if (x === 'menuReturPenjualan') {
         await sideMenuBarPage.menuReturPenjualan.scrollIntoView();
         await browser.pause(1000);
         await sideMenuBarPage.menuReturPenjualan.click();
+        await browser.pause(5000);
+        
+    } else if (x === 'menuPenjualan') {
+        await sideMenuBarPage.menuPenjualan.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuPenjualan.click();
         await browser.pause(5000);
         
     }
@@ -338,6 +362,47 @@ When ('User click {string} in navMenuFinance', async(x:string) => {
         await browser.pause(5000);
     
     }
+})
+
+When ('User click {string} in navMenuMarketing', async(x:string) => {
+    if (x === 'menuRewardV4') {
+        await sideMenuBarPage.menuRewardV4.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuRewardV4.click();
+        await browser.pause(5000);
+        
+    } 
+})
+
+When ('User click {string} in logistic', async(x:string) => {
+    if (x === 'newOutgoingGoods') {
+        await sideMenuBarPage.newOutgoingGoods.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.newOutgoingGoods.click();
+        await browser.pause(5000);
+        
+    } else if (x === 'menuIncomingGoods') {
+        await sideMenuBarPage.menuIncomingGoods.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuIncomingGoods.click();
+        await browser.pause(5000);
+        
+    } else if (x === 'menuOutgoingGoodsV4') {
+        await sideMenuBarPage.menuOutgoingGoodsV4.scrollIntoView();
+        await browser.pause(1000);
+        await sideMenuBarPage.menuOutgoingGoodsV4.click();
+        await browser.pause(5000);
+        
+    } 
+})
+
+When ('User back to previous page', async() => {
+    await browser.back();
+    await browser.pause(1000);
+})
+
+When ('User close window', async() => {
+    await browser.closeWindow();
 })
 
 // Given ('User click "navMenuConfig" in side menu page', async() => {

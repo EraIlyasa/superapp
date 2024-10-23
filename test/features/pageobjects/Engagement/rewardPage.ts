@@ -3,12 +3,25 @@ export default new class rewardPage {
     //
     get menuRewardV4() { return $('(//*[@data-testid="Menu-RewardV4"])'); }
 
+    //Alert 
+    get successAlert() { return $('(//*[@class="Toast_section__uLPED"])')}
+
     //Menu Page 
+    get detailReward() { return $('(//*[@data-testid="button-link-small-detail"])')}
     get tabListReward() { return $('//*[@data-node-key="reward"]'); }
     get tabRingkasanReward() { return $('//*[@data-node-key="summary-reward"]'); }
     get tabStokGudangReward() { return $('//*[@data-node-key="summary-reward"]'); }
     get btnBuatRewardNew() { return $('//*[contains(text(), "Buat Reward")]'); }
     
+    //Status Reward 
+    get statusReward() { return $('(//*[@data-testid="tag-filled-primary-published"])[1]')}
+
+    //Detail Reward 
+    get batalModal() { return $('(//*[@data-testid="button-ghost-large-batal"])')}
+    get btnSimpanModal() { return $('(//*[@data-testid="button-solid-large-simpan"])')}
+    get btnPublish() { return $('(//*[@data-testid="button-solid-medium-publish-reward"])')}
+    get btnBatalPublish() { return $('(//*[@data-testid="button-outline-medium-batalkan-reward"])')}
+    get btnEditReward() { return $('(//*[@data-testid="button-outline-medium-edit-reward"])')}
 
     //Buat Reward
     get btnSimpan() { return $('//*[contains(text(), "Simpan")]'); }

@@ -9,10 +9,18 @@ let assert: any
 let element: any
 let requireClick: any
 
-When('I click button add', async() => {
-    penjualanPage.btnAdd.isClickable
+let response: any
+let invoiceOrder: any
+
+When('User click button add', async() => {
+    await browser.waitUntil(async() => {
+        return await penjualanPage.btnAdd.isClickable()
+    }, {
+        timeout:60000, timeoutMsg:'btn add is not clickable'
+    })
     await penjualanPage.btnAdd.click()
-        })
+    await browser.pause(2000);
+})
         
 When('I click marketplace', async() => {
     await penjualanPage.btnMarketplace.click()
@@ -80,6 +88,19 @@ When('I click kode transaksi', async() => {
 })
 
 Then('I get order id', async () => {
+    // const currentUrl = await browser.getUrl();
+    // const match = currentUrl.match(/\/(\d+)$/);
+    // if (match) {
+    //     orderId = match[1];
+    //     console.log('Order Id is : ' + orderId);
+    // } else {
+    //     console.log('Kode Transaksi tidak ditemukan di URL')
+    // }
+    // await browser.pause(3000);
+});
+    export { orderId };
+
+Then('User get order id', async function () {
     const currentUrl = await browser.getUrl();
     const match = currentUrl.match(/\/(\d+)$/);
     if (match) {
@@ -88,9 +109,11 @@ Then('I get order id', async () => {
     } else {
         console.log('Kode Transaksi tidak ditemukan di URL')
     }
-    await browser.pause(3000);
+    this.orderId = orderId
+    await browser.pause(5000);
+
 });
-    export { orderId };
+    
 
 When ('User create order by {string} in order page', async(x:string) => {
     if (x === "direct") {
@@ -222,6 +245,13 @@ When ('User input {string} on namaProduk modal order page', async(x:string) => {
         await browser.keys(['Enter']);
         await browser.pause(1000);
     
+    } else if (x === 'Automated Stock') {
+        (await penjualanPage.fieldNamaProduk('1')).click();
+        (await penjualanPage.fieldNamaProduk('1')).setValue(x);
+        await browser.pause(5000);
+        await browser.keys(['Enter']);
+        await browser.pause(700);
+    
     }
 })
 
@@ -257,9 +287,25 @@ When ('User choose {string} on satuan modal2 order page', async(x:string) => {
 
 
 When ('User input {string} on quantity modal order page', async(x:string) => {
-    // await penjualanPage.quantity.click();
-    (await penjualanPage.fieldInputQty('1')).setValue(x);
-    await browser.pause(1000);
+    let fieldQuantity = (await penjualanPage.fieldInputQuantity('1'));
+
+    if (await fieldQuantity.isExisting) {
+        console.log('fieldQuantity is existing');
+        (await penjualanPage.fieldInputQuantity('1')).setValue(x);
+        await browser.pause(1000);
+
+    } else {
+        let fieldQty = (await penjualanPage.fieldInputQty('1'));
+
+        if (await fieldQty.isExisting) {
+            console.log('fieldQty is existing');
+            (await penjualanPage.fieldInputQty('1')).setValue(x);
+            await browser.pause(1000);
+    
+        }
+
+    } 
+    
 }) 
 
 When ('User input {string} on quantity modal2 order page', async(x:string) => {
@@ -275,6 +321,14 @@ When ('User click {string} on modal order page', async(x:string) => {
     
     } else if (x === 'btnSaveModal1') {
         (await penjualanPage.btnSaveModal('1')).click();
+        await browser.pause(1000);
+    
+    } else if (x === 'btnSaveModall1') {
+        (await penjualanPage.btnSaveModall('1')).click();
+        await browser.pause(1000);
+    
+    } else if (x === 'btnSaveModall2') {
+        (await penjualanPage.btnSaveModall('2')).click();
         await browser.pause(1000);
     
     }
@@ -376,6 +430,20 @@ When ('User change input increase {string} on quantity modal order page', async(
     await browser.pause(500);
 
 })
+
+When ('User get invoice code order', async function() {
+    invoiceOrder = await penjualanPage.detailPenjualan.getText();
+    console.log('Kode Transaksi:',await invoiceOrder)
+    await browser.pause(5000);
+
+    this.invoiceOrder = invoiceOrder;
+})
+
+When ('User click detail penjualan in order penjualan', async() => {
+    await penjualanPage.detailPenjualan.click();
+    await browser.pause(1000);
+})
+
 
 // Then ('User click "tipePenjualanDirect"', async () => {
 //     await order.tipePenjualanDirect.click();

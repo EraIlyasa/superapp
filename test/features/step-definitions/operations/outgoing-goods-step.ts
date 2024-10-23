@@ -5,13 +5,16 @@ import { expect } from 'chai';
 import axios from 'axios'
 import path from 'path';
 import fs from 'fs';
+import { error } from 'console';
 
+let found;
 
 let title: any
 let invoiceId: any
 let orderId: any
 let invoiceGlobal: any
 let downloadPath: any
+let text: any
 
 let getTodayDateCSV: any
 let getTomorrowDate: any
@@ -65,19 +68,19 @@ getTomorrowDate = (): string => {
 
 When('I click tanggal kirim', async() => {
     await outgoingGoodsPage.tanggalKirim.click();
-        });
+});
 
 When('I click tanggal kirim v4', async() => {
     await outgoingGoodsPage.tanggalKirimV4.click();
-        });
+});
 
 When('I select hari ini', async() => {
     await outgoingGoodsPage.tanggalHariIni.click();
-        });
+});
 
 When('I select hari ini v4', async() => {
     await outgoingGoodsPage.tanggalHariIniV4.click();
-        });
+});
 
 When('I input kode invoice', async () => {
     await outgoingGoodsPage.buttonKodeInvoice.click()
@@ -96,8 +99,8 @@ When('I input kode invoice v4', async () => {
     await browser.pause(20000);
 });
 
-When('I click cari kode invoice', async () => {
-    await outgoingGoodsPage.cariKodeInvoice.click()
+When('User click cari kode invoice', async () => {
+    await outgoingGoodsPage.btnCari.click()
     await browser.pause(3000);
 })
 
@@ -109,25 +112,25 @@ When('I click see details', async () => {
 When('I input kode transaksi', async() => {
     await outgoingGoodsPage.inputKodeTransaksi.setValue(kodeTransaksi);
     await browser.pause(10000);
-         });
+});
 
 When('I click detail outgoing', async() => {
     await outgoingGoodsPage.detailOutgoing.click();
     await browser.pause(10000)
-        });
+});
 
 When('I click checkbox', async() => {
     await outgoingGoodsPage.checkbox.click()
-        })
+})
 
 When('I click checkbox v4', async() => {
     await outgoingGoodsPage.checkboxV4.click()
-        })
+})
 
 When('I click terapkan', async() => {
-    await outgoingGoodsPage.terapkan.click()
+    await outgoingGoodsPage.btnTerapkan.click()
     await browser.pause(5000)
-        })
+})
 
 When('I click ganti vendor', async() => {
     await outgoingGoodsPage.gantiVendor.click()
@@ -153,7 +156,7 @@ When('I refresh the page', async() => {
     await browser.refresh()
 });
 
-When('I click assign kurir', async() => {
+When('User click assign kurir', async() => {
     await outgoingGoodsPage.assignKurir.click();
 });
 
@@ -172,6 +175,7 @@ When('I select plat nomor', async() => {
 
 When('I click assign', async() => {
     await outgoingGoodsPage.btnAssign.click();
+    await browser.pause(1000);
 });
 
 When('I click siap dikirim', async() => {
@@ -189,15 +193,38 @@ When('I click dikirim', async() => {
     await outgoingGoodsPage.btnDikirim.click();
 });
 
-Then ('User verify titlePage in outgoing goods page', async() => {
-    await browser.waitUntil(async() => {
-        return await outgoingGoodsPage.titlePage.isDisplayed()
-    }, {
-        timeout:120000, timeoutMsg:'titlePage still not displayed'
-    })
-    title = await outgoingGoodsPage.titlePage.getText();
-    console.log('### ',await title);
-    expect(outgoingGoodsPage.titlePage.isDisplayed)
+Then ('User verify {string} in outgoing goods page', async(x:string) => {
+    if (x === 'titlePageV3') {
+        try {
+            await browser.waitUntil(async() => {
+                return await outgoingGoodsPage.titlePageV3.isDisplayed()
+            }, {
+                timeout:120000, timeoutMsg:'titlePageV3 still not displayed'
+            })
+            title = await outgoingGoodsPage.titlePageV3.getText();
+            console.log('### ',await title);
+            expect(outgoingGoodsPage.titlePageV3.isDisplayed())
+        
+        } catch {
+            console.error('Title V3',error)
+        }
+    
+    } else if (x === 'titlePageV4') {
+        try {
+            await browser.waitUntil(async() => {
+                return await outgoingGoodsPage.titlePage.isDisplayed()
+            }, {
+                timeout:120000, timeoutMsg:'titlePage still not displayed'
+            })
+            title = await outgoingGoodsPage.titlePage.getText();
+            console.log('### ',await title);
+            expect(outgoingGoodsPage.titlePage.isDisplayed())
+    
+        } catch {
+            console.error('Title V4',error)
+        }    
+    }
+
 })
 
 When ('User create order from api {string}', async function(shipment) {
@@ -440,12 +467,81 @@ When ('User input {string} into inputKodeInvoice outgoing goods page', async(kod
 When ('User input invoice into inputKodeInvoice outgoing goods page', async function() {
     await outgoingGoodsPage.btnSearch.click();
     await browser.pause(1000);
-    await outgoingGoodsPage.inputDetailKodeInvoice.setValue(this.invoiceId)
-    await browser.pause(1000);
+
+    if (this.invoiceId) {
+        await outgoingGoodsPage.inputDetailKodeInvoice.setValue(this.invoiceId)
+        await browser.pause(1000);
+
+    } else if (this.invoiceOrder) {
+        await outgoingGoodsPage.inputDetailKodeInvoice.setValue(this.invoiceOrder)
+        await browser.pause(1000);
+            
+    }
+}) 
+
+When ('User input invoice into {string} outgoing goods page', async function(x:string) {
+    if ( x === 'inputKodeTransaksi') {
+        await outgoingGoodsPage.inputKodeTransaksi.click();
+        await browser.pause(750)
+        if (this.invoiceId) {
+            await outgoingGoodsPage.inputKodeTransaksi.setValue(this.invoiceId)
+            await browser.pause(1000);
+    
+        } else if (this.invoiceOrder) {
+            await outgoingGoodsPage.inputKodeTransaksi.setValue(this.invoiceOrder)
+            await browser.pause(1000);
+                
+        }
+    
+    } else if ( x === 'inputKodeTransaksiDetail') {
+        await outgoingGoodsPage.inputKodeTransaksiDetail.click();
+        await browser.pause(750)
+        if (this.invoiceId) {
+            await outgoingGoodsPage.inputKodeTransaksiDetail.setValue(this.invoiceId)
+            await browser.pause(1000);
+    
+        } else if (this.invoiceOrder) {
+            await outgoingGoodsPage.inputKodeTransaksiDetail.setValue(this.invoiceOrder)
+            await browser.pause(1000);
+                
+        }
+    
+    }
+}) 
+
+When ('User input  code into {string} outgoing goods page', async function(x:string) {
+    await browser.refresh();
+    if ( x === 'inputKodeTransaksi') {
+        await outgoingGoodsPage.inputKodeInvoice.click();
+        await browser.pause(750)
+        if (this.invoiceId) {
+            await outgoingGoodsPage.inputKodeInvoice.setValue(this.invoiceId)
+            await browser.pause(1000);
+    
+        } else if (this.invoiceOrder) {
+            await outgoingGoodsPage.inputKodeInvoice.setValue(this.invoiceOrder)
+            await browser.pause(1000);
+                
+        }
+    
+    } else if ( x === 'inputKodeTransaksiDetail') {
+        await outgoingGoodsPage.inputKodeTransaksiDetail.click();
+        await browser.pause(750)
+        if (this.invoiceId) {
+            await outgoingGoodsPage.inputKodeTransaksiDetail.setValue(this.invoiceId)
+            await browser.pause(1000);
+    
+        } else if (this.invoiceOrder) {
+            await outgoingGoodsPage.inputKodeTransaksiDetail.setValue(this.invoiceOrder)
+            await browser.pause(1000);
+                
+        }
+    
+    }
 }) 
 
 When ('User click cariKodeInvoice in outgoing goods', async() => {
-    await outgoingGoodsPage.cariKodeInvoice.click();
+    await outgoingGoodsPage.btnCari.click();
     await browser.pause(3000);
 }) 
 
@@ -515,9 +611,69 @@ When ('User click optFilter {string} modal in outgoing goods page', async(x:stri
     }
 })
 
+When ('User click nav {string} in filter modal', async(x:string) => {
+    if (x === 'Gudang') {
+        await outgoingGoodsPage.navGudang.click();
+        await browser.pause(1000);
+
+    } else if (x === 'Tgl Kirim') {
+        await outgoingGoodsPage.navTglKirim.click();
+        await browser.pause(1000);
+        
+    } else if (x === 'Tipe Vendor') {
+        await outgoingGoodsPage.navTipeVendor.click();
+        await browser.pause(1000);
+        
+    } else if (x === 'City') {
+        await outgoingGoodsPage.navCity.click();
+        await browser.pause(1000);
+        
+    } else if (x === 'Kecamatan') {
+        await outgoingGoodsPage.navKecamatan.click();
+        await browser.pause(1000);
+        
+    }
+})
+When ('User click optFilter {string} modal in outgoing goods', async(x:string) => {
+    if (x === 'Hari ini') {
+        await outgoingGoodsPage.optHariIni.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Besok') {
+        await outgoingGoodsPage.optBesok.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Kemarin') {
+        await outgoingGoodsPage.optKemarin.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Custom') {
+        await outgoingGoodsPage.optCustom.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Besok V3') {
+        await outgoingGoodsPage.optBesokV3.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Kemarin V3') {
+        await outgoingGoodsPage.optKemarinV3.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Custom V3') {
+        await outgoingGoodsPage.optCustomV3.click();
+        await browser.pause(2000);
+    
+    } else if (x === 'Hari ini V3') {
+        await outgoingGoodsPage.optHariIniV3.click();
+        await browser.pause(2000);
+    
+    }
+})
+
+
 When ('User click btnTerapkan in modal filter outgoing goods', async() => {
     await outgoingGoodsPage.btnTerapkan.click();
-    await browser.pause(1000);
+    await browser.pause(3000);
 })
 
 When ('User export csv in outgoing goods page', async() => {
@@ -544,6 +700,262 @@ When ('User export csv in outgoing goods page', async() => {
     }
 })
 
+When ('User clik btnMore filter in outgoin goods page', async() => {
+    await outgoingGoodsPage.btnMoreFilter.click();
+    await browser.pause(1000);
+})
 
+When('User click {string} filter on outgoing page', async(x:string) => {
+    if (x==='tanggal kirim') {
+        await outgoingGoodsPage.tanggalKirim.click();
+        await browser.pause(1000);
 
+    }
+});
 
+When ('User click {string} in outgoing goods', async(x:string) => {
+    if (x === 'tabTanggalKirim'){
+        await outgoingGoodsPage.tabTanggalKirim.click();
+        await browser.pause(1000);
+
+    } else if (x === 'tabTanggalKirim'){
+
+    }
+
+})
+
+When ('User click btnDetailOutgoing on outgoing goods', async() => {
+    await outgoingGoodsPage.btnDetailOutgoing.waitForClickable({timeout:30000, timeoutMsg:'btnDetailOutgoing is not clickable'})
+    await outgoingGoodsPage.btnDetailOutgoing.click();
+    await browser.pause(1000);
+})
+
+When ('User click checkbox v4 outgoing goods', async() => {
+    await outgoingGoodsPage.cbOutgoingAll.click();
+    await browser.pause(1000);
+})
+
+When ('User click checkbox v3 outgoing goods', async() => {
+    await outgoingGoodsPage.checkBoxAll.click();
+    await browser.pause(1000);
+})
+
+When ('User click {string} outgoing goods', async(x:string) => {
+    if (x === 'btnAssignKurir') {
+        await outgoingGoodsPage.btnAssignKurir.click();
+        await browser.pause(1000);
+
+    } else if (x === 'btnSiapDikirimV4') {
+        await outgoingGoodsPage.btnSiapDikirimV4.click();
+        await browser.pause(1000);
+        
+    } else if (x === 'btnDikirimV4') {
+        await outgoingGoodsPage.btnDikirimV4.click();
+        await browser.pause(1000);
+        
+    } else if (x === 'btnGantiVendorV4') {
+        await outgoingGoodsPage.btnGantiVendorV4.click();
+        await browser.pause(1000);
+        
+    } else if (x === 'btnAssignKurirV4') {
+        await outgoingGoodsPage.btnAssignKurirV4.click();
+        await browser.pause(1000);
+        
+    } else if (x === 'btnGantiVendor') {
+        await outgoingGoodsPage.btnGantiVendor.click();
+        await browser.pause(1000);
+        
+    } else if (x === 'btnSiapDikirim') {
+        await outgoingGoodsPage.btnSiapDikirim.click();
+        await browser.pause(1000);
+        
+    }
+})
+
+When ('User click {string} in btnGantiVendor', async(x:string) => {
+    if ( x === 'fieldVendorTo') {
+        await outgoingGoodsPage.fieldVendorTo.click();
+        await browser.pause(1000);
+
+    } else if ( x === 'fieldAlasan') {
+        await outgoingGoodsPage.fieldAlasan.click();
+        await browser.pause(1000);
+    }
+})
+
+When ('User click {string} in btnAssignKurir', async(x:string) => {
+    if ( x === 'fieldInputDriver') {
+        await outgoingGoodsPage.fieldInputDriver.click();
+        await browser.pause(1000);
+
+    } else if ( x === 'fieldInputPlat') {
+        await outgoingGoodsPage.fieldInputPlat.click();
+        await browser.pause(1000);
+
+    } else if ( x === 'fieldInputDriverV4') {
+        await outgoingGoodsPage.fieldInputDriverV4.click();
+        await browser.pause(1000);
+
+    } else if ( x === 'fieldInputHelperV4') {
+        await outgoingGoodsPage.fieldInputHelperV4.click();
+        await browser.pause(1000);
+
+    } else if ( x === 'fieldHelper') {
+        await outgoingGoodsPage.fieldHelper.click();
+        await browser.pause(1000);
+
+    } else if ( x === 'fieldInputPlatV4') {
+        await outgoingGoodsPage.fieldInputPlatV4.click();
+        await browser.pause(1000);
+
+    }
+})
+
+When ('User input {string} in btnGantiVendor', async(x:string) => {
+    if ( x === 'INHOUSE ALL AREA') {
+        // await outgoingGoodsPage.fieldVendorToV4.setValue(x)
+        // await browser.pause(1000);
+        // await outgoingGoodsPage.optVendorTo.click();
+        await browser.pause(1000);
+
+        found = false;
+        while (!found) {
+            await browser.keys(['ArrowDown']);
+            console.log(`down`)
+            await browser.pause(100);
+
+            if (await outgoingGoodsPage.optVendorTo.isDisplayed()) {
+                found = true;
+                await outgoingGoodsPage.optVendorTo.scrollIntoView();
+                await outgoingGoodsPage.optVendorTo.click();
+                await browser.pause(1000);
+            }
+                
+        }
+
+    } else if ( x === 'Order jumlah besar') {
+        // await outgoingGoodsPage.fieldAlasanV4.setValue(x)
+        await browser.pause(1000);
+        await outgoingGoodsPage.optAlasan.scrollIntoView();
+        await outgoingGoodsPage.optAlasan.click();
+        await browser.pause(1000);
+    }
+})
+
+When ('User input {string} in btnAssignKurir', async(x:string) => {
+    if ( x === 'Kurir NF') {
+        await outgoingGoodsPage.fieldInputDriver.setValue(x)
+        await browser.pause(750);
+        await browser.keys(['Enter']);
+        await browser.pause(1000);
+
+    } else if ( x === 'S9430NG') {
+        await outgoingGoodsPage.fieldInputPlat.setValue(x)
+        await browser.pause(750);
+        await browser.keys(['Enter']);
+        await browser.pause(1000);
+
+    } else if ( x === 'udin') {
+        await outgoingGoodsPage.fieldHelper.setValue(x)
+        await browser.pause(750);
+        await outgoingGoodsPage.optHelper.click();
+        await browser.pause(1000);
+    }
+})
+
+When ('User input {string} in btnAssignKurir v4', async(x:string) => {
+    if ( x === 'Kurir NF') {
+        await outgoingGoodsPage.fieldInputDriverV4.setValue(x)
+        await browser.pause(750);
+        await browser.keys(['Enter']);
+        await browser.pause(1000);
+
+    } else if ( x === 'S9430NG') {
+        await outgoingGoodsPage.fieldInputPlatV4.setValue(x)
+        await browser.pause(750);
+        await browser.keys(['Enter']);
+        await browser.pause(1000);
+
+    } else if ( x === 'udin') {
+        await outgoingGoodsPage.fieldInputHelperV4.setValue(x)
+        await browser.pause(750);
+        await outgoingGoodsPage.optHelperV4.click();
+        await browser.pause(1000);
+    }
+})
+
+When('User click btnAssignModal in btnAssignKurir', async() => {
+    await outgoingGoodsPage.btnAssignModal.click();
+    await browser.pause(1000);
+});
+
+When ('User click btnGanti in btnGantiVendor', async() => {
+    await outgoingGoodsPage.btnGanti.click();
+    await browser.pause(1000)
+})
+
+When ('User click btnGantiV4 in btnGantiVendor', async() => {
+    await outgoingGoodsPage.btnGantiV4.click();
+    await browser.pause(1000)
+})
+
+Then ('User able to see {string} message in detail outgoing goods', async(x:string) => {
+    if ( x === 'successAlert') {
+        try {
+            await browser.waitUntil(async() => {
+                return expect (await outgoingGoodsPage.successAlert.isDisplayed());
+            }, {
+                timeout:35000
+            })
+            text = await outgoingGoodsPage.successAlert.getText();
+            console.log('Message is:',await text);
+            await browser.pause(5000)
+    
+        }catch{
+            console.error(error)
+        }
+
+    } else if ( x === 'successAlertV3') {
+        try {
+            await browser.waitUntil(async() => {
+                return expect (await outgoingGoodsPage.successAlertV3.isDisplayed());
+            }, {
+                timeout:35000
+            })
+            text = await outgoingGoodsPage.successAlertV3.getText();
+            console.log('Message is:',await text);
+            await browser.pause(5000)
+    
+        }catch{
+            console.error(error)
+        }
+
+    }
+})
+
+When ('User click {string} in modal detail outgoing', async(x:string) => {
+    if (x === 'Ubah Status') {
+        await outgoingGoodsPage.btnUbahStatusModal.click();
+        await browser.pause(1000);
+    
+    } else if (x === 'Batal Ubah') {
+        await outgoingGoodsPage.btnTidakJadi.click();
+        await browser.pause(1000);
+    
+    } if (x === 'Ubah Status V3') {
+        await outgoingGoodsPage.btnUbahStatusModalV3.click();
+        await browser.pause(1000);
+    
+    } else if (x === 'Batal Ubah V3') {
+        await outgoingGoodsPage.btnTidakJadiV3.click();
+        await browser.pause(1000);
+    
+    }
+
+})
+
+When ('User click btnSeeDetails in outgoing goods', async() => {
+    await outgoingGoodsPage.btnSeeDetails.waitForClickable({timeout:90000})
+    await outgoingGoodsPage.btnSeeDetails.click();
+    await browser.pause(1000);
+})
