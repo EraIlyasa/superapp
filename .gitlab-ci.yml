@@ -1,0 +1,24 @@
+stages:
+  - test
+
+automation-test-job:
+  stage: test
+  tags:
+    - local
+  script:
+    - echo "Checking for changed feature files..."
+    - |
+      # Menyimpan daftar file yang diubah
+      CHANGED_FILES=$(git diff --name-only $CI_COMMIT_BEFORE_SHA $CI_COMMIT_SHA -- '*.feature')
+      echo "Changed feature files: $CHANGED_FILES"
+    
+    - |
+      # Menjalankan pengujian hanya pada file yang diubah
+      if [ -n "$CHANGED_FILES" ]; then
+        echo "Running WebdriverIO tests for changed features..."
+        npx wdio run wdio.conf.ts --spec $CHANGED_FILES
+      else
+        echo "No feature files changed. Skipping tests."
+      fi
+
+    - echo "Test execution completed."
