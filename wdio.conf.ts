@@ -1,10 +1,10 @@
-import type { Options } from '@wdio/types'
+// import type { Options } from '@wdio/types'
 import { resolve } from 'path';
 
 let downloadDir: any
 downloadDir = resolve(__dirname, './downloads');
 
-export const config: Options.Testrunner = {
+export const config = {
     //
     // ====================
     // Runner Configuration
@@ -65,8 +65,10 @@ export const config: Options.Testrunner = {
                 'download.default_directory': downloadDir,
                 'download.prompt_for_download': false,
                 'download.directory_upgrade': true,
-                'safebrowsing.enabled': true
-            }
+                'safebrowsing.enabled': true,
+            },
+            args: ['--headless', '--disable-gpu', '--window-size=1920,1080']
+
         },
     }],
 
