@@ -3,6 +3,9 @@ import { $ } from '@wdio/globals'
 export default new class penjualanPage {
 
     //Order List
+    get detailPenjualan() {
+        return $('(//*[@rel="noreferrer"])[1]/*[1]')
+    }
     get btnMoreFilter() {
         return $('//*[@data-testid="filter-modal-trigger"]')
     }
@@ -119,6 +122,9 @@ export default new class penjualanPage {
         return $('(//input[@id="qty"])['+x+']');
         // 1, 2 = x
     }
+    async fieldInputQuantity(x:string) {
+        return $('(//input[@id="quantity"])['+x+']')
+    }
 
     async fieldNamaProduk(x:string) {
         return $('(//input[@id="Produk"])['+x+']');
@@ -171,6 +177,14 @@ export default new class penjualanPage {
         return $('(//*[@id="removeProduct-'+x+'"])');
         //0, 1, 2, etc = x
     }
+    /////////////////////////////
+    async btnDeleteModal(x:string) {
+        return $('(//*[@data-testid="btn-delete"])['+x+']')
+    }
+    async btnSaveModall(x:string) {
+        return $('(//*[@data-testid="btn-save"])['+x+']')
+    }
+
     
 
 

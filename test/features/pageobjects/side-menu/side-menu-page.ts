@@ -3,6 +3,9 @@ import { $ } from '@wdio/globals';
 export default new class sideMenuBarPage {
 
     //Menu
+    get navMenuMarketing() { 
+        return $('//*[@data-testid="Menu-Marketing"]') 
+    }
     get order(){ 
         return $('//span[contains(text(),"Order")]');
     }
@@ -32,6 +35,18 @@ export default new class sideMenuBarPage {
     }
 
     //Sub Menu
+    get menuOutgoingGoodsV4() {
+        return $('(//*[@data-testid="Menu-OutgoingGoods V4"])')
+    }
+    get menuIncomingGoods() { 
+        return $('(//*[@data-testid="Menu-IncomingGoods"])[1]')
+    }
+    get menuRewardV4() { 
+        return $('(//*[@data-testid="Menu-RewardV4"])')
+     }
+    get menuReturn() {
+        return $('(//*[@data-testid="Menu-Return"])')
+    }
     get setoranTOP() {
         return $('(//*[@data-testid="Menu-SetoranTOP"])')
     }
@@ -105,7 +120,7 @@ export default new class sideMenuBarPage {
         return $('//*[@data-testid="Menu-InventoryV3"]')
     }
     get newOutgoingGoods() {
-        return $('//span[@class="ant-menu-title-content"]/a[@data-testid="Menu-OutgoingGoods V4"]')
+        return $('(//*[@data-testid="Menu-NewOutgoing Goods"])')
     }
     get outgoingGoodsV3() {
         return $('(//*[@data-testid="Menu-NewOutgoing Goods"])')

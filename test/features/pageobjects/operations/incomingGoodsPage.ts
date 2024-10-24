@@ -3,9 +3,15 @@ export default new class incomingGoodsPage {
     //Menu 
     get menuIncomingGoodsV4() {return $('//*[@data-testid="Menu-IncomingGoods V4"]');}
 
+    //Global
+    get successAlert() { return $('(//*[@class="ant-notification-notice-description"])')}
 
     //List Incoming Goods
-    get fieldInputSearch() {return $('//*[@placeholder="Cari kode PO/CG/Nama Produk/Supplier"]');}
+    get btnSearch() { return $('(//*[@id="btnSearch"])')}
+    get btnCari() { return $('(//*[@data-id="enter-btn"])')}
+    get titlePage() { return $('(//*[@id="page-title"])')}
+    get tabTolakanVendor() { return $('(//*[@data-id="canceledPending"])')}
+    get fieldInputSearch() {return $('(//*[@data-id="search-bar" and @placeholder="Search..."])');}
     get btnTglKirim() {return $('(//*[@class="ant-select-selection-search-input"])[2]');}
     get btnGudang() {return $('');}
     get btnSupplier() {return $('');}
@@ -18,6 +24,23 @@ export default new class incomingGoodsPage {
     get btnCheckinModalNomorAntrian() {return $('//*[@data-testid="btn-submit"]');}
     get btnBatalModalNomorAntrian() {return $('//*[@data-testid="btn-cancel"]');}
 
+    //Tab Tolakan Vendor
+    get btnKembali() { return $('(//*[@type="button"])//*[contains(text(),"Kembali")]')}
+    get btnSudahBenar() { return $('(//*[@type="button"])//*[contains(text(),"Sudah Benar")]')}
+    get closeModal() { return $('(//*[@aria-label="close"])')}
+    get btnDetailTV() { return $('(//*[@data-testid="button-total-sku-1"])[2]')}
+    get btnBatalTolakan() { return $('(//*[@data-id="btn-cancel-swipeable"])')}
+    get btnSubmitTolakan() { return $('(//*[@data-id="btn-submit-swipeable"])')}
+    get btnSubmit() { return $('(//*[@data-testid="button-submit-1"])[2]')}
+    async fieldInputTolakanPending(x:string) { 
+        return $('(//*[@name="new_incoming_qty"])['+x+']')
+        //1, 2, etc = x
+    } 
+    async fieldQTYPending(x:string) {
+        return $('(//*[@data-testid="tolakan-pending-'+x+'"])')
+        //1, 2, 3, etc = x
+    }
+    
     //Filter 
     get filterGudangModal() {return $('//*[@data-node-key="warehouse_id"]');}
     get filterSupplierModal() {return $('(//*[@data-node-key="supplier"])[2]');}
@@ -35,46 +58,43 @@ export default new class incomingGoodsPage {
 
 
 
-    public get fieldInputSearch0() {
+     get fieldInputSearch0() {
         return $('//*[@id="searchBar"]/div/span/span/span[1]/input');
     }
-    public get btnCariProduk() {
+     get btnCariProduk() {
         return $('//*[@data-id="enter-btn"]');
     }
-    public get btnFilterGudang() {
+     get btnFilterGudang() {
         return $('//*[@id="site-layout-background"]/div/div[2]/div[1]/div/div[2]/div/button[1]');
     }
-    public get btnFilterPeriode() {
+     get btnFilterPeriode() {
         return $('//*[@id="site-layout-background"]/div/div[2]/div[1]/div/div[2]/div/button[2]');
     }
-    public get btnFilterSupplier() {
+     get btnFilterSupplier() {
         return $('//*[@id="site-layout-background"]/div/div[2]/div[1]/div/div[2]/div/button[3]');
     }
-    public get btnFilterStatus() {
+     get btnFilterStatus() {
         return $('//*[@id="site-layout-background"]/div/div[2]/div[1]/div/div[2]/div/button[4]');
     }
-    public get btnExport() {
+     get btnExport() {
         return $('//*[@data-id="export-csv"]');
     }
-    public get tabSupplier() {
+     get tabSupplier() {
         return $('//*[@id="rc-tabs-0-tab-purchasing"]/div/span');
     } 
-    public get tabReturSupplier() {
+     get tabReturSupplier() {
         return $('//*[@id="rc-tabs-0-tab-returnSupplier"]/div/span');
     }
-    public get tabTolakan() {
+     get tabTolakan() {
         return $('//*[@id="rc-tabs-0-tab-canceled"]/div/span');
     }
-    public get tabReturPenjualan() {
+     get tabReturPenjualan() {
         return $('//*[@id="rc-tabs-0-tab-returnOrder"]/div/span');
     }
-    public get tabTransferStock() {
+     get tabTransferStock() {
         return $('//*[@id="rc-tabs-0-tab-transfer"]/div/span');
     }
-    public get tabConsignment() {
+     get tabConsignment() {
         return $('//*[@id="rc-tabs-0-tab-transfer"]/div/span');
-    }
-    public get tabTolakanVendor() {
-        return $('//*[@id="rc-tabs-0-tab-canceledPending"]/div/span');
     }
 }
