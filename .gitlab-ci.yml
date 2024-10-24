@@ -18,7 +18,8 @@ automation-test-job:
         echo "Running WebdriverIO tests for changed features..."
         npx wdio run wdio.conf.ts --spec $CHANGED_FILES
       else
-        echo "No feature files changed. Skipping tests."
+        echo "No feature files changed. Running all tests as fallback."
+        npx wdio run wdio.conf.ts # atau menyesuaikan dengan semua file .feature
       fi
 
     - echo "Test execution completed."

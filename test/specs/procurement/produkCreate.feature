@@ -4,6 +4,7 @@ Feature: Create - Produk
   @PR-0001
   Scenario Outline: Ensure user able to create product
 
+
     When api user login
     When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page

@@ -19,11 +19,8 @@ getTodayDateTime = (): string => {
     const hours = String(today.getHours()).padStart(2, '0');
     const minutes = String(today.getMinutes()).padStart(2, '0');
     // const seconds = String(today.getSeconds()).padStart(2, '0');
-    
     return `${year}-${month}-${day}_${hours}-${minutes}`;
 }
-
-
 
 When ('User directed to List barang yang terdaftar di Super page', async() => {
     await browser.waitUntil(async() => {
