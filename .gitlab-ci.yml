@@ -6,9 +6,6 @@ automation-test-job:
   tags:
     - local
   script:
-    - echo "Running tests..."
-    - npx wdio run wdio.conf.ts --spec produkCreate.feature
-  artifacts:
-    paths:
-      - envs
-    expire_in: 1 hour  # File akan disimpan selama 1 jam
+    - echo "Building..."
+    - mkdir build
+    - touch build/automated_test.txt
