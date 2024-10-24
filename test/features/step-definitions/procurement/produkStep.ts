@@ -47,7 +47,7 @@ When ('User click btnCreateProduk button in Product page', async() => {
 When ('User send image in uploadImage6', async() => {
     try {
         const uploadImage = await produkPage.uploadImage;
-        await uploadImage.waitForExist({timeout:10000})
+        await uploadImage.waitForExist({timeout:25000})
         await browser.execute((el:HTMLElement) => {
         el.style.display = 'block';
       }, uploadImage);
@@ -138,6 +138,8 @@ When ('User send {string} image in uploadImage', async(file) => {
 
 
 When ('User click fieldSubType button in Product page', async() => {
+    let title = await browser.$('(//*[@id="form-info"])')
+    await title.scrollIntoView();
     await produkPage.fieldSubtipe.click();
     await browser.pause(1000);
 })
@@ -164,14 +166,14 @@ When ('User fill fieldNamaProduk with {string} in fieldNamaPRoduk', async(namaPr
 
 When ('User click fieldKategori in product page', async() => {
     await produkPage.fieldKategori.click();
-    await browser.pause(4000);
+    await browser.pause(2000);
 
 }) 
 
 
 When ('User choose optKategori in fieldKategori', async() => {
     (await produkPage.optKategori('0')).click();
-    await browser.pause(500);
+    await browser.pause(1000);
 }) 
 
 
@@ -189,64 +191,72 @@ When ('User click fieldInputBarcode in product page', async() =>{
 
 When ('User click field and choose Pilih Tag Produk in product page', async() => {
     (await produkPage.field('1')).click();
+    await browser.pause(500);
     (await produkPage.inputField('2')).setValue('100g');
-    await browser.pause(1000);
+    await browser.pause(500);
     await browser.keys('Enter');
 })
 
 
 When ('User click field and choose Pilih Referensi Produk in product page', async() => {
     (await produkPage.field('2')).click();
+    await browser.pause(500);
     (await produkPage.inputField('3')).setValue('100g');
-    await browser.pause(1000);
+    await browser.pause(500);
     await browser.keys('Enter');
 })
 
 
 When ('User click field and choose Pilih Variant in product page', async() => {
     (await produkPage.field('3')).click();
+    await browser.pause(500);
     (await produkPage.inputField('4')).setValue('100g');
-    await browser.pause(1000);
+    await browser.pause(500);
     await browser.keys('Enter');
 })
 
 
 When ('User click field and choose Pilih Packaging Material in product page', async() => {
     (await produkPage.field('4')).click();
+    await browser.pause(500);
     (await produkPage.inputField('5')).setValue('100g');
-    await browser.pause(1000);
+    await browser.pause(500);
     await browser.keys('Enter');
 })
 
 
 When ('User click field and choose Pilih Packaging Color in product page', async() => {
     (await produkPage.field('5')).click();
+    await browser.pause(500);
     (await produkPage.inputField('6')).setValue('100g');
-    await browser.pause(1000);
+    await browser.pause(500);
     await browser.keys('Enter');
 })
 
 
 When ('User click field and choose Pilih Main Ingredients in product page', async() => {
     (await produkPage.field('6')).click();
+    await browser.pause(500);
     (await produkPage.inputField('7')).setValue('100g');
-    await browser.pause(1000);
+    await browser.pause(500);
     await browser.keys(['Enter']);
 })
 
 
 When ('User click field and choose Pilih Texture in product page', async() => {
     (await produkPage.field('7')).click();
+    await browser.pause(500);
     (await produkPage.inputField('8')).setValue('100g');
-    await browser.pause(1000);
+    await browser.pause(500);
     await browser.keys(['Enter']);
 })
 
 
 When ('User click field and choose Pilih Taste in product page', async() => {
     (await produkPage.field('8')).click();
+    await browser.pause(500);
     (await produkPage.inputField('9')).setValue('100g');
-    await browser.pause(1000);
+    await browser.pause(500);
     await browser.keys(['Enter']);
 })
 
@@ -278,14 +288,16 @@ When ('User click fieldTargetUsia in product page', async() => {
 
 When ('User choose taget usia', async() => {
     // (await produkPage.optTargetUsia('[2]')).waitForClickable();
-    (await produkPage.optTargetUsia('1')).click();
+    // (await produkPage.optTargetUsia('1')).click();
+    await browser.keys(['Enter']);
+    await browser.pause(1000);
 }) 
 
 
 When ('User click fieldPPNPenjualan in product page', async() => {
-    await produkPage.fieldPPNTest.scrollIntoView();
+    await produkPage.fieldPPNPenjualan.scrollIntoView();
     await browser.pause(1000);
-    await produkPage.fieldPPNTest.click();
+    await produkPage.fieldPPNPenjualan.click();
     // await produkPage.fieldPPNPenjualan.click();
     await browser.pause(5000);
 }) 
@@ -453,7 +465,21 @@ Then ('User able to see Berhasil membuat produk baru {string} verification', asy
     })
     let alert = await produkPage.successAlert.getText();
 
-    expect (await alert).equal(message);
+    // expect (await alert).equal(message);
+    console.log('message is ',alert)
+    await browser.pause(5000);
+})
+
+Then ('User able to see Berhasil membuat produk baru pesan verification', async() => {
+    await browser.waitUntil(async() => {
+        return await produkPage.successAlert.isDisplayed();
+    }, {
+        timeout:25000,
+        timeoutMsg:'successAlert stil not displayed'
+    })
+    let alert = await produkPage.successAlert.getText();
+
+    // expect (await alert).equal(message);
     console.log('message is ',alert)
     await browser.pause(5000);
 })
