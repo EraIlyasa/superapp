@@ -26,6 +26,9 @@ await browser.setCookies([
 
 await browser.pause(5000)
 
+//do refresh to let the system load data
+await browser.refresh();
+
 })
 
 

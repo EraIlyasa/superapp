@@ -7,7 +7,9 @@ automation-test-job:
     - local
   script:
     - echo "Running tests..."
-    - npx wdio run wdio.conf.ts --spec produkCreate.feature
+    - npm install
+    - npm run test:ci
+    - npx wdio run wdio.conf.ts --spec setoran.feature
   artifacts:
     paths:
       - envs

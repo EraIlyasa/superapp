@@ -67,7 +67,7 @@ export const config = {
                 'download.directory_upgrade': true,
                 'safebrowsing.enabled': true,
             },
-            args: ['--headless', '--disable-gpu', '--window-size=1920,1080']
+            // args: ['--headless', '--disable-gpu', '--window-size=1920,1080']
 
         },
     }],
@@ -172,6 +172,10 @@ export const config = {
         ignoreUndefinedDefinitions: false
     },
 
+    afterStep: async function () {
+        console.log('---------------------------');
+        await browser.pause(900); 
+    },
 
     //
     // =====

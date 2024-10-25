@@ -14,6 +14,34 @@ When ('User click {string} filter setoran', async(x:string) => {
         await setoran.tglSetoranFilter.click();
         await browser.pause(1000);
     
+    } else if (x === 'gudangFilter') {
+        await setoran.gudangFilter.click();
+        await browser.pause(1000);
+    
+    } else if (x === 'jenisSetoranFilter') {
+        await setoran.jenisSetoranFilter.click();
+        await browser.pause(1000);
+    
+    }
+})
+
+When ('User click nav menu {string} setoran modal', async(x:string) => {
+    if (x === 'Gudang') {
+        await setoran.navGudang.click();
+
+    } else if (x === 'Jenis Setoran') {
+        await setoran.navGudang.click();
+        await setoran.navJenisSetoran.click();
+        
+    } else if (x === 'Petugas Vendor') {
+        await setoran.navGudang.click();
+        await setoran.navJenisSetoran.click();
+        await setoran.navPetugasVendor.click();
+        
+    } else if (x === 'Pembuat Setoran') {
+        await setoran.navGudang.click();
+        await setoran.navJenisSetoran.click();
+        await setoran.navPembuatSetoran.click();
     }
 })
 
@@ -40,6 +68,31 @@ When ('User choose {string} in tglSetoran setoran', async(x:string) => {
 
     }
 })
+
+// When ('User choose {string} in tglSetoran setoran', async(x:string) => {
+//     if (x === 'Hari Ini') {
+//         await setoran.hariIni.waitForDisplayed();
+//         await setoran.hariIni.click();
+//         await browser.pause(1000);
+
+//     } else if (x === '7 Hari Terakhir') {
+//         await setoran.lastWeek.waitForDisplayed();
+//         await setoran.lastWeek.click();
+//         await browser.pause(1000);
+
+//     } else if (x === '30 Hari Terakhir') {
+//         await setoran.lastMonth.waitForDisplayed();
+//         await setoran.lastMonth.click();
+//         await browser.pause(1000);
+
+//     } else if (x === 'Custom') {
+//         await setoran.custom.waitForDisplayed();
+//         await setoran.custom.click();
+//         await browser.pause(1000);
+
+//     }
+// })
+
 When ('User input {string} into fieldInputSearch setoran', async(kodeSetoran) => {
     await setoran.fieldInputSearch.waitForClickable({timeout:40000, timeoutMsg:'field inptu search still not clickable'});
     await setoran.fieldInputSearch.click();
@@ -365,9 +418,84 @@ When ('User attach file import CSV vendor', async() => {
     await setoran.btnImport.click();
   
 })
-
-
 When ('User delete nominal inside "fieldInputBayarCash"', async() => {
     await setoran.fieldInputBayarCash.click();
     await setoran.btnClearRevisiBayar.click();
+})
+
+When ('User choose {String} in gudangFilter setoran', async(x:string) => {
+    if (x === 'Aloha-RTP') {
+        await setoran.gudangAlohaRTP.click();
+
+    }
+})
+
+When ('User choose {string} in jenisSetoranFilter setoran', async(x:string) => {
+    if (x === 'Vendor') {
+        await setoran.vendor.click();
+
+    }
+})
+When ('User choose {String} in namaPembuat setoran', async(x:string) => {
+//     if (x === '')
+//     await setoran.
+})
+
+
+
+
+Then ('User able to see {string} on list setoran', async(x) => {
+    if (x === 'jenisSetoran') {
+        try {
+            await browser.waitUntil(async() => {
+                return expect (await setoran.textJenisSetoran.isDisplayed());
+            }, {
+                timeout:35000
+            })
+            text = await setoran.textJenisSetoran.getText();
+            console.log('Jenis Setoran:', text);
+            await browser.pause(1000);
+            expect(await text).to.equal(x);
+        }catch (error) {
+            console.log('Error:', error);
+            throw error;
+        }
+    
+    } else if (x === 'picSetoran') {
+        try {
+            await browser.waitUntil(async() => {
+                return expect (await setoran.textPICSetoran.isDisplayed());
+            }, {
+                timeout:35000
+            })
+            text = await setoran.textPICSetoran.getText();
+            console.log('Jenis Setoran:', text);
+            await browser.pause(1000);
+            expect(await text).to.equal(x);
+        }catch (error) {
+            console.log('Error:', error);
+            throw error;
+        }
+    
+    }
+
+})
+
+When ('User click {string} filter modal setoran', async(x:string) => {
+    if (x === 'Terapkan') {
+        await setoran.btnTerapkan.click();
+
+    } if (x === 'Reset') {
+        await setoran.btnReset.click();
+        
+    }
+})
+
+When ('User input {string} into searchPembuatSetoran filter modal setoran', async function(pic) {
+    await setoran.searchPembuatSetoran.setValue(pic);
+    await browser.pause(2000);
+    let name = await setoran.getName.getText()
+    console.log('Name:',await name)
+
+    await browser.$(`(//*[@label="${name}"])`).click();
 })
