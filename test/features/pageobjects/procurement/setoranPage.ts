@@ -4,6 +4,8 @@ export default new class setoranPage {
     get menuSetoran() {return $('(//*[@data-testid="Menu-Setoran"])');}
 
     //List Menu Setoran
+    get btnDetailSetoran() { return $('(//*[@data-testid="button-link-small-detail"])[1]')}
+    get btnDetailNT() { return $('(//*[@data-testid="button-link-small-detail"])[2]')}
     get textPICSetoran() { return $('(//*[@data-testid="deposit-maker-0"])')}
     get textJenisSetoran() { return $('(//*[@data-testid="deposit-type-0"])')}
     get namaPembuat() { return $('(//*[@data-testid="filter-created-by"])')}
@@ -13,9 +15,14 @@ export default new class setoranPage {
     get btnBuatSetoranNew() {return $('(//*[contains(text(), "Buat Setoran")])');} 
     get titlePage() { return $('(//*[@class="flex gap-size-16"])')}
     get fieldInputSearch() {return $('(//*[@placeholder="Cari Kode Setoran / Kode Invoice"])')}
-    get kodeSetoran() { return $('(//*[@data-testid="code-0"])/*/*[1]')}
+    get KodeSetoran() { return $('(//*[@data-testid="code-0"])/*/*[1]')}
     get noDataSetoran() { return $('(//*[@class="css-1vp3ixv ant-empty"])')}
 
+    //Assertion 
+    get modalDetailNTRow1() { return $('(//*[@class="ant-table-tbody"])[2]')}
+    get modalDetailNTRow0() { return $('(//*[@class="ant-table-thead"])[2]')}
+    get modalDetailNT() { return $('(//*[@class="ModalBasic_modalTitle__i74MF"])')}
+    
     //Filter Setoran 
     get btnReset() { return $('(//*[@data-testid="modal-reset-filter"])')}
     get btnTerapkan() { return $('(//*[@data-testid="modal-apply-filter"])')}
@@ -37,6 +44,7 @@ export default new class setoranPage {
     //Option Pembuat Setoran Filter
     async picName() { return $('(//*[@label="Era Ilyasa"])')}
     get getName() { return $('(//*[@class="ant-checkbox-wrapper Checkbox_container__SAOkr undefined css-1vp3ixv"])')}
+    
     //gudangFilter
     get gudangAlohaRTP() { return $('(//*[@class="ant-radio-group ant-radio-group-outline RadioFilter_radioGroup__uhLeH Radio_radioGroupContainer__hePaF Radio_vertical__xq9kx css-1vp3ixv"])//*[contains(text(),"Aloha-RTP")]')}
 
@@ -46,9 +54,12 @@ export default new class setoranPage {
     get lastMonth() { return $('(//*[@class="rc-virtual-list-holder-inner"])//*[@title="30 hari terakhir"]')}
     get custom() { return $('(//*[@class="rc-virtual-list-holder-inner"])//*[@title="Custom"]')}
     
+    //Detail Kode Setoran 
+    get btnPrintBuktiSetor() {return $('(//*[@data-testid="btn-print"])');}
+    get buktiSetoranPage() { return $('(//*[@id="print-doc-tanda-terima-deposit"])')}
+
     //Create Setoran
     get btnBuatSetoran() {return $('(//*[@data-testid="btn-setor"])');}
-    get btnPrintBuktiSetor() {return $('(//*[@data-testid="btn-print"])');}
     get btnCancel() {return $('(//*[@data-testid="btn-cancel"])');}
     get btnSayaYakin() {return $('(//*[@data-testid="btn-submit"])');}
     get btnConfirmDelete() {return $('(//*[@data-testid="btn-delete"])');}

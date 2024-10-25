@@ -297,3 +297,33 @@ Then User able to see "<picSetoran>" on list setoran
 Examples:
 | picSetoran     | pic       |
 | Era Ilyasa     | erailyasa |
+
+@Setoran-0014
+Scenario: Memastikan tampil modal Detail Nominal Transaksi ketika klik detail nilai transaksi
+When api user login
+When open dashboard superapp
+Given User click menu "navMenuFinance" in side menu page
+And User click "menuSetoran" in navMenuFinance
+Then User verify titlePage in setoran
+And User wait for 3 seconds 
+
+And User click "tglSetoranFilter" filter setoran
+And User choose "30 Hari Terakhir" in tglSetoran setoran
+And User click detail "Detail Nilai Transaksi" list setoran
+Then User able to see modal detail nilai transaksi 
+
+@Setoran-0015
+Scenario: Memastikan tampil preview print bukti setor ketika klik button print bukti setoran
+When api user login
+When open dashboard superapp
+Given User click menu "navMenuFinance" in side menu page
+And User click "menuSetoran" in navMenuFinance
+Then User verify titlePage in setoran
+And User wait for 3 seconds 
+
+And User click "tglSetoranFilter" filter setoran
+And User choose "30 Hari Terakhir" in tglSetoran setoran
+And User click detail "Detail Kode Setoran" list setoran
+And User wait for 3 seconds 
+And User click button bukti setoran in detail setoran
+Then User able to see page print bukti setoran

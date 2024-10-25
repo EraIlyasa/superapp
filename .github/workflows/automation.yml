@@ -1,0 +1,28 @@
+name: automation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'  # Atur versi Node.js sesuai kebutuhan Anda
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run WebdriverIO tests
+        run: npx wdio run wdio.conf.ts --spec setoran.feature --cucumberOpts.tags="@Setoran-0015"  # Pastikan file ini ada dan terkonfigurasi dengan benar

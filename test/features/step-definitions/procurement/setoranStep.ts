@@ -2,6 +2,7 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import setoranPage from '../../pageobjects/procurement/setoranPage';
 import path from 'path';
 import { expect } from 'chai';
+import { error } from 'console';
 const setoran = setoranPage;
 
 
@@ -104,12 +105,12 @@ Then ('User able to see {string} in setoran', async(x:string) => {
     if (x === 'STR241017-1') {
         try {
             await browser.waitUntil(async() => {
-                return expect(await setoran.kodeSetoran.isDisplayed());
+                return expect(await setoran.KodeSetoran.isDisplayed());
             }, {
                 timeout:45000,
                 timeoutMsg:'Kode setoran still not displayed'
             })
-            console.log('Kode Setoran:', await setoran.kodeSetoran.getText())
+            console.log('Kode Setoran:', await setoran.KodeSetoran.getText())
             await browser.pause(5000);
 
         } catch {
@@ -498,4 +499,62 @@ When ('User input {string} into searchPembuatSetoran filter modal setoran', asyn
     console.log('Name:',await name)
 
     await browser.$(`(//*[@label="${name}"])`).click();
+})
+
+When ('User click detail {string} list setoran', async(x:string) => {
+    if (x === 'Detail Nilai Transaksi') {
+        await setoran.btnDetailNT.click();
+
+    } else if (x === 'Detail Kode Setoran') {
+        await setoran.btnDetailSetoran.click();
+
+    }
+})
+Then ('User able to see modal detail nilai transaksi', async() => {
+    try {
+        await browser.waitUntil(async() => {
+            return expect (await setoran.modalDetailNT.isDisplayed());
+        }, {
+            timeout:35000, timeoutMsg:'Modal detail nilai transaksi is not displayed'
+        })
+
+        try {
+            expect (await setoran.modalDetailNTRow0.isDisplayed());
+            text = await setoran.modalDetailNTRow0.getText();
+            console.log('Row 0:',await text);
+            await browser.pause(1000)    
+        }catch{
+            console.error('Row 0 is not displayed', error)
+        }
+
+        try {
+            expect (await setoran.modalDetailNTRow1.isDisplayed());
+            text = await setoran.modalDetailNTRow1.getText();
+            console.log('Row 1:',await text);
+            await browser.pause(1000)    
+        }catch{
+            console.error('Row 1 is not displayed', error)
+        }
+
+    }catch{
+        console.error('Not as expected one or more assertion is not displayed')
+    }
+}) 
+
+When ('User click button bukti setoran in detail setoran', async() => {
+    await setoran.btnPrintBuktiSetor.click();
+})
+
+Then ('User able to see page print bukti setoran', async() => {
+    try {
+        await browser.waitUntil(async() => {
+           return expect (await setoran.buktiSetoranPage.isDisplayed())
+        }, {
+            timeout:30000
+        })
+        console.log('Page is displayed')
+    }catch{
+        console.error('Page is not opened', error)
+    }
+
 })
