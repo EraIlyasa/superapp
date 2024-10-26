@@ -1,8 +1,6 @@
 @Setoran
 Feature: Create-Setoran
 
-
-
 @Setoran-0001
 Scenario: Memastikan user dapat masuk ke halaman setoran
 When api user login
