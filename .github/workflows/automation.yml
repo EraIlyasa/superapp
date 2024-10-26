@@ -31,4 +31,4 @@ jobs:
         run: npm list @wdio/* cucumber*  # Menampilkan versi dependensi
 
       - name: Run WebdriverIO tests
-        run: npx wdio run wdio.conf.ts --spec setoran.feature --cucumberOpts.tags="@Setoran-0015"
+        run: npx wdio run wdio.conf.ts 
