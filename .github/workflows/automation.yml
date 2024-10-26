@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: List files for debugging
-        run: ls -R  # Menampilkan struktur direktori
+      # - name: List files for debugging
+      #   run: ls -R  # Menampilkan struktur direktori
 
       - name: Run WebdriverIO tests
         run: npx wdio run wdio.conf.ts --spec setoran.feature --cucumberOpts.tags="@Setoran-0015" --logLevel=debug
