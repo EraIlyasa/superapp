@@ -27,8 +27,5 @@ jobs:
       - name: List files for debugging
         run: ls -R  # Menampilkan struktur direktori
 
-      - name: Check Node modules version
-        run: npm list @wdio/* cucumber*  # Menampilkan versi dependensi
-
       - name: Run WebdriverIO tests
         run: npx wdio run wdio.conf.ts 
