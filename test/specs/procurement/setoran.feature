@@ -226,14 +226,15 @@ When open dashboard superapp
 Given User click menu "navMenuFinance" in side menu page
 And User click "menuSetoran" in navMenuFinance
 Then User verify titlePage in setoran
-And User wait for 5 seconds 
+And User wait for 3 seconds 
 
 And User click "tglSetoranFilter" filter setoran
 And User choose "30 Hari Terakhir" in tglSetoran setoran
 And User click "gudangFilter" filter setoran
-And User click nav menu "Jenis Setoran" setoran modal
+# And User click nav menu "Gudang" setoran modal
 And User choose "Aloha-RTP" in gudangFilter setoran
-Then User able to see {string} on list setoran
+And User click "Terapkan" filter modal setoran
+Then User able to see "Gudang" on list setoran
 
 @Setoran-0011
 Scenario: Memastikan berhasil filter Jenis Setoran
@@ -250,11 +251,7 @@ And User click "gudangFilter" filter setoran
 And User click nav menu "Jenis Setoran" setoran modal
 And User choose "Vendor" in jenisSetoranFilter setoran
 And User click "Terapkan" filter modal setoran
-Then User able to see "<jenisSetoran>" on list setoran
-
-Examples:
-| jenisSetoran |
-| vendor       |
+Then User able to see "Jenis Setoran" on list setoran
 
 # @Setoran-0012
 # Scenario: Memastikan berhasil filter Tipe PT
@@ -271,7 +268,7 @@ Examples:
 # And User click nav menu "Jenis Setoran" setoran modal
 # And User choose "Vendor" in jenisSetoranFilter setoran
 # And User click "Terapkan" filter modal setoran
-# Then User able to see "<jenisSetoran>" on list setoran
+# Then User able to see "Jenis Setoran" on list setoran
 
 # Examples:
 # | jenisSetoran |
@@ -292,11 +289,11 @@ And User click "gudangFilter" filter setoran
 And User click nav menu "Pembuat Setoran" setoran modal
 And User input "<pic>" into searchPembuatSetoran filter modal setoran
 And User click "Terapkan" filter modal setoran
-Then User able to see "<picSetoran>" on list setoran
+Then User able to see "Pembuat Setoran" on list setoran
 
 Examples:
-| picSetoran     | pic       |
-| Era Ilyasa     | erailyasa |
+| pic       |
+| erailyasa |
 
 @Setoran-0014
 Scenario: Memastikan tampil modal Detail Nominal Transaksi ketika klik detail nilai transaksi

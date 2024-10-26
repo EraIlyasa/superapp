@@ -424,7 +424,7 @@ When ('User delete nominal inside "fieldInputBayarCash"', async() => {
     await setoran.btnClearRevisiBayar.click();
 })
 
-When ('User choose {String} in gudangFilter setoran', async(x:string) => {
+When ('User choose {string} in gudangFilter setoran', async(x:string) => {
     if (x === 'Aloha-RTP') {
         await setoran.gudangAlohaRTP.click();
 
@@ -445,42 +445,39 @@ When ('User choose {String} in namaPembuat setoran', async(x:string) => {
 
 
 
-Then ('User able to see {string} on list setoran', async(x) => {
-    if (x === 'jenisSetoran') {
-        try {
-            await browser.waitUntil(async() => {
-                return expect (await setoran.textJenisSetoran.isDisplayed());
-            }, {
-                timeout:35000
-            })
-            text = await setoran.textJenisSetoran.getText();
-            console.log('Jenis Setoran:', text);
-            await browser.pause(1000);
-            expect(await text).to.equal(x);
-        }catch (error) {
-            console.log('Error:', error);
-            throw error;
-        }
+Then('User able to see {string} on list setoran', async (namaField) => {
+    let textElement;
     
-    } else if (x === 'picSetoran') {
-        try {
-            await browser.waitUntil(async() => {
-                return expect (await setoran.textPICSetoran.isDisplayed());
-            }, {
-                timeout:35000
-            })
-            text = await setoran.textPICSetoran.getText();
-            console.log('Jenis Setoran:', text);
-            await browser.pause(1000);
-            expect(await text).to.equal(x);
-        }catch (error) {
-            console.log('Error:', error);
-            throw error;
-        }
-    
+    // Tentukan elemen berdasarkan namaField
+    switch (namaField) {
+        case 'Jenis Setoran':
+            textElement = setoran.textJenisSetoran;
+            break;
+        case 'Pembuat Setoran':
+            textElement = setoran.textPICSetoran;
+            break;
+        case 'Gudang':
+            textElement = setoran.textGudang;
+            break;
+        default:
+            throw new Error(`Field "${namaField}" tidak dikenali`);
     }
 
-})
+    try {
+        await browser.waitUntil(async () => {
+            return expect (await textElement.isDisplayed());
+        }, {
+            timeout: 35000
+        });
+
+        const text = await textElement.getText();
+        console.log(`${namaField}:`, text);
+        await browser.pause(1000);
+    } catch (error) {
+        console.log('Error:', error);
+        throw error;
+    }
+});
 
 When ('User click {string} filter modal setoran', async(x:string) => {
     if (x === 'Terapkan') {

@@ -6,6 +6,7 @@ export default new class setoranPage {
     //List Menu Setoran
     get btnDetailSetoran() { return $('(//*[@data-testid="button-link-small-detail"])[1]')}
     get btnDetailNT() { return $('(//*[@data-testid="button-link-small-detail"])[2]')}
+    get textGudang() { return $('(//*[@data-testid="warehouse-name-0"])')}
     get textPICSetoran() { return $('(//*[@data-testid="deposit-maker-0"])')}
     get textJenisSetoran() { return $('(//*[@data-testid="deposit-type-0"])')}
     get namaPembuat() { return $('(//*[@data-testid="filter-created-by"])')}
