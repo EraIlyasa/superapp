@@ -87,6 +87,9 @@ export default new class purchaseOrderPage {
     get optModalFilterPeriodeCustomEnd() { return $('//*[@id="date-range-end"]'); }
 
     // Create New PO
+
+    //Alert 
+    get alert() { return $('(//*[@class="ant-notification-notice-description"])')}
     // Section 1 Detail
     get titleCreatePO() { return $('//[@id="page-title"]//[text()="Buat PO"]'); }
     get fieldJenisPO() { return $('//span[@title="Finish Good"]'); }

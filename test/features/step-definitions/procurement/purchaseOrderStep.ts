@@ -36,7 +36,6 @@ When('User click "menuPurchasingPO" button in "PO" page', async () => {
   });
       console.log("Element is clickable, clicking now...");
       await POV4.menuPurchasingPO.click();
-      await browser.pause(5000);
   } catch (error) {
   console.error("Error occurred while clicking menuPurchasingPO:", error);
 }
@@ -57,22 +56,22 @@ When('User click "btnCreateNewPO" button in "PO" page', async () => {
     timeoutMsg:'btnCreateNewPO still not clickable'
   })
   await POV4.btnCreateNewPO.click();
-  await browser.pause(3000);
+  await browser.pause(1000);
 });
 
 When('User clicks "fieldJenisPO" button in "PO" page', async () => {
   await POV4.fieldJenisPO.click();
-  await browser.pause(1000);
+  
 });
 
 When('User clicks "fieldGudang" button in "PO" page', async () => {
   await POV4.fieldGudang.click();
-  await browser.pause(1000);
+  
 });
 
 When('User clicks "optGudangPOAloha" button in "PO" page', async () => {
   await POV4.optGudangPOAloha.click();
-  await browser.pause(3000);
+  await browser.pause(1000);
 });
 
 
@@ -125,7 +124,7 @@ When(
 
 When('User clicks "fieldPengiriman" button in "PO" page', async () => {
   await POV4.fieldPengiriman.scrollIntoView();
-  await browser.pause(1000);
+  
   await POV4.fieldPengiriman.click();
 });
 
@@ -297,7 +296,7 @@ When('User click "btnSimpanCreatePO" button in "PO" page', async () => {
 
 When ('User click "btnTambahProdukModalPO" button in "PO" page', async() => {
     await POV4.btnTambahProdukModalPO.click();
-    await browser.pause(1000);
+    
 });
 
 
@@ -324,9 +323,8 @@ When ('User fill "fieldQtyModalPO2" with value {string} in "PO" page', async (qt
 
 When ('User fill "fieldHargaSatuanModalPO2" with value {string} in "PO" page', async (price) => {
     await POV4.fieldHargaSatuanModalPO2.setValue(price);
-    await browser.pause(1000);
-
 });
+
 When ('User fill "fieldDiskon1ModalPO2" with value {string} in "PO" page', async (diskon1) => {
     await POV4.fieldDiskon1ModalPO2.setValue(diskon1);
 });
@@ -361,7 +359,7 @@ Then(' User able to see Gagal menyimpan PO message verification', async () => {
 
 Then ('User able to see Terdapat info yang belum lengkap message verification', async() => {
   await browser.waitUntil(async() => {
-    await browser.pause(3000);
+    await browser.pause(2000);
     return expect (await POV4.allertProdukDupl.isDisplayed());  
   }, {
     timeout:10000,
@@ -403,19 +401,19 @@ When ('User input "kodePORow1" to "fieldInputSearch" from "PO"', async() => {
 
 When ('User clicks "btnCari" button in "Finance" page', async() => {
   await POV4.btnCari.click();
-  await browser.pause(1000);
+  
 })
 
 
 When ('User click "btnCari" in "PO" page', async()=> {
   await POV4.btnCari.click();
-  await browser.pause(2000);
+  await browser.pause(1000);
 })
 
 
 When ('User clicks "btnDetailRow0" button in "Finance" page', async() => {
   await POV4.btnDetailRow0.click();
-  await browser.pause(1000);
+  
 })
 
 
@@ -436,7 +434,7 @@ When ('User clicks "btnSimpanModalPR" button in "Finance" page', async() => {
 
 When ('User click "btnPrepayment" button in "PO" page', async() => {
   await POV4.btnPrepayment.click();
-  await browser.pause(1000);
+  
 })
 
 When ('User upload image to "imgUploadNotaPengajuan" in "PO" page', async() => {
@@ -565,19 +563,19 @@ await browser.waitUntil(async() => {
   timeoutMsg:'navNotaPengajuan still not displayed'
 })
 await POV4.navNotaPengajuan.click();
-await browser.pause(1000);
+
 })
 
 
 When ('User click "reqNavNotaPengajuan" button in "PO" page', async() => {
 await POV4.reqNavNotaPengajuan.click();
-await browser.pause(1000);
+
 })
 
 
 When ('User fill "fieldDeskripsiPrepayment" with value "Notes Prepayment" in "PO" page', async() => {
 await POV4.fieldDeskripsiPrepayment.setValue('Notes Prepayment');
-await browser.pause(1000);
+
 
 })
 
@@ -614,7 +612,7 @@ try {
 
 When ('User clicks "optMetodePembayaranTempo" button in "PO" page', async() => {
 await POV4.optMetodePembayaranTempo.click();
-await browser.pause(1000);
+
 
 })
 
@@ -638,7 +636,7 @@ await browser.waitUntil(async() => {
   timeout:10000,
   timeoutMsg:'allertNotaPengajuanTempo still not displayed after timeout'
 })
-await browser.pause(1000);
+
 console.log('allertNotaPengajuanTempo is displayed')
 })
 
@@ -674,7 +672,7 @@ await browser.pause(2000);
 
 When ('User click "fieldNominalPrepayment" button in "PO" page', async() =>{
 await POV4.fieldNominalPrepayment.click();
-await browser.pause(1000);
+
 
 
 })
@@ -702,13 +700,13 @@ export {kodeInvoice}
 
 When ('User clicks "optJenisPORM" button in "PO" page', async() => {
 await POV4.optJenisPORM.click();
-await browser.pause(1000);
+
 })
 
 
 When ('User clicks "optProdukModalPORaw" button in "PO" page', async() => {
 await POV4.optProdukModalPORaw0.click();
-await browser.pause(1000);
+
 })
 
 
@@ -727,7 +725,7 @@ await browser.pause(5000);
 When ('User click "btnImportCSVPO" button in "PO" page', async() => {
 await POV4.btnImportCSVPO.scrollIntoView();
 await POV4.btnImportCSVPO.click();
-await browser.pause(1000);
+
 })
 
 
@@ -740,13 +738,13 @@ await browser.pause(2000);
 When ('User click "fieldDeskripsiNota" in "PO" page', async() => {
 await POV4.fieldDeskripsiNota.scrollIntoView();
 await POV4.fieldDeskripsiNota.click();
-await browser.pause(1000);
+
 }) 
 
 
 When ('User input {string} into "fieldDeskripsiNota"', async(desc:string) => {
 await POV4.fieldDeskripsiNota.setValue(desc);
-await browser.pause(1000);
+
 })
 
 
@@ -758,13 +756,13 @@ await browser.pause(5000);
 
 When ('User click "btnSearch" in "PO" page', async() => {
 await POV4.btnSearch.click();
-await browser.pause(1000);
+
 })
 
 
 When ('User input "kodeInvoice" into "fieldInputSearch"', async() => {
 await POV4.fieldInputSearch.setValue(kodeInvoice);
-await browser.pause(1000);
+
 })
 
 
@@ -783,7 +781,19 @@ await browser.pause(1000);
 
 
 Then ('User able to see Purchase Order berhasil dibuat! message', async() => {
-await browser.pause(5000);
+  try {
+    await browser.waitUntil(async() => {
+      return await POV4.alert.isDisplayed();
+    }, {
+      timeout:30000, timeoutMsg:'Alert notification is not displayed'
+    })
+    text = await POV4.alert.getText();
+    console.log(await text);
+
+  }catch{
+    console.error('Alert notification is not displayed', error);
+  }
+  await browser.pause(5000);
 })
 
 
@@ -824,7 +834,7 @@ await browser.execute((el:HTMLElement) => {
 When ('User click "btnEditProdukPO" in "Edit PO" page', async() => {
 await POV4.btnEditProdukPO.scrollIntoView();
 await POV4.btnEditProdukPO.click();
-await browser.pause(1000);
+
 })
 
 
@@ -855,13 +865,13 @@ await browser.waitUntil(async() => {
   timeoutMsg:'btnCancelPO still not displayed'
 })
 await POV4.btnCancelPO.click();
-await browser.pause(1000);
+
 })
 
 
 When ('User click "btnLanjutkanCancel" to proceed cancelation', async() => {
 await POV4.btnLanjutkanCancel.click();
-await browser.pause(1000);
+
 })
 
 
@@ -879,20 +889,20 @@ await browser.pause(7000);
 
 When ('User clicks "optProdukModalPORaw1" button in "PO" page', async() => {
 await POV4.optProdukModalPORaw1.click();
-await browser.pause(1000);
+
 })
 
 
 When ('User click "btnAturProdukBonus" in "PO" page', async() =>{
 await POV4.btnAturProdukBonus.scrollIntoView();
 await POV4.btnAturProdukBonus.click();
-await browser.pause(1000);
+
 })
 
 
 When ('User clicks "fieldSatuanModalPOId" button in "PO" page', async() => {
 await POV4.fieldSatuanModalPOId.click();
-await browser.pause(1000);
+
 })
 
 
@@ -909,13 +919,13 @@ await browser.waitUntil(async() => {
 
 When ('User clicks "fieldSatuanModalPO2" button in "PO" page', async() => {
 await POV4.fieldSatuanModalPO2.click();
-await browser.pause(1000);
+
 })
 
 
 When ('User clicks "optSatuanModalPO2" button in "PO" page', async() => {
 await POV4.optSatuanModalPO2.click();
-await browser.pause(1000);
+
 })
 
 
@@ -978,34 +988,34 @@ Then ('User verified "status po" for "textStatusPO" is {string}', async(textStat
   if (textStatusPO === 'Set') {
     let set = await POV4.textStatusPO.getText();
     expect (await set).to.equal(textStatusPO);
-    await browser.pause(1000);
+    
 
   } else if (textStatusPO === 'Submitted') {
     let submitted = await POV4.textStatusPO.getText();
     expect (await submitted).to.equal(textStatusPO);
-    await browser.pause(1000);
+    
 
   } else if (textStatusPO === 'Cancelled') {
     let cancelled = await POV4.textStatusPO.getText();
     expect (await cancelled).to.equal(textStatusPO);
-    await browser.pause(1000);
+    
 
   } else if (textStatusPO === 'Closed') {
     let closed = await POV4.textStatusPO.getText();
     expect (await closed).to.equal(textStatusPO);
-    await browser.pause(1000);
+    
 
   } else if (textStatusPO === 'Force Closed') {
     let forceClosed = await POV4.textStatusPO.getText();
     expect (await forceClosed).to.equal(textStatusPO);
-    await browser.pause(1000);
+    
   }
 })
 
 
 When ('User clicks "optJenisPOFinishGood" button in "PO" page', async() => {
 await POV4.optJenisPOFinishGood.click();
-await browser.pause(1000);
+
 })
 
 
@@ -1025,7 +1035,7 @@ await browser.pause(2000);
 
 When ('User fill "fieldProdukModalPO2" with value {string} in "PO" page', async(productName) => {
 await POV4.fieldProdukModalPO2.setValue(productName);
-await browser.pause(1000);
+
 })
 // Then ('User able to see "Purchase Order berhasil dibuat!" message', async() => {
 //   await browser.pause(5000);
@@ -1049,18 +1059,18 @@ Then ('User able to see successfull {string} message verification', async(x:stri
 
 When ('User click btnSearch in payment request page', async() => {
   await paymentRequestPage.btnSearch.click();
-  await browser.pause(1000);
+  
 })
 
 When ('User input kode invoice into fieldInputSearch in payment request', async function() {
   await paymentRequestPage.fieldInputSearch.click();
   await paymentRequestPage.fieldInputSearch.setValue(this.poKode);
-  await browser.pause(1000);
+  
 })
 
 When ('User click btnCari in payment request page', async() => {
   await paymentRequestPage.btnCari.click();
-  await browser.pause(1000);
+  
 })
 
 Then ('User verify status payment request {string}', async(x:string) => {
@@ -1088,17 +1098,17 @@ Then ('User verify status payment request {string}', async(x:string) => {
 
 When ('User click btnDetail in payment request page', async() => {
   await paymentRequestPage.btnDetail.click();
-  await browser.pause(1000);
+  
 })
 
 When ('User click btnSetujui in detail payment request', async() => {
   await paymentRequestPage.btnSetujui.click();
-  await browser.pause(1000);
+  
 })
 
 When ('User click btnSimpanSR in setujui modal', async() => {
   await paymentRequestPage.btnSimpanSR.click();
-  await browser.pause(1000);
+  
 })
 
 When ('User input {string} into inputFieldPaidByModal', async(pembayar) => {
@@ -1106,7 +1116,7 @@ When ('User input {string} into inputFieldPaidByModal', async(pembayar) => {
   await paymentRequestPage.inputFieldPaidByModal.setValue(pembayar);
   await browser.pause(2000);
   await browser.keys(['Enter']);
-  await browser.pause(1000);
+  
 })
 
 When ('User upload invoice into imgUpload', async() => {
@@ -1125,5 +1135,5 @@ When ('User upload invoice into imgUpload', async() => {
 
 When ('User click btnSelesaikanModal in detail payment request', async() => {
   await paymentRequestPage.btnSelesaikanModal.click();
-  await browser.pause(1000);
+  
 })

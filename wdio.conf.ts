@@ -37,6 +37,14 @@ export const config = {
             },
 
         },
+        // args: [
+        //     '--headless',
+        //     '--no-sandbox',
+        //     '--disable-dev-shm-usage',
+        //     '--remote-debugging-port=9222',
+        //     '--enable-logging',
+        //     '--v=1'
+        //   ],
     }],
 
     // ===================
