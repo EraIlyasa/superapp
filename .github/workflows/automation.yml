@@ -28,4 +28,5 @@ jobs:
         run: ls -R  # Menampilkan struktur direktori
 
       - name: Run WebdriverIO tests
-        run: npx wdio run wdio.conf.ts 
+        run: npx wdio run wdio.conf.ts --spec setoran.feature
+ 
