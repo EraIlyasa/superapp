@@ -448,7 +448,6 @@ When ('User choose {String} in namaPembuat setoran', async(x:string) => {
 Then('User able to see {string} on list setoran', async (namaField) => {
     let textElement;
     
-    // Tentukan elemen berdasarkan namaField
     switch (namaField) {
         case 'Jenis Setoran':
             textElement = setoran.textJenisSetoran;

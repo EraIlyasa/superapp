@@ -19,10 +19,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Atur versi Node.js sesuai kebutuhan Anda
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
+      - name: List files for debugging
+        run: ls -R  # Menampilkan struktur direktori
+
+      - name: Check Node modules version
+        run: npm list @wdio/* cucumber*  # Menampilkan versi dependensi
+
       - name: Run WebdriverIO tests
-        run: npx wdio run wdio.conf.ts --spec setoran.feature --cucumberOpts.tags="@Setoran-0015"  # Pastikan file ini ada dan terkonfigurasi dengan benar
+        run: npx wdio run wdio.conf.ts --spec setoran.feature --cucumberOpts.tags="@Setoran-0015"
