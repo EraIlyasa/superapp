@@ -7,9 +7,8 @@ Feature: Create-flashsale
 
   @flashsale-0001
   Scenario Outline: Memastikan dapat buat flashsale baru
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     And User click "navMenuMarketing" in global page
     And User click "menuFlashsale" inside "navMenuMarketing"
     And User wait for 10 seconds
@@ -63,9 +62,8 @@ Feature: Create-flashsale
 
   @flashsale-0002
   Scenario Outline: Memastikan Field gambar ada validation required ketika user tidak meinput gambar pada create flashsale
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     And User click "navMenuMarketing" in global page
     And User click "menuFlashsale" inside "navMenuMarketing"
     And User wait for 10 seconds
@@ -115,9 +113,8 @@ Feature: Create-flashsale
 
   @flashsale-0003
   Scenario Outline: Memastikan Field gambar ada validation required ketika user tidak menginput gambar pada create flashsale
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     And User click "navMenuMarketing" in global page
     And User click "menuFlashsale" inside "navMenuMarketing"
     And User wait for 10 seconds
@@ -169,9 +166,8 @@ Feature: Create-flashsale
 
   @flashsale-0004
   Scenario Outline: Memastikan ada validation jika user tidak input nama flashsale
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     And User click "navMenuMarketing" in global page
     And User click "menuFlashsale" inside "navMenuMarketing"
     And User wait for 10 seconds
@@ -222,9 +218,8 @@ Feature: Create-flashsale
 
   @flashsale-0005
   Scenario Outline: Memastikan ada validation jika user tidak input quota SKU flashsale
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     And User click "navMenuMarketing" in global page
     And User click "menuFlashsale" inside "navMenuMarketing"
     And User wait for 10 seconds
@@ -280,9 +275,8 @@ Feature: Create-flashsale
 
   @flashsale-0006
   Scenario Outline: Memastikan dapat buat flashsale baru
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     And User click "navMenuMarketing" in global page
     And User click "menuFlashsale" inside "navMenuMarketing"
     And User wait for 10 seconds

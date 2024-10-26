@@ -3,14 +3,13 @@ Feature: Create-Feature
 
   @Reward-0001
   Scenario Outline: Memastikan dapat create reward dengan tipe transaksi
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     When User click "navMenuMarketing" in global page
     When User click "menuRewardV4"
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     Given User click "btnBuatRewardNew" in menu reward
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     And User click "fieldInputNamaReward" in create reward page
     And User input "<namaReward>" into "fieldInputNamaReward"
     And User click "fieldTipeReward" in create reward page
@@ -53,9 +52,13 @@ Feature: Create-Feature
 
   @Reward-0002
   Scenario Outline: Memastikan dapat create reward dengan tipe reward daily checkin
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    When User click "navMenuMarketing" in global page
+    When User click "menuRewardV4"
+    And User wait for 3 seconds
     Given User click "btnBuatRewardNew" in menu reward
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     And User click "fieldInputNamaReward" in create reward page
     And User input "<namaReward>" into "fieldInputNamaReward"
     And User click "fieldTipeReward" in create reward page
@@ -100,9 +103,13 @@ Feature: Create-Feature
 
   @Reward-0003
   Scenario Outline: Memastikan dapat create reward dengan tipe reward daily checkin
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    When User click "navMenuMarketing" in global page
+    When User click "menuRewardV4"
+    And User wait for 3 seconds
     Given User click "btnBuatRewardNew" in menu reward
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     And User click "fieldInputNamaReward" in create reward page
     And User input "<namaReward>" into "fieldInputNamaReward"
     And User click "fieldTipeReward" in create reward page
@@ -147,9 +154,13 @@ Feature: Create-Feature
 
   @Reward-0004
   Scenario Outline: Memastikan dapat create reward dengan tipe reward daily checkin
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    When User click "navMenuMarketing" in global page
+    When User click "menuRewardV4"
+    And User wait for 3 seconds
     Given User click "btnBuatRewardNew" in menu reward
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     Given User click "btnSimpan" to create new reward
     Then User able to see invalid verification message
     Then User verify "<allertnamareward>" on "allertNamaReward"

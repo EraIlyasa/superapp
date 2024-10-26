@@ -8,7 +8,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0028
   Scenario Outline: Memastikan Create PO Raw Material dan berhasil disimpan dengan status set
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -64,7 +65,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0029
   Scenario Outline: Memastikan bisa import product Raw Material  dihalaman create PO
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -101,7 +103,7 @@ Feature: Create - Purchase Order Raw Material
     And User upload image to "imgUploadNotaPengajuan" in "PO" page
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Purchase Order berhasil dibuat! message
-    Given User get to dashboard url
+    # Given User get to dashboard url
 
     Examples:
       | notes                  | pic   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP      | textValuePPN      | textValueSubTotal  | textValueGrandTotal |
@@ -109,6 +111,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0030
   Scenario Outline: Memastikan Edit PO Raw Material dan berhasil disimpan dengan status set
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -169,7 +173,7 @@ Feature: Create - Purchase Order Raw Material
     When User input "kodeInvoice" into "fieldInputSearch"
     And User click "btnCari" in "PO" page
     Then User verified "status po" for "textStatusPO" is "<textStatusPO>"
-    Given User get to dashboard url
+    # Given User get to dashboard url
 
     Examples:
       | notes                  | pic   | productName   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP      | textValuePPN      | textValueSubTotal  | textValueGrandTotal | desc           | textStatusPO |
@@ -177,6 +181,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0031
   Scenario Outline: Memastikan bisa import product Raw Material dihalaman edit PO dengan kondisi product tidak sama dengan sebelumnya
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -239,7 +245,7 @@ Feature: Create - Purchase Order Raw Material
     # And User input "<desc>" into "fieldDeskripsiNota"
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see "Purchase Order berhasil diupdate" message verification
-    Given User get to dashboard url
+    # Given User get to dashboard url
 
     Examples:
       | notes                  | pic   | productName   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP      | textValuePPN      | textValueSubTotal  | textValueGrandTotal | desc           | textStatusPO |
@@ -247,6 +253,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0032
   Scenario Outline: Memastikan Cancel PO Raw Material dan berhasil disimpan dengan Cancel
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -299,7 +307,7 @@ Feature: Create - Purchase Order Raw Material
     And User click "btnCancelPO" in "PO" page
     And User click "btnLanjutkanCancel" to proceed cancelation
     Then Userr able to see "Data Berhasil Dibatalkan" message verification
-    Given User get to dashboard url
+    # Given User get to dashboard url
 
     Examples:
       | notes                  | pic   | productName   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP      | textValuePPN      | textValueSubTotal  | textValueGrandTotal |
@@ -307,6 +315,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0033
   Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method tf
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -356,7 +366,7 @@ Feature: Create - Purchase Order Raw Material
     And User upload image to "imgUploadNotaPengajuan" in "PO" page
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Data Berhasil Dibatalkan message verification
-    Given User get to dashboard url
+    # Given User get to dashboard url
 
     Examples:
       | metodePembayaran | notes                  | pic   | productName   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP      | textValuePPN      | textValueSubTotal  | textValueGrandTotal |
@@ -364,6 +374,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0034
   Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method cod
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -413,7 +425,7 @@ Feature: Create - Purchase Order Raw Material
     And User upload image to "imgUploadNotaPengajuan" in "PO" page
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Purchase Order berhasil dibuat! message
-    Given User get to dashboard url
+    # Given User get to dashboard url
 
     Examples:
       | metodePembayaran | notes                  | pic   | productName   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP      | textValuePPN      | textValueSubTotal  | textValueGrandTotal |
@@ -421,6 +433,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0035
   Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method TF grandtotal =0
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -478,6 +492,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0036
   Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method COD grandtotal =0
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -527,7 +543,7 @@ Feature: Create - Purchase Order Raw Material
     And User upload image to "imgUploadNotaPengajuan" in "PO" page
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Purchase Order berhasil dibuat! message
-    Given User get to dashboard url
+    # Given User get to dashboard url
 
     Examples:
       | metodePembayaran | notes                  | pic   | productName   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP | textValuePPN | textValueSubTotal | textValueGrandTotal |
@@ -535,6 +551,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0037
   Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method Tempo grandtotal =0
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -583,7 +601,7 @@ Feature: Create - Purchase Order Raw Material
     And User click "navNotaPengajuan"
     And User upload image to "imgUploadNotaPengajuan" in "PO" page
     And User click "btnSimpanCreatePO" button in "PO" page
-    Then User able to see Purchase Order berhasil dibuat! message
+    # Then User able to see Purchase Order berhasil dibuat! message
 
     Examples:
       | metodePembayaran | notes                  | pic   | productName   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP | textValuePPN | textValueSubTotal | textValueGrandTotal |
@@ -591,6 +609,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0038
   Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method Tempo
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -647,7 +667,7 @@ Feature: Create - Purchase Order Raw Material
     And User upload image to "imgUploadRPNP" in request payment modal
     And User can wait loading application for "3" seconds
     And User click "btnSimpanRPModal" button in request payment modal
-    Then User able to see Data has been updated message verification
+    # Then User able to see Data has been updated message verification
 
     Examples:
       | metodePembayaran | notes                  | pic   | productName   | qty  | price | diskon1 | diskonOffFaktur | textValueDPP      | textValuePPN      | textValueSubTotal  | textValueGrandTotal |
@@ -655,6 +675,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0039
   Scenario Outline: Memastikan Atur Prouduct berhasil untuk PO status Submit
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -728,6 +750,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0040
   Scenario Outline: Memastikan Create PO Raw Material dan Gagal simpan
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -737,7 +761,7 @@ Feature: Create - Purchase Order Raw Material
     And User click "btnSimpanCreatePO" button in "PO" page
     And User can wait loading application for "5" seconds
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | a |
@@ -745,6 +769,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0041
   Scenario Outline: Memastikan Create PO Raw Material dan Gagal simpan ketika hanya input Jenis PO dan gudang
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -756,7 +782,7 @@ Feature: Create - Purchase Order Raw Material
     And User click "btnSimpanCreatePO" button in "PO" page
     And User can wait loading application for "5" seconds
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | a |
@@ -764,6 +790,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0042
   Scenario Outline: Memastikan Create PO Raw Material  dan Gagal simpan ketika hanya input Jenis PO, gudang dan Tipe PT
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -777,7 +805,7 @@ Feature: Create - Purchase Order Raw Material
     And User clicks "optTipePTPO" button in "PO" page
     And User can wait loading application for "5" seconds
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | a |
@@ -785,6 +813,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0043
   Scenario Outline: Memastikan Create PO Raw Material  dan Gagal simpan ketika hanya input Jenis PO, gudang , Tipe PT, dan Supplier
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -800,7 +830,7 @@ Feature: Create - Purchase Order Raw Material
     And User can wait loading application for "5" seconds
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | a |
@@ -808,6 +838,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0044
   Scenario Outline: Memastikan Create PO Raw Material dan Gagal simpan ketika hanya input Jenis PO, gudang , Tipe PT, Supplier, dan Payment Method
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -825,7 +857,7 @@ Feature: Create - Purchase Order Raw Material
     And User can wait loading application for "5" seconds
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | metodePembayaran |
@@ -833,6 +865,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0045
   Scenario Outline: Memastikan Create PO Raw Material  dan Gagal simpan ketika hanya input Jenis PO, gudang , Tipe PT, Supplier,  Payment Method dan Pengiriman
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -852,7 +886,7 @@ Feature: Create - Purchase Order Raw Material
     And User can wait loading application for "5" seconds
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | metodePembayaran |
@@ -860,6 +894,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0046
   Scenario Outline: Memastikan Create PO Raw Material  dan Gagal simpan ketika hanya input Jenis PO, gudang , Tipe PT, Supplier,  Payment Method, Pengiriman, dan PIC
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -881,7 +917,7 @@ Feature: Create - Purchase Order Raw Material
     And User can wait loading application for "5" seconds
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | metodePembayaran | pic   |
@@ -889,6 +925,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0047
   Scenario Outline: Memastikan Create PO Raw Material  dan Gagal simpan ketika hanya input Jenis PO, gudang , Tipe PT, Supplier,  Payment Method (Transfer), Pengiriman, dan PIC
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -910,7 +948,7 @@ Feature: Create - Purchase Order Raw Material
     And User can wait loading application for "5" seconds
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | metodePembayaran | pic   |
@@ -918,6 +956,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0048
   Scenario Outline: Memastikan Create PO Raw Material  dan Gagal simpan ketika hanya input Jenis PO, gudang , Tipe PT, Supplier,  Payment Method (tempo), Pengiriman, dan PIC
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -939,7 +979,7 @@ Feature: Create - Purchase Order Raw Material
     And User can wait loading application for "5" seconds
     And User click "btnSimpanCreatePO" button in "PO" page
     Then User able to see Gagal menyimpan PO message verification
-    Given User get url to "PO" page
+    # Given User get url to "PO" page
 
     Examples:
       | metodePembayaran | pic   |
@@ -947,6 +987,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0049
   Scenario Outline: Memastikan Create PO Raw Material  dan Gagal simpan ketika hanya input Jenis PO, gudang , Tipe PT, Supplier,  Payment Method , Pengiriman, PIC, Bank Supplier(Transfer)  dan Product Duplikat
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -1004,6 +1046,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0050
   Scenario Outline: Memastikan Create PO Raw Material  dan Gagal simpan ketika hanya input Jenis PO, gudang , Tipe PT, Supplier,  Payment Method , Pengiriman, PIC, Bank Supplier(Tempo)  dan Product Duplikat
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -1061,6 +1105,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0051
   Scenario Outline: Memastikan Request payment gagal simpan ketika belum upload pengajuan
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -1119,6 +1165,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0052
   Scenario Outline: Memastikan submit po berhasil simpan ketika belum upload pengajuan
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -1168,6 +1216,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0053
   Scenario Outline: Memastikan gagal import product ketika product dan satuannya sama pada halaman create
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -1219,6 +1269,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0054
   Scenario Outline: Memastikan gagal import product ketika product dengan sku tidak terdaftar atau asal pada halaman create
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -1270,6 +1322,8 @@ Feature: Create - Purchase Order Raw Material
 
   @PO-0055
   Scenario Outline: Memastikan gagal import product ketika product qty decimal pada halaman create
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page

@@ -3,10 +3,9 @@ Feature: Create-page
 
     @template-1
     Scenario Outline: User berhasil membuat page dengan template 1
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User wait for 3 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuCMSV4" inside "navMenuMarketing"
     And User click "menuPages" inside "menuCMSV4"
@@ -31,7 +30,9 @@ Feature: Create-page
 
     @template-2
     Scenario Outline: User berhasil membuat page dengan template 2
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User wait for 3 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuCMSV4" inside "navMenuMarketing"
     And User click "menuPages" inside "menuCMSV4"
@@ -60,7 +61,9 @@ Feature: Create-page
 
     @template-3
     Scenario Outline: User berhasil membuat page dengan template 3
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User wait for 3 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuCMSV4" inside "navMenuMarketing"
     And User click "menuPages" inside "menuCMSV4"
@@ -88,7 +91,9 @@ Feature: Create-page
 
     @template-4-subkategori
     Scenario Outline: User berhasil membuat page dengan template 4
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User wait for 3 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuCMSV4" inside "navMenuMarketing"
     And User click "menuPages" inside "menuCMSV4"
@@ -120,6 +125,8 @@ Feature: Create-page
 
     @template-4-produkspesifik
     Scenario Outline: User berhasil membuat page dengan template 4
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuCMSV4" inside "navMenuMarketing"
@@ -158,7 +165,9 @@ Feature: Create-page
 
     @template-4-edit
     Scenario Outline: User berhasil mengubah page
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User wait for 3 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuCMSV4" inside "navMenuMarketing"
     And User click "menuPages" inside "menuCMSV4"
@@ -177,7 +186,9 @@ Feature: Create-page
 
     @hapus-page
     Scenario Outline: Tampil alert hapus page
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User wait for 3 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuCMSV4" inside "navMenuMarketing"
     And User click "menuPages" inside "menuCMSV4"

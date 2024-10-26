@@ -8,9 +8,8 @@ Feature: Create-Poin Tukar
 
   @PT-0001
   Scenario Outline: Memastikan dapat buat poin tukar baru dengan toggle All day aktif
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     And User click "navMenuMarketing" in global page
     And User click "menuPoinTukar" inside "navMenuMarketing"
     And User click "subMenuVoucherParameter" inside "menuPointTukar"
@@ -55,9 +54,8 @@ Feature: Create-Poin Tukar
 
   @PT-0002
   Scenario Outline: Memastikan tidak dapat buat poin tukar baru dengan button cancel
-    # Given I send login url
-    # When I login with credential
-    # Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     And User click "navMenuMarketing" in global page
     And User click "menuPoinTukar" inside "navMenuMarketing"
     And User click "subMenuVoucherParameter" inside "menuPointTukar"
@@ -102,12 +100,11 @@ Feature: Create-Poin Tukar
 
   @PT-0003
   Scenario: Memastikan tidak dapat create poin tukar ketika tidak isi semua field
-    # Given I send login url
-    # When I login with credential
-    # Then I see usernameDisplay
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
     And User click "btnCreateVoucher" to create voucher
@@ -124,13 +121,15 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
   @PT-0004
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi upload gambar
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
     And User upload image to "uploadImage" voucher detail
@@ -147,26 +146,30 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
   @PT-0005
   Scenario: Memastikan tidak dapat upload gambar ketika upload gambar tidak sesuai requirement
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
     And User upload invalid image to "uploadImage" voucher detail
     Then User verify "allertUploadImage"
     And User click "btnCreateVoucher" to create voucher
     And User wait for 5 seconds
-    And User back to previous page
+    # And User back to previous page
 
   @PT-0006
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field voucher name
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
     And User click "fieldInputVoucherName"
@@ -184,7 +187,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | voucherName       |
@@ -192,9 +195,11 @@ Feature: Create-Poin Tukar
 
   @PT-0007
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 1 voucher detail
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -215,7 +220,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | voucherName       | voucherPrefix | duration |
@@ -223,9 +228,11 @@ Feature: Create-Poin Tukar
 
   @PT-0008
   Scenario Outline: Memastikan tidak dapat create poin tukar ketika hanya isi field section 2 conditions
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -251,7 +258,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | jumlahTransaksi | diskon |
@@ -259,9 +266,11 @@ Feature: Create-Poin Tukar
 
   @PT-0009
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 3 push notification
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -280,7 +289,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | title             | description     |
@@ -288,9 +297,11 @@ Feature: Create-Poin Tukar
 
   @PT-0010
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 4 about voucher
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -309,7 +320,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertJumlahTransaksi"
     Then User verify "allertTitle"
     Then User verify "allertMainDesc"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | description     |
@@ -317,9 +328,11 @@ Feature: Create-Poin Tukar
 
   @PT-0011
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 1 voucher detail dan section 2 conditions
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -349,7 +362,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | voucherName       | voucherPrefix | duration | jumlahTransaksi | diskon |
@@ -357,9 +370,11 @@ Feature: Create-Poin Tukar
 
   @PT-0012
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 1 voucher detail dan section 3 push notification
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     # When I refresh the browser
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
@@ -387,7 +402,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | voucherName       | voucherPrefix | duration | title             | description     |
@@ -395,9 +410,11 @@ Feature: Create-Poin Tukar
 
   @PT-0013
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 1 voucher detail dan section 4 about voucher
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -419,7 +436,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertJumlahTransaksi"
     Then User verify "allertTitle"
     Then User verify "allertMainDesc"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | voucherName       | voucherPrefix | duration | description     |
@@ -427,12 +444,14 @@ Feature: Create-Poin Tukar
 
   @PT-0014
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 2 conditions dan section 3 push notification
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    And User wait for 3 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     And User click "fieldcondition"
     And User click "getConditions" inside "fieldCondition"
     And User click "fieldProductCluster"
@@ -444,7 +463,7 @@ Feature: Create-Poin Tukar
     And User input "<title>" inside "fieldInputTitle"
     And User input "<description>" inside "fieldInputDesc"
     And User click "btnCreateVoucher" to create voucher
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     Then User verify "allertUploadImage"
     Then User verify "allertVoucherName"
     Then User verify "allertVoucherPrefix"
@@ -453,7 +472,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | title             | description     | jumlahTransaksi | diskon |
@@ -461,12 +480,14 @@ Feature: Create-Poin Tukar
 
   @PT-0015
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 2 conditions dan section 4 about voucher
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    And User wait for 3 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     And User click "fieldcondition"
     And User click "getConditions" inside "fieldCondition"
     And User click "fieldProductCluster"
@@ -479,7 +500,7 @@ Feature: Create-Poin Tukar
     And User input "<description>" inside "fieldInputDescTC"
     And User input "<description>" inside "fieldInputDescH2U"
     And User click "btnCreateVoucher" to create voucher
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     Then User verify "allertUploadImage"
     Then User verify "allertVoucherName"
     Then User verify "allertVoucherPrefix"
@@ -488,7 +509,7 @@ Feature: Create-Poin Tukar
     Then User verify "allertAboutVoucher"
     Then User verify "allertTC"
     Then User verify "allertH2U"
-    And User back to previous page
+    # And User back to previous page
 
     Examples:
       | description     | jumlahTransaksi | diskon |
@@ -496,9 +517,11 @@ Feature: Create-Poin Tukar
 
   @PT-0016
   Scenario: Memastikan tidak dapat create poin tukar ketika hanya isi field section 3 push notification dan section 4 about voucher
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -525,9 +548,11 @@ Feature: Create-Poin Tukar
 
   @PT-0017
   Scenario: Memastikan input maksimal field voucher name hanya 40 karakter
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -543,15 +568,17 @@ Feature: Create-Poin Tukar
 
   @PT-0018
   Scenario: Memastikan input maksimal field voucher pre fix hanya 10 karakter
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
-    And User wait for 5 seconds
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    And User wait for 3 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     And User click "fieldInputVoucherPrefix"
     And User input "<voucherPrefix>" into "fieldInputVoucherPrefix"
-    And User wait for 5 seconds
+    And User wait for 3 seconds
     Then User validate the "fieldInputVoucherPrefix" input
     And User back to previous page
 
@@ -561,10 +588,11 @@ Feature: Create-Poin Tukar
 
   @PT-0019
   Scenario: Memastikan input maksimal field title hanya 40 karakter
-    # 
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds
@@ -580,9 +608,11 @@ Feature: Create-Poin Tukar
 
   @PT-0020
   Scenario: Memastikan input maksimal field description push notification hanya 100 karakter
-    # And User click "navMenuMarketing" in global page
-    # And User click "menuPoinTukar" inside "navMenuMarketing"
-    # And User click "subMenuVoucherParameter" inside "menuPointTukar"
+    When api user login
+    When open dashboard superapp
+    And User click "navMenuMarketing" in global page
+    And User click "menuPoinTukar" inside "navMenuMarketing"
+    And User click "subMenuVoucherParameter" inside "menuPointTukar"
     And User wait for 5 seconds
     Given User click "btnCreateNewParameterVoucher" inside "menuPointTukar"
     And User wait for 5 seconds

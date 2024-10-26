@@ -1,10 +1,10 @@
 @Purchasing-Purchase-Order-Request-Payment
 Feature: Create - Purchase Order
 
-  Background: User login into the system
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+  # Background: User login into the system
+  #   Given I send login url
+  #   When I login with credential
+  #   Then I see usernameDisplay
 
   @PO-0053
   Scenario Outline: Memastikan Request payment berhasil untuk PO dengan payment method cod/tf
@@ -71,7 +71,8 @@ Feature: Create - Purchase Order
 
   @PO-0054
   Scenario Outline: Memastikan fungsi button batal Request payment berfungsi dengan baik
-    # When api user login
+    When api user login
+    When open dashboard superapp
     # When open dashboard superapp
     # When User click "navMenuPurchasing" button in "Global" page
     # And User click "menuPurchasingPO" button in "PO" page
@@ -131,8 +132,8 @@ Feature: Create - Purchase Order
 
   @PO-0055
   Scenario Outline: Memastikan submit berhasil untuk PO dengan kondisi grandtotal = 0 atau tempo
-    # When api user login
-    # When open dashboard superapp
+    When api user login
+    When open dashboard superapp
     # When User click "navMenuPurchasing" button in "Global" page
     # And User click "menuPurchasingPO" button in "PO" page
     # And User directed to "Purchase Order" page
@@ -188,8 +189,8 @@ Feature: Create - Purchase Order
 
   @PO-0056
   Scenario Outline: Memastikan  Request payment gagal untuk PO dengan payment method tf dengan kondisi belum upload nota pengajuan
-    # When api user login
-    # When open dashboard superapp
+    When api user login
+    When open dashboard superapp
     # When User click "navMenuPurchasing" button in "Global" page
     # And User click "menuPurchasingPO" button in "PO" page
     # And User directed to "Purchase Order" page
@@ -254,8 +255,8 @@ Feature: Create - Purchase Order
 
   @PO-0057
   Scenario Outline: Memastikan Request payment gagal untuk PO dengan payment method cod dengan kondisi belum upload nota pengajuan
-    # When api user login
-    # When open dashboard superapp
+    When api user login
+    When open dashboard superapp
     # When User click "navMenuPurchasing" button in "Global" page
     # And User click "menuPurchasingPO" button in "PO" page
     # And User directed to "Purchase Order" page
@@ -319,8 +320,8 @@ Feature: Create - Purchase Order
 
   @PO-0058
   Scenario Outline: Memastikan submit gagal untuk PO dengan kondisi grandtotal = 0 atau tempo kondisi belum upload nota pengajuan
-    # When api user login
-    # When open dashboard superapp
+    When api user login
+    When open dashboard superapp
     # When User click "navMenuPurchasing" button in "Global" page
     # And User click "menuPurchasingPO" button in "PO" page
     # And User directed to "Purchase Order" page
@@ -372,7 +373,7 @@ Feature: Create - Purchase Order
     And User can wait loading application for "3" seconds
     And User click "btnSimpanRPModal" button in request payment modal
     Then User "able" to see "allertNotaPengajuanTempo" in "PO" page
-    Given User get create PO url
+    # Given User get create PO url
 
     Examples:
       | metodePembayaran | notes                  | pic   | productName     | qty  | price | diskon1 | diskonOffFaktur | textValueDPP | textValuePPN | textValueSubTotal | textValueGrandTotal |
@@ -380,8 +381,8 @@ Feature: Create - Purchase Order
 
   @PO-0059
   Scenario Outline: Memastikan  Request payment gagal untuk PO dengan payment method cod dengan kondisi jumlah payment request = 0
-    # When api user login
-    # When open dashboard superapp
+    When api user login
+    When open dashboard superapp
     # When User click "navMenuPurchasing" button in "Global" page
     # And User click "menuPurchasingPO" button in "PO" page
     # And User directed to "Purchase Order" page
@@ -437,7 +438,7 @@ Feature: Create - Purchase Order
     And User can wait loading application for "3" seconds
     Then User "able" to see "allertNotaPengajuan" in "PO" page
     Then User "able" to see "allertNotaPengajuan" in "PO" page
-    Given User get create PO url
+    # Given User get create PO url
 
     Examples:
       | metodePembayaran | notes                  | pic   | productName     | qty  | price | diskon1 | diskonOffFaktur | textValueDPP      | textValuePPN      | textValueSubTotal  | textValueGrandTotal |
@@ -445,8 +446,8 @@ Feature: Create - Purchase Order
 
   @PO-0060
   Scenario Outline: Memastikan  Request payment gagal untuk PO dengan payment method tf dengan kondisi jumlah payment request = 0
-    # When api user login
-    # When open dashboard superapp
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page

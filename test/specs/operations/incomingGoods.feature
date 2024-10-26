@@ -1,16 +1,15 @@
 @Purchasing-Incoming-Goods
 Feature: Create - Incoming Goods
 
-  Background: User login into the system
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+  # Background: User login into the system
+  #   Given I send login url
+  #   When I login with credential
+  #   Then I see usernameDisplay
 
   @OPS-01
   Scenario Outline: Memastikan ketika sudah create PO "Finished Goods" maka akan tampil di list incoming goods
-    # Given I send login url
-    # When I login with credential
-    # Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page
@@ -77,9 +76,8 @@ Feature: Create - Incoming Goods
 
   @OPS-02
   Scenario Outline: Memastikan ketika sudah create PO "Raw Material" maka akan tampil di list incoming goods
-    # Given I send login url
-    # When I login with credential
-    # Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click "menuPurchasingPO" button in "PO" page
     And User directed to "Purchase Order" page

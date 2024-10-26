@@ -3,9 +3,8 @@ Feature: Create - Transfer Transfer Goods
 
   @TransferGoods-0001
   Scenario Outline: Memastikan dapat buat transfer goods
-    Given I send login url
-    When I login with credential
-    Then I see usernameDisplay
+    When api user login
+    When open dashboard superapp
     When User click "navMenuLogistik" button in "Global" page
     And User click "menuTransferGoodsV4" button in "PO" page
     And User wait for 5 seconds

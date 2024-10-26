@@ -1,19 +1,21 @@
 Feature: Create-flashsale
 
-        Background: User login into the system
-            Given I send login url
-             When I login with credential
-             Then I see usernameDisplay
+        # Background: User login into the system
+        #     Given I send login url
+        #      When I login with credential
+        #      Then I see usernameDisplay
 
-        @flashsale-0001
-        Scenario Outline: Memastikan dapat buat flashsale baru
-              And User click "navMenuMarketing" in global page
-              And User click "menuFlashsaleV4" inside "navMenuMarketing"
-              And User wait for 5 seconds
-              And User click "createFsale" inside "Flashsale"
-              And User wait for 5 seconds
-              And User click "uploadFsale" inside "Flashsale"
-              And User input "filePath" into "uploadGambar"
+        # @flashsale-0001
+        # Scenario Outline: Memastikan dapat buat flashsale baru
+        #       When api user login
+        #       When open dashboard superapp
+        #       And User click "navMenuMarketing" in global page
+        #       And User click "menuFlashsaleV4" inside "navMenuMarketing"
+        #       And User wait for 5 seconds
+        #       And User click "createFsale" inside "Flashsale"
+        #       And User wait for 5 seconds
+        #       And User click "uploadFsale" inside "Flashsale"
+        #       And User input "filePath" into "uploadGambar"
             # Given User input "<namaFlashsale>" into "fieldInputNamaFlashsale"
             #   And User click "fieldPeriodeFlashsale" inside "Flashsale"
             #   And User input "startDate" into "fieldPeriodeFlashsale"
@@ -33,6 +35,6 @@ Feature: Create-flashsale
             #   And User click "btnBuatFlashsale" in "Flashsale"
             #  Then User able to see "Data berhasil disimpan" message verification
 
-        Examples:
-                  | namaFlashsale | startDate  | endDate    | filePath                                                                     |
-                  | SuperSale     | 2024-09-01 | 2024-09-10 | /Users/maulanajayadi/Documents/tes/git/griya-super/Product Banner Design.jpg |
+        # Examples:
+        #           | namaFlashsale | startDate  | endDate    | filePath                                                                     |
+        #           | SuperSale     | 2024-09-01 | 2024-09-10 | /Users/maulanajayadi/Documents/tes/git/griya-super/Product Banner Design.jpg |

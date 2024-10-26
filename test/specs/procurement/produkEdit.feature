@@ -28,7 +28,8 @@ Feature: Edit - Produk
 
   @PR-0030
   Scenario Outline: Berhasil Edit product RTP  tanpa ada perubahan
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -50,7 +51,8 @@ Feature: Edit - Produk
 
   @PR-0031
   Scenario Outline: Berhasil Edit product RTP Ingredients tanpa ada perubahan
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -72,7 +74,8 @@ Feature: Edit - Produk
 
 @PR-0032
   Scenario Outline: Berhasil Edit product dengan ubah nama product
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -97,7 +100,8 @@ Feature: Edit - Produk
 
 @PR-0033
 Scenario Outline: Berhasil Edit product dengan ubah ppn product
-    # Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -121,7 +125,8 @@ Scenario Outline: Berhasil Edit product dengan ubah ppn product
 
   @PR-0034
 Scenario Outline: Berhasil Edit product dengan kondisi uncheklist pin
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -143,7 +148,8 @@ Scenario Outline: Berhasil Edit product dengan kondisi uncheklist pin
 
 @PR-0035
 Scenario Outline: Berhasil Edit product dengan kondisi cheklist pin
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -165,7 +171,8 @@ Scenario Outline: Berhasil Edit product dengan kondisi cheklist pin
 
 @PR-0036
 Scenario Outline: Memastikan click batal pada halaman edit product
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -183,7 +190,8 @@ Scenario Outline: Memastikan click batal pada halaman edit product
 
 @PR-0037
 Scenario Outline: Memastikan user bisa click panduan atribute product
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -221,7 +229,8 @@ Scenario Outline: Memastikan user bisa click panduan atribute product
 
 @PR-0039
 Scenario Outline: Gagal Edit product dengan kondisi upload gambar dengan format pdf
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -241,7 +250,8 @@ Scenario Outline: Gagal Edit product dengan kondisi upload gambar dengan format 
 
 @PR-0040
 Scenario Outline: Gagal Edit product dengan kondisi upload gambar dengan format csv
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -261,7 +271,8 @@ Scenario Outline: Gagal Edit product dengan kondisi upload gambar dengan format 
 
 @PR-0041
 Scenario Outline: Gagal Edit product dengan kondisi upload gambar dengan format tiff
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -281,7 +292,8 @@ Scenario Outline: Gagal Edit product dengan kondisi upload gambar dengan format 
 
 @PR-0042
 Scenario Outline: Gagal Edit product dengan kondisi upload gambar dengan format bmp
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -301,7 +313,8 @@ Scenario Outline: Gagal Edit product dengan kondisi upload gambar dengan format 
 
 @PR-0043
 Scenario Outline: Gagal Edit product dengan kondisi nama diubah dengan nama product yang sudah ada sebelumnya
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -330,7 +343,8 @@ Scenario Outline: Gagal Edit product dengan kondisi nama diubah dengan nama prod
 
 @PR-0044
 Scenario Outline: memastikan pada halaman edit product tipe product keadaan disable
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -351,7 +365,8 @@ Scenario Outline: memastikan pada halaman edit product tipe product keadaan disa
 
 @PR-0045
 Scenario Outline: Memastikan pada halaman edit product tidak bisa ganti merek
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -378,7 +393,8 @@ Scenario Outline: Memastikan pada halaman edit product tidak bisa ganti merek
 
 @PR-0046
 Scenario Outline: Memastikan tidak bisa hapus attribute product untuk product RTP
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -400,7 +416,8 @@ Scenario Outline: Memastikan tidak bisa hapus attribute product untuk product RT
 
 @PR-0047
 Scenario Outline: Memastikan tidak bisa hapus attribute product yang sudah ada transaksi
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -422,7 +439,8 @@ Scenario Outline: Memastikan tidak bisa hapus attribute product yang sudah ada t
 
 @PR-0048
 Scenario Outline: Memastikan tidak bisa tambah attribute product untuk product RTP Ingredients
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -445,7 +463,8 @@ Scenario Outline: Memastikan tidak bisa tambah attribute product untuk product R
 
 @PR-0049
 Scenario Outline:  Memastikan tidak bisa checklist Ingredients untuk product rtp
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page
@@ -466,7 +485,8 @@ Scenario Outline:  Memastikan tidak bisa checklist Ingredients untuk product rtp
 
 @PR-0050
 Scenario Outline: Memastikan tidak bisa unchecklist Ingredients untuk product rtp
-    Given User login
+    When api user login
+    When open dashboard superapp
     When User click "navMenuPurchasing" button in "Global" page
     And User click produk menu in Product page
     And User directed to List barang yang terdaftar di Super page

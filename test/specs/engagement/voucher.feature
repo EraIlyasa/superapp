@@ -2,8 +2,8 @@
 Feature: Create Voucher
     @create-voucher-discount-all-product
     Scenario Outline: User berhasil membuat voucher discount all product
-    Given I send login url
-    When I login with credential
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuVoucher" inside "navMenuMarketing"
@@ -63,8 +63,8 @@ Feature: Create Voucher
 
     @create-voucher-discount-all-product-except
     Scenario Outline: User berhasil membuat voucher discount all product except abc kecap manis
-    Given I send login url
-    When I login with credential
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuVoucher" inside "navMenuMarketing"
@@ -132,8 +132,8 @@ Feature: Create Voucher
 
     @create-voucher-discount-all-product-except-special
     Scenario Outline: User berhasil membuat voucher discound all product except special
-    Given I send login url
-    When I login with credential
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuVoucher" inside "navMenuMarketing"
@@ -199,8 +199,8 @@ Feature: Create Voucher
 
     @create-voucher-discount-all-product-except-cigarette
     Scenario Outline: User berhasil membuat voucher discount all product except cigarette
-    Given I send login url
-    When I login with credential
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuVoucher" inside "navMenuMarketing"
@@ -262,8 +262,8 @@ Feature: Create Voucher
 
     @create-voucher-discount-and
     Scenario Outline: User berhasil membuat voucher discount and
-    Given I send login url
-    When I login with credential
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuVoucher" inside "navMenuMarketing"
@@ -335,8 +335,8 @@ Feature: Create Voucher
 
     @create-voucher-discount-or
     Scenario Outline: User berhasil membuat voucher discount or
-    Given I send login url
-    When I login with credential
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuVoucher" inside "navMenuMarketing"
@@ -409,8 +409,8 @@ Feature: Create Voucher
 
     @create-voucher-discount-and-special
     Scenario Outline: User berhasil membuat voucher discount and special
-    Given I send login url
-    When I login with credential
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuVoucher" inside "navMenuMarketing"
@@ -483,8 +483,8 @@ Feature: Create Voucher
 
     @create-voucher-discount-or-special
     Scenario Outline: User berhasil membuat voucher discount or special
-    Given I send login url
-    When I login with credential
+    When api user login
+    When open dashboard superapp
     And User wait for 5 seconds
     And User click "navMenuMarketing" in global page
     And User click "menuVoucher" inside "navMenuMarketing"
