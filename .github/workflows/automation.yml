@@ -28,5 +28,6 @@ jobs:
         run: ls -R  # Menampilkan struktur direktori
 
       - name: Run WebdriverIO tests
-        run: npx wdio run wdio.conf.ts --spec setoran.feature
+        run: npx wdio run wdio.conf.ts --spec setoran.feature --cucumberOpts.tags="@Setoran-0015" --logLevel=debug
+
  
